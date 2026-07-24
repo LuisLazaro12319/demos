@@ -259,7 +259,8 @@ section {
 
 /* --- SECCIÓN OPINIONES --- */
 .bg-section-reviews {
-    background: linear-gradient(180deg, #0a0a0c 0%, #121118 100%);
+    background: radial-gradient(circle at center, rgba(157, 0, 255, 0.28) 0%, rgba(10, 10, 12, 0.93) 75%),
+                url('reviews-bg.jpg') no-repeat center center/cover;
 }
 
 .reviews-grid {
@@ -298,7 +299,8 @@ section {
 
 /* --- SECCIÓN CONTACTO --- */
 .contact-section {
-    background-color: #0d0d11;
+    background: radial-gradient(circle at center, rgba(157, 0, 255, 0.28) 0%, rgba(10, 10, 12, 0.93) 75%),
+                url('contact-bg.jpg') no-repeat center center/cover;
     padding-bottom: 0;
 }
 
