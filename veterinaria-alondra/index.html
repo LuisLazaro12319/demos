@@ -81,6 +81,11 @@
   .head .kick{color:var(--green);font-weight:800;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem;}
   .head h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-.6px;line-height:1.15;margin-bottom:.7rem;}
   .head p{color:var(--muted);font-size:1.05rem;}
+  /* Fondo con husky en la seccion de servicios */
+  #servicios{background:linear-gradient(rgba(11,44,49,.82),rgba(11,44,49,.88)),url('img/husky.jpg') center/cover no-repeat;background-attachment:fixed;}
+  @media(max-width:860px){#servicios{background-attachment:scroll;}}
+  #servicios .head h2{color:#fff;}
+  #servicios .head p{color:#cfe6e8;}
 
   /* SERVICIOS */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
