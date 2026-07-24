@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de demos — Webs para comercios</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#0e1116;color:#e8edf3;line-height:1.6;padding:2.5rem 1.4rem;}
+  .wrap{max-width:1000px;margin:0 auto;}
+  h1{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.3rem;}
+  .sub{color:#8b98a8;margin-bottom:2.2rem;font-size:.98rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+  .card{background:#161b23;border:1px solid #232c38;border-radius:14px;padding:1.3rem;transition:transform .2s,border-color .2s;}
+  .card:hover{transform:translateY(-4px);border-color:#3a86ff;}
+  .card .rubro{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:#3a86ff;font-weight:700;margin-bottom:.4rem;}
+  .card h2{font-size:1.1rem;font-weight:700;margin-bottom:.3rem;}
+  .card .meta{color:#8b98a8;font-size:.85rem;margin-bottom:1rem;}
+  .card .links{display:flex;gap:.5rem;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:.5rem .9rem;border-radius:8px;font-size:.82rem;font-weight:600;text-decoration:none;}
+  .b1{background:#3a86ff;color:#fff;}
+  .b2{background:#25D366;color:#fff;}
+  .foot{margin-top:2.5rem;color:#63707f;font-size:.85rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Panel de demos</h1>
+  <div class="sub">Webs de muestra para comercios · Villa Lugano, CABA</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="rubro">Cerrajería</div>
+      <h2>Cerrajería Mosca</h2>
+      <div class="meta">Av. Riestra 5539 · 011 5117-9513</div>
+      <div class="links">
+        <a class="btn b1" href="cerrajeria-mosca/">Ver demo</a>
+        <a class="btn b2" href="https://wa.me/5491151179513" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="rubro">Gomería</div>
+      <h2>Gomería Av. Argentina</h2>
+      <div class="meta">Av. Argentina 5723 · 011 5954-9663</div>
+      <div class="links">
+        <a class="btn b1" href="gomeria-argentina/">Ver demo</a>
+        <a class="btn b2" href="https://wa.me/5491159549663" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="rubro">Barbería</div>
+      <h2>Barbers Crew</h2>
+      <div class="meta">Av. Piedra Buena 5014 · 011 3656-8289</div>
+      <div class="links">
+        <a class="btn b1" href="barbers-crew/">Ver demo</a>
+        <a class="btn b2" href="https://wa.me/5491136568289" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="rubro">Odontología</div>
+      <h2>AS Odontología Lugano</h2>
+      <div class="meta">Cañada de Gómez 4740 · 011 3339-5422</div>
+      <div class="links">
+        <a class="btn b1" href="as-odontologia/">Ver demo</a>
+        <a class="btn b2" href="https://wa.me/5491133395422" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Panel interno · agregá una carpeta nueva y aparece un demo más</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cerrajería Mosca — Cerrajero en Villa Lugano | Urgencias 24 hs</title>
+<meta name="description" content="Cerrajería Mosca en Villa Lugano, CABA. Aperturas, cambio de cerraduras, copias de llaves y urgencias. Atención rápida y precios accesibles.">
+<style>
+  :root{
+    --bg:#0e0e10;
+    --bg2:#16161a;
+    --card:#1c1c21;
+    --gold:#f2b53c;
+    --gold-soft:#f6c869;
+    --text:#f4f2ee;
+    --muted:#a3a0a0;
+    --line:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 1.4rem;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+      padding:1rem 1.6rem;backdrop-filter:blur(14px);background:rgba(14,14,16,.55);border-bottom:1px solid var(--line);transition:background .3s;}
+  nav .logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.15rem;letter-spacing:.3px;}
+  nav .logo .key{color:var(--gold);font-size:1.35rem;transform:rotate(-25deg);display:inline-block;}
+  nav .links{display:flex;gap:2rem;font-size:.92rem;color:var(--muted);}
+  nav .links a:hover{color:var(--gold);}
+  nav .call{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#1a1206;padding:.55rem 1.1rem;border-radius:40px;font-weight:700;font-size:.9rem;transition:transform .15s,box-shadow .2s;}
+  nav .call:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(242,181,60,.3);}
+  @media(max-width:820px){nav .links{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;
+        background:
+          radial-gradient(circle at 78% 22%,rgba(242,181,60,.20),transparent 45%),
+          radial-gradient(circle at 12% 88%,rgba(242,181,60,.08),transparent 42%),
+          linear-gradient(160deg,#161418 0%,#0e0e10 55%,#0a0a0c 100%);}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+        background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+        background-size:56px 56px;mask-image:radial-gradient(circle at 70% 40%,black,transparent 78%);-webkit-mask-image:radial-gradient(circle at 70% 40%,black,transparent 78%);}
+  /* Decorative key glow */
+  .hero .glow-key{position:absolute;right:-40px;top:50%;transform:translateY(-50%) rotate(18deg);font-size:min(38vw,520px);line-height:1;color:rgba(242,181,60,.06);z-index:1;pointer-events:none;user-select:none;}
+  @media(max-width:820px){.hero .glow-key{opacity:.5;right:-90px;}}
+  .hero-inner{position:relative;z-index:2;padding-top:5rem;max-width:720px;}
+  .badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(242,181,60,.12);border:1px solid rgba(242,181,60,.35);color:var(--gold-soft);
+         padding:.45rem 1rem;border-radius:40px;font-size:.82rem;font-weight:600;margin-bottom:1.6rem;letter-spacing:.2px;}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,220,132,.5);}70%{box-shadow:0 0 0 10px rgba(61,220,132,0);}100%{box-shadow:0 0 0 0 rgba(61,220,132,0);}}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:800;line-height:1.05;letter-spacing:-1px;margin-bottom:1.2rem;}
+  .hero h1 span{color:var(--gold);}
+  .hero p.lead{font-size:1.2rem;color:var(--muted);max-width:560px;margin-bottom:2.2rem;}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.8rem;border-radius:44px;font-weight:700;font-size:1rem;transition:transform .15s,box-shadow .2s,background .2s;}
+  .btn svg{width:20px;height:20px;}
+  .btn-primary{background:#25D366;color:#fff;box-shadow:0 10px 30px rgba(37,211,102,.28);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(37,211,102,.42);}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);}
+  .hero-meta{display:flex;gap:1.8rem;margin-top:2.4rem;flex-wrap:wrap;color:var(--muted);font-size:.9rem;}
+  .hero-meta div{display:flex;align-items:center;gap:.5rem;}
+  .hero-meta .ic{color:var(--gold);}
+
+  /* URGENCIAS STRIP */
+  .strip{background:var(--gold);color:#1a1206;font-weight:700;text-align:center;padding:.85rem 1rem;font-size:1rem;letter-spacing:.2px;}
+  .strip a{text-decoration:underline;}
+
+  /* STATS */
+  .stats{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:3.2rem 0;}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center;}
+  .stat .num{font-size:2.6rem;font-weight:800;color:var(--gold);line-height:1;}
+  .stat .lbl{color:var(--muted);font-size:.9rem;margin-top:.5rem;}
+  @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:2rem;}}
+
+  /* SECTIONS */
+  section.block{padding:6rem 0;}
+  .eyebrow{color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.8rem;}
+  h2.title{font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.5px;margin-bottom:1rem;line-height:1.1;}
+  .section-head{max-width:640px;margin-bottom:3rem;}
+  .section-head p{color:var(--muted);font-size:1.08rem;}
+
+  /* SERVICES */
+  .services{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  @media(max-width:900px){.services{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.services{grid-template-columns:1fr;}}
+  .svc{position:relative;border-radius:18px;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;
+       padding:1.6rem;background-size:cover;background-position:center;border:1px solid var(--line);transition:transform .3s;}
+  .svc::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,16,.15) 0%,rgba(14,14,16,.94) 82%);transition:background .3s;}
+  .svc:hover{transform:translateY(-6px);}
+  .svc:hover::before{background:linear-gradient(180deg,rgba(242,181,60,.12) 0%,rgba(14,14,16,.95) 78%);}
+  .svc>*{position:relative;z-index:1;}
+  .svc .ico{width:44px;height:44px;border-radius:12px;background:rgba(242,181,60,.15);border:1px solid rgba(242,181,60,.35);display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:auto;}
+  .svc h3{font-size:1.2rem;font-weight:700;margin:1rem 0 .4rem;}
+  .svc p{color:var(--muted);font-size:.92rem;}
+
+  /* WHY */
+  .why{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+  @media(max-width:800px){.why-grid{grid-template-columns:1fr;}}
+  .feat{display:flex;gap:1rem;align-items:flex-start;}
+  .feat .fico{flex-shrink:0;width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#c98a1e);display:flex;align-items:center;justify-content:center;color:#1a1206;}
+  .feat h4{font-size:1.1rem;margin-bottom:.3rem;}
+  .feat p{color:var(--muted);font-size:.94rem;}
+
+  /* REVIEWS */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+  @media(max-width:820px){.reviews{grid-template-columns:1fr;}}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.8rem;transition:transform .3s,border-color .3s;}
+  .rev:hover{transform:translateY(-5px);border-color:rgba(242,181,60,.4);}
+  .rev .stars{color:var(--gold);font-size:1rem;margin-bottom:.9rem;letter-spacing:2px;}
+  .rev p{font-size:.98rem;margin-bottom:1.3rem;}
+  .rev .who{display:flex;align-items:center;gap:.8rem;}
+  .rev .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b9791a);color:#1a1206;display:flex;align-items:center;justify-content:center;font-weight:800;}
+  .rev .who .nm{font-weight:600;font-size:.92rem;}
+  .rev .who .src{color:var(--muted);font-size:.78rem;}
+
+  /* CTA */
+  .cta-final{position:relative;text-align:center;padding:5.5rem 1.4rem;background:linear-gradient(135deg,#1c1c21,#101012);border:1px solid var(--line);border-radius:26px;overflow:hidden;}
+  .cta-final::before{content:"";position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:520px;height:520px;background:radial-gradient(circle,rgba(242,181,60,.18),transparent 65%);}
+  .cta-final>*{position:relative;z-index:1;}
+  .cta-final h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;margin-bottom:.8rem;}
+  .cta-final p{color:var(--muted);font-size:1.1rem;margin-bottom:2rem;}
+
+  /* CONTACT / FOOTER */
+  footer{background:var(--bg2);border-top:1px solid var(--line);padding:4rem 0 2rem;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem;}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:2rem;}}
+  .foot h5{font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  .foot p,.foot a{color:var(--muted);font-size:.95rem;display:block;margin-bottom:.5rem;}
+  .foot a:hover{color:var(--gold);}
+  .foot .brand{font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:.8rem;}
+  .foot .brand .key{color:var(--gold);}
+  .copy{border-top:1px solid var(--line);padding-top:1.6rem;text-align:center;color:var(--muted);font-size:.85rem;}
+
+  /* FLOATING WA */
+  .wa-float{position:fixed;right:1.4rem;bottom:1.4rem;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;
+            display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);transition:transform .2s;}
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:32px;height:32px;}
+
+  /* REVEAL ANIM */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo"><span class="key">&#128273;</span> Cerrajería Mosca</div>
+  <div class="links">
+    <a href="#servicios">Servicios</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#opiniones">Opiniones</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a class="call" href="tel:+541151179513">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Llamar
+  </a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="glow-key">&#128273;</div>
+  <div class="wrap hero-inner">
+    <div class="badge reveal"><span class="dot"></span> Abierto ahora · Urgencias en Villa Lugano</div>
+    <h1 class="reveal">Cerrajería <span>rápida y confiable</span> cuando más la necesitás</h1>
+    <p class="lead reveal">Aperturas, cambio de cerraduras, copias de llaves y asesoramiento. Más de una década cuidando las puertas del barrio, con precios accesibles y trabajo garantizado.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="https://wa.me/5491151179513?text=Hola%20Cerrajer%C3%ADa%20Mosca%2C%20necesito%20un%20servicio" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.94 14.5L2 22l5.66-1.48A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .78.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div><span class="ic">&#9733;</span> 4.7 · 55 opiniones en Google</div>
+      <div><span class="ic">&#128205;</span> Av. Riestra 5539, Villa Lugano</div>
+      <div><span class="ic">&#128337;</span> Lun a Sáb · hasta 20:30 hs</div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">&#9889; ¿Quedaste afuera o se rompió la cerradura? <a href="tel:+541151179513">Llamá ahora al 011 5117-9513</a></div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><div class="num" data-count="12" data-suffix="+">0</div><div class="lbl">Años en el barrio</div></div>
+    <div class="stat reveal"><div class="num" data-count="4.7" data-decimals="1">0</div><div class="lbl">Puntaje en Google</div></div>
+    <div class="stat reveal"><div class="num" data-count="55" data-suffix="+">0</div><div class="lbl">Opiniones reales</div></div>
+    <div class="stat reveal"><div class="num" data-count="30" data-suffix="min">0</div><div class="lbl">Respuesta promedio</div></div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="block" id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Lo que hacemos</div>
+      <h2 class="title">Servicios de cerrajería integral</h2>
+      <p>Resolvemos desde una urgencia hasta la seguridad completa de tu hogar o comercio. Presupuesto sin cargo antes de empezar.</p>
+    </div>
+    <div class="services">
+      <div class="svc reveal" style="background-image:url('img/aperturas.jpg');">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
+        <h3>Aperturas de urgencia</h3>
+        <p>Puertas, autos y cajas fuertes. Llegamos rápido y sin dañar tu cerradura.</p>
+      </div>
+      <div class="svc reveal" style="background-image:url('img/cerraduras.jpg');">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="11" width="18" height="11" rx="2"/><circle cx="12" cy="16" r="1.5"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Cambio de cerraduras</h3>
+        <p>Instalación y reparación de cerraduras de seguridad de todas las marcas.</p>
+      </div>
+      <div class="svc reveal" style="background-image:url('img/copias.jpg');">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21M18 18l2-2M15 15l2-2"/></svg></div>
+        <h3>Copias de llaves</h3>
+        <p>Duplicados al instante: comunes, de seguridad y codificadas. Precisión garantizada.</p>
+      </div>
+      <div class="svc reveal" style="background-image:url('img/autos.jpg');">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M5 17h14M6 17l1.5-5h9L18 17M7 12l1-3h8l1 3"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg></div>
+        <h3>Llaves de autos</h3>
+        <p>Copiado y codificado de llaves de vehículos. Resolvé sin ir a la concesionaria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why block" id="nosotros">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Por qué elegirnos</div>
+      <h2 class="title">Un cerrajero de confianza, no un desconocido</h2>
+      <p>Somos un negocio del barrio con nombre y reputación. Lo que decimos, lo cumplimos.</p>
+    </div>
+    <div class="why-grid">
+      <div class="feat reveal">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <div><h4>Respuesta rápida</h4><p>"Vino a los 30 minutos y dejó la puerta de diez." Llegamos cuando nos necesitás.</p></div>
+      </div>
+      <div class="feat reveal">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div><h4>Trabajo garantizado</h4><p>Profesionalismo y prolijidad en cada servicio. Si no queda perfecto, lo resolvemos.</p></div>
+      </div>
+      <div class="feat reveal">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div><h4>Precios accesibles</h4><p>Presupuesto claro antes de empezar. Sin sorpresas ni cargos ocultos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="block" id="opiniones">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Opiniones reales</div>
+      <h2 class="title">Lo que dicen nuestros clientes</h2>
+      <p>Reseñas verificadas de clientes en Google. Promedio 4.7 sobre 5.</p>
+    </div>
+    <div class="reviews">
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>"Excelente atención y asesoramiento. Compré una cerradura y solicité la colocación, vino a los 30 minutos y dejó la puerta de diez. Lo recomiendo."</p>
+        <div class="who"><div class="av">P</div><div><div class="nm">Patricio Gómez</div><div class="src">Opinión en Google</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>"Excelente atención, muy buenos precios. Seguro encontrás lo que te hace falta de cerrajería o herramientas."</p>
+        <div class="who"><div class="av">M</div><div><div class="nm">Marcelo Espósito</div><div class="src">Local Guide · Google</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>"Excelente servicio, absolutamente profesional y con costos muy accesibles. Trabajos rápidos y de calidad."</p>
+        <div class="who"><div class="av">E</div><div><div class="nm">Eduardo Iglesias</div><div class="src">Opinión en Google</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <h2>¿Necesitás un cerrajero ahora?</h2>
+      <p>Escribinos por WhatsApp o llamanos. Te respondemos al toque.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a class="btn btn-primary" href="https://wa.me/5491151179513?text=Hola%20Cerrajer%C3%ADa%20Mosca%2C%20necesito%20un%20servicio" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.94 14.5L2 22l5.66-1.48A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .78.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+          WhatsApp 011 5117-9513
+        </a>
+        <a class="btn btn-ghost" href="tel:+541151179513">Llamar por teléfono</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot">
+        <div class="brand"><span class="key">&#128273;</span> Cerrajería Mosca</div>
+        <p>Cerrajería de barrio en Villa Lugano. Aperturas, cerraduras, copias de llaves y urgencias con la confianza de siempre.</p>
+      </div>
+      <div class="foot">
+        <h5>Contacto</h5>
+        <a href="tel:+541151179513">&#128222; 011 5117-9513</a>
+        <a href="https://wa.me/5491151179513" target="_blank">&#128241; WhatsApp directo</a>
+        <p>&#128205; Av. Riestra 5539<br>Villa Lugano, CABA</p>
+      </div>
+      <div class="foot">
+        <h5>Horarios</h5>
+        <p>Lunes a Sábado</p>
+        <p>Hasta las 20:30 hs</p>
+        <p>Consultá por urgencias</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 Cerrajería Mosca · Villa Lugano, CABA · Sitio de demostración</div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5491151179513?text=Hola%20Cerrajer%C3%ADa%20Mosca%2C%20necesito%20un%20servicio" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.94 14.5L2 22l5.66-1.48A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .78.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4*70)+'ms'; io.observe(el); });
+
+  // Animated counters
+  function animate(el){
+    const target=parseFloat(el.dataset.count);
+    const dec=parseInt(el.dataset.decimals||'0');
+    const suffix=el.dataset.suffix||'';
+    let start=null;const dur=1400;
+    function step(ts){
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const val=(target*(0.5-Math.cos(p*Math.PI)/2));
+      el.textContent=val.toFixed(dec)+suffix;
+      if(p<1)requestAnimationFrame(step); else el.textContent=target.toFixed(dec)+suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  const co=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ animate(e.target.querySelector('.num')); co.unobserve(e.target);} });
+  },{threshold:.5});
+  document.querySelectorAll('.stat').forEach(s=>co.observe(s));
+
+  // Nav bg on scroll
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{ nav.style.background = window.scrollY>40 ? 'rgba(14,14,16,.9)' : 'rgba(14,14,16,.55)'; });
+</script>
+
+</body>
+</html>
