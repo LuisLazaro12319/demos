@@ -119,9 +119,11 @@
   .btn-white:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.16);}
 
   /* CONTACT */
-  /* Fondo estatico de rottweiler en la seccion de contacto */
+  /* Fondo estatico de rottweiler en la seccion de contacto (solo desktop) */
   .contact{background:linear-gradient(rgba(11,44,49,.82),rgba(11,44,49,.88)),url('img/rottweiler.jpg') center 30%/cover no-repeat;background-attachment:scroll;}
   .contact .head h2{color:#fff;}
+  /* En celular la foto vertical se ve mal -> dejamos solo el color */
+  @media(max-width:760px){.contact{background:linear-gradient(160deg,#123f45,#0b2c31);}}
   .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
   @media(max-width:760px){.cols{grid-template-columns:1fr;}}
   .cbox{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.8rem;text-align:center;}
