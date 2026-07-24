@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-HUB Fitness — Gimnasio en Villa Lugano</title>
+<meta name="description" content="V-HUB Fitness, gimnasio en Villa Lugano, CABA. Máquinas nuevas, clases grupales y profes que te acompañan. Consultá por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0c0d;
+    --bg2:#121416;
+    --card:#171a1d;
+    --volt:#c8f230;
+    --volt-d:#a5cc1f;
+    --text:#f0f2f0;
+    --muted:#9aa2a6;
+    --line:rgba(200,242,48,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1150px;margin:0 auto;padding:0 1.4rem;}
+  .anton{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px;text-transform:uppercase;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+      padding:.9rem 1.6rem;background:rgba(11,12,13,.6);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s;}
+  nav.scrolled{background:rgba(11,12,13,.94);}
+  nav .brand{font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:1px;text-transform:uppercase;}
+  nav .brand span{color:var(--volt);}
+  nav .links{display:flex;gap:2rem;font-size:.86rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+  nav .links a:hover{color:var(--volt);}
+  nav .cta{background:var(--volt);color:#0b0c0d;padding:.6rem 1.3rem;border-radius:6px;font-weight:700;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;transition:transform .15s,box-shadow .2s;}
+  nav .cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(200,242,48,.28);}
+  @media(max-width:900px){nav .links{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:7rem 0 4rem;
+        background:linear-gradient(100deg,rgba(11,12,13,.94) 30%,rgba(11,12,13,.6) 75%),url('img/hero.jpg') center/cover no-repeat;}
+  .hero-in{max-width:660px;}
+  .badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(200,242,48,.12);border:1px solid rgba(200,242,48,.42);color:var(--volt);
+         padding:.42rem 1rem;border-radius:6px;font-size:.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.4rem;}
+  .hero h1{font-family:'Anton',sans-serif;font-size:clamp(2.9rem,7.5vw,5.2rem);line-height:.95;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.1rem;}
+  .hero h1 em{font-style:normal;color:var(--volt);}
+  .hero p{font-size:1.15rem;color:var(--muted);max-width:520px;margin-bottom:2rem;}
+  .cta-row{display:flex;gap:.9rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2rem;border-radius:7px;font-weight:700;font-size:.95rem;letter-spacing:1.2px;text-transform:uppercase;transition:transform .15s,box-shadow .2s;}
+  .btn svg{width:20px;height:20px;}
+  .btn-wa{background:#25D366;color:#fff;box-shadow:0 10px 28px rgba(37,211,102,.28);}
+  .btn-wa:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(37,211,102,.42);}
+  .btn-volt{background:var(--volt);color:#0b0c0d;}
+  .btn-volt:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(200,242,48,.35);}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.16);}
+  .btn-ghost:hover{background:rgba(200,242,48,.12);border-color:var(--volt);transform:translateY(-3px);}
+  .hero-meta{display:flex;gap:1.8rem;margin-top:2.2rem;flex-wrap:wrap;color:var(--muted);font-size:.92rem;}
+  .hero-meta b{color:var(--volt);font-weight:700;}
+
+  /* STATS */
+  .stats{background:var(--volt);color:#0b0c0d;}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1.9rem 0;text-align:center;}
+  @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:1.6rem;}}
+  .stat .n{font-family:'Anton',sans-serif;font-size:2rem;line-height:1;}
+  .stat .l{font-size:.82rem;font-weight:600;opacity:.8;margin-top:.25rem;text-transform:uppercase;letter-spacing:1px;}
+
+  /* SECTIONS */
+  section.block{padding:5.5rem 0;}
+  .head{text-align:center;max-width:640px;margin:0 auto 3rem;}
+  .head .kick{color:var(--volt);font-weight:700;font-size:.8rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem;}
+  .head h2{font-family:'Anton',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:1px;text-transform:uppercase;line-height:1;margin-bottom:.7rem;}
+  .head p{color:var(--muted);font-size:1.05rem;}
+
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr;}}
+  .card{position:relative;border-radius:12px;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;
+        padding:1.6rem;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,.08);transition:transform .3s;}
+  .card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,13,.2),rgba(11,12,13,.95) 78%);transition:background .3s;}
+  .card:hover{transform:translateY(-6px);}
+  .card:hover::before{background:linear-gradient(180deg,rgba(200,242,48,.14),rgba(11,12,13,.95) 74%);}
+  .card>*{position:relative;z-index:1;}
+  .card .ic{width:44px;height:44px;border-radius:10px;background:rgba(200,242,48,.16);border:1px solid rgba(200,242,48,.4);display:flex;align-items:center;justify-content:center;color:var(--volt);margin-bottom:auto;}
+  .card h3{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.5px;text-transform:uppercase;margin:1rem 0 .3rem;}
+  .card p{color:var(--muted);font-size:.93rem;}
+
+  /* BAND */
+  .band{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:5rem 1.4rem;
+        background:linear-gradient(rgba(11,12,13,.72),rgba(11,12,13,.9)),url('img/entreno.jpg') center/cover no-repeat;}
+  .band h2{font-family:'Anton',sans-serif;font-size:clamp(2rem,5.5vw,3.6rem);letter-spacing:1px;text-transform:uppercase;line-height:1;margin-bottom:1rem;max-width:800px;}
+  .band h2 em{font-style:normal;color:var(--volt);}
+  .band p{color:#d5dad6;font-size:1.08rem;max-width:540px;margin:0 auto 1.8rem;}
+
+  /* REVIEWS */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+  @media(max-width:880px){.reviews{grid-template-columns:1fr;}}
+  .rev{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.8rem;transition:transform .3s,border-color .3s;}
+  .rev:hover{transform:translateY(-5px);border-color:rgba(200,242,48,.45);}
+  .rev .st{color:var(--volt);letter-spacing:2px;margin-bottom:.8rem;}
+  .rev p{font-size:.97rem;margin-bottom:1.2rem;}
+  .rev .who{display:flex;align-items:center;gap:.75rem;}
+  .rev .av{width:40px;height:40px;border-radius:50%;background:var(--volt);color:#0b0c0d;display:flex;align-items:center;justify-content:center;font-weight:800;}
+  .rev .nm{font-weight:600;font-size:.9rem;}
+  .rev .src{color:var(--muted);font-size:.76rem;}
+
+  /* CONTACT */
+  .contact{background:var(--bg2);border-top:1px solid rgba(255,255,255,.06);}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+  @media(max-width:760px){.cols{grid-template-columns:1fr;}}
+  .cbox{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.7rem;text-align:center;}
+  .cbox .ic{width:46px;height:46px;border-radius:11px;background:rgba(200,242,48,.14);color:var(--volt);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+  .cbox h4{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.5rem;}
+  .cbox p,.cbox a{color:var(--muted);font-size:.95rem;display:block;}
+  .cbox a:hover{color:var(--volt);}
+  .map{width:100%;height:400px;border:0;display:block;filter:grayscale(.3) contrast(1.05);}
+  footer{background:#08090a;text-align:center;padding:2.2rem 1.4rem;color:#6f7679;font-size:.88rem;}
+  footer .fb{font-family:'Anton',sans-serif;color:#fff;font-size:1.2rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;}
+  footer .fb span{color:var(--volt);}
+
+  .wa-float{position:fixed;right:1.4rem;bottom:1.4rem;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);transition:transform .2s;}
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:32px;height:32px;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">V<span>-</span>HUB <span>Fitness</span></div>
+  <div class="links">
+    <a href="#actividades">Actividades</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#opiniones">Opiniones</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a class="cta" href="https://wa.me/5491133664292?text=Hola%20V-HUB%2C%20quer%C3%ADa%20consultar%20por%20los%20planes" target="_blank">Consultar</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="badge reveal">★ 5.0 en Google · 20 opiniones</div>
+    <h1 class="reveal">El espacio para<br><em>entrenar en Lugano</em></h1>
+    <p class="reveal">Máquinas nuevas, instalaciones amplias y profesores que te acompañan en cada rutina. El gimnasio que el barrio estaba esperando.</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-wa" href="https://wa.me/5491133664292?text=Hola%20V-HUB%2C%20quer%C3%ADa%20consultar%20por%20los%20planes" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.94 14.5L2 22l5.66-1.48A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .78.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+        Consultar planes
+      </a>
+      <a class="btn btn-ghost" href="#actividades">Ver actividades</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div>📍 Av. Riestra 6158, Villa Lugano</div>
+      <div>🕐 Lun a Vie <b>7 a 21 hs</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><div class="n">5.0★</div><div class="l">Puntaje Google</div></div>
+    <div class="stat reveal"><div class="n">20</div><div class="l">Opiniones reales</div></div>
+    <div class="stat reveal"><div class="n">7–21</div><div class="l">Lunes a viernes</div></div>
+    <div class="stat reveal"><div class="n">100%</div><div class="l">Máquinas nuevas</div></div>
+  </div>
+</div>
+
+<!-- ACTIVIDADES -->
+<section class="block" id="actividades">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kick">Qué vas a encontrar</div>
+      <h2>Entrená como querés</h2>
+      <p>Equipamiento nuevo, espacio amplio y profes que están para vos. Sin importar tu nivel.</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal" style="background-image:url('img/pesas.jpg');">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg></div>
+        <h3>Musculación</h3><p>Máquinas nuevas y peso libre para armar tu rutina de fuerza.</p>
+      </div>
+      <div class="card reveal" style="background-image:url('img/hero.jpg');">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Cardio</h3><p>Bicicletas, cintas y equipamiento para quemar y ganar resistencia.</p>
+      </div>
+      <div class="card reveal" style="background-image:url('img/fitness.jpg');">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <h3>Clases grupales</h3><p>Entrená acompañado, con energía y buen ambiente.</p>
+      </div>
+      <div class="card reveal" style="background-image:url('img/entreno.jpg');">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Profes que acompañan</h3><p>"Lo mejor los profes, son geniales." Te corrigen y te guían de verdad.</p>
+      </div>
+      <div class="card reveal" style="background-image:url('img/pesas.jpg');">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h3>Rutinas personalizadas</h3><p>Un plan según tu objetivo, tu nivel y tu tiempo disponible.</p>
+      </div>
+      <div class="card reveal" style="background-image:url('img/fitness.jpg');">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M12 21s-7-4.5-7-10a4 4 0 018-1 4 4 0 018 1c0 5.5-7 10-7 10z"/></svg></div>
+        <h3>Buen ambiente</h3><p>Un lugar limpio, amplio y con onda, donde dan ganas de volver.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band" id="nosotros">
+  <div class="reveal">
+    <h2>"El barrio se merecía<br><em>un gimnasio así"</em></h2>
+    <p>Espacioso, con excelentes máquinas y clases con muy buen ambiente. Así nos describen nuestros socios.</p>
+    <a class="btn btn-volt" href="https://wa.me/5491133664292?text=Hola%20V-HUB%2C%20quer%C3%ADa%20consultar%20por%20los%20planes" target="_blank">Empezá hoy</a>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="block" id="opiniones">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kick">Opiniones reales</div>
+      <h2>Lo que dicen los socios</h2>
+      <p>Reseñas verificadas en Google. 5.0 sobre 5 con 20 opiniones.</p>
+    </div>
+    <div class="reviews">
+      <div class="rev reveal">
+        <div class="st">★★★★★</div>
+        <p>"El barrio se merecía un gimnasio así: espacioso, excelentes máquinas y lo mejor los profes, son geniales. Muy buenas las clases y el ambiente es genial."</p>
+        <div class="who"><div class="av">D</div><div><div class="nm">Diego Ercolano</div><div class="src">Local Guide · Google</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="st">★★★★★</div>
+        <p>"Calidad de máquinas y profesores excelente, sumado al hermoso ambiente que hay allí. Un lujo."</p>
+        <div class="who"><div class="av">S</div><div><div class="nm">Santiago Avalos</div><div class="src">Opinión en Google</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="st">★★★★★</div>
+        <p>"Excelente gimnasio. Máquinas nuevas, todo impecable, buenos profes, buenas rutinas."</p>
+        <div class="who"><div class="av">I</div><div><div class="nm">Iván Casas</div><div class="src">Local Guide · Google</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact block" id="contacto">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kick">Contacto</div>
+      <h2>Vení a entrenar</h2>
+    </div>
+    <div class="cols">
+      <div class="cbox reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="24" height="24"><path d="M12 21s-7-4.5-7-10a7 7 0 1114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+        <h4>Dirección</h4>
+        <p>Av. Riestra 6158<br>Villa Lugano, CABA</p>
+      </div>
+      <div class="cbox reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="24" height="24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></div>
+        <h4>Teléfono</h4>
+        <a href="tel:+5491133664292">011 15-3366-4292</a>
+        <a href="https://wa.me/5491133664292" target="_blank">WhatsApp directo</a>
+      </div>
+      <div class="cbox reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="24" height="24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h4>Horarios</h4>
+        <p>Lun a Vie: 7 a 21 hs</p>
+        <p>Sábados: 9 a 12 hs</p>
+        <p>Domingos: cerrado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<iframe class="map" src="https://www.google.com/maps?q=Av.%20Riestra%206158,%20Villa%20Lugano,%20CABA&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa V-HUB Fitness"></iframe>
+
+<footer>
+  <div class="fb">V<span>-</span>HUB Fitness</div>
+  Av. Riestra 6158 · Villa Lugano, CABA · Sitio de demostración
+</footer>
+
+<a class="wa-float" href="https://wa.me/5491133664292?text=Hola%20V-HUB%2C%20quer%C3%ADa%20consultar%20por%20los%20planes" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.94 14.5L2 22l5.66-1.48A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .78.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*70)+'ms';io.observe(el);});
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+
+</body>
+</html>
