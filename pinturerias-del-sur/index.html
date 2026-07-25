@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinturerías del Sur | Pintura de Hogar, Obra y Automotor</title>
+<meta name="description" content="Pinturerías del Sur — 3 sucursales en Azul y Olavarría. Pintura de hogar, obra y automotor. Distribuidores oficiales Sherwin-Williams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a2647;
+    --navy2:#123a6b;
+    --blue:#1e7fe0;
+    --cyan:#2bc4e0;
+    --red:#e6293a;
+    --bg:#f6f8fb;
+    --text:#2b3648;
+    --text-gray:#647089;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Poppins',sans-serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+  ul{list-style:none;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(255,255,255,.6);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(10,38,71,.06);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{background:rgba(255,255,255,.94);box-shadow:0 4px 25px rgba(10,38,71,.08);}
+  .brand{display:flex;align-items:center;gap:.7rem;font-weight:800;font-size:1.25rem;color:var(--navy);}
+  .brand img{width:42px;height:42px;}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.88rem;font-weight:600;color:var(--navy2);letter-spacing:.2px;transition:.2s;}
+  .nav-links a:hover{color:var(--red);}
+  .nav-cta{
+    display:flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;
+    padding:.6rem 1.3rem;border-radius:8px;font-size:.85rem;font-weight:700;
+    box-shadow:0 6px 18px rgba(230,41,58,.3);transition:transform .25s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(100deg, rgba(10,38,71,.92) 0%, rgba(10,38,71,.75) 45%, rgba(30,127,224,.35) 100%), url('img/hero.jpg') center 25%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);color:#fff;padding:.5rem 1.1rem;border-radius:30px;
+    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;backdrop-filter:blur(6px);
+  }
+  .hero-badge b{color:var(--cyan);}
+  .hero h1{font-size:3.6rem;font-weight:800;color:#fff;max-width:680px;line-height:1.12;text-shadow:0 4px 25px rgba(0,0,0,.3);}
+  .hero h1 span{color:var(--cyan);}
+  .hero p{margin-top:1.3rem;font-size:1.15rem;color:#d6e2f2;max-width:560px;font-weight:400;}
+  .hero-stats{display:flex;gap:2.2rem;margin-top:2.3rem;flex-wrap:wrap;}
+  .stat{color:#fff;}
+  .stat b{display:block;font-size:1.8rem;font-weight:800;color:var(--cyan);}
+  .stat span{font-size:.82rem;color:#c7d6ea;}
+  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:9px;font-weight:700;font-size:.9rem;transition:.3s;}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 10px 28px rgba(230,41,58,.4);}
+  .btn-red:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(230,41,58,.55);}
+  .btn-white{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35);}
+  .btn-white:hover{background:rgba(255,255,255,.22);}
+
+  /* SECTION SHARED */
+  section{padding:6rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.3rem;font-weight:800;color:var(--navy);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.2rem;font-size:1.02rem;}
+
+  /* SERVICIOS */
+  .servicios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;}
+  .servicio-card{
+    background:#fff;border-radius:16px;padding:2.3rem 1.8rem;text-align:center;
+    box-shadow:0 10px 35px rgba(10,38,71,.07);border:1px solid rgba(10,38,71,.05);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .servicio-card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(10,38,71,.12);}
+  .servicio-icon{
+    width:64px;height:64px;border-radius:16px;margin:0 auto 1.3rem;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;
+    background:linear-gradient(135deg,var(--blue),var(--cyan));
+  }
+  .servicio-card:nth-child(2) .servicio-icon{background:linear-gradient(135deg,var(--navy),var(--navy2));}
+  .servicio-card:nth-child(3) .servicio-icon{background:linear-gradient(135deg,var(--red),#ff6b5e);}
+  .servicio-card h3{font-size:1.15rem;color:var(--navy);margin-bottom:.6rem;font-weight:700;}
+  .servicio-card p{color:var(--text-gray);font-size:.92rem;}
+
+  /* MARCA / ASESORAMIENTO */
+  .marca{background:var(--navy);color:#fff;}
+  .marca-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
+  .marca-img{border-radius:14px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.35);}
+  .marca-text .eyebrow{text-align:left;color:var(--cyan);}
+  .marca-text h2{font-size:2.1rem;text-align:left;margin-bottom:1.1rem;font-weight:800;}
+  .marca-text p{color:#c7d6ea;margin-bottom:1.6rem;font-size:1.02rem;}
+  .marca-list{display:flex;flex-direction:column;gap:.9rem;}
+  .marca-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:#e4ecf7;}
+  .marca-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:.7rem;font-weight:900;}
+  .sw-badge{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.8rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);padding:.7rem 1.2rem;border-radius:10px;font-size:.85rem;color:#fff;font-weight:600;}
+
+  /* SUCURSALES */
+  .sucursales-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.8rem;}
+  .suc-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 35px rgba(10,38,71,.08);border:1px solid rgba(10,38,71,.05);}
+  .suc-img{height:190px;overflow:hidden;}
+  .suc-img img{width:100%;height:100%;object-fit:cover;}
+  .suc-body{padding:1.6rem 1.6rem 1.8rem;}
+  .suc-city{display:inline-block;background:rgba(230,41,58,.1);color:var(--red);font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;margin-bottom:.8rem;}
+  .suc-body h3{font-size:1.2rem;color:var(--navy);margin-bottom:.5rem;font-weight:700;}
+  .suc-addr{color:var(--text-gray);font-size:.92rem;margin-bottom:1.3rem;display:flex;align-items:flex-start;gap:.5rem;}
+  .suc-actions{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .suc-btn{flex:1;text-align:center;padding:.7rem .5rem;border-radius:8px;font-size:.82rem;font-weight:700;}
+  .suc-btn.wa{background:#25d366;color:#fff;}
+  .suc-btn.map{background:var(--bg);color:var(--navy);border:1px solid rgba(10,38,71,.12);}
+
+  /* CONTACTO / FOOTER CTA */
+  .cta-final{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff;text-align:center;padding:5rem 1.5rem;}
+  .cta-final h2{font-size:2.1rem;font-weight:800;margin-bottom:1rem;}
+  .cta-final p{color:#c7d6ea;max-width:520px;margin:0 auto 2rem;}
+
+  footer{background:#081b33;color:#a9b8cf;padding:3.5rem 0 2rem;text-align:center;}
+  .footer-brand{display:flex;align-items:center;justify-content:center;gap:.7rem;font-weight:800;font-size:1.3rem;color:#fff;margin-bottom:1.2rem;}
+  .footer-brand img{width:40px;height:40px;}
+  .footer-socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1.6rem;}
+  .social-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;transition:.3s;}
+  .social-btn:hover{background:var(--red);border-color:var(--red);}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.3);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .servicios-grid{grid-template-columns:1fr;}
+    .marca-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:2.4rem;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2rem;}
+    .hero-stats{gap:1.5rem;}
+    .sec-title{font-size:1.8rem;}
+    section{padding:4rem 0;}
+    .marca-text h2{font-size:1.7rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><img src="img/logo.png" alt="Pinturerías del Sur">Pinturerías <span style="color:var(--red)">del Sur</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#marca">Asesoramiento</a></li>
+      <li><a href="#sucursales">Sucursales</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/542281555070?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">Consultar</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">★ <b>4.6</b> en Google · Pintura de Hogar, Obra y Automotor</span>
+    <h1>Color y calidad para cada <span>proyecto</span></h1>
+    <p>Pinturas, esmaltes y asesoramiento profesional en Azul y Olavarría. Distribuidores oficiales Sherwin-Williams.</p>
+    <div class="hero-stats">
+      <div class="stat"><b>3</b><span>Sucursales</span></div>
+      <div class="stat"><b>4.6★</b><span>En Google</span></div>
+      <div class="stat"><b>2</b><span>Ciudades</span></div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-red" href="https://wa.me/542281555070?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      <a class="btn btn-white" href="#sucursales">Ver Sucursales</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Qué Hacemos</span>
+    <h2 class="sec-title">Pintura para Cada Necesidad</h2>
+    <p class="sec-sub">Home, obra y automotor: te acompañamos con el producto y el asesoramiento justo para tu proyecto.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        </div>
+        <h3>Pintura de Hogar</h3>
+        <p>Látex, esmaltes y revestimientos para renovar interiores y exteriores.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M6 7V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v3"/><path d="M2 12h20"/></svg>
+        </div>
+        <h3>Pintura de Obra</h3>
+        <p>Materiales y volumen para constructoras, pintores y grandes proyectos.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17a2 2 0 1 0 4 0M5 17a2 2 0 1 1 4 0M15 17a2 2 0 1 0 4 0M15 17a2 2 0 1 1 4 0M3 17V9l2-5h14l2 5v8"/></svg>
+        </div>
+        <h3>Pintura Automotor</h3>
+        <p>Productos y color para chapa y pintura, retoques y trabajos de taller.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="marca" class="marca">
+  <div class="wrap marca-grid">
+    <div class="marca-img reveal">
+      <img src="img/swatch.jpg" alt="Asesoramiento en color">
+    </div>
+    <div class="marca-text reveal">
+      <span class="eyebrow">Asesoramiento</span>
+      <h2>El color correcto, sin vueltas</h2>
+      <p>Te ayudamos a elegir el producto y el tono ideal para tu proyecto, con marcas reconocidas y respaldo técnico en cada sucursal.</p>
+      <ul class="marca-list">
+        <li><span class="chk">✓</span> Asesoramiento personalizado en color</li>
+        <li><span class="chk">✓</span> Stock permanente en 3 sucursales</li>
+        <li><span class="chk">✓</span> Atención para particulares y obras</li>
+      </ul>
+      <div class="sw-badge">Distribuidores oficiales Sherwin-Williams</div>
+    </div>
+  </div>
+</section>
+
+<section id="sucursales">
+  <div class="wrap">
+    <span class="eyebrow">Encontranos</span>
+    <h2 class="sec-title">Nuestras Sucursales</h2>
+    <p class="sec-sub">3 locales para atenderte mejor, en Azul y Olavarría.</p>
+    <div class="sucursales-grid">
+      <div class="suc-card reveal">
+        <div class="suc-img"><img src="img/branch1.jpg" alt="Sucursal Roca 673, Azul"></div>
+        <div class="suc-body">
+          <span class="suc-city">Azul</span>
+          <h3>Roca 673</h3>
+          <div class="suc-addr">📍 Julio A. Roca 673, Azul</div>
+          <div class="suc-actions">
+            <a class="suc-btn wa" href="https://wa.me/542281555070" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="suc-btn map" href="https://www.google.com/maps/place/PINTURERIAS+DEL+SUR/@-36.7830113,-59.8630086,18z/data=!4m6!3m5!1s0x959427736e5b785f:0x90125b3f3ba0aa42!8m2!3d-36.7830129!4d-59.8619022" target="_blank" rel="noopener">Ver mapa</a>
+          </div>
+        </div>
+      </div>
+      <div class="suc-card reveal">
+        <div class="suc-img"><img src="img/branch2.jpg" alt="Sucursal Av. 25 de Mayo y Sarmiento, Azul"></div>
+        <div class="suc-body">
+          <span class="suc-city">Azul</span>
+          <h3>Av. 25 de Mayo y Sarmiento</h3>
+          <div class="suc-addr">📍 Av. 25 de Mayo esq. Sarmiento, Azul</div>
+          <div class="suc-actions">
+            <a class="suc-btn wa" href="https://wa.me/542281535900" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="suc-btn map" href="https://www.google.com/maps/search/?api=1&query=Pintureria+del+Sur+Av+25+de+Mayo+y+Sarmiento+Azul" target="_blank" rel="noopener">Ver mapa</a>
+          </div>
+        </div>
+      </div>
+      <div class="suc-card reveal">
+        <div class="suc-img"><img src="img/branch3.jpg" alt="Sucursal Av. Pringles 3917, Olavarría"></div>
+        <div class="suc-body">
+          <span class="suc-city">Olavarría</span>
+          <h3>Av. Pringles 3917</h3>
+          <div class="suc-addr">📍 Av. Pringles 3917, Olavarría</div>
+          <div class="suc-actions">
+            <a class="suc-btn wa" href="https://wa.me/542284399277" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="suc-btn map" href="https://www.google.com/maps/search/?api=1&query=Pintureria+del+Sur+Av+Pringles+3917+Olavarria" target="_blank" rel="noopener">Ver mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final">
+  <h2>¿Tenés un proyecto para pintar?</h2>
+  <p>Escribinos por WhatsApp y te asesoramos sin cargo, en la sucursal que te quede más cerca.</p>
+  <a class="btn btn-red" href="https://wa.me/542281555070?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">Consultar Ahora</a>
+</div>
+
+<footer>
+  <div class="footer-brand"><img src="img/logo.png" alt="Pinturerías del Sur">Pinturerías del Sur</div>
+  <div class="footer-socials">
+    <a class="social-btn" href="https://www.instagram.com/pinturerias_del_sur/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="social-btn" href="https://wa.me/542281555070" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+    </a>
+  </div>
+  <p class="fine">© 2026 Pinturerías del Sur · Azul & Olavarría</p>
+</footer>
+
+<a class="float-wa" href="https://wa.me/542281555070?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
