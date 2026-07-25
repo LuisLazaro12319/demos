@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rogelio Restaurante | Cocina Española & Mediterránea en Mendoza</title>
+<meta name="description" content="Rogelio Restaurante - Cocina española y mediterránea en Godoy Cruz, Mendoza. Paella, gambas al ajillo, pulpo a la gallega y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine-deep:#1a0508;
+    --wine:#3d0f14;
+    --wine-mid:#5c1a1f;
+    --gold:#c9a15a;
+    --gold-light:#e8cf9a;
+    --cream:#f3ead9;
+    --text-gray:#cdbca4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--wine-deep);
+    color:var(--cream);
+    font-family:'Montserrat',sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+
+  /* ---- NAV ---- */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem 2rem;
+    background:rgba(26,5,8,.35);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(201,161,90,.15);
+    transition:background .35s ease;
+  }
+  nav.scrolled{background:rgba(26,5,8,.75);}
+  .brand{display:flex;align-items:center;gap:.7rem;font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;color:var(--gold-light);letter-spacing:.5px;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);}
+  .nav-links{display:flex;gap:2.2rem;list-style:none;}
+  .nav-links a{font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-gray);transition:.25s;position:relative;}
+  .nav-links a:hover{color:var(--gold-light);}
+  .nav-cta{
+    display:flex;align-items:center;gap:.5rem;
+    background:linear-gradient(135deg,var(--gold),#a97f3d);
+    color:#1a0508;padding:.6rem 1.3rem;border-radius:30px;
+    font-size:.8rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    box-shadow:0 4px 18px rgba(201,161,90,.35);
+    transition:transform .25s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+  .burger{display:none;background:none;border:none;color:var(--gold-light);font-size:1.6rem;cursor:pointer;}
+
+  /* ---- HERO ---- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    padding:8rem 1.4rem 4rem;
+    background:
+      radial-gradient(circle at center, rgba(61,15,20,.55) 0%, rgba(15,4,6,.93) 78%),
+      url('img/hero.jpg') center 38%/cover no-repeat;
+  }
+  .hero-eyebrow{
+    font-size:.82rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold-light);
+    margin-bottom:1.3rem;font-weight:600;
+  }
+  .hero h1{font-size:4.2rem;font-weight:700;color:var(--cream);text-shadow:0 4px 30px rgba(0,0,0,.6);max-width:800px;}
+  .hero h1 em{font-style:italic;color:var(--gold-light);}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:var(--text-gray);max-width:560px;font-weight:300;}
+  .rating-badge{
+    margin-top:2.2rem;display:inline-flex;align-items:center;gap:.6rem;
+    background:rgba(255,255,255,.06);border:1px solid rgba(201,161,90,.3);
+    padding:.6rem 1.3rem;border-radius:40px;font-size:.9rem;
+    backdrop-filter:blur(6px);
+  }
+  .stars{color:var(--gold);letter-spacing:2px;}
+  .hero-actions{margin-top:2.6rem;display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:center;}
+  .btn{
+    display:inline-flex;align-items:center;gap:.6rem;
+    padding:.95rem 2.1rem;border-radius:40px;font-weight:600;font-size:.88rem;
+    letter-spacing:.6px;text-transform:uppercase;transition:.3s;
+  }
+  .btn-gold{background:linear-gradient(135deg,var(--gold),#a97f3d);color:#1a0508;box-shadow:0 8px 25px rgba(201,161,90,.35);}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,161,90,.5);}
+  .btn-outline{border:1px solid rgba(243,234,217,.4);color:var(--cream);}
+  .btn-outline:hover{background:rgba(243,234,217,.08);}
+  .scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);width:22px;height:36px;border:2px solid rgba(243,234,217,.4);border-radius:20px;}
+  .scroll-cue::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--gold-light);border-radius:2px;animation:scrollDown 1.6s infinite;}
+  @keyframes scrollDown{0%{opacity:1;top:6px;}100%{opacity:0;top:20px;}}
+
+  /* ---- SECTION SHARED ---- */
+  section{padding:6.5rem 0;position:relative;}
+  .eyebrow{font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;text-align:center;display:block;margin-bottom:.8rem;}
+  .sec-title{font-size:2.6rem;text-align:center;color:var(--cream);font-weight:600;margin-bottom:1rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.5rem;font-weight:300;font-size:1.02rem;}
+
+  /* ---- NOSOTROS ---- */
+  .nosotros{display:grid;grid-template-columns:.85fr 1.15fr;gap:3.5rem;align-items:center;}
+  .nosotros-img{border-radius:6px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);position:relative;}
+  .nosotros-img::after{content:'';position:absolute;inset:0;border:1px solid rgba(201,161,90,.4);border-radius:6px;pointer-events:none;}
+  .nosotros-text .eyebrow{text-align:left;}
+  .nosotros-text h2{font-size:2.3rem;text-align:left;margin-bottom:1.3rem;}
+  .nosotros-text p{color:var(--text-gray);font-weight:300;margin-bottom:1.1rem;font-size:1.02rem;}
+  .quote-line{
+    margin-top:1.6rem;padding-left:1.3rem;border-left:3px solid var(--gold);
+    font-family:'Playfair Display',serif;font-style:italic;color:var(--gold-light);font-size:1.15rem;
+  }
+
+  /* ---- PLATOS ---- */
+  .platos{background:linear-gradient(180deg,rgba(61,15,20,.25),transparent);}
+  .platos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.8rem;}
+  .plato-card{
+    position:relative;border-radius:10px;overflow:hidden;height:340px;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+    transition:transform .4s ease;
+  }
+  .plato-card:hover{transform:translateY(-8px);}
+  .plato-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .plato-card:hover img{transform:scale(1.08);}
+  .plato-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(26,5,8,0) 30%, rgba(15,4,6,.95) 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;
+  }
+  .plato-badge{
+    position:absolute;top:1rem;right:1rem;background:var(--gold);color:#1a0508;
+    font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    padding:.3rem .7rem;border-radius:20px;
+  }
+  .plato-overlay h3{font-size:1.35rem;color:var(--cream);margin-bottom:.3rem;}
+  .plato-overlay span{font-size:.85rem;color:var(--gold-light);font-weight:300;}
+
+  /* ---- RESEÑAS ---- */
+  .resenas{
+    background:
+      radial-gradient(circle at center, rgba(92,26,31,.4) 0%, rgba(15,4,6,.95) 75%),
+      url('img/fishchips.jpg') center/cover no-repeat fixed;
+  }
+  .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.8rem;}
+  .resena-card{
+    background:rgba(255,255,255,.05);border:1px solid rgba(201,161,90,.2);
+    border-radius:10px;padding:2rem;backdrop-filter:blur(8px);
+  }
+  .resena-card .stars{display:block;margin-bottom:1rem;font-size:1rem;}
+  .resena-card p{font-style:italic;color:var(--cream);font-weight:300;margin-bottom:1.2rem;font-size:1rem;}
+  .resena-card .author{color:var(--gold-light);font-weight:600;font-size:.9rem;font-style:normal;}
+  @media(max-width:768px){.resenas{background-attachment:scroll;}}
+
+  /* ---- HORARIOS + CONTACTO ---- */
+  .contacto{
+    background:
+      radial-gradient(circle at center, rgba(61,15,20,.5) 0%, rgba(15,4,6,.95) 78%),
+      url('img/contacto.jpg') center/cover no-repeat;
+  }
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:rgba(255,255,255,.05);border:1px solid rgba(201,161,90,.25);
+    border-radius:10px;padding:1.6rem 1.8rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;backdrop-filter:blur(6px);
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(201,161,90,.15);
+    display:flex;align-items:center;justify-content:center;color:var(--gold-light);
+  }
+  .info-card h4{font-size:1rem;color:var(--cream);margin-bottom:.3rem;font-family:'Montserrat',sans-serif;font-weight:600;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;font-weight:300;}
+  .info-card a:hover{color:var(--gold-light);}
+  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(201,161,90,.3);box-shadow:0 20px 50px rgba(0,0,0,.5);}
+  .map-wrap iframe{width:100%;height:420px;border:0;filter:grayscale(30%) sepia(10%);}
+
+  /* ---- FOOTER ---- */
+  footer{background:var(--wine-deep);border-top:1px solid rgba(201,161,90,.15);padding:3.5rem 0 2rem;text-align:center;}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--gold-light);margin-bottom:1rem;}
+  .footer-socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1.6rem;}
+  .social-btn{
+    width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,161,90,.3);
+    display:flex;align-items:center;justify-content:center;color:var(--gold-light);transition:.3s;
+  }
+  .social-btn:hover{background:var(--gold);color:#1a0508;}
+  footer .fine{color:var(--text-gray);font-size:.8rem;font-weight:300;}
+
+  /* ---- FLOATING WHATSAPP ---- */
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .nosotros{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .hero h1{font-size:2.6rem;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.1rem;}
+    .hero p{font-size:1rem;}
+    .sec-title{font-size:2rem;}
+    section{padding:4.5rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><span class="dot"></span>Rogelio <span style="color:var(--cream);font-weight:400;">Restaurante</span></div>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#platos">Platos</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/5492616403618?text=Hola!%20Quiero%20reservar%20una%20mesa%20en%20Rogelio%20Restaurante" target="_blank" rel="noopener">Reservar</a>
+</nav>
+
+<section class="hero">
+  <span class="hero-eyebrow">Cocina Española & Mediterránea</span>
+  <h1>Rogelio <em>Restaurante</em></h1>
+  <p>Sabores del mediterráneo en el corazón de Godoy Cruz, Mendoza. Paella, mariscos y la hospitalidad de siempre.</p>
+  <div class="rating-badge"><span class="stars">★★★★★</span> 4.7 · 372 reseñas en Google</div>
+  <div class="hero-actions">
+    <a class="btn btn-gold" href="https://wa.me/5492616403618?text=Hola!%20Quiero%20reservar%20una%20mesa%20en%20Rogelio%20Restaurante" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+    <a class="btn btn-outline" href="#platos">Ver Platos</a>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+
+<section id="nosotros">
+  <div class="wrap nosotros">
+    <div class="nosotros-img reveal">
+      <img src="img/nosotros.jpg" alt="Interior de Rogelio Restaurante">
+    </div>
+    <div class="nosotros-text reveal">
+      <span class="eyebrow">Sobre Nosotros</span>
+      <h2>Una mesa con alma española</h2>
+      <p>En Rogelio, cada plato se prepara con la calma y el cuidado de una cocina que no tiene apuro: mariscos frescos, recetas mediterráneas y esa atención personalizada que solo dan sus propios dueños.</p>
+      <p>Música española de fondo, mozos que explican cada paso y un ambiente pensado para compartir una mesa larga, sin apuro, martes a sábado desde las 20 hs.</p>
+      <div class="quote-line">"La mano de quienes preparan cada plato es única, exquisita."</div>
+    </div>
+  </div>
+</section>
+
+<section id="platos" class="platos">
+  <div class="wrap">
+    <span class="eyebrow">Nuestra Cocina</span>
+    <h2 class="sec-title">Platos Destacados</h2>
+    <p class="sec-sub">Una selección de nuestros platos más pedidos, según nuestros propios comensales.</p>
+    <div class="platos-grid">
+      <div class="plato-card reveal">
+        <span class="plato-badge">Insignia</span>
+        <img src="img/paella.jpg" alt="Paella de Rogelio">
+        <div class="plato-overlay"><h3>Paella de Rogelio</h3><span>Arroz, mariscos y el toque de la casa</span></div>
+      </div>
+      <div class="plato-card reveal">
+        <span class="plato-badge">Popular</span>
+        <img src="img/gambas.jpg" alt="Gambas al Ajillo">
+        <div class="plato-overlay"><h3>Gambas al Ajillo</h3><span>Camarones salteados en aceite de oliva y ajo</span></div>
+      </div>
+      <div class="plato-card reveal">
+        <img src="img/pulpo.jpg" alt="Pulpo a la Gallega">
+        <div class="plato-overlay"><h3>Pulpo a la Gallega</h3><span>Con papas, pimentón y aceite de oliva</span></div>
+      </div>
+      <div class="plato-card reveal">
+        <img src="img/tortilla.jpg" alt="Tortilla Española">
+        <div class="plato-overlay"><h3>Tortilla Española</h3><span>La clásica, jugosa por dentro</span></div>
+      </div>
+      <div class="plato-card reveal">
+        <img src="img/jamon.jpg" alt="Jamón Ibérico">
+        <div class="plato-overlay"><h3>Jamón Ibérico</h3><span>Cortado fino, para compartir</span></div>
+      </div>
+      <div class="plato-card reveal">
+        <img src="img/osobuco.jpg" alt="Osobuco Estofado">
+        <div class="plato-overlay"><h3>Osobuco Estofado</h3><span>Cocción lenta al estilo mediterráneo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas" class="resenas">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold-light);">Lo que dicen</span>
+    <h2 class="sec-title">Reseñas de Nuestros Clientes</h2>
+    <div class="resenas-grid">
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Ah Rogelio lo conocimos x una publicidad, no es un lugar visible pero cdo entras es hermoso, música española, se puede charlar tranquilamente... Todo es recomendable, el pulpo, la tortilla, el arroz, la ensalada."</p>
+        <span class="author">— Jimena Lucero, Local Guide</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Excelente la atención personalizada de sus dueños. Los mozos nos explicaron cada paso y en cada plato descubrimos un sabor único. Transmitían el aroma del mediterráneo junto a sus anécdotas."</p>
+        <span class="author">— Clara Romagnoli</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"El mejor lugar en Mendoza p comer la excelente gastronomía de España. Atención excelente d sus dueños, ambiente agradable y de buen gusto y comida deliciosa. Volveré, super recomendable."</p>
+        <span class="author">— Guillermo Lúquez</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Reservá tu Mesa</h2>
+    <p class="sec-sub">Martes a sábado, desde las 20 hs. Te esperamos.</p>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Renato Zanzin 1458, Godoy Cruz, Mendoza</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Reservas</h4><a href="tel:+542616403618">0261 640-3618</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div><h4>Horario</h4><p>Martes a Sábado · desde las 20 hs</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div><h4>Instagram</h4><a href="https://www.instagram.com/rogeliorestaurant" target="_blank" rel="noopener">@rogeliorestaurant</a></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps?q=Renato+Zanzin+1458,+Godoy+Cruz,+Mendoza&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Rogelio Restaurante</div>
+  <div class="footer-socials">
+    <a class="social-btn" href="https://www.instagram.com/rogeliorestaurant" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="social-btn" href="https://wa.me/5492616403618?text=Hola!%20Quiero%20reservar%20una%20mesa%20en%20Rogelio%20Restaurante" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+    </a>
+  </div>
+  <p class="fine">© 2026 Rogelio Restaurante · Godoy Cruz, Mendoza</p>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5492616403618?text=Hola!%20Quiero%20reservar%20una%20mesa%20en%20Rogelio%20Restaurante" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
