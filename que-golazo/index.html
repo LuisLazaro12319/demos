@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Que Golazo | Canchas de Fútbol en CABA</title>
+<meta name="description" content="Que Golazo - Canchas de fútbol 5, 6 y 7 en Alberti, CABA. Bar, parrilla y estacionamiento propio. Reservá por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0f0d;
+    --bg2:#121712;
+    --gold:#ffb700;
+    --gold-light:#ffd166;
+    --green:#22c55e;
+    --text:#e9ede9;
+    --text-gray:#9aa39a;
+    --card:#171c17;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+  ul{list-style:none;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 2rem;
+    background:rgba(11,15,13,.55);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,183,0,.15);
+    transition:background .3s ease;
+  }
+  nav.scrolled{background:rgba(11,15,13,.92);}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:#fff;}
+  .brand .ball{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);}
+  .brand span{color:var(--gold);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--gold);}
+  .nav-cta{
+    display:flex;align-items:center;gap:.5rem;background:var(--gold);color:#0b0f0d;
+    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+    box-shadow:0 6px 18px rgba(255,183,0,.3);transition:transform .25s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(90deg, rgba(6,8,7,.95) 15%, rgba(6,8,7,.6) 60%, rgba(255,183,0,.2) 100%), url('img/hero.jpg') center 35%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,183,0,.1);
+    border:1px solid rgba(255,183,0,.35);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
+    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
+  }
+  .hero-badge b{color:var(--gold-light);}
+  .hero h1{font-size:4.6rem;color:#fff;max-width:780px;line-height:1.02;text-shadow:0 4px 25px rgba(0,0,0,.5);}
+  .hero h1 span{color:var(--gold);}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:560px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
+  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
+  .btn-gold{background:var(--gold);color:#0b0f0d;box-shadow:0 10px 28px rgba(255,183,0,.35);}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(255,183,0,.5);}
+  .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
+  .btn-outline:hover{background:rgba(255,255,255,.14);}
+
+  /* SECTION SHARED */
+  section{padding:6rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;font-family:'Inter',sans-serif;}
+  .sec-title{text-align:center;font-size:2.6rem;color:#fff;margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+
+  /* SERVICIOS */
+  .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  .servicio-card{
+    background:var(--card);border-radius:12px;padding:2rem 1.4rem;text-align:center;
+    border:1px solid rgba(255,255,255,.06);transition:transform .3s ease, border-color .3s ease;
+  }
+  .servicio-card:hover{transform:translateY(-6px);border-color:rgba(255,183,0,.4);}
+  .servicio-icon{
+    width:54px;height:54px;border-radius:10px;margin:0 auto 1.2rem;
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.4rem;
+    background:rgba(255,183,0,.1);
+  }
+  .servicio-card h3{font-size:1.05rem;color:#fff;margin-bottom:.5rem;font-family:'Inter',sans-serif;font-weight:700;text-transform:none;letter-spacing:0;}
+  .servicio-card p{color:var(--text-gray);font-size:.88rem;text-transform:none;font-family:'Inter',sans-serif;}
+
+  /* INSTALACIONES */
+  .instalaciones{background:var(--bg2);}
+  .inst-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
+  .inst-img{border-radius:12px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(255,183,0,.15);}
+  .inst-text .eyebrow{text-align:left;}
+  .inst-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;color:#fff;}
+  .inst-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .inst-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem;}
+  .inst-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:#dfe3df;font-family:'Inter',sans-serif;}
+  .inst-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#0b0f0d;font-size:.7rem;font-weight:900;}
+
+  /* RESEÑAS */
+  .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem;}
+  .resena-card{
+    background:var(--card);border-radius:12px;padding:2rem;border:1px solid rgba(255,255,255,.06);
+  }
+  .resena-card .stars{display:block;margin-bottom:1rem;color:var(--gold);font-size:1rem;}
+  .resena-card p{color:#dcdfdc;font-size:.98rem;margin-bottom:1.2rem;text-transform:none;font-family:'Inter',sans-serif;font-style:italic;}
+  .resena-card .author{color:var(--gold);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:var(--card);border:1px solid rgba(255,255,255,.06);
+    border-radius:10px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(255,183,0,.12);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+  }
+  .info-card h4{font-size:.95rem;color:#fff;margin-bottom:.3rem;font-weight:700;font-family:'Inter',sans-serif;text-transform:none;letter-spacing:0;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .info-card a:hover{color:var(--gold);}
+  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(255,183,0,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);}
+  .map-wrap iframe{width:100%;height:420px;border:0;filter:grayscale(60%) invert(90%) contrast(85%);}
+
+  /* FOOTER */
+  footer{background:#070908;color:#8b918b;padding:4rem 0 2rem;border-top:1px solid rgba(255,183,0,.1);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;}
+  .footer-brand .ball{width:12px;height:12px;border-radius:50%;background:var(--gold);}
+  .footer-brand span{color:var(--gold);}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Inter',sans-serif;}
+  .footer-col p, .footer-col a{color:#8b918b;font-size:.9rem;font-family:'Inter',sans-serif;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:var(--gold);}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.04);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  .footer-tel{display:block;color:#c3c9c3;margin-bottom:.4rem;}
+  .footer-tel:hover{color:var(--gold);}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .servicios-grid{grid-template-columns:repeat(2,1fr);}
+    .inst-grid{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:2.8rem;}
+  }
+  @media(max-width:560px){
+    .servicios-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.2rem;}
+    .sec-title{font-size:1.9rem;}
+    section{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><span class="ball"></span>Que <span>Golazo</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#instalaciones">Instalaciones</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/5491131560464?text=Hola!%20Quiero%20reservar%20una%20cancha" target="_blank" rel="noopener">Reservar</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">★ <b>4.4</b> en Google · +24 reseñas</span>
+    <h1>Tu cancha te <span>espera</span></h1>
+    <p>Fútbol 5, 6 y 7 en canchas techadas, con bar, parrilla y estacionamiento propio. Sede Alberti, CABA.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="https://wa.me/5491131560464?text=Hola!%20Quiero%20reservar%20una%20cancha" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+      <a class="btn btn-outline" href="#contacto">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Que Ofrecemos</span>
+    <h2 class="sec-title">Todo Para Tu Partido</h2>
+    <p class="sec-sub">Más que una cancha: un lugar para juntarte con amigos antes, durante y después del partido.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20M2 12h20"/></svg>
+        </div>
+        <h3>Fútbol 5, 6 y 7</h3>
+        <p>Canchas techadas con césped sintético de primera.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg>
+        </div>
+        <h3>Bar &amp; Parrilla</h3>
+        <p>Bar propio con parrilla para el tercer tiempo.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Estacionamiento</h3>
+        <p>Lugar propio para dejar el auto o la moto.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3>Escuela de Fútbol</h3>
+        <p>Clases con profes para chicos y técnica personalizada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="instalaciones" class="instalaciones">
+  <div class="wrap inst-grid">
+    <div class="inst-img reveal">
+      <img src="img/pitch.jpg" alt="Cancha de fútbol">
+    </div>
+    <div class="inst-text reveal">
+      <span class="eyebrow">Instalaciones</span>
+      <h2>Canchas nuevas y cuidadas</h2>
+      <p>Según nuestros propios jugadores: caucho en su punto justo, vestuarios impecables y canchas siempre en buen estado.</p>
+      <div class="inst-list">
+        <li><span class="chk">✓</span> Vestuarios súper equipados y limpios</li>
+        <li><span class="chk">✓</span> Césped sintético nuevo y cuidado</li>
+        <li><span class="chk">✓</span> Bar y parrilla propia</li>
+        <li><span class="chk">✓</span> Estacionamiento en el predio</li>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Lo Que Dicen</span>
+    <h2 class="sec-title">Reseñas Reales</h2>
+    <div class="resenas-grid">
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Todo nuevo. Con estacionamiento y bar propio. Baños y vestuarios súper equipados y limpios. Las canchas en muy buenas condiciones."</p>
+        <span class="author">Carola Kaefer</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Hermosas canchas con el caucho justo, baños super limpios y el personal super buena onda."</p>
+        <span class="author">Luna Luis</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Las canchas están nuevas y súper cuidadas."</p>
+        <span class="author">Reseña en Google</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Sede Alberti</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Alberti 1350, CABA</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Reservas</h4><a href="tel:+541131560464">11-3156-0464</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h4>Abierto</h4><p>Lunes a domingo</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div><h4>Instagram</h4><a href="https://www.instagram.com/quegolazofutbol" target="_blank" rel="noopener">@quegolazofutbol</a></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps?q=Alberti+1350,+CABA&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand"><span class="ball"></span>Que <span>Golazo</span></div>
+        <p>Canchas de fútbol 5, 6 y 7 en CABA. Bar, parrilla y estacionamiento propio. Sede Alberti.</p>
+      </div>
+      <div class="footer-col footer-addr">
+        <h4>Sede Alberti</h4>
+        <p>Alberti 1350<br>CABA</p>
+        <p>Lunes a domingo</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#instalaciones">Instalaciones</a>
+          <a href="#resenas">Reseñas</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/quegolazofutbol" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+        <a class="footer-tel" href="tel:+541131560464">Tel: 11-3156-0464</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 Que Golazo · Alberti, CABA</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491131560464?text=Hola!%20Quiero%20reservar%20una%20cancha" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
