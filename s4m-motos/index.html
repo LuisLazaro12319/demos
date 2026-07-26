@@ -12,8 +12,8 @@
   :root{
     --bg:#111214;
     --bg2:#1a1c1f;
-    --orange:#ff5a1f;
-    --amber:#ffb020;
+    --green:#2fa32a;
+    --green-light:#5cc94f;
     --text:#e8e9ec;
     --text-gray:#9aa0aa;
     --card:#1c1e22;
@@ -31,27 +31,23 @@
   nav{
     position:fixed;top:0;left:0;width:100%;z-index:1000;
     display:flex;align-items:center;justify-content:space-between;
-    padding:1rem 2rem;
-    background:rgba(17,18,20,.55);
+    padding:.7rem 2rem;
+    background:rgba(255,255,255,.68);
     backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(255,90,31,.15);
+    border-bottom:1px solid rgba(0,0,0,.06);
     transition:background .3s ease;
   }
-  nav.scrolled{background:rgba(17,18,20,.92);}
-  .brand{display:flex;align-items:center;gap:.7rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:1px;color:#fff;}
-  .brand .mark{
-    width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--orange),var(--amber));
-    display:flex;align-items:center;justify-content:center;color:#111;font-weight:800;font-size:1.1rem;
-  }
-  .brand small{display:block;font-family:'Inter',sans-serif;text-transform:none;font-size:.62rem;color:var(--text-gray);letter-spacing:.5px;font-weight:400;}
+  nav.scrolled{background:rgba(255,255,255,.94);box-shadow:0 4px 25px rgba(0,0,0,.08);}
+  .brand{display:flex;align-items:center;gap:.6rem;}
+  .brand img{height:52px;width:auto;display:block;}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.9rem;}
-  .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
-  .nav-links a:hover{color:var(--orange);}
+  .nav-links a{font-size:.85rem;font-weight:600;color:#3a3f47;letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--green);}
   .nav-cta{
-    display:flex;align-items:center;gap:.5rem;background:var(--orange);color:#fff;
+    display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;
     padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
-    box-shadow:0 6px 18px rgba(255,90,31,.35);transition:transform .25s;
+    box-shadow:0 6px 18px rgba(47,163,42,.35);transition:transform .25s;
   }
   .nav-cta:hover{transform:translateY(-2px);}
 
@@ -60,28 +56,28 @@
     position:relative;min-height:100vh;display:flex;flex-direction:column;
     align-items:flex-start;justify-content:center;
     padding:8rem 1.5rem 5rem;
-    background:linear-gradient(90deg, rgba(10,10,11,.94) 10%, rgba(10,10,11,.55) 60%, rgba(255,90,31,.25) 100%), url('img/hero.jpg') center 30%/cover no-repeat;
+    background:linear-gradient(90deg, rgba(10,10,11,.94) 10%, rgba(10,10,11,.55) 60%, rgba(47,163,42,.25) 100%), url('img/hero.jpg') center 30%/cover no-repeat;
   }
   .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
   .hero-badge{
-    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,90,31,.12);
-    border:1px solid rgba(255,90,31,.4);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(47,163,42,.12);
+    border:1px solid rgba(47,163,42,.4);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
     font-size:.82rem;font-weight:600;margin-bottom:1.5rem;
   }
-  .hero-badge b{color:var(--amber);}
+  .hero-badge b{color:var(--green-light);}
   .hero h1{font-size:4.4rem;font-weight:700;color:#fff;max-width:760px;line-height:1.05;text-shadow:0 4px 25px rgba(0,0,0,.4);letter-spacing:.5px;}
-  .hero h1 span{color:var(--orange);}
+  .hero h1 span{color:var(--green);}
   .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c7cad0;max-width:560px;font-weight:400;text-transform:none;}
   .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
   .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;}
-  .btn-orange{background:var(--orange);color:#fff;box-shadow:0 10px 28px rgba(255,90,31,.4);}
-  .btn-orange:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(255,90,31,.55);}
+  .btn-green{background:var(--green);color:#fff;box-shadow:0 10px 28px rgba(47,163,42,.4);}
+  .btn-green:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(47,163,42,.55);}
   .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
   .btn-outline:hover{background:rgba(255,255,255,.14);}
 
   /* SECTION SHARED */
   section{padding:6rem 0;}
-  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:.7rem;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:.7rem;}
   .sec-title{text-align:center;font-size:2.5rem;font-weight:700;color:#fff;margin-bottom:.9rem;letter-spacing:.5px;}
   .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
 
@@ -91,11 +87,11 @@
     background:var(--card);border-radius:12px;padding:2.2rem 1.7rem;
     border:1px solid rgba(255,255,255,.06);transition:transform .3s ease, border-color .3s ease;
   }
-  .servicio-card:hover{transform:translateY(-6px);border-color:rgba(255,90,31,.4);}
+  .servicio-card:hover{transform:translateY(-6px);border-color:rgba(47,163,42,.4);}
   .servicio-icon{
     width:56px;height:56px;border-radius:10px;margin-bottom:1.3rem;
-    display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:1.5rem;
-    background:rgba(255,90,31,.1);
+    display:flex;align-items:center;justify-content:center;color:var(--green);font-size:1.5rem;
+    background:rgba(47,163,42,.1);
   }
   .servicio-card h3{font-size:1.2rem;color:#fff;margin-bottom:.6rem;font-weight:700;letter-spacing:.5px;}
   .servicio-card p{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
@@ -103,12 +99,12 @@
   /* TALLER / IMG BAND */
   .taller{position:relative;background:var(--bg2);}
   .taller-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
-  .taller-img{border-radius:12px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(255,90,31,.2);}
+  .taller-img{border-radius:12px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(47,163,42,.2);}
   .taller-text .eyebrow{text-align:left;}
   .taller-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;font-weight:700;color:#fff;}
   .taller-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
   .taller-stats{display:flex;gap:2.4rem;margin-top:1.8rem;}
-  .tstat b{display:block;font-size:2.1rem;font-weight:700;color:var(--orange);font-family:'Rajdhani',sans-serif;}
+  .tstat b{display:block;font-size:2.1rem;font-weight:700;color:var(--green);font-family:'Rajdhani',sans-serif;}
   .tstat span{font-size:.8rem;color:var(--text-gray);text-transform:uppercase;letter-spacing:.5px;}
 
   /* RESEÑAS */
@@ -116,9 +112,9 @@
   .resena-card{
     background:var(--card);border-radius:12px;padding:2rem;border:1px solid rgba(255,255,255,.06);
   }
-  .resena-card .stars{display:block;margin-bottom:1rem;color:var(--amber);font-size:1rem;}
+  .resena-card .stars{display:block;margin-bottom:1rem;color:var(--green-light);font-size:1rem;}
   .resena-card p{color:#dcdee2;font-size:.98rem;margin-bottom:1.2rem;text-transform:none;font-family:'Inter',sans-serif;font-style:italic;}
-  .resena-card .author{color:var(--orange);font-weight:700;font-size:.88rem;text-transform:uppercase;letter-spacing:.5px;}
+  .resena-card .author{color:var(--green);font-weight:700;font-size:.88rem;text-transform:uppercase;letter-spacing:.5px;}
 
   /* CONTACTO */
   .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
@@ -128,20 +124,22 @@
     display:flex;gap:1rem;align-items:flex-start;
   }
   .info-card .icon{
-    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(255,90,31,.12);
-    display:flex;align-items:center;justify-content:center;color:var(--orange);
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(47,163,42,.12);
+    display:flex;align-items:center;justify-content:center;color:var(--green);
   }
   .info-card h4{font-size:1rem;color:#fff;margin-bottom:.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:'Rajdhani',sans-serif;}
   .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
-  .info-card a:hover{color:var(--orange);}
-  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(255,90,31,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);}
+  .info-card a:hover{color:var(--green);}
+  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(47,163,42,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);}
   .map-wrap iframe{width:100%;height:420px;border:0;filter:grayscale(50%) invert(92%) contrast(90%);}
 
-  footer{background:#0a0a0b;color:#8b909a;padding:3.5rem 0 2rem;text-align:center;border-top:1px solid rgba(255,90,31,.1);}
-  .footer-brand{display:flex;align-items:center;justify-content:center;gap:.7rem;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:1.2rem;font-family:'Rajdhani',sans-serif;text-transform:uppercase;}
+  footer{background:#0a0a0b;color:#8b909a;padding:3.5rem 0 2rem;text-align:center;border-top:1px solid rgba(47,163,42,.1);}
+  .footer-brand{display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+  .footer-brand .badge{background:#fff;border-radius:10px;padding:.5rem 1rem;box-shadow:0 4px 18px rgba(0,0,0,.3);}
+  .footer-brand img{height:44px;width:auto;display:block;}
   .footer-socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1.6rem;}
   .social-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;transition:.3s;}
-  .social-btn:hover{background:var(--orange);border-color:var(--orange);}
+  .social-btn:hover{background:var(--green);border-color:var(--green);}
   footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;}
 
   .float-wa{
@@ -173,7 +171,7 @@
 <body>
 
 <nav id="nav">
-  <div class="brand"><span class="mark">S4M</span><span>Service <span style="color:var(--orange)">for Motors</span><small>Taller de Motocicletas</small></span></div>
+  <div class="brand"><img src="img/logo.png" alt="S4M - Service for Motors"></div>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
@@ -191,7 +189,7 @@
     <h1>Tu moto en <span>manos de confianza</span></h1>
     <p>Service, diagnóstico y reparación con asesoramiento real — de los que te enseñan a cuidar tu moto, no solo a arreglarla.</p>
     <div class="hero-actions">
-      <a class="btn btn-orange" href="https://wa.me/5491125337411?text=Hola!%20Quiero%20consultar%20por%20mi%20moto" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      <a class="btn btn-green" href="https://wa.me/5491125337411?text=Hola!%20Quiero%20consultar%20por%20mi%20moto" target="_blank" rel="noopener">Consultar por WhatsApp</a>
       <a class="btn btn-outline" href="#contacto">Cómo llegar</a>
     </div>
   </div>
@@ -308,7 +306,7 @@
 </section>
 
 <footer>
-  <div class="footer-brand"><span class="mark" style="width:36px;height:36px;font-size:.9rem;">S4M</span>Service for Motors</div>
+  <div class="footer-brand"><span class="badge"><img src="img/logo.png" alt="S4M - Service for Motors"></span></div>
   <div class="footer-socials">
     <a class="social-btn" href="https://www.instagram.com/service4motors" target="_blank" rel="noopener" aria-label="Instagram">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
