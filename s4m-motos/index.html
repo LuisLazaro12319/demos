@@ -133,14 +133,23 @@
   .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(47,163,42,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);}
   .map-wrap iframe{width:100%;height:420px;border:0;filter:grayscale(50%) invert(92%) contrast(90%);}
 
-  footer{background:#0a0a0b;color:#8b909a;padding:3.5rem 0 2rem;text-align:center;border-top:1px solid rgba(47,163,42,.1);}
-  .footer-brand{display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
-  .footer-brand .badge{background:#fff;border-radius:10px;padding:.5rem 1rem;box-shadow:0 4px 18px rgba(0,0,0,.3);}
-  .footer-brand img{height:44px;width:auto;display:block;}
-  .footer-socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1.6rem;}
-  .social-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;transition:.3s;}
+  footer{background:#0a0a0b;color:#8b909a;padding:4rem 0 2rem;border-top:1px solid rgba(47,163,42,.1);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{margin-bottom:1rem;}
+  .footer-brand .badge{display:inline-flex;background:#fff;border-radius:10px;padding:.4rem .9rem;}
+  .footer-brand img{height:36px;width:auto;display:block;}
+  .footer-col h4{color:#fff;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Rajdhani',sans-serif;}
+  .footer-col p, .footer-col a{color:#8b909a;font-size:.9rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:var(--green);}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;transition:.3s;}
   .social-btn:hover{background:var(--green);border-color:var(--green);}
-  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;}
+  .footer-col.contact a{display:block;color:#c7cad0;margin-bottom:.4rem;}
+  .footer-col.contact a:hover{color:var(--green);}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center;}
 
   .float-wa{
     position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
@@ -156,8 +165,13 @@
     .servicios-grid{grid-template-columns:1fr;}
     .taller-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
     .hero h1{font-size:2.8rem;}
+  }
+  @media(max-width:560px){
+    .footer-grid{grid-template-columns:1fr;gap:2rem;text-align:left;}
+    .footer-col.about p{max-width:none;}
   }
   @media(max-width:480px){
     .hero{padding:7rem 1.1rem 3.5rem;}
@@ -306,16 +320,42 @@
 </section>
 
 <footer>
-  <div class="footer-brand"><span class="badge"><img src="img/logo.png" alt="S4M - Service for Motors"></span></div>
-  <div class="footer-socials">
-    <a class="social-btn" href="https://www.instagram.com/service4motors" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a class="social-btn" href="https://wa.me/5491125337411" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
-    </a>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand"><span class="badge"><img src="img/logo.png" alt="S4M - Service for Motors"></span></div>
+        <p>Taller de motocicletas en CABA. Service, diagnóstico y reparación con asesoramiento real.</p>
+      </div>
+      <div class="footer-col footer-addr">
+        <h4>Taller</h4>
+        <p>Av. Jujuy 1539<br>CABA</p>
+        <p>Lunes a sábado<br>desde las 10 hs</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#taller">El Taller</a>
+          <a href="#resenas">Reseñas</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/service4motors" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="social-btn" href="https://wa.me/5491125337411" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+          </a>
+        </div>
+        <a href="tel:+541125337411">Tel: 011 2533-7411</a>
+        <a href="https://wa.me/5491125337411" target="_blank" rel="noopener">WhatsApp: 011 2533-7411</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 S4M - Service for Motors · CABA</p>
   </div>
-  <p class="fine">© 2026 S4M - Service for Motors · CABA</p>
 </footer>
 
 <a class="float-wa" href="https://wa.me/5491125337411?text=Hola!%20Quiero%20consultar%20por%20mi%20moto" target="_blank" rel="noopener" aria-label="WhatsApp">
