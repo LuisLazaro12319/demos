@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S4M - Service for Motors | Taller de Motos en CABA</title>
+<meta name="description" content="S4M - Service for Motors. Taller de motocicletas en Av. Jujuy 1539, CABA. Service, diagnóstico y reparación con asesoramiento real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#111214;
+    --bg2:#1a1c1f;
+    --orange:#ff5a1f;
+    --amber:#ffb020;
+    --text:#e8e9ec;
+    --text-gray:#9aa0aa;
+    --card:#1c1e22;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Rajdhani',sans-serif;text-transform:uppercase;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+  ul{list-style:none;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 2rem;
+    background:rgba(17,18,20,.55);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,90,31,.15);
+    transition:background .3s ease;
+  }
+  nav.scrolled{background:rgba(17,18,20,.92);}
+  .brand{display:flex;align-items:center;gap:.7rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:1px;color:#fff;}
+  .brand .mark{
+    width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--orange),var(--amber));
+    display:flex;align-items:center;justify-content:center;color:#111;font-weight:800;font-size:1.1rem;
+  }
+  .brand small{display:block;font-family:'Inter',sans-serif;text-transform:none;font-size:.62rem;color:var(--text-gray);letter-spacing:.5px;font-weight:400;}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--orange);}
+  .nav-cta{
+    display:flex;align-items:center;gap:.5rem;background:var(--orange);color:#fff;
+    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+    box-shadow:0 6px 18px rgba(255,90,31,.35);transition:transform .25s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(90deg, rgba(10,10,11,.94) 10%, rgba(10,10,11,.55) 60%, rgba(255,90,31,.25) 100%), url('img/hero.jpg') center 30%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,90,31,.12);
+    border:1px solid rgba(255,90,31,.4);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
+    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;
+  }
+  .hero-badge b{color:var(--amber);}
+  .hero h1{font-size:4.4rem;font-weight:700;color:#fff;max-width:760px;line-height:1.05;text-shadow:0 4px 25px rgba(0,0,0,.4);letter-spacing:.5px;}
+  .hero h1 span{color:var(--orange);}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c7cad0;max-width:560px;font-weight:400;text-transform:none;}
+  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;}
+  .btn-orange{background:var(--orange);color:#fff;box-shadow:0 10px 28px rgba(255,90,31,.4);}
+  .btn-orange:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(255,90,31,.55);}
+  .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
+  .btn-outline:hover{background:rgba(255,255,255,.14);}
+
+  /* SECTION SHARED */
+  section{padding:6rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.5rem;font-weight:700;color:#fff;margin-bottom:.9rem;letter-spacing:.5px;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+
+  /* SERVICIOS */
+  .servicios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+  .servicio-card{
+    background:var(--card);border-radius:12px;padding:2.2rem 1.7rem;
+    border:1px solid rgba(255,255,255,.06);transition:transform .3s ease, border-color .3s ease;
+  }
+  .servicio-card:hover{transform:translateY(-6px);border-color:rgba(255,90,31,.4);}
+  .servicio-icon{
+    width:56px;height:56px;border-radius:10px;margin-bottom:1.3rem;
+    display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:1.5rem;
+    background:rgba(255,90,31,.1);
+  }
+  .servicio-card h3{font-size:1.2rem;color:#fff;margin-bottom:.6rem;font-weight:700;letter-spacing:.5px;}
+  .servicio-card p{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
+
+  /* TALLER / IMG BAND */
+  .taller{position:relative;background:var(--bg2);}
+  .taller-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
+  .taller-img{border-radius:12px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(255,90,31,.2);}
+  .taller-text .eyebrow{text-align:left;}
+  .taller-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;font-weight:700;color:#fff;}
+  .taller-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .taller-stats{display:flex;gap:2.4rem;margin-top:1.8rem;}
+  .tstat b{display:block;font-size:2.1rem;font-weight:700;color:var(--orange);font-family:'Rajdhani',sans-serif;}
+  .tstat span{font-size:.8rem;color:var(--text-gray);text-transform:uppercase;letter-spacing:.5px;}
+
+  /* RESEÑAS */
+  .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem;}
+  .resena-card{
+    background:var(--card);border-radius:12px;padding:2rem;border:1px solid rgba(255,255,255,.06);
+  }
+  .resena-card .stars{display:block;margin-bottom:1rem;color:var(--amber);font-size:1rem;}
+  .resena-card p{color:#dcdee2;font-size:.98rem;margin-bottom:1.2rem;text-transform:none;font-family:'Inter',sans-serif;font-style:italic;}
+  .resena-card .author{color:var(--orange);font-weight:700;font-size:.88rem;text-transform:uppercase;letter-spacing:.5px;}
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:var(--card);border:1px solid rgba(255,255,255,.06);
+    border-radius:10px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(255,90,31,.12);
+    display:flex;align-items:center;justify-content:center;color:var(--orange);
+  }
+  .info-card h4{font-size:1rem;color:#fff;margin-bottom:.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:'Rajdhani',sans-serif;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .info-card a:hover{color:var(--orange);}
+  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(255,90,31,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);}
+  .map-wrap iframe{width:100%;height:420px;border:0;filter:grayscale(50%) invert(92%) contrast(90%);}
+
+  footer{background:#0a0a0b;color:#8b909a;padding:3.5rem 0 2rem;text-align:center;border-top:1px solid rgba(255,90,31,.1);}
+  .footer-brand{display:flex;align-items:center;justify-content:center;gap:.7rem;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:1.2rem;font-family:'Rajdhani',sans-serif;text-transform:uppercase;}
+  .footer-socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1.6rem;}
+  .social-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;transition:.3s;}
+  .social-btn:hover{background:var(--orange);border-color:var(--orange);}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .servicios-grid{grid-template-columns:1fr;}
+    .taller-grid{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:2.8rem;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.2rem;}
+    .sec-title{font-size:1.9rem;}
+    section{padding:4rem 0;}
+    .taller-stats{gap:1.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><span class="mark">S4M</span><span>Service <span style="color:var(--orange)">for Motors</span><small>Taller de Motocicletas</small></span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#taller">El Taller</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/5491125337411?text=Hola!%20Quiero%20consultar%20por%20mi%20moto" target="_blank" rel="noopener">Consultar</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">★ <b>4.4</b> en Google · +42 reseñas</span>
+    <h1>Tu moto en <span>manos de confianza</span></h1>
+    <p>Service, diagnóstico y reparación con asesoramiento real — de los que te enseñan a cuidar tu moto, no solo a arreglarla.</p>
+    <div class="hero-actions">
+      <a class="btn btn-orange" href="https://wa.me/5491125337411?text=Hola!%20Quiero%20consultar%20por%20mi%20moto" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      <a class="btn btn-outline" href="#contacto">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Qué Hacemos</span>
+    <h2 class="sec-title">Servicios del Taller</h2>
+    <p class="sec-sub">Atención honesta y profesional para que tu moto ande como el primer día.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <h3>Service &amp; Mantenimiento</h3>
+        <p>Cambio de aceite, filtros y puesta a punto para que la moto rinda al máximo.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg>
+        </div>
+        <h3>Diagnóstico y Reparación</h3>
+        <p>Revisamos el problema real antes de tocar nada, con presupuesto claro.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Asesoramiento Real</h3>
+        <p>Te explicamos cada paso y cómo mantener tu moto entre visitas al taller.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="taller" class="taller">
+  <div class="wrap taller-grid">
+    <div class="taller-img reveal">
+      <img src="img/chrome.jpg" alt="Detalle de motor de motocicleta">
+    </div>
+    <div class="taller-text reveal">
+      <span class="eyebrow">El Taller</span>
+      <h2>Pasión por las motos, en serio</h2>
+      <p>En S4M laburamos con la moto como si fuera nuestra: sin apuro, con las herramientas justas y explicando cada paso. Los clientes lo notan — por algo vuelven.</p>
+      <div class="taller-stats">
+        <div class="tstat"><b>4.4★</b><span>En Google</span></div>
+        <div class="tstat"><b>42+</b><span>Reseñas</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Lo Que Dicen</span>
+    <h2 class="sec-title">Reseñas Reales</h2>
+    <div class="resenas-grid">
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"La verdad que los chicos son espectaculares, únicos, son unos genios totales. Desde que te asesoran bien, te enseñan hasta cómo cuidar tu moto... ¡y ofrecen también café!"</p>
+        <span class="author">Maria Guzman</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Me intentaron robar la moto, me rompieron la cerradura y no la pude encender más. Hablé con el taller y me ofrecieron una solución, son muy amables, trabajan rápido y los precios muy buenos."</p>
+        <span class="author">Emiliano Ho</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Excelente servicio, el muchacho que atiende muy respetuoso, le doy un 10."</p>
+        <span class="author">Reseña en Google</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Encontranos en CABA</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Av. Jujuy 1539, CABA</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Teléfono</h4><a href="tel:+541125337411">011 2533-7411</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div><h4>Horario</h4><p>Lunes a sábado · desde las 10 hs</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div><h4>Instagram</h4><a href="https://www.instagram.com/service4motors" target="_blank" rel="noopener">@service4motors</a></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps?q=Av.+Jujuy+1539,+CABA&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><span class="mark" style="width:36px;height:36px;font-size:.9rem;">S4M</span>Service for Motors</div>
+  <div class="footer-socials">
+    <a class="social-btn" href="https://www.instagram.com/service4motors" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="social-btn" href="https://wa.me/5491125337411" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+    </a>
+  </div>
+  <p class="fine">© 2026 S4M - Service for Motors · CABA</p>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491125337411?text=Hola!%20Quiero%20consultar%20por%20mi%20moto" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
