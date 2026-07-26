@@ -145,7 +145,12 @@
   .footer-nav a:hover{color:var(--green);}
   .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
   .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
-  .social-btn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(255,255,255,.04);transition:.3s;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.04);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
   .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
   .footer-col.contact a{display:block;color:#c7cad0;margin-bottom:.4rem;}
   .footer-col.contact a:hover{color:var(--green);}
