@@ -111,6 +111,15 @@
   .nosotros .sec-title{color:#fff;}
   .nosotros .sec-sub{color:#c3cdd8;}
 
+  /* RESEÑAS */
+  .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem;}
+  .resena-card{
+    background:var(--card);border-radius:12px;padding:2rem;border:1px solid rgba(255,255,255,.06);
+  }
+  .resena-card .stars{display:block;margin-bottom:1rem;color:var(--yellow);font-size:1rem;}
+  .resena-card p{color:#dcdfe2;font-size:.98rem;margin-bottom:1.2rem;text-transform:none;font-family:'Inter',sans-serif;font-style:italic;}
+  .resena-card .author{color:var(--yellow);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
+
   /* CONTACTO */
   .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
   .info-card{
@@ -190,6 +199,7 @@
     <ul class="nav-links">
       <li><a href="#flota">Flota</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a class="nav-cta" href="https://wa.me/5491176449566?text=Hola!%20Quiero%20consultar%20por%20un%20camion" target="_blank" rel="noopener">Consultar</a>
@@ -215,20 +225,20 @@
     <p class="sec-sub">Unidades reales de nuestro predio. Consultanos por disponibilidad y precio actualizado.</p>
     <div class="flota-grid">
       <div class="flota-card reveal">
-        <div class="flota-img"><img src="img/camion1.jpg" alt="Camión Mercedes-Benz con caja"></div>
-        <div class="flota-body"><h3>Mercedes-Benz</h3><span>Con caja · Disponible</span></div>
+        <div class="flota-img"><img src="img/camion1.jpg" alt="Camión Mercedes-Benz 710 con caja"></div>
+        <div class="flota-body"><h3>Mercedes-Benz 710</h3><span>Con caja · Disponible</span></div>
       </div>
       <div class="flota-card reveal">
-        <div class="flota-img"><img src="img/camion2.jpg" alt="Camión Mercedes-Benz Atego"></div>
-        <div class="flota-body"><h3>Atego</h3><span>Con caja · Disponible</span></div>
+        <div class="flota-img"><img src="img/camion2.jpg" alt="Camión Mercedes-Benz Atego 1725 con caja"></div>
+        <div class="flota-body"><h3>Atego 1725</h3><span>Con caja · Disponible</span></div>
       </div>
       <div class="flota-card reveal">
         <div class="flota-img"><img src="img/camion3.jpg" alt="Tractor Mercedes-Benz Atego 1729"></div>
         <div class="flota-body"><h3>Atego 1729</h3><span>Tractor · Disponible</span></div>
       </div>
       <div class="flota-card reveal">
-        <div class="flota-img"><img src="img/camion4.jpg" alt="Camión Mercedes-Benz chasis"></div>
-        <div class="flota-body"><h3>Mercedes-Benz</h3><span>Chasis · Disponible</span></div>
+        <div class="flota-img"><img src="img/camion4.jpg" alt="Camión Mercedes-Benz 710 chasis"></div>
+        <div class="flota-body"><h3>Mercedes-Benz 710</h3><span>Chasis · Disponible</span></div>
       </div>
     </div>
   </div>
@@ -244,8 +254,8 @@
         <div class="nos-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
-        <h3>Especialistas Mercedes-Benz</h3>
-        <p>Años de experiencia trabajando específicamente con la marca.</p>
+        <h3>+40 Años en la Zona</h3>
+        <p>Décadas de trayectoria en compraventa de camiones Mercedes-Benz.</p>
       </div>
       <div class="nos-card reveal">
         <div class="nos-icon">
@@ -260,6 +270,30 @@
         </div>
         <h3>Atención Directa</h3>
         <p>Hablás directo con nosotros, sin intermediarios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Lo Que Dicen</span>
+    <h2 class="sec-title">Reseñas Reales</h2>
+    <div class="resenas-grid">
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Más de 40 años en el lugar, en compraventa de camiones. Gente muy cumplidora y honrada."</p>
+        <span class="author">Guillermo Langan, Local Guide</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Los mejores de la zona sin dudas!"</p>
+        <span class="author">Rumbotex</span>
+      </div>
+      <div class="resena-card reveal">
+        <span class="stars">★★★★★</span>
+        <p>"Todo excelente!"</p>
+        <span class="author">Tatiana Domínguez</span>
       </div>
     </div>
   </div>
@@ -320,6 +354,7 @@
         <div class="footer-nav">
           <a href="#flota">Flota</a>
           <a href="#nosotros">Nosotros</a>
+          <a href="#resenas">Reseñas</a>
           <a href="#contacto">Contacto</a>
         </div>
       </div>
