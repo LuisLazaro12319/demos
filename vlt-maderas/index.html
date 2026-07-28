@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLT Aberturas & Maderas | Maderera en 9 de Abril, Buenos Aires</title>
+<meta name="description" content="VLT Aberturas & Maderas - Venta de madera, aberturas y cortes a medida en 9 de Abril, Buenos Aires. Envíos a localidades cercanas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#e2231a;
+    --red-dark:#b81a13;
+    --bg:#faf8f5;
+    --dark:#1c1917;
+    --text:#2b2622;
+    --text-gray:#6b625a;
+    --card:#ffffff;
+    --wood:#8a5a34;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.3px;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+  ul{list-style:none;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(28,25,23,.08);
+    box-shadow:0 2px 20px rgba(0,0,0,.05);
+  }
+  .brand{display:flex;align-items:center;gap:.7rem;font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;color:var(--dark);}
+  .brand .mark{width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;font-weight:700;box-shadow:0 4px 14px rgba(226,35,26,.35);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.3px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--red);}
+  .nav-cta{
+    display:flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;
+    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;
+    box-shadow:0 6px 18px rgba(226,35,26,.35);transition:transform .25s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:92vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(100deg, rgba(20,16,13,.9) 15%, rgba(20,16,13,.5) 60%, rgba(226,35,26,.25) 100%), url('img/hero.jpg') center 45%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(226,35,26,.15);
+    border:1px solid rgba(226,35,26,.5);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
+    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;
+  }
+  .hero-badge b{color:#ff8a82;}
+  .hero h1{font-size:4.2rem;font-weight:700;color:#fff;max-width:760px;line-height:1.05;text-shadow:0 4px 25px rgba(0,0,0,.4);}
+  .hero h1 span{color:#ff5147;}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#e5ddd6;max-width:560px;font-weight:400;text-transform:none;}
+  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.3px;}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 10px 28px rgba(226,35,26,.4);}
+  .btn-red:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(226,35,26,.55);}
+  .btn-outline{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.3);}
+  .btn-outline:hover{background:rgba(255,255,255,.16);}
+
+  /* SECTION SHARED */
+  section{padding:6rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.5rem;color:var(--dark);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;}
+
+  /* SERVICIOS */
+  #servicios{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(20,16,13,.88) 0%, rgba(20,16,13,.93) 100%),
+      url('img/establecimiento.jpg') center 60%/cover no-repeat;
+  }
+  #servicios .eyebrow{color:#ff8a82;}
+  #servicios .sec-title{color:#fff;}
+  #servicios .sec-sub{color:#d8cfc7;}
+  .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  .servicio-card{
+    background:var(--card);border-radius:14px;padding:2.1rem 1.5rem;text-align:center;
+    box-shadow:0 8px 25px rgba(28,25,23,.06);border:1px solid rgba(28,25,23,.05);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .servicio-card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(28,25,23,.1);}
+  .servicio-icon{
+    width:56px;height:56px;border-radius:12px;margin:0 auto 1.2rem;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+  }
+  .servicio-card h3{font-size:1.05rem;color:var(--dark);margin-bottom:.5rem;font-weight:700;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif;}
+  .servicio-card p{color:var(--text-gray);font-size:.88rem;text-transform:none;}
+
+  /* PRODUCTO / CORTES */
+  .producto{background:var(--card);}
+  .producto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
+  .producto-img{border-radius:14px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.15);}
+  .producto-text .eyebrow{text-align:left;}
+  .producto-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;color:var(--dark);}
+  .producto-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;}
+  .producto-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem;}
+  .producto-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:var(--text);}
+  .producto-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:900;}
+
+  /* RESEÑAS (estilo widget) */
+  .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;}
+  .resena-card{
+    background:#fff;border-radius:10px;padding:1.6rem;border:1px solid rgba(28,25,23,.08);
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
+  }
+  .resena-top{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+  .resena-avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex:0 0 44px;
+    font-family:'Oswald',sans-serif;
+  }
+  .resena-who{flex:1;}
+  .resena-name{display:flex;align-items:center;gap:.3rem;font-weight:700;font-size:.92rem;color:var(--dark);}
+  .resena-name svg{flex:0 0 auto;}
+  .resena-sub{font-size:.75rem;color:var(--text-gray);}
+  .google-badge{display:flex;align-items:center;gap:.35rem;margin-left:auto;}
+  .stars-row{color:#fbbc04;font-size:.95rem;margin-bottom:.7rem;letter-spacing:1px;}
+  .resena-card p{color:var(--text);font-size:.92rem;text-transform:none;}
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:var(--card);border:1px solid rgba(28,25,23,.07);
+    border-radius:10px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;box-shadow:0 6px 20px rgba(0,0,0,.04);
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(226,35,26,.1);
+    display:flex;align-items:center;justify-content:center;color:var(--red);
+  }
+  .info-card h4{font-size:.95rem;color:var(--dark);margin-bottom:.3rem;font-weight:700;text-transform:none;font-family:'Inter',sans-serif;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;text-transform:none;}
+  .info-card a:hover{color:var(--red);}
+  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(28,25,23,.1);box-shadow:0 20px 50px rgba(0,0,0,.1);}
+  .map-wrap iframe{width:100%;height:420px;border:0;}
+
+  /* FOOTER */
+  footer{background:var(--dark);color:#a89e94;padding:4rem 0 2rem;border-top:1px solid rgba(226,35,26,.25);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Oswald',sans-serif;font-weight:700;font-size:1.3rem;color:#fff;margin-bottom:1rem;}
+  .footer-brand .mark{width:34px;height:34px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;font-weight:700;}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;}
+  .footer-col p, .footer-col a{color:#a89e94;font-size:.9rem;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:var(--red);}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.15);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.04);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  .footer-tel{display:block;color:#a89e94;margin-bottom:.4rem;}
+  .footer-tel:hover{color:var(--red);}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.3);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .servicios-grid{grid-template-columns:repeat(2,1fr);}
+    .producto-grid{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:2.8rem;}
+  }
+  @media(max-width:560px){
+    .servicios-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.2rem;}
+    .sec-title{font-size:1.9rem;}
+    section{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><span class="mark">VLT</span>Aberturas <span style="color:var(--red)">&amp; Maderas</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#cortes">Cortes a Medida</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/5491134139326?text=Hola!%20Quiero%20consultar%20por%20madera" target="_blank" rel="noopener">Consultar</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">★ <b>4.8</b> en Google · +46 reseñas</span>
+    <h1>Soluciones en <span>madera</span> para tu obra</h1>
+    <p>Maderas, aberturas y cortes a medida en 9 de Abril. Envíos a localidades cercanas.</p>
+    <div class="hero-actions">
+      <a class="btn btn-red" href="https://wa.me/5491134139326?text=Hola!%20Quiero%20consultar%20por%20madera" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      <a class="btn btn-outline" href="#contacto">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Qué Ofrecemos</span>
+    <h2 class="sec-title">Todo Para Tu Construcción</h2>
+    <p class="sec-sub">Maderas y aberturas de calidad, con la atención que nos caracteriza.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg>
+        </div>
+        <h3>Maderas</h3>
+        <p>Amplio surtido para obra y construcción.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="1"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h3>Aberturas</h3>
+        <p>Puertas placa y aberturas para cada espacio.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v18M6 3l12 6-12 6"/></svg>
+        </div>
+        <h3>Cortes a Medida</h3>
+        <p>Tableros y madera cortados a tu medida exacta.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Envíos</h3>
+        <p>Flete económico a localidades cercanas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cortes" class="producto">
+  <div class="wrap producto-grid">
+    <div class="producto-img reveal">
+      <img src="img/cortes.jpg" alt="Escalones de madera cortados a medida">
+    </div>
+    <div class="producto-text reveal">
+      <span class="eyebrow">Cortes a Medida</span>
+      <h2>Tu proyecto, a tu medida</h2>
+      <p>Cortamos tableros y maderas exactamente como los necesitás: escalones, estanterías, mesadas y más, con la calidad de siempre.</p>
+      <ul class="producto-list">
+        <li><span class="chk">✓</span> Cortes exactos según tu proyecto</li>
+        <li><span class="chk">✓</span> Distintas maderas y espesores</li>
+        <li><span class="chk">✓</span> Asesoramiento en el material justo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Lo Que Dicen</span>
+    <h2 class="sec-title">Reseñas de Google</h2>
+    <p class="sec-sub">Opiniones reales de nuestros clientes.</p>
+    <div class="resenas-grid">
+      <div class="resena-card reveal">
+        <div class="resena-top">
+          <div class="resena-avatar">C</div>
+          <div class="resena-who">
+            <div class="resena-name">Cristian Bragini</div>
+            <div class="resena-sub">7 reseñas</div>
+          </div>
+          <div class="google-badge">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+          </div>
+        </div>
+        <div class="stars-row">★★★★★</div>
+        <p>"Muy buenos precios y atención"</p>
+      </div>
+      <div class="resena-card reveal">
+        <div class="resena-top">
+          <div class="resena-avatar">L</div>
+          <div class="resena-who">
+            <div class="resena-name">Leandro</div>
+            <div class="resena-sub">4 reseñas</div>
+          </div>
+          <div class="google-badge">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+          </div>
+        </div>
+        <div class="stars-row">★★★★★</div>
+        <p>"Muy buena atención y disponibilidad de pagos"</p>
+      </div>
+      <div class="resena-card reveal">
+        <div class="resena-top">
+          <div class="resena-avatar">M</div>
+          <div class="resena-who">
+            <div class="resena-name">Martin Silvera</div>
+            <div class="resena-sub">Local Guide · 256 reseñas</div>
+          </div>
+          <div class="google-badge">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+          </div>
+        </div>
+        <div class="stars-row">★★★★★</div>
+        <p>"Impecable servicio, buen surtido"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Nuestro Depósito</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Camino de Cintura 7229, 9 de Abril</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Contacto</h4><a href="tel:+541134139326">11-3413-9326</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h4>Horario</h4><p>Cierra a las 18 hs</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div><h4>Instagram</h4><a href="https://www.instagram.com/madereravlt" target="_blank" rel="noopener">@madereravlt</a></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps?q=Camino+de+Cintura+7229,+9+de+Abril&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand"><span class="mark">VLT</span>Aberturas &amp; Maderas</div>
+        <p>Maderas, aberturas y cortes a medida en 9 de Abril, Buenos Aires. Envíos a localidades cercanas.</p>
+      </div>
+      <div class="footer-col footer-addr">
+        <h4>Depósito</h4>
+        <p>Camino de Cintura 7229<br>9 de Abril</p>
+        <p>Cierra a las 18 hs</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#cortes">Cortes a Medida</a>
+          <a href="#resenas">Reseñas</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/madereravlt" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+        <a class="footer-tel" href="tel:+541134139326">Tel: 11-3413-9326</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 VLT Aberturas &amp; Maderas · 9 de Abril, Buenos Aires</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491134139326?text=Hola!%20Quiero%20consultar%20por%20madera" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
