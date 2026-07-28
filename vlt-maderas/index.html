@@ -85,8 +85,13 @@
   #servicios{
     position:relative;
     background:
-      linear-gradient(180deg, rgba(20,16,13,.88) 0%, rgba(20,16,13,.93) 100%),
+      linear-gradient(180deg, rgba(20,16,13,.5) 0%, rgba(20,16,13,.6) 100%),
       url('img/establecimiento.jpg') center 60%/cover no-repeat;
+  }
+  .servicios-extra{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:2.4rem;}
+  .servicios-extra span{
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;
+    padding:.55rem 1.1rem;border-radius:30px;font-size:.85rem;font-weight:600;backdrop-filter:blur(4px);
   }
   #servicios .eyebrow{color:#ff8a82;}
   #servicios .sec-title{color:#fff;}
@@ -225,7 +230,7 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <span class="hero-badge">★ <b>4.8</b> en Google · +46 reseñas</span>
+    <span class="hero-badge">★ <b>4.8</b> en Google · +46 reseñas · <b>+10</b> años de trayectoria</span>
     <h1>Soluciones en <span>madera</span> para tu obra</h1>
     <p>Maderas, aberturas y cortes a medida en 9 de Abril. Envíos a localidades cercanas.</p>
     <div class="hero-actions">
@@ -269,6 +274,14 @@
         <h3>Envíos</h3>
         <p>Flete económico a localidades cercanas.</p>
       </div>
+    </div>
+    <div class="servicios-extra reveal">
+      <span>Techos</span>
+      <span>Revestimientos</span>
+      <span>Pisos</span>
+      <span>Machimbres</span>
+      <span>Tirantería</span>
+      <span>Y mucho más</span>
     </div>
   </div>
 </section>
@@ -365,7 +378,7 @@
           <div class="icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
-          <div><h4>Horario</h4><p>Cierra a las 18 hs</p></div>
+          <div><h4>Horario</h4><p>Lun a Vie 8 a 12 y 13 a 18 hs<br>Sáb 8 a 13 hs</p></div>
         </div>
         <div class="info-card reveal">
           <div class="icon">
@@ -391,7 +404,7 @@
       <div class="footer-col footer-addr">
         <h4>Depósito</h4>
         <p>Camino de Cintura 7229<br>9 de Abril</p>
-        <p>Cierra a las 18 hs</p>
+        <p>Lun a Vie 8-12 y 13-18 hs<br>Sáb 8 a 13 hs</p>
       </div>
       <div class="footer-col">
         <h4>Navegación</h4>
