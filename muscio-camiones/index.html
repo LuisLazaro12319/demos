@@ -39,7 +39,7 @@
     box-shadow:0 2px 20px rgba(10,37,64,.05);
   }
   .brand{display:flex;align-items:center;gap:.7rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;color:var(--navy);}
-  .brand .mark{width:38px;height:38px;border-radius:8px;background:var(--yellow);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:1.1rem;font-weight:800;}
+  .brand img{height:56px;width:auto;display:block;}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.9rem;}
   .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.3px;text-transform:uppercase;transition:.2s;font-family:'Inter',sans-serif;}
@@ -130,7 +130,7 @@
   footer{background:#071a2d;color:#8fa0b3;padding:4rem 0 2rem;border-top:1px solid rgba(255,196,0,.15);}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
   .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:1rem;}
-  .footer-brand .mark{width:32px;height:32px;border-radius:7px;background:var(--yellow);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:.9rem;font-weight:800;}
+  .footer-brand img{height:44px;width:auto;display:block;}
   .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Inter',sans-serif;}
   .footer-col p, .footer-col a{color:#8fa0b3;font-size:.9rem;font-family:'Inter',sans-serif;}
   .footer-col.about p{line-height:1.7;max-width:280px;}
@@ -183,7 +183,7 @@
 <body>
 
 <nav id="nav">
-  <div class="brand"><span class="mark">MC</span>Muscio <span style="color:var(--yellow-dark)">Camiones</span></div>
+  <div class="brand"><img src="img/logo.png" alt="Muscio Camiones"></div>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#flota">Flota</a></li>
@@ -305,7 +305,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col about">
-        <div class="footer-brand"><span class="mark">MC</span>Muscio Camiones</div>
+        <div class="footer-brand"><img src="img/logo.png" alt="Muscio Camiones"></div>
         <p>Venta de camiones Mercedes-Benz en Esteban Echeverría, Buenos Aires.</p>
       </div>
       <div class="footer-col footer-addr">
