@@ -44,12 +44,6 @@
   .nav-links{display:flex;gap:1.9rem;}
   .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.3px;text-transform:uppercase;transition:.2s;}
   .nav-links a:hover{color:var(--red);}
-  .nav-cta{
-    display:flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;
-    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;
-    box-shadow:0 6px 18px rgba(226,35,26,.35);transition:transform .25s;
-  }
-  .nav-cta:hover{transform:translateY(-2px);}
 
   /* HERO */
   .hero{
@@ -82,20 +76,11 @@
   .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;}
 
   /* SERVICIOS */
-  #servicios{
-    position:relative;
-    background:
-      linear-gradient(180deg, rgba(20,16,13,.5) 0%, rgba(20,16,13,.6) 100%),
-      url('img/establecimiento.jpg') center 60%/cover no-repeat;
-  }
   .servicios-extra{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:2.4rem;}
   .servicios-extra span{
-    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;
-    padding:.55rem 1.1rem;border-radius:30px;font-size:.85rem;font-weight:600;backdrop-filter:blur(4px);
+    background:var(--card);border:1px solid rgba(28,25,23,.1);color:var(--text);
+    padding:.55rem 1.1rem;border-radius:30px;font-size:.85rem;font-weight:600;
   }
-  #servicios .eyebrow{color:#ff8a82;}
-  #servicios .sec-title{color:#fff;}
-  #servicios .sec-sub{color:#d8cfc7;}
   .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
   .servicio-card{
     background:var(--card);border-radius:14px;padding:2.1rem 1.5rem;text-align:center;
@@ -123,6 +108,15 @@
   .producto-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:900;}
 
   /* RESEÑAS (estilo widget) */
+  #resenas{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(20,16,13,.72) 0%, rgba(20,16,13,.8) 100%),
+      url('img/resenas-bg.jpg') center 65%/cover no-repeat;
+  }
+  #resenas .eyebrow{color:#ff8a82;}
+  #resenas .sec-title{color:#fff;}
+  #resenas .sec-sub{color:#d8cfc7;}
   .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;}
   .resena-card{
     background:#fff;border-radius:10px;padding:1.6rem;border:1px solid rgba(28,25,23,.08);
@@ -224,7 +218,6 @@
       <li><a href="#resenas">Reseñas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
-    <a class="nav-cta" href="https://wa.me/5491134139326?text=Hola!%20Quiero%20consultar%20por%20madera" target="_blank" rel="noopener">Consultar</a>
   </div>
 </nav>
 
