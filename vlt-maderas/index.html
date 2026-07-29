@@ -101,31 +101,15 @@
     background:var(--card);border:1px solid rgba(28,25,23,.1);color:var(--text);
     padding:.55rem 1.1rem;border-radius:30px;font-size:.85rem;font-weight:600;
   }
-  .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
-  .servicio-card{
-    background:var(--card);border-radius:14px;padding:2.1rem 1.5rem;text-align:center;
-    box-shadow:0 8px 25px rgba(28,25,23,.06);border:1px solid rgba(28,25,23,.05);
-    transition:transform .3s ease, box-shadow .3s ease;
-  }
-  .servicio-card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(28,25,23,.1);}
-  .servicio-icon{
-    width:56px;height:56px;border-radius:12px;margin:0 auto 1.2rem;
-    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;
-    background:linear-gradient(135deg,var(--red),var(--red-dark));
-  }
-  .servicio-card h3{font-size:1.05rem;color:var(--dark);margin-bottom:.5rem;font-weight:700;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif;}
-  .servicio-card p{color:var(--text-gray);font-size:.88rem;text-transform:none;}
-
-  /* PRODUCTO / CORTES */
-  #cortes{
+  #servicios{
     position:relative;
     background:
       linear-gradient(180deg, rgba(20,16,13,.4) 0%, rgba(20,16,13,.55) 100%),
       url('img/cortes-bg.jpg') center 35%/cover no-repeat;
   }
-  #cortes .eyebrow{color:#ff8a82;}
-  #cortes .sec-title{color:#fff;}
-  #cortes .sec-sub{color:#d8cfc7;}
+  #servicios .eyebrow{color:#ff8a82;}
+  #servicios .sec-title{color:#fff;}
+  #servicios .sec-sub{color:#d8cfc7;}
   .maderas-label{color:#ff8a82;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.9rem;}
   .producto-center{max-width:640px;margin:0 auto;text-align:center;}
   .producto-center .sec-sub{margin-bottom:2.2rem;}
@@ -214,7 +198,6 @@
   .reveal.in{opacity:1;transform:translateY(0);}
 
   @media(max-width:900px){
-    .servicios-grid{grid-template-columns:repeat(2,1fr);}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
@@ -222,7 +205,6 @@
     .hero h1{font-size:2.8rem;}
   }
   @media(max-width:560px){
-    .servicios-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr;gap:2rem;}
     .footer-col.about p{max-width:none;}
   }
@@ -240,8 +222,7 @@
   <div class="brand"><span class="mark">VLT</span>Aberturas <span style="color:var(--red)">&amp; Maderas</span></div>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#cortes">Cortes a Medida</a></li>
+      <li><a href="#servicios">Qué Ofrecemos</a></li>
       <li><a href="#resenas">Reseñas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -250,8 +231,7 @@
     </button>
   </div>
   <ul class="mobile-menu" id="mobileMenu">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#cortes">Cortes a Medida</a></li>
+    <li><a href="#servicios">Qué Ofrecemos</a></li>
     <li><a href="#resenas">Reseñas</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -269,55 +249,9 @@
   </div>
 </section>
 
-<section id="servicios">
-  <div class="wrap">
-    <span class="eyebrow">Qué Ofrecemos</span>
-    <h2 class="sec-title">Todo Para Tu Construcción</h2>
-    <p class="sec-sub">Maderas y aberturas de calidad, con la atención que nos caracteriza.</p>
-    <div class="servicios-grid">
-      <div class="servicio-card reveal">
-        <div class="servicio-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg>
-        </div>
-        <h3>Maderas</h3>
-        <p>Amplio surtido para obra y construcción.</p>
-      </div>
-      <div class="servicio-card reveal">
-        <div class="servicio-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="1"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <h3>Aberturas</h3>
-        <p>Puertas placa y aberturas para cada espacio.</p>
-      </div>
-      <div class="servicio-card reveal">
-        <div class="servicio-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v18M6 3l12 6-12 6"/></svg>
-        </div>
-        <h3>Cortes a Medida</h3>
-        <p>Tableros y madera cortados a tu medida exacta.</p>
-      </div>
-      <div class="servicio-card reveal">
-        <div class="servicio-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        </div>
-        <h3>Envíos</h3>
-        <p>Flete económico a localidades cercanas.</p>
-      </div>
-    </div>
-    <div class="servicios-extra reveal">
-      <span>Techos</span>
-      <span>Revestimientos</span>
-      <span>Pisos</span>
-      <span>Machimbres</span>
-      <span>Tirantería</span>
-      <span>Y mucho más</span>
-    </div>
-  </div>
-</section>
-
-<section id="cortes" class="producto">
+<section id="servicios" class="producto">
   <div class="wrap producto-center reveal">
-    <span class="eyebrow">Cortes a Medida</span>
+    <span class="eyebrow">Qué Ofrecemos</span>
     <h2 class="sec-title">Tu proyecto, a tu medida</h2>
     <p class="sec-sub">Cortamos tableros y maderas exactamente como los necesitás: escalones, estanterías, mesadas y más, con la calidad de siempre.</p>
     <p class="maderas-label">Las mejores maderas para:</p>
@@ -441,8 +375,7 @@
       <div class="footer-col">
         <h4>Navegación</h4>
         <div class="footer-nav">
-          <a href="#servicios">Servicios</a>
-          <a href="#cortes">Cortes a Medida</a>
+          <a href="#servicios">Qué Ofrecemos</a>
           <a href="#resenas">Reseñas</a>
           <a href="#contacto">Contacto</a>
         </div>
