@@ -118,16 +118,23 @@
 
   /* PRODUCTO / CORTES */
   .producto{background:var(--card);}
-  .producto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
-  .producto-img{border-radius:14px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.15);}
-  .producto-text .eyebrow{text-align:left;}
-  .producto-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;color:var(--dark);}
-  .producto-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;}
+  .producto-center{max-width:640px;margin:0 auto;text-align:center;}
+  .producto-center .sec-sub{margin-bottom:2.2rem;}
   .producto-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem;}
   .producto-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:var(--text);}
   .producto-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:900;}
+  .producto-list-center{align-items:center;}
 
   /* RESEÑAS (estilo widget) */
+  #resenas{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(20,16,13,.72) 0%, rgba(20,16,13,.8) 100%),
+      url('img/resenas-bg.jpg') center 65%/cover no-repeat;
+  }
+  #resenas .eyebrow{color:#ff8a82;}
+  #resenas .sec-title{color:#fff;}
+  #resenas .sec-sub{color:#d8cfc7;}
   .resenas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;}
   .resena-card{
     background:#fff;border-radius:10px;padding:1.6rem;border:1px solid rgba(28,25,23,.08);
@@ -199,7 +206,6 @@
 
   @media(max-width:900px){
     .servicios-grid{grid-template-columns:repeat(2,1fr);}
-    .producto-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
@@ -301,20 +307,15 @@
 </section>
 
 <section id="cortes" class="producto">
-  <div class="wrap producto-grid">
-    <div class="producto-img reveal">
-      <img src="img/cortes.jpg" alt="Escalones de madera cortados a medida">
-    </div>
-    <div class="producto-text reveal">
-      <span class="eyebrow">Cortes a Medida</span>
-      <h2>Tu proyecto, a tu medida</h2>
-      <p>Cortamos tableros y maderas exactamente como los necesitás: escalones, estanterías, mesadas y más, con la calidad de siempre.</p>
-      <ul class="producto-list">
-        <li><span class="chk">✓</span> Cortes exactos según tu proyecto</li>
-        <li><span class="chk">✓</span> Distintas maderas y espesores</li>
-        <li><span class="chk">✓</span> Asesoramiento en el material justo</li>
-      </ul>
-    </div>
+  <div class="wrap producto-center reveal">
+    <span class="eyebrow">Cortes a Medida</span>
+    <h2 class="sec-title">Tu proyecto, a tu medida</h2>
+    <p class="sec-sub">Cortamos tableros y maderas exactamente como los necesitás: escalones, estanterías, mesadas y más, con la calidad de siempre.</p>
+    <ul class="producto-list producto-list-center">
+      <li><span class="chk">✓</span> Cortes exactos según tu proyecto</li>
+      <li><span class="chk">✓</span> Distintas maderas y espesores</li>
+      <li><span class="chk">✓</span> Asesoramiento en el material justo</li>
+    </ul>
   </div>
 </section>
 
