@@ -33,11 +33,13 @@
     position:fixed;top:0;left:0;width:100%;z-index:1000;
     display:flex;align-items:center;justify-content:space-between;
     padding:.9rem 2rem;
-    background:rgba(255,255,255,.92);
+    background:rgba(255,255,255,.96);
     backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-bottom:1px solid rgba(28,25,23,.08);
     box-shadow:0 2px 20px rgba(0,0,0,.05);
+    transition:background .3s ease, box-shadow .3s ease;
   }
+  nav.scrolled{background:rgba(255,255,255,.55);box-shadow:none;border-bottom-color:rgba(28,25,23,.03);}
   .brand{display:flex;align-items:center;gap:.7rem;font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;color:var(--dark);}
   .brand .mark{width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;font-weight:700;box-shadow:0 4px 14px rgba(226,35,26,.35);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
