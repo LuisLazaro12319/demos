@@ -139,8 +139,30 @@
   .destacado-list .chk{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:900;margin-top:.1rem;}
 
   /* GALERIA */
-  .galeria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
-  .galeria-grid iframe{border-radius:12px;}
+  .galeria-carousel{position:relative;max-width:400px;margin:0 auto;}
+  .galeria-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;}
+  .galeria-track::-webkit-scrollbar{display:none;}
+  .galeria-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;justify-content:center;}
+  .galeria-slide iframe{border-radius:12px;}
+  .galeria-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--card);color:#fff;font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
+    transition:background .2s;
+    z-index:2;
+  }
+  .galeria-arrow:hover{background:var(--blue);}
+  .galeria-arrow.prev{left:-1.2rem;}
+  .galeria-arrow.next{right:-1.2rem;}
+  .galeria-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.2rem;}
+  .galeria-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .2s;}
+  .galeria-dots span.active{background:var(--blue);}
+  @media(max-width:480px){
+    .galeria-arrow.prev{left:.4rem;}
+    .galeria-arrow.next{right:.4rem;}
+  }
 
   /* CONTACTO */
   #contacto{
@@ -201,7 +223,6 @@
 
   @media(max-width:900px){
     .servicios-grid{grid-template-columns:repeat(2,1fr);}
-    .galeria-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto;}
     .inst-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
@@ -348,10 +369,23 @@
     <span class="eyebrow">Seguinos en Instagram</span>
     <h2 class="sec-title">Mirá el Gym en Acción</h2>
     <p class="sec-sub">Contenido real de nuestro Instagram @body_sportgym.</p>
-    <div class="galeria-grid">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DRqF7Yaifyd/" data-instgrm-version="14"></blockquote>
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSJAx9fiQlH/" data-instgrm-version="14"></blockquote>
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbebSPxiSUl/" data-instgrm-version="14"></blockquote>
+    <div class="galeria-carousel">
+      <button class="galeria-arrow prev" id="galeriaPrev" aria-label="Reel anterior">&#10094;</button>
+      <div class="galeria-track" id="galeriaTrack">
+        <div class="galeria-slide">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DRqF7Yaifyd/" data-instgrm-version="14"></blockquote>
+        </div>
+        <div class="galeria-slide">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSJAx9fiQlH/" data-instgrm-version="14"></blockquote>
+        </div>
+        <div class="galeria-slide">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbebSPxiSUl/" data-instgrm-version="14"></blockquote>
+        </div>
+      </div>
+      <button class="galeria-arrow next" id="galeriaNext" aria-label="Siguiente reel">&#10095;</button>
+    </div>
+    <div class="galeria-dots" id="galeriaDots">
+      <span class="active"></span><span></span><span></span>
     </div>
   </div>
 </section>
@@ -453,6 +487,28 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const galeriaTrack = document.getElementById('galeriaTrack');
+  const galeriaSlides = galeriaTrack.querySelectorAll('.galeria-slide');
+  const galeriaDots = document.querySelectorAll('#galeriaDots span');
+  const goToSlide = (i) => {
+    const idx = Math.max(0, Math.min(galeriaSlides.length - 1, i));
+    galeriaTrack.scrollTo({ left: galeriaSlides[idx].offsetLeft, behavior: 'smooth' });
+  };
+  document.getElementById('galeriaPrev').addEventListener('click', () => {
+    goToSlide(Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth) - 1);
+  });
+  document.getElementById('galeriaNext').addEventListener('click', () => {
+    goToSlide(Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth) + 1);
+  });
+  let galeriaScrollTimer;
+  galeriaTrack.addEventListener('scroll', () => {
+    clearTimeout(galeriaScrollTimer);
+    galeriaScrollTimer = setTimeout(() => {
+      const active = Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth);
+      galeriaDots.forEach((d, i) => d.classList.toggle('active', i === active));
+    }, 100);
+  });
 </script>
 
 <script async src="https://www.instagram.com/embed.js" onload="window.instgrm && window.instgrm.Embeds.process();"></script>
