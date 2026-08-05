@@ -140,11 +140,11 @@
   .destacado-list .chk{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:var(--red);box-shadow:0 0 10px rgba(255,23,80,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:900;margin-top:.1rem;}
 
   /* GALERIA */
-  .galeria-carousel{position:relative;max-width:540px;margin:0 auto;}
+  .galeria-carousel{position:relative;max-width:400px;margin:0 auto;}
   .galeria-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;}
   .galeria-track::-webkit-scrollbar{display:none;}
-  .galeria-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;justify-content:center;}
-  .galeria-slide iframe{border-radius:12px;}
+  .galeria-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;justify-content:center;align-items:center;}
+  .galeria-slide video{width:100%;max-height:70vh;border-radius:12px;background:#000;display:block;}
   .galeria-arrow{
     position:absolute;top:50%;transform:translateY(-50%);
     width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
@@ -347,38 +347,20 @@
 
 <section id="galeria">
   <div class="wrap">
-    <span class="eyebrow">Seguinos en Instagram</span>
+    <span class="eyebrow">Galería</span>
     <h2 class="sec-title">Mirá el Gym en Acción</h2>
-    <p class="sec-sub">Contenido real de nuestro Instagram @body_sportgym.</p>
+    <p class="sec-sub">Fotos y videos reales de nuestro gimnasio.</p>
     <div class="galeria-carousel">
-      <button class="galeria-arrow prev" id="galeriaPrev" aria-label="Reel anterior">&#10094;</button>
+      <button class="galeria-arrow prev" id="galeriaPrev" aria-label="Anterior">&#10094;</button>
       <div class="galeria-track" id="galeriaTrack">
         <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DRqF7Yaifyd/" data-instgrm-version="14"></blockquote>
-        </div>
-        <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSJAx9fiQlH/" data-instgrm-version="14"></blockquote>
-        </div>
-        <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbebSPxiSUl/" data-instgrm-version="14"></blockquote>
-        </div>
-        <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZ5-VldpjUZ/" data-instgrm-version="14"></blockquote>
-        </div>
-        <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZgW-W6JrUN/" data-instgrm-version="14"></blockquote>
-        </div>
-        <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZJJhchCZzn/" data-instgrm-version="14"></blockquote>
-        </div>
-        <div class="galeria-slide">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYszOAlp7PO/" data-instgrm-version="14"></blockquote>
+          <video src="video/gym-1.mp4" controls playsinline preload="metadata"></video>
         </div>
       </div>
-      <button class="galeria-arrow next" id="galeriaNext" aria-label="Siguiente reel">&#10095;</button>
+      <button class="galeria-arrow next" id="galeriaNext" aria-label="Siguiente">&#10095;</button>
     </div>
     <div class="galeria-dots" id="galeriaDots">
-      <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span class="active"></span>
     </div>
   </div>
 </section>
@@ -502,7 +484,5 @@
     }, 100);
   });
 </script>
-
-<script async src="https://www.instagram.com/embed.js" onload="window.instgrm && window.instgrm.Embeds.process();"></script>
 </body>
 </html>
