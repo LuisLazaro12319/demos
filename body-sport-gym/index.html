@@ -41,6 +41,7 @@
   }
   nav.scrolled{background:rgba(11,12,14,.5);box-shadow:none;border-bottom-color:rgba(10,132,255,.06);}
   .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:#fff;}
+  .brand img{height:48px;width:auto;display:block;}
   .brand span{color:var(--blue);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.9rem;}
@@ -70,7 +71,7 @@
     position:relative;min-height:92vh;display:flex;flex-direction:column;
     align-items:flex-start;justify-content:center;
     padding:8rem 1.5rem 5rem;
-    background:linear-gradient(100deg, rgba(6,7,9,.94) 15%, rgba(6,7,9,.55) 60%, rgba(10,132,255,.22) 100%), url('img/hero.jpg') center 30%/cover no-repeat;
+    background:linear-gradient(100deg, rgba(6,7,9,.94) 15%, rgba(6,7,9,.55) 60%, rgba(10,132,255,.22) 100%), url('img/hero.jpg') center 55%/cover no-repeat;
   }
   .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
   .hero-badge{
@@ -164,6 +165,7 @@
   footer{background:#000;color:#8a9098;padding:4rem 0 2rem;border-top:1px solid rgba(10,132,255,.15);}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
   .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;}
+  .footer-brand img{height:40px;width:auto;display:block;}
   .footer-brand span{color:var(--blue);}
   .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Inter',sans-serif;}
   .footer-col p, .footer-col a{color:#8a9098;font-size:.9rem;font-family:'Inter',sans-serif;}
@@ -218,7 +220,7 @@
 <body>
 
 <nav id="nav">
-  <div class="brand">Body<span>Sport</span></div>
+  <div class="brand"><img src="img/logo.png" alt="Body Sport GYM">Body<span>Sport</span></div>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#servicios">Qué Ofrecemos</a></li>
@@ -376,7 +378,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col about">
-        <div class="footer-brand">Body<span>Sport</span></div>
+        <div class="footer-brand"><img src="img/logo.png" alt="Body Sport GYM">Body<span>Sport</span></div>
         <p>Gimnasio en Villa Centenario. Musculación, cardio y atención personalizada.</p>
       </div>
       <div class="footer-col footer-addr">
