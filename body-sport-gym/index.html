@@ -138,6 +138,10 @@
   .destacado-list li{display:flex;align-items:flex-start;gap:.8rem;font-size:.98rem;color:#dfe3e6;font-family:'Inter',sans-serif;}
   .destacado-list .chk{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:900;margin-top:.1rem;}
 
+  /* GALERIA */
+  .galeria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+  .galeria-grid iframe{border-radius:12px;}
+
   /* CONTACTO */
   #contacto{
     position:relative;
@@ -197,6 +201,7 @@
 
   @media(max-width:900px){
     .servicios-grid{grid-template-columns:repeat(2,1fr);}
+    .galeria-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto;}
     .inst-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
@@ -216,6 +221,7 @@
     section{padding:4rem 0;}
   }
 </style>
+<script async src="//www.instagram.com/embed.js"></script>
 </head>
 <body>
 
@@ -226,6 +232,7 @@
       <li><a href="#servicios">Qué Ofrecemos</a></li>
       <li><a href="#instalaciones">Instalaciones</a></li>
       <li><a href="#destacados">Nos Eligen</a></li>
+      <li><a href="#galeria">Galería</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
@@ -236,6 +243,7 @@
     <li><a href="#servicios">Qué Ofrecemos</a></li>
     <li><a href="#instalaciones">Instalaciones</a></li>
     <li><a href="#destacados">Nos Eligen</a></li>
+    <li><a href="#galeria">Galería</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
 </nav>
@@ -336,6 +344,19 @@
   </div>
 </section>
 
+<section id="galeria">
+  <div class="wrap">
+    <span class="eyebrow">Seguinos en Instagram</span>
+    <h2 class="sec-title">Mirá el Gym en Acción</h2>
+    <p class="sec-sub">Contenido real de nuestro Instagram @body_sportgym.</p>
+    <div class="galeria-grid">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/body_sportgym/reel/DRqF7Yaifyd/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/body_sportgym/reel/DSJAx9fiQlH/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/body_sportgym/p/DbebSPxiSUl/" data-instgrm-version="14"></blockquote>
+    </div>
+  </div>
+</section>
+
 <section id="contacto">
   <div class="wrap">
     <span class="eyebrow">Visitanos</span>
@@ -392,6 +413,7 @@
           <a href="#servicios">Qué Ofrecemos</a>
           <a href="#instalaciones">Instalaciones</a>
           <a href="#destacados">Nos Eligen</a>
+          <a href="#galeria">Galería</a>
           <a href="#contacto">Contacto</a>
         </div>
       </div>
