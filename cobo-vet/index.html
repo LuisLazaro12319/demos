@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cobo Vet | Veterinaria en Nueva Pompeya</title>
+<meta name="description" content="Cobo Vet - Veterinaria en Av. Cobo 540, Nueva Pompeya, CABA. Consultas, vacunación, baño y peluquería. 4.7/5 en Google con más de 160 opiniones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1565c0;
+    --blue-dark:#0d47a1;
+    --blue-light:#eaf3fc;
+    --green:#2e9e5b;
+    --green-dark:#22793f;
+    --bg:#ffffff;
+    --bg2:#f4f9fb;
+    --text:#1c2b39;
+    --text-gray:#5f7080;
+    --border:#e3ecf2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Poppins',sans-serif;font-weight:700;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    box-shadow:0 2px 16px rgba(21,101,192,.08);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{background:rgba(255,255,255,.72);box-shadow:none;}
+  .brand{display:flex;align-items:baseline;gap:.15rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blue-dark);}
+  .brand span{color:var(--green);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--text-gray);letter-spacing:.2px;transition:.2s;}
+  .nav-links a:hover{color:var(--blue);}
+  .burger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;
+  }
+  .burger span{display:block;width:100%;height:2px;background:var(--blue-dark);border-radius:2px;transition:.3s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;
+    background:#fff;border-top:1px solid var(--border);box-shadow:0 12px 25px rgba(21,101,192,.1);
+    padding:.8rem 2rem 1.2rem;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu li{border-top:1px solid var(--border);}
+  .mobile-menu li:first-child{border-top:none;}
+  .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
+  .mobile-menu a:hover{color:var(--blue);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:90vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(100deg, rgba(13,71,161,.88) 10%, rgba(13,71,161,.6) 55%, rgba(21,101,192,.35) 100%), url('img/hero.jpg') center 22%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.4);color:#fff;padding:.5rem 1.1rem;border-radius:30px;
+    font-size:.85rem;font-weight:600;margin-bottom:1.5rem;
+  }
+  .hero-badge b{color:#8fd6a8;}
+  .hero h1{font-size:3.6rem;color:#fff;max-width:720px;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,.25);}
+  .hero h1 span{color:#8fd6a8;}
+  .hero p{margin-top:1.3rem;font-size:1.12rem;color:#e4edf5;max-width:540px;font-weight:400;}
+  .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;transition:.3s;}
+  .btn-green{background:var(--green);color:#fff;box-shadow:0 10px 24px rgba(46,158,91,.35);}
+  .btn-green:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(46,158,91,.45);background:var(--green-dark);}
+  .btn-outline{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.5);}
+  .btn-outline:hover{background:rgba(255,255,255,.2);}
+
+  /* SECTION SHARED */
+  section{padding:5.5rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.3rem;color:var(--blue-dark);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3rem;font-size:1.02rem;}
+
+  /* SERVICIOS */
+  #servicios{background:var(--bg2);}
+  .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  .servicio-card{
+    background:#fff;border-radius:14px;padding:2.1rem 1.5rem;text-align:center;
+    border:1px solid var(--border);transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .servicio-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(21,101,192,.12);}
+  .servicio-icon{
+    width:56px;height:56px;border-radius:12px;margin:0 auto 1.2rem;
+    display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.4rem;
+    background:var(--blue-light);
+  }
+  .servicio-card h3{font-size:1.05rem;color:var(--text);margin-bottom:.5rem;font-weight:700;}
+  .servicio-card p{color:var(--text-gray);font-size:.88rem;}
+
+  /* SOBRE EL DOCTOR */
+  .sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+  .sobre-grid h2{font-size:2.1rem;color:var(--blue-dark);margin-bottom:1.1rem;text-align:left;}
+  .sobre-grid p{color:var(--text-gray);margin-bottom:1rem;font-size:1.02rem;}
+  .sobre-stats{display:flex;gap:2.2rem;margin-top:1.8rem;}
+  .sobre-stat b{display:block;font-family:'Poppins',sans-serif;font-size:1.9rem;color:var(--green);}
+  .sobre-stat span{font-size:.85rem;color:var(--text-gray);}
+  .sobre-photo{border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(21,101,192,.15);}
+  .sobre-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1;}
+
+  /* RESEÑAS */
+  #resenas{background:var(--bg2);}
+  .resenas-summary{
+    max-width:640px;margin:0 auto 3rem;background:#fff;border-radius:16px;padding:2.2rem;
+    display:flex;align-items:center;gap:2rem;border:1px solid var(--border);box-shadow:0 10px 30px rgba(21,101,192,.08);
+  }
+  .resenas-score{text-align:center;flex:0 0 auto;}
+  .resenas-score b{display:block;font-family:'Poppins',sans-serif;font-size:3rem;color:var(--blue-dark);line-height:1;}
+  .resenas-stars{color:#f5a623;font-size:1.1rem;margin:.4rem 0 .2rem;}
+  .resenas-score span{font-size:.85rem;color:var(--text-gray);}
+  .resenas-divider{width:1px;align-self:stretch;background:var(--border);}
+  .resenas-list{flex:1;display:flex;flex-direction:column;gap:.7rem;}
+  .resenas-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.95rem;color:var(--text);}
+  .resenas-list .chk{width:20px;height:20px;flex:0 0 20px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:900;margin-top:.15rem;}
+  .resenas-cta{text-align:center;}
+  .resenas-cta p{color:var(--text-gray);margin-bottom:1.2rem;}
+
+  /* PACIENTES */
+  #pacientes{
+    position:relative;
+    background:linear-gradient(180deg, rgba(13,71,161,.88) 0%, rgba(13,71,161,.92) 100%), url('img/paciente.jpg') center 30%/cover no-repeat;
+  }
+  #pacientes .eyebrow{color:#8fd6a8;}
+  #pacientes .sec-title{color:#fff;}
+  #pacientes .sec-sub{color:#dbe6f0;}
+  .pacientes-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;max-width:700px;margin:0 auto;}
+  .pacientes-tags span{
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;
+    padding:.6rem 1.3rem;border-radius:30px;font-size:.92rem;font-weight:600;
+  }
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:#fff;border:1px solid var(--border);
+    border-radius:12px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;box-shadow:0 6px 18px rgba(21,101,192,.06);
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:var(--blue-light);
+    display:flex;align-items:center;justify-content:center;color:var(--blue);
+  }
+  .info-card h4{font-size:.95rem;color:var(--text);margin-bottom:.3rem;font-weight:700;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;}
+  .info-card a:hover{color:var(--blue);}
+  .map-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 45px rgba(21,101,192,.1);}
+  .map-wrap iframe{width:100%;height:420px;border:0;}
+
+  /* FOOTER */
+  footer{background:var(--blue-dark);color:#c3d6ea;padding:3.5rem 0 2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:baseline;gap:.15rem;font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:1rem;}
+  .footer-brand span{color:#8fd6a8;}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;}
+  .footer-col p, .footer-col a{color:#c3d6ea;font-size:.9rem;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:#8fd6a8;}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.06);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  .footer-tel{display:block;color:#c3d6ea;margin-bottom:.4rem;}
+  .footer-tel:hover{color:#8fd6a8;}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem;text-align:center;color:#9fb7cf;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .servicios-grid{grid-template-columns:repeat(2,1fr);}
+    .sobre-grid{grid-template-columns:1fr;gap:2rem;}
+    .sobre-grid .sobre-photo{order:-1;max-width:380px;margin:0 auto;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero h1{font-size:2.6rem;}
+    .resenas-summary{flex-direction:column;text-align:center;}
+    .resenas-divider{width:100%;height:1px;}
+  }
+  @media(max-width:560px){
+    .servicios-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+    .sobre-stats{justify-content:center;flex-wrap:wrap;gap:1.5rem;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.1rem;}
+    .sec-title{font-size:1.8rem;}
+    section{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Cobo<span>Vet</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sobre">El Doctor</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sobre">El Doctor</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">★ <b>4.7/5</b> · +160 opiniones en Google</span>
+    <h1>Cuidamos a tu mejor amigo <span>como si fuera propio</span></h1>
+    <p>Veterinaria en Nueva Pompeya. Consultas, vacunación y baño y peluquería, con atención personalizada del Dr. Gustavo Pellettieri.</p>
+    <div class="hero-actions">
+      <a class="btn btn-green" href="https://wa.me/5491141956101?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener">Pedir turno por WhatsApp</a>
+      <a class="btn btn-outline" href="#contacto">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Qué Ofrecemos</span>
+    <h2 class="sec-title">Atención Integral para tu Mascota</h2>
+    <p class="sec-sub">Servicios pensados para el cuidado y bienestar de caninos, felinos y otras mascotas.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+        </div>
+        <h3>Consultas Generales</h3>
+        <p>Medicina veterinaria general para caninos y felinos.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>Vacunación</h3>
+        <p>Plan de vacunas al día para proteger la salud de tu mascota.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10M12 3v18M5 8c0-2.5 3-5 7-5s7 2.5 7 5-3 5-7 5-7-2.5-7-5Z"/></svg>
+        </div>
+        <h3>Baño y Peluquería</h3>
+        <p>Corte, baño e higiene para que tu mascota luzca impecable.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h3>Pet Shop</h3>
+        <p>Alimento balanceado y accesorios para tu mascota.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="sobre-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="text-align:left">Sobre el Doctor</span>
+        <h2>Dr. Gustavo Pellettieri</h2>
+        <p>Al frente de Cobo Vet, atendiendo personalmente a cada paciente que llega al consultorio de Av. Cobo 540, en el corazón de Nueva Pompeya.</p>
+        <p>La clínica también ofrece servicio de baño y peluquería, y cuenta con pet shop propio para que encuentres todo lo que tu mascota necesita en un mismo lugar.</p>
+        <div class="sobre-stats">
+          <div class="sobre-stat"><b>4.7/5</b><span>Calificación en Google</span></div>
+          <div class="sobre-stat"><b>+160</b><span>Opiniones de clientes</span></div>
+        </div>
+      </div>
+      <div class="sobre-photo reveal">
+        <img src="img/paciente.jpg" alt="Paciente de Cobo Vet">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Reseñas</span>
+    <h2 class="sec-title">Lo Que Dicen en Google</h2>
+    <p class="sec-sub">Opiniones reales de dueños de mascotas que confían en Cobo Vet.</p>
+    <div class="resenas-summary reveal">
+      <div class="resenas-score">
+        <b>4.7</b>
+        <div class="resenas-stars">★★★★★</div>
+        <span>+160 opiniones</span>
+      </div>
+      <div class="resenas-divider"></div>
+      <ul class="resenas-list">
+        <li><span class="chk">✓</span> Atención personalizada del Dr. Gustavo Pellettieri</li>
+        <li><span class="chk">✓</span> Consultas, vacunación y baño y peluquería en un mismo lugar</li>
+        <li><span class="chk">✓</span> Turnos ágiles por WhatsApp</li>
+        <li><span class="chk">✓</span> Pet shop propio dentro del consultorio</li>
+      </ul>
+    </div>
+    <div class="resenas-cta reveal">
+      <p>¿Ya nos visitaste? Contanos tu experiencia.</p>
+      <a class="btn btn-green" href="https://search.google.com/local/writereview?placeid=0x95bccba5eceb4a4b:0xf29aa0fadce87340" target="_blank" rel="noopener">Escribir una opinión</a>
+    </div>
+  </div>
+</section>
+
+<section id="pacientes">
+  <div class="wrap">
+    <span class="eyebrow">Nuestros Pacientes</span>
+    <h2 class="sec-title">Atendemos a Toda la Familia</h2>
+    <p class="sec-sub">No solo perros y gatos: en Cobo Vet también recibimos otras mascotas.</p>
+    <div class="pacientes-tags">
+      <span>🐶 Caninos</span>
+      <span>🐱 Felinos</span>
+      <span>🐰 Conejos</span>
+      <span>💉 Vacunación</span>
+      <span>✂️ Peluquería</span>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Nueva Pompeya, CABA</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Av. Cobo 540, Nueva Pompeya, CABA</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Teléfono / WhatsApp</h4><a href="tel:+541149220836">011 4922-0836</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h4>Turnos</h4><p>Con turno previo por WhatsApp. También se atiende por orden de llegada.</p></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://maps.google.com/maps?q=Av.%20Cobo%20540%2C%20CABA&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand">Cobo<span>Vet</span></div>
+        <p>Veterinaria en Nueva Pompeya. Consultas, vacunación y baño y peluquería para tu mascota.</p>
+      </div>
+      <div class="footer-col footer-addr">
+        <h4>Ubicación</h4>
+        <p>Av. Cobo 540<br>Nueva Pompeya, CABA</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#sobre">El Doctor</a>
+          <a href="#resenas">Reseñas</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/cobovet" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+        <a class="footer-tel" href="tel:+541149220836">Tel: 011 4922-0836</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 Cobo Vet · Nueva Pompeya, Buenos Aires</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491141956101?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpen = burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
