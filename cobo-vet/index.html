@@ -119,8 +119,30 @@
   .sobre-stats{display:flex;gap:2.2rem;margin-top:1.8rem;}
   .sobre-stat b{display:block;font-family:'Poppins',sans-serif;font-size:1.9rem;color:var(--green);}
   .sobre-stat span{font-size:.85rem;color:var(--text-gray);}
-  .sobre-photo{border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(21,101,192,.15);}
-  .sobre-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1;}
+  .sobre-photo{position:relative;}
+  .sobre-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:16px;box-shadow:0 20px 45px rgba(21,101,192,.15);-ms-overflow-style:none;scrollbar-width:none;}
+  .sobre-track::-webkit-scrollbar{display:none;}
+  .sobre-slide{flex:0 0 100%;scroll-snap-align:center;}
+  .sobre-slide img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1;display:block;}
+  .sobre-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+    background:#fff;color:var(--blue-dark);font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(21,101,192,.18);
+    transition:background .2s,color .2s;
+    z-index:2;
+  }
+  .sobre-arrow:hover{background:var(--green);color:#fff;}
+  .sobre-arrow.prev{left:-1.2rem;}
+  .sobre-arrow.next{right:-1.2rem;}
+  .sobre-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.2rem;}
+  .sobre-dots span{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .2s;}
+  .sobre-dots span.active{background:var(--green);}
+  @media(max-width:480px){
+    .sobre-arrow.prev{left:.2rem;}
+    .sobre-arrow.next{right:.2rem;}
+  }
 
   /* RESEÑAS */
   #resenas{background:var(--bg2);}
@@ -364,8 +386,19 @@
         </div>
       </div>
       <div class="sobre-photo reveal">
-        <img src="img/paciente.jpg" alt="Paciente de Cobo Vet">
+        <button class="sobre-arrow prev" id="sobrePrev" aria-label="Foto anterior">&#10094;</button>
+        <div class="sobre-track" id="sobreTrack">
+          <div class="sobre-slide"><img src="img/sobre-1.jpg" alt="Paciente de Cobo Vet"></div>
+          <div class="sobre-slide"><img src="img/sobre-2.jpg" alt="Paciente de Cobo Vet"></div>
+          <div class="sobre-slide"><img src="img/sobre-3.jpg" alt="Pacientes de Cobo Vet"></div>
+          <div class="sobre-slide"><img src="img/sobre-4.jpg" alt="Dr. Gustavo atendiendo un paciente"></div>
+          <div class="sobre-slide"><img src="img/sobre-5.jpg" alt="Dr. Gustavo atendiendo un paciente"></div>
+        </div>
+        <button class="sobre-arrow next" id="sobreNext" aria-label="Siguiente foto">&#10095;</button>
       </div>
+    </div>
+    <div class="sobre-dots" id="sobreDots">
+      <span class="active"></span><span></span><span></span><span></span><span></span>
     </div>
   </div>
 </section>
@@ -699,6 +732,28 @@
     }
     submitBtn.disabled = false;
     submitBtn.textContent = 'Enviar reseña';
+  });
+
+  const sobreTrack = document.getElementById('sobreTrack');
+  const sobreDotsWrap = document.getElementById('sobreDots');
+  const goToSobre = (i) => {
+    const slides = sobreTrack.querySelectorAll('.sobre-slide');
+    const idx = Math.max(0, Math.min(slides.length - 1, i));
+    sobreTrack.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+  };
+  document.getElementById('sobrePrev').addEventListener('click', () => {
+    goToSobre(Math.round(sobreTrack.scrollLeft / sobreTrack.clientWidth) - 1);
+  });
+  document.getElementById('sobreNext').addEventListener('click', () => {
+    goToSobre(Math.round(sobreTrack.scrollLeft / sobreTrack.clientWidth) + 1);
+  });
+  let sobreScrollTimer;
+  sobreTrack.addEventListener('scroll', () => {
+    clearTimeout(sobreScrollTimer);
+    sobreScrollTimer = setTimeout(() => {
+      const active = Math.round(sobreTrack.scrollLeft / sobreTrack.clientWidth);
+      sobreDotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === active));
+    }, 100);
   });
 </script>
 </body>
