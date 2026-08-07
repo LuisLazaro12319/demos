@@ -124,20 +124,43 @@
 
   /* RESEÑAS */
   #resenas{background:var(--bg2);}
-  .resenas-summary{
-    max-width:640px;margin:0 auto 3rem;background:#fff;border-radius:16px;padding:2.2rem;
-    display:flex;align-items:center;gap:2rem;border:1px solid var(--border);box-shadow:0 10px 30px rgba(21,101,192,.08);
+  .resenas-card{
+    max-width:820px;margin:0 auto 2.5rem;background:#fff;border-radius:16px;padding:2.4rem;
+    border:1px solid var(--border);box-shadow:0 10px 30px rgba(21,101,192,.08);
+    display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center;
   }
-  .resenas-score{text-align:center;flex:0 0 auto;}
-  .resenas-score b{display:block;font-family:'Poppins',sans-serif;font-size:3rem;color:var(--blue-dark);line-height:1;}
-  .resenas-stars{color:#f5a623;font-size:1.1rem;margin:.4rem 0 .2rem;}
-  .resenas-score span{font-size:.85rem;color:var(--text-gray);}
-  .resenas-divider{width:1px;align-self:stretch;background:var(--border);}
-  .resenas-list{flex:1;display:flex;flex-direction:column;gap:.7rem;}
-  .resenas-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.95rem;color:var(--text);}
-  .resenas-list .chk{width:20px;height:20px;flex:0 0 20px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:900;margin-top:.15rem;}
-  .resenas-cta{text-align:center;}
-  .resenas-cta p{color:var(--text-gray);margin-bottom:1.2rem;}
+  .resenas-breakdown{display:flex;flex-direction:column;gap:.55rem;}
+  .resenas-bar-row{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--text-gray);}
+  .resenas-bar-row .lbl{width:34px;flex:0 0 34px;}
+  .resenas-bar-track{flex:1;height:8px;border-radius:4px;background:var(--bg2);overflow:hidden;}
+  .resenas-bar-fill{height:100%;background:var(--green);border-radius:4px;}
+  .resenas-bar-row .count{width:32px;flex:0 0 32px;text-align:right;}
+  .resenas-badge{text-align:center;padding-left:2.5rem;border-left:1px solid var(--border);}
+  .resenas-badge svg{margin-bottom:.2rem;}
+  .resenas-badge b{display:block;font-family:'Poppins',sans-serif;font-size:2.6rem;color:var(--blue-dark);line-height:1;}
+  .resenas-badge .stars{color:#f5a623;font-size:1rem;margin:.3rem 0 .2rem;}
+  .resenas-badge span{font-size:.85rem;color:var(--text-gray);display:block;margin-bottom:1.1rem;}
+  .resenas-badge .btn{padding:.7rem 1.3rem;font-size:.82rem;white-space:nowrap;}
+  .resenas-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+  .resenas-highlight-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:0 6px 18px rgba(21,101,192,.06);}
+  .resenas-highlight-card .stars{color:#f5a623;font-size:.9rem;margin-bottom:.6rem;}
+  .resenas-highlight-card h4{font-size:.98rem;color:var(--text);margin-bottom:.5rem;}
+  .resenas-highlight-card p{font-size:.88rem;color:var(--text-gray);}
+
+  /* MODAL RESEÑA */
+  .review-modal-overlay{display:none;position:fixed;inset:0;background:rgba(13,26,43,.55);z-index:2000;align-items:center;justify-content:center;padding:1.5rem;}
+  .review-modal-overlay.open{display:flex;}
+  .review-modal{background:#fff;border-radius:16px;padding:2rem;max-width:420px;width:100%;position:relative;}
+  .review-modal h3{color:var(--blue-dark);margin-bottom:.3rem;font-size:1.3rem;}
+  .review-modal .modal-sub{font-size:.85rem;color:var(--text-gray);margin-bottom:1rem;}
+  .review-modal-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-gray);line-height:1;}
+  .review-modal label{display:block;font-size:.85rem;font-weight:600;margin:1rem 0 .4rem;color:var(--text);}
+  .review-modal input, .review-modal textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.92rem;color:var(--text);}
+  .review-modal textarea{resize:vertical;min-height:90px;}
+  .star-picker{display:flex;gap:.3rem;font-size:1.5rem;color:#d8dee3;}
+  .star-picker span{cursor:pointer;transition:.15s;}
+  .star-picker span.active{color:#f5a623;}
+  .review-modal .btn-green{width:100%;justify-content:center;margin-top:1.4rem;}
 
   /* PACIENTES */
   #pacientes{
@@ -212,8 +235,9 @@
     .nav-links{display:none;}
     .burger{display:flex;}
     .hero h1{font-size:2.6rem;}
-    .resenas-summary{flex-direction:column;text-align:center;}
-    .resenas-divider{width:100%;height:1px;}
+    .resenas-card{grid-template-columns:1fr;}
+    .resenas-badge{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:1.6rem;}
+    .resenas-highlights{grid-template-columns:1fr;}
   }
   @media(max-width:560px){
     .servicios-grid{grid-template-columns:1fr;}
@@ -327,26 +351,63 @@
     <span class="eyebrow">Reseñas</span>
     <h2 class="sec-title">Lo Que Dicen en Google</h2>
     <p class="sec-sub">Opiniones reales de dueños de mascotas que confían en Cobo Vet.</p>
-    <div class="resenas-summary reveal">
-      <div class="resenas-score">
-        <b>4.7</b>
-        <div class="resenas-stars">★★★★★</div>
-        <span>+160 opiniones</span>
+    <div class="resenas-card reveal">
+      <div class="resenas-breakdown">
+        <div class="resenas-bar-row"><span class="lbl">5 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:88%"></div></div><span class="count">141</span></div>
+        <div class="resenas-bar-row"><span class="lbl">4 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:8%"></div></div><span class="count">13</span></div>
+        <div class="resenas-bar-row"><span class="lbl">3 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:2%"></div></div><span class="count">3</span></div>
+        <div class="resenas-bar-row"><span class="lbl">2 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:1%"></div></div><span class="count">1</span></div>
+        <div class="resenas-bar-row"><span class="lbl">1 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:1%"></div></div><span class="count">2</span></div>
       </div>
-      <div class="resenas-divider"></div>
-      <ul class="resenas-list">
-        <li><span class="chk">✓</span> Atención personalizada del Dr. Gustavo Pellettieri</li>
-        <li><span class="chk">✓</span> Consultas, vacunación y baño y peluquería en un mismo lugar</li>
-        <li><span class="chk">✓</span> Turnos ágiles por WhatsApp</li>
-        <li><span class="chk">✓</span> Pet shop propio dentro del consultorio</li>
-      </ul>
+      <div class="resenas-badge">
+        <svg width="90" height="46" viewBox="0 0 90 46" fill="none">
+          <path d="M8 6c8 4 10 16 6 30" stroke="#2e9e5b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 12c5 1 8 5 7 10M5 20c5 1 8 4 7 9M6 28c4 1 7 3 6 7" stroke="#2e9e5b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M82 6c-8 4-10 16-6 30" stroke="#2e9e5b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M84 12c-5 1-8 5-7 10M85 20c-5 1-8 4-7 9M84 28c-4 1-7 3-6 7" stroke="#2e9e5b" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <b>4.7</b>
+        <div class="stars">★★★★★</div>
+        <span>+160 reseñas</span>
+        <a class="btn btn-green" id="openReviewModal" href="https://search.google.com/local/writereview?placeid=0x95bccba5eceb4a4b:0xf29aa0fadce87340">Escribe una reseña</a>
+      </div>
     </div>
-    <div class="resenas-cta reveal">
-      <p>¿Ya nos visitaste? Contanos tu experiencia.</p>
-      <a class="btn btn-green" href="https://search.google.com/local/writereview?placeid=0x95bccba5eceb4a4b:0xf29aa0fadce87340" target="_blank" rel="noopener">Escribir una opinión</a>
+    <div class="resenas-highlights">
+      <div class="resenas-highlight-card reveal">
+        <div class="stars">★★★★★</div>
+        <h4>Atención profesional y humana</h4>
+        <p>Los dueños destacan el compromiso del Dr. Gustavo con cada paciente, su paciencia para explicar los diagnósticos y el cariño con el que trata a los animales.</p>
+      </div>
+      <div class="resenas-highlight-card reveal">
+        <div class="stars">★★★★★</div>
+        <h4>Preparados para casos complejos</h4>
+        <p>Entre los casos resueltos, una cirugía para extirpar un tumor mamario en una gata con una recuperación excelente.</p>
+      </div>
+      <div class="resenas-highlight-card reveal">
+        <div class="stars">★★★★★</div>
+        <h4>Buena onda en todo el equipo</h4>
+        <p>Julieta y Milena completan el equipo clínico, reconocidas por su buena predisposición en cada consulta.</p>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="review-modal-overlay" id="reviewModalOverlay">
+  <div class="review-modal">
+    <button class="review-modal-close" id="closeReviewModal" aria-label="Cerrar">&times;</button>
+    <h3>Escribe una reseña</h3>
+    <p class="modal-sub">Elegí tu calificación y te llevamos a Google para publicarla.</p>
+    <label>Tu calificación</label>
+    <div class="star-picker" id="starPicker">
+      <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+    </div>
+    <label>Nombre completo</label>
+    <input type="text" placeholder="Tu nombre">
+    <label>Tu reseña</label>
+    <textarea placeholder="Contanos tu experiencia en Cobo Vet..."></textarea>
+    <a class="btn btn-green" href="https://search.google.com/local/writereview?placeid=0x95bccba5eceb4a4b:0xf29aa0fadce87340" target="_blank" rel="noopener">Continuar en Google</a>
+  </div>
+</div>
 
 <section id="pacientes">
   <div class="wrap">
@@ -452,6 +513,19 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const reviewModalOverlay = document.getElementById('reviewModalOverlay');
+  document.getElementById('openReviewModal').addEventListener('click', (e) => {
+    e.preventDefault();
+    reviewModalOverlay.classList.add('open');
+  });
+  document.getElementById('closeReviewModal').addEventListener('click', () => reviewModalOverlay.classList.remove('open'));
+  reviewModalOverlay.addEventListener('click', (e) => { if (e.target === reviewModalOverlay) reviewModalOverlay.classList.remove('open'); });
+  const starPicker = document.getElementById('starPicker');
+  starPicker.querySelectorAll('span').forEach(s => s.addEventListener('click', () => {
+    const v = +s.dataset.v;
+    starPicker.querySelectorAll('span').forEach((s2, i) => s2.classList.toggle('active', i < v));
+  }));
 </script>
 </body>
 </html>
