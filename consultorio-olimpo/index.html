@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olimpo | Consultorio Odontológico</title>
+<meta name="description" content="Consultorio Odontológico Olimpo - Dos sedes: Ingeniero Budge (Av. Olimpo 1272) y 9 de Abril (Dr. E. Restelli 1713). Odontología general, extracciones y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#22a8e0;
+    --sky-dark:#0e7fb0;
+    --sky-light:#eaf7fc;
+    --bg:#ffffff;
+    --bg2:#f2fafd;
+    --text:#1c2b39;
+    --text-gray:#5f7080;
+    --border:#dceef6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Poppins',sans-serif;font-weight:700;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    box-shadow:0 2px 16px rgba(34,168,224,.1);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{background:rgba(255,255,255,.72);box-shadow:none;}
+  .brand{display:flex;align-items:baseline;gap:.15rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--sky-dark);}
+  .brand span{color:var(--text);font-weight:600;font-size:1.05rem;}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--text-gray);letter-spacing:.2px;transition:.2s;}
+  .nav-links a:hover{color:var(--sky-dark);}
+  .burger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;
+  }
+  .burger span{display:block;width:100%;height:2px;background:var(--sky-dark);border-radius:2px;transition:.3s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;
+    background:#fff;border-top:1px solid var(--border);box-shadow:0 12px 25px rgba(34,168,224,.12);
+    padding:.8rem 2rem 1.2rem;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu li{border-top:1px solid var(--border);}
+  .mobile-menu li:first-child{border-top:none;}
+  .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
+  .mobile-menu a:hover{color:var(--sky-dark);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:88vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(100deg, rgba(14,127,176,.55) 10%, rgba(34,168,224,.35) 55%, rgba(234,247,252,.25) 100%), url('img/hero.jpg') center 25%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,.6);color:var(--sky-dark);padding:.5rem 1.1rem;border-radius:30px;
+    font-size:.85rem;font-weight:700;margin-bottom:1.5rem;
+  }
+  .hero h1{font-size:3.4rem;color:#fff;max-width:720px;line-height:1.1;text-shadow:0 4px 20px rgba(14,60,90,.35);}
+  .hero h1 span{color:#eaf7fc;}
+  .hero p{margin-top:1.3rem;font-size:1.12rem;color:#f2fafd;max-width:540px;font-weight:400;text-shadow:0 2px 10px rgba(14,60,90,.3);}
+  .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;transition:.3s;}
+  .btn-sky{background:var(--sky-dark);color:#fff;box-shadow:0 10px 24px rgba(14,127,176,.35);}
+  .btn-sky:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,127,176,.45);}
+  .btn-outline{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.6);}
+  .btn-outline:hover{background:rgba(255,255,255,.28);}
+
+  /* SECTION SHARED */
+  section{padding:5.5rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--sky-dark);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.3rem;color:var(--text);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3rem;font-size:1.02rem;}
+
+  /* VALUES */
+  #valores{background:var(--bg2);}
+  .valores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+  .valor-card{background:#fff;border-radius:14px;padding:2.2rem 1.8rem;border:1px solid var(--border);box-shadow:0 8px 24px rgba(34,168,224,.08);}
+  .valor-icon{
+    width:56px;height:56px;border-radius:12px;margin-bottom:1.2rem;
+    display:flex;align-items:center;justify-content:center;color:var(--sky-dark);font-size:1.4rem;
+    background:var(--sky-light);
+  }
+  .valor-card h3{font-size:1.1rem;color:var(--text);margin-bottom:.6rem;font-weight:700;}
+  .valor-card p{color:var(--text-gray);font-size:.92rem;}
+
+  /* SERVICIOS */
+  .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  .servicio-card{
+    background:#fff;border-radius:14px;padding:2.1rem 1.5rem;text-align:center;
+    border:1px solid var(--border);transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .servicio-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(34,168,224,.12);}
+  .servicio-icon{
+    width:56px;height:56px;border-radius:12px;margin:0 auto 1.2rem;
+    display:flex;align-items:center;justify-content:center;color:var(--sky-dark);font-size:1.4rem;
+    background:var(--sky-light);
+  }
+  .servicio-card h3{font-size:1.05rem;color:var(--text);margin-bottom:.5rem;font-weight:700;}
+  .servicio-card p{color:var(--text-gray);font-size:.88rem;}
+
+  /* SEDES */
+  #sedes{background:var(--bg2);}
+  .sedes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
+  .sede-card{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:0 10px 30px rgba(34,168,224,.1);}
+  .sede-card .sede-tag{display:inline-block;background:var(--sky-light);color:var(--sky-dark);font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.35rem .8rem;border-radius:20px;margin-bottom:1rem;}
+  .sede-card h3{font-size:1.35rem;color:var(--text);margin-bottom:.9rem;}
+  .sede-row{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;font-size:.92rem;color:var(--text-gray);}
+  .sede-row .icon{width:20px;height:20px;flex:0 0 20px;color:var(--sky-dark);margin-top:.1rem;}
+  .sede-card .btn{width:100%;justify-content:center;margin-top:.8rem;}
+
+  /* NOSOTROS */
+  .nosotros-box{max-width:760px;margin:0 auto;text-align:center;}
+  .nosotros-box p{color:var(--text-gray);font-size:1.05rem;margin-bottom:1.2rem;}
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
+  .map-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 45px rgba(34,168,224,.12);}
+  .map-wrap iframe{width:100%;height:320px;border:0;display:block;}
+  .map-wrap .map-label{background:#fff;padding:1rem 1.3rem;font-weight:700;color:var(--text);border-bottom:1px solid var(--border);}
+
+  /* FOOTER */
+  footer{background:var(--sky-dark);color:#d7effa;padding:3.5rem 0 2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:baseline;gap:.15rem;font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:1rem;}
+  .footer-brand span{color:#d7effa;font-weight:600;font-size:1rem;}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;}
+  .footer-col p, .footer-col a{color:#d7effa;font-size:.9rem;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:#fff;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.08);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;text-align:center;color:#bfe3f4;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .valores-grid{grid-template-columns:1fr;}
+    .servicios-grid{grid-template-columns:repeat(2,1fr);}
+    .sedes-grid{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero h1{font-size:2.6rem;}
+  }
+  @media(max-width:560px){
+    .servicios-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.1rem;}
+    .sec-title{font-size:1.8rem;}
+    section{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Olimpo<span>Odontología</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sedes">Sedes</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sedes">Sedes</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">🦷 Dos sedes en zona sur</span>
+    <h1>Tu sonrisa, <span>en buenas manos</span></h1>
+    <p>Consultorio odontológico con atención en Ingeniero Budge y 9 de Abril. Odontología general, extracciones y estética dental.</p>
+    <div class="hero-actions">
+      <a class="btn btn-sky" href="https://wa.me/5491158771436?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener">Pedir turno por WhatsApp</a>
+      <a class="btn btn-outline" href="#sedes">Ver las sedes</a>
+    </div>
+  </div>
+</section>
+
+<section id="valores">
+  <div class="wrap">
+    <span class="eyebrow">Por qué elegirnos</span>
+    <h2 class="sec-title">Odontología Cercana y de Confianza</h2>
+    <p class="sec-sub">Dos consultorios pensados para que siempre tengas una sede cerca tuyo.</p>
+    <div class="valores-grid">
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 0 0-9 9c0 3.5 2 5.5 2 8 0 1.5 1 2 2 1 1-1 1-3 2-5 1 3 2 5 3 5s2-2 3-5c1 2 1 4 2 5 1 1 2 .5 2-1 0-2.5 2-4.5 2-8a9 9 0 0 0-9-9z"/></svg>
+        </div>
+        <h3>Dos sedes disponibles</h3>
+        <p>Consultorios en Ingeniero Budge y 9 de Abril, para que elijas el que te quede más cómodo.</p>
+      </div>
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Turnos por WhatsApp</h3>
+        <p>Coordiná tu turno de forma simple y rápida, directo con cada sede.</p>
+      </div>
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Atención de lunes a sábados</h3>
+        <p>Horarios pensados para que puedas atenderte sin faltar al trabajo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Qué Ofrecemos</span>
+    <h2 class="sec-title">Nuestros Tratamientos</h2>
+    <p class="sec-sub">Servicios de odontología general para toda la familia.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 0 0-9 9c0 3.5 2 5.5 2 8 0 1.5 1 2 2 1 1-1 1-3 2-5 1 3 2 5 3 5s2-2 3-5c1 2 1 4 2 5 1 1 2 .5 2-1 0-2.5 2-4.5 2-8a9 9 0 0 0-9-9z"/></svg>
+        </div>
+        <h3>Odontología General</h3>
+        <p>Consultas, diagnóstico y tratamiento de rutina para el cuidado bucal.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h3>Extracciones</h3>
+        <p>Extracciones dentales con los cuidados y seguimiento necesarios.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+        </div>
+        <h3>Limpieza y Prevención</h3>
+        <p>Controles periódicos para prevenir caries y problemas de encías.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12s2.5-6 8-6 8 6 8 6-2.5 6-8 6-8-6-8-6z"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </div>
+        <h3>Estética Dental</h3>
+        <p>Tratamientos para lograr una sonrisa más pareja y luminosa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sedes">
+  <div class="wrap">
+    <span class="eyebrow">Nuestras Sedes</span>
+    <h2 class="sec-title">Elegí la Sede Más Cercana</h2>
+    <p class="sec-sub">Atendemos de lunes a sábados en nuestras dos ubicaciones.</p>
+    <div class="sedes-grid">
+      <div class="sede-card reveal">
+        <span class="sede-tag">Sede Olimpo</span>
+        <h3>Ingeniero Budge</h3>
+        <div class="sede-row">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          <span>Av. Olimpo 1272, Ingeniero Budge</span>
+        </div>
+        <div class="sede-row">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>011 15-5877-1436</span>
+        </div>
+        <div class="sede-row">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Lunes a sábados</span>
+        </div>
+        <a class="btn btn-sky" href="https://wa.me/5491158771436?text=Hola!%20Quiero%20consultar%20por%20un%20turno%20en%20la%20sede%20Olimpo" target="_blank" rel="noopener">Turno Sede Olimpo</a>
+      </div>
+      <div class="sede-card reveal">
+        <span class="sede-tag">Sede Restelli</span>
+        <h3>9 de Abril</h3>
+        <div class="sede-row">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          <span>Dr. E. Restelli 1713, 9 de Abril</span>
+        </div>
+        <div class="sede-row">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>011 15-6819-4477</span>
+        </div>
+        <div class="sede-row">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Lunes a sábados</span>
+        </div>
+        <a class="btn btn-sky" href="https://wa.me/5491168194477?text=Hola!%20Quiero%20consultar%20por%20un%20turno%20en%20la%20sede%20Restelli" target="_blank" rel="noopener">Turno Sede Restelli</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <div class="wrap">
+    <span class="eyebrow">Nosotros</span>
+    <h2 class="sec-title">Odontología Pensada para tu Familia</h2>
+    <div class="nosotros-box">
+      <p>En Olimpo Consultorio Odontológico trabajamos para que cuidar tu salud bucal sea simple: dos sedes cercanas, turnos coordinados por WhatsApp y atención de lunes a sábados.</p>
+      <p>Nos enfocamos en la odontología general del día a día — consultas, extracciones, prevención y estética — para que encuentres una solución cerca de tu casa o tu trabajo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Cómo Llegar</h2>
+    <div class="contacto-grid">
+      <div class="map-wrap reveal">
+        <div class="map-label">Sede Olimpo · Ingeniero Budge</div>
+        <iframe src="https://maps.google.com/maps?q=Av.%20Olimpo%201272%2C%20Ingeniero%20Budge&output=embed" loading="lazy"></iframe>
+      </div>
+      <div class="map-wrap reveal">
+        <div class="map-label">Sede Restelli · 9 de Abril</div>
+        <iframe src="https://maps.google.com/maps?q=Dr.%20E.%20Restelli%201713%2C%209%20de%20Abril&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand">Olimpo<span>Odontología</span></div>
+        <p>Consultorio odontológico con dos sedes en zona sur: Ingeniero Budge y 9 de Abril.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#sedes">Sedes</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/consultoriolimpo" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© 2026 Olimpo Consultorio Odontológico · Zona Sur, Buenos Aires</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491158771436?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpen = burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
