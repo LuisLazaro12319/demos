@@ -117,7 +117,9 @@
     background:linear-gradient(180deg, rgba(234,247,252,.55) 0%, rgba(234,247,252,.65) 100%), url('img/sedes-bg.jpg') center 45%/cover no-repeat;
   }
   .sedes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
-  .sede-card{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:0 10px 30px rgba(34,168,224,.1);}
+  .sede-card{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:0 10px 30px rgba(34,168,224,.1);max-width:400px;}
+  .sede-card:first-child{justify-self:start;}
+  .sede-card:last-child{justify-self:end;}
   .sede-card .sede-tag{display:inline-block;background:var(--sky-light);color:var(--sky-dark);font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.35rem .8rem;border-radius:20px;margin-bottom:1rem;}
   .sede-card h3{font-size:1.35rem;color:var(--text);margin-bottom:.9rem;}
   .sede-row{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;font-size:.92rem;color:var(--text-gray);}
@@ -195,6 +197,7 @@
   @media(max-width:900px){
     .valores-grid{grid-template-columns:1fr;}
     .sedes-grid{grid-template-columns:1fr;}
+    .sede-card{max-width:none;justify-self:stretch;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
