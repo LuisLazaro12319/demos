@@ -112,7 +112,10 @@
   .servicios-checklist .chk{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:var(--sky-dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:900;}
 
   /* SEDES */
-  #sedes{background:var(--bg2);}
+  #sedes{
+    position:relative;
+    background:linear-gradient(180deg, rgba(234,247,252,.55) 0%, rgba(234,247,252,.65) 100%), url('img/sedes-bg.jpg') center 45%/cover no-repeat;
+  }
   .sedes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
   .sede-card{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:0 10px 30px rgba(34,168,224,.1);}
   .sede-card .sede-tag{display:inline-block;background:var(--sky-light);color:var(--sky-dark);font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.35rem .8rem;border-radius:20px;margin-bottom:1rem;}
