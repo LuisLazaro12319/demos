@@ -100,8 +100,14 @@
   .servicios-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;display:block;}
   .servicios-checklist{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem;}
   .servicios-checklist ul{display:flex;flex-direction:column;gap:.9rem;}
-  .servicios-checklist li{display:flex;align-items:center;gap:.8rem;font-size:1rem;font-weight:600;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:30px;padding:.7rem 1.3rem;box-shadow:0 4px 14px rgba(34,168,224,.06);}
-  .servicios-checklist .chk{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:var(--sky-dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:900;}
+  .servicio-toggle{width:100%;display:flex;align-items:center;gap:.8rem;font-size:1rem;font-weight:600;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:20px;padding:.7rem 1.3rem;box-shadow:0 4px 14px rgba(34,168,224,.06);cursor:pointer;text-align:left;font-family:inherit;transition:border-radius .2s;}
+  .servicio-item.open .servicio-toggle{border-radius:20px 20px 0 0;}
+  .servicio-toggle .chk{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:var(--sky-dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:900;}
+  .servicio-toggle .chevron{margin-left:auto;font-size:.75rem;color:var(--text-gray);transition:transform .25s;}
+  .servicio-item.open .servicio-toggle .chevron{transform:rotate(180deg);}
+  .servicio-desc{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--sky-light);border:1px solid var(--border);border-top:none;border-radius:0 0 20px 20px;}
+  .servicio-item.open .servicio-desc{max-height:160px;}
+  .servicio-desc p{padding:.8rem 1.3rem 1rem;font-size:.85rem;color:var(--text-gray);line-height:1.5;}
 
   /* SEDES */
   #sedes{background:var(--bg2);}
@@ -277,20 +283,56 @@
         <p class="sec-sub" style="text-align:left;margin:0 0 1.6rem;">Doce tratamientos pensados para el cuidado integral de tu salud bucal.</p>
         <div class="servicios-checklist">
           <ul>
-            <li class="reveal"><span class="chk">✓</span> Odontología Integral</li>
-            <li class="reveal"><span class="chk">✓</span> Ortodoncia</li>
-            <li class="reveal"><span class="chk">✓</span> Ortopedia</li>
-            <li class="reveal"><span class="chk">✓</span> Implantes</li>
-            <li class="reveal"><span class="chk">✓</span> Prótesis dental</li>
-            <li class="reveal"><span class="chk">✓</span> Cirugía oral</li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Odontología Integral</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Atención completa de tu salud bucal: control, diagnóstico y tratamiento en un mismo lugar.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Ortodoncia</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Corrige la posición de los dientes con brackets o alineadores para lograr una mordida pareja.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Ortopedia</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Guía el crecimiento de los maxilares en chicos y adolescentes para prevenir problemas futuros.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Implantes</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Reemplazan una pieza perdida con una raíz artificial fija, como un diente natural.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Prótesis dental</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Piezas removibles o fijas que reponen dientes faltantes y recuperan la función de masticar.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Cirugía oral</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Extracciones y otros procedimientos quirúrgicos en boca, encías y maxilares.</p></div>
+            </li>
           </ul>
           <ul>
-            <li class="reveal"><span class="chk">✓</span> Rehabilitación</li>
-            <li class="reveal"><span class="chk">✓</span> Periodoncia</li>
-            <li class="reveal"><span class="chk">✓</span> Odontopediatría</li>
-            <li class="reveal"><span class="chk">✓</span> Conductos</li>
-            <li class="reveal"><span class="chk">✓</span> Endodoncia</li>
-            <li class="reveal"><span class="chk">✓</span> Estética</li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Rehabilitación</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Recupera la función y la estética de tu boca después de una pérdida o daño dental.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Periodoncia</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Cuida la salud de encías y hueso, tratando la gingivitis y la periodontitis.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Odontopediatría</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Atención odontológica pensada especialmente para los más chicos de la casa.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Conductos</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Elimina el nervio dañado de una pieza para salvarla sin necesidad de extraerla.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Endodoncia</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Trata el interior del diente cuando hay una infección o daño profundo en la pulpa dental.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Estética</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Blanqueamientos, carillas y otros tratamientos para mejorar la apariencia de tu sonrisa.</p></div>
+            </li>
           </ul>
         </div>
       </div>
@@ -530,6 +572,12 @@
       const wasOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  document.querySelectorAll('.servicio-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.servicio-item').classList.toggle('open');
     });
   });
 </script>
