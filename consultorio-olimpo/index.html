@@ -159,6 +159,21 @@
     .equipo-arrow.next{right:.2rem;}
   }
 
+  /* FAQ */
+  #faq{background:var(--bg2);}
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:.9rem;}
+  .faq-item{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(34,168,224,.06);}
+  .faq-q{
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    width:100%;background:none;border:none;text-align:left;cursor:pointer;
+    padding:1.1rem 1.4rem;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:600;color:var(--text);
+  }
+  .faq-q .plus{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--sky-light);color:var(--sky-dark);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;transition:transform .25s;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-item.open .faq-a{max-height:220px;}
+  .faq-a-inner{padding:0 1.4rem 1.2rem;color:var(--text-gray);font-size:.92rem;line-height:1.6;}
+
   /* CONTACTO */
   .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
   .map-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 45px rgba(34,168,224,.12);}
@@ -231,6 +246,7 @@
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#sedes">Sedes</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#faq">Preguntas Frecuentes</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
@@ -241,6 +257,7 @@
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#sedes">Sedes</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#faq">Preguntas Frecuentes</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
 </nav>
@@ -415,6 +432,36 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <span class="eyebrow">Preguntas Frecuentes</span>
+    <h2 class="sec-title">Resolvemos tus Dudas</h2>
+    <p class="sec-sub">Lo que más nos preguntan sobre pagos y atención por obra social.</p>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q"><span>¿Qué medios de pago aceptan?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Efectivo, MercadoPago, transferencia bancaria y tarjeta de crédito.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Cuántas veces puedo atenderme por obra social al mes?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Solo corresponde 1 prestación al mes.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Qué tratamientos puedo hacer por obra social?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Arreglos, extracciones y tratamientos de conducto.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Qué debo llevar para atenderme por obra social?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Carnet y DNI físicos, más fotocopia de ambos.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Tengo que abonar algo si me atiendo por obra social?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sí, un bono.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contacto">
   <div class="wrap">
     <span class="eyebrow">Visitanos</span>
@@ -505,6 +552,15 @@
       const active = Math.round(equipoTrack.scrollLeft / 206);
       equipoDotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === active));
     }, 100);
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
   });
 </script>
 </body>
