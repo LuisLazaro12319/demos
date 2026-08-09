@@ -95,7 +95,10 @@
 
 
   /* SERVICIOS */
-  .servicios-checklist{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 2.5rem;max-width:820px;margin:0 auto;}
+  .servicios-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;}
+  .servicios-photo{border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(34,168,224,.15);}
+  .servicios-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;display:block;}
+  .servicios-checklist{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem;}
   .servicios-checklist ul{display:flex;flex-direction:column;gap:.9rem;}
   .servicios-checklist li{display:flex;align-items:center;gap:.8rem;font-size:1rem;font-weight:600;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:30px;padding:.7rem 1.3rem;box-shadow:0 4px 14px rgba(34,168,224,.06);}
   .servicios-checklist .chk{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:var(--sky-dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:900;}
@@ -200,6 +203,9 @@
   .reveal.in{opacity:1;transform:translateY(0);}
 
   @media(max-width:900px){
+    .servicios-layout{grid-template-columns:1fr;gap:2rem;}
+    .servicios-photo{order:-1;max-width:380px;margin:0 auto;}
+    .servicios-content .eyebrow, .servicios-content .sec-title, .servicios-content .sec-sub{text-align:center !important;}
     .sedes-grid{grid-template-columns:1fr;}
     .sede-card{max-width:none;justify-self:stretch;}
     .contacto-grid{grid-template-columns:1fr;}
@@ -264,26 +270,33 @@
 
 <section id="servicios">
   <div class="wrap">
-    <span class="eyebrow">Qué Ofrecemos</span>
-    <h2 class="sec-title">Nuestros Tratamientos</h2>
-    <p class="sec-sub">Doce tratamientos pensados para el cuidado integral de tu salud bucal.</p>
-    <div class="servicios-checklist">
-      <ul>
-        <li class="reveal"><span class="chk">✓</span> Odontología Integral</li>
-        <li class="reveal"><span class="chk">✓</span> Ortodoncia</li>
-        <li class="reveal"><span class="chk">✓</span> Ortopedia</li>
-        <li class="reveal"><span class="chk">✓</span> Implantes</li>
-        <li class="reveal"><span class="chk">✓</span> Prótesis dental</li>
-        <li class="reveal"><span class="chk">✓</span> Cirugía oral</li>
-      </ul>
-      <ul>
-        <li class="reveal"><span class="chk">✓</span> Rehabilitación</li>
-        <li class="reveal"><span class="chk">✓</span> Periodoncia</li>
-        <li class="reveal"><span class="chk">✓</span> Odontopediatría</li>
-        <li class="reveal"><span class="chk">✓</span> Conductos</li>
-        <li class="reveal"><span class="chk">✓</span> Endodoncia</li>
-        <li class="reveal"><span class="chk">✓</span> Estética</li>
-      </ul>
+    <div class="servicios-layout">
+      <div class="servicios-content">
+        <span class="eyebrow" style="text-align:left">Qué Ofrecemos</span>
+        <h2 class="sec-title" style="text-align:left">Nuestros Tratamientos</h2>
+        <p class="sec-sub" style="text-align:left;margin:0 0 1.6rem;">Doce tratamientos pensados para el cuidado integral de tu salud bucal.</p>
+        <div class="servicios-checklist">
+          <ul>
+            <li class="reveal"><span class="chk">✓</span> Odontología Integral</li>
+            <li class="reveal"><span class="chk">✓</span> Ortodoncia</li>
+            <li class="reveal"><span class="chk">✓</span> Ortopedia</li>
+            <li class="reveal"><span class="chk">✓</span> Implantes</li>
+            <li class="reveal"><span class="chk">✓</span> Prótesis dental</li>
+            <li class="reveal"><span class="chk">✓</span> Cirugía oral</li>
+          </ul>
+          <ul>
+            <li class="reveal"><span class="chk">✓</span> Rehabilitación</li>
+            <li class="reveal"><span class="chk">✓</span> Periodoncia</li>
+            <li class="reveal"><span class="chk">✓</span> Odontopediatría</li>
+            <li class="reveal"><span class="chk">✓</span> Conductos</li>
+            <li class="reveal"><span class="chk">✓</span> Endodoncia</li>
+            <li class="reveal"><span class="chk">✓</span> Estética</li>
+          </ul>
+        </div>
+      </div>
+      <div class="servicios-photo reveal">
+        <img src="img/servicios-photo.jpg" alt="Atención odontológica">
+      </div>
     </div>
   </div>
 </section>
