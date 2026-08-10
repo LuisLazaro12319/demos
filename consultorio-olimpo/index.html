@@ -40,9 +40,10 @@
     transition:background .3s ease, box-shadow .3s ease;
   }
   nav.scrolled{background:rgba(255,255,255,.72);box-shadow:none;}
-  .brand{display:flex;align-items:center;gap:.5rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--sky-dark);}
-  .brand img{height:42px;width:42px;border-radius:10px;display:block;}
-  .brand span{color:var(--text);font-weight:600;font-size:1.05rem;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Poppins',sans-serif;}
+  .brand img{height:46px;width:46px;border-radius:10px;display:block;}
+  .brand-name{display:block;line-height:1;font-size:1.7rem;font-weight:800;color:var(--sky-dark);}
+  .brand-sub{display:block;line-height:1;font-size:1.15rem;font-weight:600;color:var(--text);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.9rem;}
   .nav-links a{font-size:.9rem;font-weight:600;color:var(--text-gray);letter-spacing:.2px;transition:.2s;}
@@ -244,7 +245,7 @@
 <body>
 
 <nav id="nav">
-  <div class="brand"><img src="img/logo.png" alt="Olimpo Consultorio Odontológico">Olimpo<span>Odontología</span></div>
+  <div class="brand"><img src="img/logo.png" alt="Olimpo Consultorio Odontológico"><span class="brand-name">Olimpo</span><span class="brand-sub">Odontología</span></div>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
@@ -368,7 +369,7 @@
           </div>
           <div class="sede-row">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            <span>Lunes a sábados</span>
+            <span>Lunes a sábados<br>9:00 a 15:00</span>
           </div>
           <a class="btn btn-sky" href="https://wa.me/5491158771436?text=Hola!%20Quiero%20consultar%20por%20un%20turno%20en%20la%20sede%20Olimpo" target="_blank" rel="noopener">Turno Sede Olimpo</a>
         </div>
@@ -388,7 +389,7 @@
           </div>
           <div class="sede-row">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            <span>Lunes a sábados</span>
+            <span>Lunes y sábados: 9:00 a 17:00<br>Martes a viernes: 9:00 a 15:00</span>
           </div>
           <a class="btn btn-sky" href="https://wa.me/5491168194477?text=Hola!%20Quiero%20consultar%20por%20un%20turno%20en%20la%20sede%20Restelli" target="_blank" rel="noopener">Turno Sede Restelli</a>
         </div>
