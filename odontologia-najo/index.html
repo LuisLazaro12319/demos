@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAJO | Odontología Integral 24 hs</title>
+<meta name="description" content="Odontología NAJO 24 hs - Buenos Aires 3173, Florencio Varela. Guardia odontológica las 24 horas, odontología integral y estética facial. 4.7/5 en Google con más de 350 opiniones.">
+<link rel="icon" type="image/jpeg" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#3fb8b8;
+    --teal-dark:#0e6e6e;
+    --teal-light:#e8f7f7;
+    --bg:#ffffff;
+    --bg2:#f2fbfb;
+    --text:#1c2b39;
+    --text-gray:#5f7080;
+    --border:#d8f0ef;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Poppins',sans-serif;font-weight:700;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    box-shadow:0 2px 16px rgba(15,110,110,.1);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{background:rgba(255,255,255,.72);box-shadow:none;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Poppins',sans-serif;}
+  .brand img{height:46px;width:46px;border-radius:10px;display:block;object-fit:cover;}
+  .brand-name{display:block;line-height:1;font-size:1.7rem;font-weight:800;color:var(--teal-dark);}
+  .brand-sub{display:block;line-height:1;font-size:1.7rem;font-weight:800;color:var(--text);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--text-gray);letter-spacing:.2px;transition:.2s;}
+  .nav-links a:hover{color:var(--teal-dark);}
+  .burger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;
+  }
+  .burger span{display:block;width:100%;height:2px;background:var(--teal-dark);border-radius:2px;transition:.3s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;
+    background:#fff;border-top:1px solid var(--border);box-shadow:0 12px 25px rgba(15,110,110,.12);
+    padding:.8rem 2rem 1.2rem;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu li{border-top:1px solid var(--border);}
+  .mobile-menu li:first-child{border-top:none;}
+  .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
+  .mobile-menu a:hover{color:var(--teal-dark);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:88vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(100deg, rgba(14,60,60,.72) 10%, rgba(15,110,110,.5) 55%, rgba(63,184,184,.28) 100%), url('img/hero.jpg') center 20%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,.6);color:var(--teal-dark);padding:.5rem 1.1rem;border-radius:30px;
+    font-size:.85rem;font-weight:700;margin-bottom:1.5rem;
+  }
+  .hero h1{font-size:3.4rem;color:#fff;max-width:720px;line-height:1.1;text-shadow:0 4px 20px rgba(6,40,40,.4);}
+  .hero h1 span{color:#c9f3f0;}
+  .hero p{margin-top:1.3rem;font-size:1.12rem;color:#f0fbfa;max-width:560px;font-weight:400;text-shadow:0 2px 10px rgba(6,40,40,.35);}
+  .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;transition:.3s;}
+  .btn-teal{background:var(--teal-dark);color:#fff;box-shadow:0 10px 24px rgba(14,60,60,.35);}
+  .btn-teal:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,60,60,.45);}
+  .btn-outline{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.6);}
+  .btn-outline:hover{background:rgba(255,255,255,.28);}
+  .hero-tags{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.7rem;}
+  .hero-tags span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;padding:.45rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;}
+
+  /* SECTION SHARED */
+  section{padding:5.5rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal-dark);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.3rem;color:var(--text);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3rem;font-size:1.02rem;}
+
+  /* SERVICIOS */
+  #servicios{background:var(--bg2);}
+  .servicios-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center;}
+  .servicios-photo{border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(15,110,110,.15);}
+  .servicios-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;display:block;}
+  .servicios-checklist{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem;}
+  .servicios-checklist ul{display:flex;flex-direction:column;gap:.9rem;}
+  .servicio-toggle{width:100%;display:flex;align-items:center;gap:.8rem;font-size:1rem;font-weight:600;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:20px;padding:.7rem 1.3rem;box-shadow:0 4px 14px rgba(15,110,110,.06);cursor:pointer;text-align:left;font-family:inherit;transition:border-radius .2s;}
+  .servicio-item.open .servicio-toggle{border-radius:20px 20px 0 0;}
+  .servicio-toggle .chk{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:var(--teal-dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:900;}
+  .servicio-toggle .chevron{margin-left:auto;font-size:.75rem;color:var(--text-gray);transition:transform .25s;}
+  .servicio-item.open .servicio-toggle .chevron{transform:rotate(180deg);}
+  .servicio-desc{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--teal-light);border:0 solid var(--border);border-radius:0 0 20px 20px;}
+  .servicio-item.open .servicio-desc{max-height:160px;border-width:0 1px 1px;}
+  .servicio-desc p{padding:.8rem 1.3rem 1rem;font-size:.85rem;color:var(--text-gray);line-height:1.5;}
+
+  /* RESEÑAS */
+  .resenas-card{
+    max-width:820px;margin:0 auto 2.5rem;background:#fff;border-radius:16px;padding:2.4rem;
+    border:1px solid var(--border);box-shadow:0 10px 30px rgba(15,110,110,.08);
+    display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center;
+  }
+  .resenas-breakdown{display:flex;flex-direction:column;gap:.55rem;}
+  .resenas-bar-row{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--text-gray);}
+  .resenas-bar-row .lbl{width:34px;flex:0 0 34px;}
+  .resenas-bar-track{flex:1;height:8px;border-radius:4px;background:var(--bg2);overflow:hidden;}
+  .resenas-bar-fill{height:100%;background:var(--teal);border-radius:4px;}
+  .resenas-bar-row .count{width:36px;flex:0 0 36px;text-align:right;}
+  .resenas-badge{text-align:center;padding-left:2.5rem;border-left:1px solid var(--border);}
+  .resenas-badge svg{margin-bottom:.2rem;}
+  .resenas-badge b{display:block;font-family:'Poppins',sans-serif;font-size:2.6rem;color:var(--teal-dark);line-height:1;}
+  .resenas-badge .stars{color:#f5a623;font-size:1rem;margin:.3rem 0 .2rem;}
+  .resenas-badge span{font-size:.85rem;color:var(--text-gray);display:block;margin-bottom:1.1rem;}
+  .resenas-badge .btn{padding:.7rem 1.3rem;font-size:.82rem;white-space:nowrap;}
+  .resenas-carousel{position:relative;max-width:640px;margin:0 auto;}
+  .resenas-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;}
+  .resenas-track::-webkit-scrollbar{display:none;}
+  .resenas-slide{flex:0 0 100%;scroll-snap-align:center;padding:0 .3rem;}
+  .review-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.7rem 1.9rem;box-shadow:0 6px 18px rgba(15,110,110,.06);min-height:180px;}
+  .review-card .reviewer{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem;}
+  .review-card .avatar{width:42px;height:42px;border-radius:50%;background:var(--teal-light);color:var(--teal-dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;flex:0 0 42px;font-family:'Poppins',sans-serif;}
+  .review-card .reviewer-name{font-weight:700;color:var(--text);font-size:.98rem;}
+  .review-card .reviewer-meta{font-size:.78rem;color:var(--text-gray);}
+  .review-card .stars{color:#f5a623;font-size:.95rem;margin-bottom:.7rem;}
+  .review-card p{color:var(--text);font-size:.92rem;line-height:1.6;}
+  .resenas-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+    background:#fff;color:var(--teal-dark);font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(15,110,110,.18);
+    transition:background .2s,color .2s;
+    z-index:2;
+  }
+  .resenas-arrow:hover{background:var(--teal-dark);color:#fff;}
+  .resenas-arrow.prev{left:-1.2rem;}
+  .resenas-arrow.next{right:-1.2rem;}
+  .resenas-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.2rem;}
+  .resenas-dots span{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .2s;}
+  .resenas-dots span.active{background:var(--teal-dark);}
+  @media(max-width:480px){
+    .resenas-arrow.prev{left:.2rem;}
+    .resenas-arrow.next{right:.2rem;}
+  }
+
+  /* MODAL RESEÑA */
+  .review-modal-overlay{display:none;position:fixed;inset:0;background:rgba(6,30,30,.55);z-index:2000;align-items:center;justify-content:center;padding:1.5rem;}
+  .review-modal-overlay.open{display:flex;}
+  .review-modal{background:#fff;border-radius:16px;padding:2rem;max-width:420px;width:100%;position:relative;}
+  .review-modal h3{color:var(--teal-dark);margin-bottom:.3rem;font-size:1.3rem;}
+  .review-modal .modal-sub{font-size:.85rem;color:var(--text-gray);margin-bottom:1rem;}
+  .review-modal-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-gray);line-height:1;}
+  .review-modal label{display:block;font-size:.85rem;font-weight:600;margin:1rem 0 .4rem;color:var(--text);}
+  .review-modal input, .review-modal textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.92rem;color:var(--text);}
+  .review-modal textarea{resize:vertical;min-height:90px;}
+  .star-picker{display:flex;gap:.3rem;font-size:1.5rem;color:#d8dee3;}
+  .star-picker span{cursor:pointer;transition:.15s;}
+  .star-picker span.active{color:#f5a623;}
+  .review-modal .btn-teal{width:100%;justify-content:center;margin-top:1.4rem;}
+
+  /* NOSOTROS */
+  #nosotros{background:var(--bg2);}
+  .nosotros-box{max-width:760px;margin:0 auto;text-align:center;}
+  .nosotros-box p{color:var(--text-gray);font-size:1.05rem;margin-bottom:1.2rem;}
+  .equipo-title{text-align:center;font-size:1.3rem;color:var(--text);margin-top:3.5rem;margin-bottom:2rem;}
+  .equipo-carousel{position:relative;max-width:900px;margin:0 auto;}
+  .equipo-track{display:flex;gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;padding:.3rem .1rem 1rem;}
+  .equipo-track::-webkit-scrollbar{display:none;}
+  .equipo-slide{flex:0 0 190px;scroll-snap-align:start;text-align:center;}
+  .equipo-photo{width:100%;aspect-ratio:3/4;border-radius:12px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;color:var(--teal-dark);margin-bottom:.9rem;box-shadow:0 8px 20px rgba(15,110,110,.1);overflow:hidden;}
+  .equipo-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .equipo-slide h4{font-size:.98rem;color:var(--text);margin-bottom:.15rem;font-weight:700;}
+  .equipo-slide p{font-size:.82rem;color:var(--teal-dark);margin-bottom:.15rem;font-weight:600;}
+  .equipo-slide span{font-size:.78rem;color:var(--text-gray);}
+  .equipo-arrow{
+    position:absolute;top:38%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+    background:#fff;color:var(--teal-dark);font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(15,110,110,.18);
+    transition:background .2s,color .2s;
+    z-index:2;
+  }
+  .equipo-arrow:hover{background:var(--teal-dark);color:#fff;}
+  .equipo-arrow.prev{left:-1.2rem;}
+  .equipo-arrow.next{right:-1.2rem;}
+  .equipo-dots{display:flex;justify-content:center;gap:.5rem;margin-top:.5rem;}
+  .equipo-dots span{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .2s;}
+  .equipo-dots span.active{background:var(--teal-dark);}
+  @media(max-width:480px){
+    .equipo-arrow.prev{left:.2rem;}
+    .equipo-arrow.next{right:.2rem;}
+  }
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:#fff;border:1px solid var(--border);
+    border-radius:12px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;box-shadow:0 6px 18px rgba(15,110,110,.06);
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:var(--teal-light);
+    display:flex;align-items:center;justify-content:center;color:var(--teal-dark);
+  }
+  .info-card h4{font-size:.95rem;color:var(--text);margin-bottom:.3rem;font-weight:700;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;}
+  .info-card a:hover{color:var(--teal-dark);}
+  .map-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 45px rgba(15,110,110,.1);}
+  .map-wrap iframe{width:100%;height:420px;border:0;}
+
+  /* FOOTER */
+  footer{background:var(--teal-dark);color:#d3f0ee;padding:3.5rem 0 2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:center;gap:.5rem;font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:1rem;}
+  .footer-brand img{height:34px;width:34px;border-radius:8px;display:block;object-fit:cover;}
+  .footer-brand span{color:#d3f0ee;font-weight:600;font-size:1rem;}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;}
+  .footer-col p, .footer-col a{color:#d3f0ee;font-size:.9rem;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:#fff;}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.08);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;text-align:center;color:#a9d9d6;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .servicios-layout{grid-template-columns:1fr;gap:2rem;}
+    .servicios-photo{order:-1;max-width:380px;margin:0 auto;}
+    .servicios-content .eyebrow, .servicios-content .sec-title, .servicios-content .sec-sub{text-align:center !important;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero h1{font-size:2.6rem;}
+    .resenas-card{grid-template-columns:1fr;}
+    .resenas-badge{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:1.6rem;}
+  }
+  @media(max-width:560px){
+    .servicios-checklist{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.1rem;}
+    .sec-title{font-size:1.8rem;}
+    section{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><img src="img/logo.jpg" alt="NAJO Odontología"><span class="brand-name">NAJO</span><span class="brand-sub">Odontología</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">🦷 Guardia odontológica las 24 hs</span>
+    <h1>Tu sonrisa, <span>a cualquier hora</span></h1>
+    <p>Odontología integral y estética facial en Florencio Varela. Urgencias, tratamientos programados y turnos por WhatsApp, todos los días del año.</p>
+    <div class="hero-actions">
+      <a class="btn btn-teal" href="https://wa.me/5491138685402?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener">Pedir turno por WhatsApp</a>
+      <a class="btn btn-outline" href="#resenas">Ver reseñas</a>
+    </div>
+    <div class="hero-tags">
+      <span>🕐 Abierto las 24 horas</span>
+      <span>💬 Turnos por WhatsApp</span>
+      <span>🏳️‍🌈 Amigable con LGBTQ+</span>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="servicios-layout">
+      <div class="servicios-content">
+        <span class="eyebrow" style="text-align:left">Qué Ofrecemos</span>
+        <h2 class="sec-title" style="text-align:left">Nuestros Tratamientos</h2>
+        <p class="sec-sub" style="text-align:left;margin:0 0 1.6rem;">Odontología integral y estética facial, con guardia de urgencias las 24 horas.</p>
+        <div class="servicios-checklist">
+          <ul>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Odontología Integral</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Diagnóstico y tratamiento completo de tu salud bucal en un mismo lugar.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Guardia 24 hs</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Atención inmediata ante dolor, golpes o infecciones, cualquier día y a cualquier hora.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Extracciones</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Extracción de piezas dañadas, incluidas muelas de juicio, con anestesia local.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Endodoncia</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Trata el interior del diente cuando hay una infección o daño profundo en la pulpa dental.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Ortodoncia</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Brackets y alineadores para corregir la posición de los dientes.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Odontopediatría</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Atención odontológica pensada especialmente para los más chicos de la casa.</p></div>
+            </li>
+          </ul>
+          <ul>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Limpieza Dental</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Remoción de sarro y placa para cuidar tus encías y prevenir caries.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Blanqueamiento</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Tratamientos para aclarar el color de tus dientes y lucir una sonrisa más luminosa.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Prótesis Dental</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Piezas removibles o fijas que reponen dientes faltantes y recuperan la función de masticar.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Implantes</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Reemplazan una pieza perdida con una raíz artificial fija, como un diente natural.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Estética Facial</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Relleno de labios y rinomodelación con ácido hialurónico.</p></div>
+            </li>
+            <li class="servicio-item reveal">
+              <button class="servicio-toggle"><span class="chk">✓</span><span>Certificado Bucodental</span><span class="chevron">▾</span></button>
+              <div class="servicio-desc"><p>Certificados y controles odontológicos para trámites laborales o escolares.</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="servicios-photo reveal">
+        <img src="img/servicios-photo.jpg" alt="Consultorio odontológico">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Reseñas</span>
+    <h2 class="sec-title">Lo Que Dicen en Google</h2>
+    <p class="sec-sub">Opiniones reales de pacientes que confiaron en NAJO.</p>
+    <div class="resenas-card reveal">
+      <div class="resenas-breakdown">
+        <div class="resenas-bar-row"><span class="lbl">5 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:90%"></div></div><span class="count">316</span></div>
+        <div class="resenas-bar-row"><span class="lbl">4 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:2%"></div></div><span class="count">7</span></div>
+        <div class="resenas-bar-row"><span class="lbl">3 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:1%"></div></div><span class="count">1</span></div>
+        <div class="resenas-bar-row"><span class="lbl">2 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:1%"></div></div><span class="count">2</span></div>
+        <div class="resenas-bar-row"><span class="lbl">1 ★</span><div class="resenas-bar-track"><div class="resenas-bar-fill" style="width:7%"></div></div><span class="count">26</span></div>
+      </div>
+      <div class="resenas-badge">
+        <svg width="90" height="46" viewBox="0 0 90 46" fill="none">
+          <path d="M8 6c8 4 10 16 6 30" stroke="#3fb8b8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 12c5 1 8 5 7 10M5 20c5 1 8 4 7 9M6 28c4 1 7 3 6 7" stroke="#3fb8b8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M82 6c-8 4-10 16-6 30" stroke="#3fb8b8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M84 12c-5 1-8 5-7 10M85 20c-5 1-8 4-7 9M84 28c-4 1-7 3-6 7" stroke="#3fb8b8" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <b>4.7</b>
+        <div class="stars">★★★★★</div>
+        <span>352 reseñas</span>
+        <a class="btn btn-teal" id="openReviewModal" href="https://maps.app.goo.gl/azNYVWWZNfHVYmHo9">Escribe una reseña</a>
+      </div>
+    </div>
+    <div class="resenas-carousel reveal">
+      <button class="resenas-arrow prev" id="resenasPrev" aria-label="Reseña anterior">&#10094;</button>
+      <div class="resenas-track" id="resenasTrack">
+        <div class="resenas-slide">
+          <div class="review-card">
+            <div class="reviewer">
+              <div class="avatar">L</div>
+              <div><div class="reviewer-name">Luka Nahuel Truccolo</div><div class="reviewer-meta">Hace 2 meses</div></div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Fui de urgencia por una muela de juicio que me estaba matando del dolor. Pregunté a las 16:30 si podía ir, me dieron turno a las 17 hs y a las 18 hs ya estaba afuera, sin dolor y sin la muela. Me atendió la doctora Nadia.</p>
+          </div>
+        </div>
+        <div class="resenas-slide">
+          <div class="review-card">
+            <div class="reviewer">
+              <div class="avatar">E</div>
+              <div><div class="reviewer-name">Eliana Echegaray</div><div class="reviewer-meta">Hace 1 mes</div></div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Mi experiencia fue muy grata, acudí desde muy lejos por la recomendación de una amiga y no me arrepiento. Fui con la intención de sacarme la raíz que estaba infectada.</p>
+          </div>
+        </div>
+        <div class="resenas-slide">
+          <div class="review-card">
+            <div class="reviewer">
+              <div class="avatar">K</div>
+              <div><div class="reviewer-name">Katherine Saldaña</div><div class="reviewer-meta">Hace 1 mes</div></div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Quiero agradecer profundamente la atención que recibí en la guardia odontológica. Llegué con un dolor insoportable, sin poder dormir ni comer, y desde el primer momento me trataron con muchísima paciencia.</p>
+          </div>
+        </div>
+        <div class="resenas-slide">
+          <div class="review-card">
+            <div class="reviewer">
+              <div class="avatar">A</div>
+              <div><div class="reviewer-name">Ailen Agustina Perez</div><div class="reviewer-meta">Hace 3 meses</div></div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Fui por guardia, me atendió la doctora Nadia. Excelente mi experiencia, una persona profesional, cálida y empática. Me realizó la extracción de 3 raíces que quedaron de una mala praxis en otro lugar.</p>
+          </div>
+        </div>
+        <div class="resenas-slide">
+          <div class="review-card">
+            <div class="reviewer">
+              <div class="avatar">V</div>
+              <div><div class="reviewer-name">Vera Orduna</div><div class="reviewer-meta">Local Guide · Hace 4 meses</div></div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Hoy fui de urgencia con la doctora Nadia, quien me atendió súper bien, me explicó todo con muchísima paciencia y además me recibió de guardia un domingo. Estoy muy agradecida y conforme.</p>
+          </div>
+        </div>
+        <div class="resenas-slide">
+          <div class="review-card">
+            <div class="reviewer">
+              <div class="avatar">D</div>
+              <div><div class="reviewer-name">Daniela Djedjeian</div><div class="reviewer-meta">Hace 5 meses</div></div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Vivo en la Costa Atlántica y voy a Mármol para atenderme con Diego porque es un artista y se nota que ama lo que hace. Muy profesional y confiable, él y todo su equipo. Recomiendo 100%.</p>
+          </div>
+        </div>
+      </div>
+      <button class="resenas-arrow next" id="resenasNext" aria-label="Siguiente reseña">&#10095;</button>
+    </div>
+    <div class="resenas-dots" id="resenasDots">
+      <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<div class="review-modal-overlay" id="reviewModalOverlay">
+  <div class="review-modal">
+    <button class="review-modal-close" id="closeReviewModal" aria-label="Cerrar">&times;</button>
+    <h3>Escribe una reseña</h3>
+    <p class="modal-sub">Tu reseña se publica directo acá en la página.</p>
+    <form id="reviewForm">
+      <label>Tu calificación</label>
+      <div class="star-picker" id="starPicker">
+        <span class="active" data-v="1">★</span><span class="active" data-v="2">★</span><span class="active" data-v="3">★</span><span class="active" data-v="4">★</span><span class="active" data-v="5">★</span>
+      </div>
+      <label for="reviewName">Nombre completo</label>
+      <input id="reviewName" type="text" placeholder="Tu nombre" required maxlength="60">
+      <label for="reviewText">Tu reseña</label>
+      <textarea id="reviewText" placeholder="Contanos tu experiencia en NAJO..." required maxlength="500"></textarea>
+      <button type="submit" class="btn btn-teal" id="reviewSubmitBtn">Enviar reseña</button>
+    </form>
+  </div>
+</div>
+
+<section id="nosotros">
+  <div class="wrap">
+    <span class="eyebrow">Nosotros</span>
+    <h2 class="sec-title">Odontología Integral, las 24 Horas</h2>
+    <div class="nosotros-box">
+      <p>En NAJO Odontología ofrecemos atención integral los 365 días del año: desde una urgencia a la madrugada hasta un tratamiento estético programado con calma.</p>
+      <p>Combinamos la odontología general con la estética facial, para que cuides tu sonrisa cerca de tu casa, en Florencio Varela.</p>
+    </div>
+    <h3 class="equipo-title">Nuestro Equipo</h3>
+    <div class="equipo-carousel">
+      <button class="equipo-arrow prev" id="equipoPrev" aria-label="Anterior">&#10094;</button>
+      <div class="equipo-track" id="equipoTrack">
+        <div class="equipo-slide reveal">
+          <div class="equipo-photo"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+          <h4>Od. Nadia Capararo</h4>
+          <p>MP 25.098</p>
+          <span>Guardia y urgencias</span>
+        </div>
+        <div class="equipo-slide reveal">
+          <div class="equipo-photo"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+          <h4>Od. José I. Tesone</h4>
+          <p>MP 25.099</p>
+          <span>Odontología integral</span>
+        </div>
+        <div class="equipo-slide reveal">
+          <div class="equipo-photo"><img src="img/equipo-micaela.jpg" alt="Od. Micaela Gallego"></div>
+          <h4>Od. Micaela Gallego</h4>
+          <p>MP 25.755</p>
+          <span>Atiende los jueves</span>
+        </div>
+        <div class="equipo-slide reveal">
+          <div class="equipo-photo"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+          <h4>Diego</h4>
+          <p>Odontólogo</p>
+          <span>Estética y rehabilitación</span>
+        </div>
+      </div>
+      <button class="equipo-arrow next" id="equipoNext" aria-label="Siguiente">&#10095;</button>
+    </div>
+    <div class="equipo-dots" id="equipoDots">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Florencio Varela, Buenos Aires</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Buenos Aires 3173, entre Sallares y Mitre, Florencio Varela</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Teléfono / WhatsApp</h4><a href="tel:+541138685402">011 3868-5402</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h4>Horarios</h4><p>Abierto las 24 horas, todos los días</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div><h4>Turnos</h4><p>Coordinados por WhatsApp. Guardia de urgencias sin turno previo.</p></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://maps.google.com/maps?q=Buenos%20Aires%203173%2C%20Florencio%20Varela&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand"><img src="img/logo.jpg" alt="NAJO Odontología">NAJO<span>Odontología</span></div>
+        <p>Odontología integral y estética facial en Florencio Varela, con guardia de urgencias las 24 horas.</p>
+      </div>
+      <div class="footer-col footer-addr">
+        <h4>Ubicación</h4>
+        <p>Buenos Aires 3173<br>Florencio Varela, Buenos Aires</p>
+        <p>Abierto las 24 horas, todos los días</p>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/odontologianajo" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© 2026 NAJO Odontología · Florencio Varela, Buenos Aires</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491138685402?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCcF4ew0ztsPSC_idLufdAOW3_atPRYh34",
+    authDomain: "demos-webs-comercios.firebaseapp.com",
+    projectId: "demos-webs-comercios",
+    storageBucket: "demos-webs-comercios.firebasestorage.app",
+    messagingSenderId: "632222054769",
+    appId: "1:632222054769:web:d968657d94e9e07dfc5ed0"
+  };
+  const firebaseApp = initializeApp(firebaseConfig);
+  const db = getFirestore(firebaseApp);
+  const reviewsCol = collection(db, "reviews_najo");
+
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpen = burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.querySelectorAll('.servicio-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.servicio-item').classList.toggle('open');
+    });
+  });
+
+  const reviewModalOverlay = document.getElementById('reviewModalOverlay');
+  document.getElementById('openReviewModal').addEventListener('click', (e) => {
+    e.preventDefault();
+    reviewModalOverlay.classList.add('open');
+  });
+  document.getElementById('closeReviewModal').addEventListener('click', () => reviewModalOverlay.classList.remove('open'));
+  reviewModalOverlay.addEventListener('click', (e) => { if (e.target === reviewModalOverlay) reviewModalOverlay.classList.remove('open'); });
+
+  let selectedRating = 5;
+  const starPicker = document.getElementById('starPicker');
+  starPicker.querySelectorAll('span').forEach(s => s.addEventListener('click', () => {
+    selectedRating = +s.dataset.v;
+    starPicker.querySelectorAll('span').forEach((s2, i) => s2.classList.toggle('active', i < selectedRating));
+  }));
+
+  const resenasTrack = document.getElementById('resenasTrack');
+  const resenasDotsWrap = document.getElementById('resenasDots');
+  const goToResena = (i) => {
+    const slides = resenasTrack.querySelectorAll('.resenas-slide');
+    const idx = Math.max(0, Math.min(slides.length - 1, i));
+    resenasTrack.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+  };
+  document.getElementById('resenasPrev').addEventListener('click', () => {
+    goToResena(Math.round(resenasTrack.scrollLeft / resenasTrack.clientWidth) - 1);
+  });
+  document.getElementById('resenasNext').addEventListener('click', () => {
+    goToResena(Math.round(resenasTrack.scrollLeft / resenasTrack.clientWidth) + 1);
+  });
+  let resenasScrollTimer;
+  resenasTrack.addEventListener('scroll', () => {
+    clearTimeout(resenasScrollTimer);
+    resenasScrollTimer = setTimeout(() => {
+      const active = Math.round(resenasTrack.scrollLeft / resenasTrack.clientWidth);
+      resenasDotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === active));
+    }, 100);
+  });
+
+  function addReviewSlide(name, rating, text, meta) {
+    const slide = document.createElement('div');
+    slide.className = 'resenas-slide';
+    const initial = (name.trim().charAt(0) || '?').toUpperCase();
+    const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="reviewer">
+        <div class="avatar"></div>
+        <div><div class="reviewer-name"></div><div class="reviewer-meta"></div></div>
+      </div>
+      <div class="stars"></div>
+      <p></p>`;
+    card.querySelector('.avatar').textContent = initial;
+    card.querySelector('.reviewer-name').textContent = name;
+    card.querySelector('.reviewer-meta').textContent = meta;
+    card.querySelector('.stars').textContent = stars;
+    card.querySelector('p').textContent = text;
+    slide.appendChild(card);
+    resenasTrack.appendChild(slide);
+    resenasDotsWrap.appendChild(document.createElement('span'));
+  }
+
+  getDocs(query(reviewsCol, orderBy('createdAt', 'desc'))).then(snap => {
+    snap.forEach(docSnap => {
+      const d = docSnap.data();
+      addReviewSlide(d.name, d.rating, d.text, 'Reseña reciente');
+    });
+  }).catch(err => console.error('No se pudieron cargar las reseñas', err));
+
+  const reviewForm = document.getElementById('reviewForm');
+  reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nameInput = document.getElementById('reviewName');
+    const textInput = document.getElementById('reviewText');
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
+    if (!name || !text) return;
+    const submitBtn = document.getElementById('reviewSubmitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    try {
+      await addDoc(reviewsCol, { name, rating: selectedRating, text, createdAt: serverTimestamp() });
+      addReviewSlide(name, selectedRating, text, 'Reseña reciente');
+      reviewForm.reset();
+      selectedRating = 5;
+      starPicker.querySelectorAll('span').forEach(s => s.classList.add('active'));
+      reviewModalOverlay.classList.remove('open');
+      goToResena(resenasTrack.querySelectorAll('.resenas-slide').length - 1);
+    } catch (err) {
+      alert('No se pudo enviar la reseña. Intentá de nuevo en un momento.');
+    }
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar reseña';
+  });
+
+  const equipoTrack = document.getElementById('equipoTrack');
+  const equipoDotsWrap = document.getElementById('equipoDots');
+  const goToEquipo = (i) => {
+    const slides = equipoTrack.querySelectorAll('.equipo-slide');
+    const idx = Math.max(0, Math.min(slides.length - 1, i));
+    equipoTrack.scrollTo({ left: slides[idx].offsetLeft - 8, behavior: 'smooth' });
+  };
+  document.getElementById('equipoPrev').addEventListener('click', () => {
+    goToEquipo(Math.round(equipoTrack.scrollLeft / 206) - 1);
+  });
+  document.getElementById('equipoNext').addEventListener('click', () => {
+    goToEquipo(Math.round(equipoTrack.scrollLeft / 206) + 1);
+  });
+  let equipoScrollTimer;
+  equipoTrack.addEventListener('scroll', () => {
+    clearTimeout(equipoScrollTimer);
+    equipoScrollTimer = setTimeout(() => {
+      const active = Math.round(equipoTrack.scrollLeft / 206);
+      equipoDotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === active));
+    }, 100);
+  });
+</script>
+</body>
+</html>
