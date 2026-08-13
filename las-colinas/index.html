@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Colinas | Centro Médico de Diagnóstico</title>
+<meta name="description" content="Las Colinas Centro Médico de Diagnóstico - Leandro N. Alem 197, Victoria, Entre Ríos. Ecografías, radiografías, escanogramas y especialidades médicas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#1f9a7d;
+    --verde-dark:#146152;
+    --verde-light:#e8f7f3;
+    --bg:#ffffff;
+    --bg2:#f2faf8;
+    --text:#1c2b39;
+    --text-gray:#5f7080;
+    --border:#dcf0ea;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    box-shadow:0 2px 16px rgba(20,97,82,.1);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{background:rgba(255,255,255,.72);box-shadow:none;}
+  .brand{display:flex;align-items:baseline;gap:.2rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--verde-dark);}
+  .brand span{color:var(--text);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--text-gray);letter-spacing:.2px;transition:.2s;}
+  .nav-links a:hover{color:var(--verde-dark);}
+  .burger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;
+  }
+  .burger span{display:block;width:100%;height:2px;background:var(--verde-dark);border-radius:2px;transition:.3s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;
+    background:#fff;border-top:1px solid var(--border);box-shadow:0 12px 25px rgba(20,97,82,.12);
+    padding:.8rem 2rem 1.2rem;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu li{border-top:1px solid var(--border);}
+  .mobile-menu li:first-child{border-top:none;}
+  .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
+  .mobile-menu a:hover{color:var(--verde-dark);}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:88vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(100deg, rgba(15,45,38,.72) 10%, rgba(20,97,82,.5) 55%, rgba(31,154,125,.28) 100%), url('img/hero.jpg') center 30%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,.6);color:var(--verde-dark);padding:.5rem 1.1rem;border-radius:30px;
+    font-size:.85rem;font-weight:700;margin-bottom:1.5rem;
+  }
+  .hero h1{font-size:3.4rem;color:#fff;max-width:720px;line-height:1.1;text-shadow:0 4px 20px rgba(6,30,25,.4);}
+  .hero h1 span{color:#c8f0e4;}
+  .hero p{margin-top:1.3rem;font-size:1.12rem;color:#eefaf6;max-width:560px;font-weight:400;text-shadow:0 2px 10px rgba(6,30,25,.35);}
+  .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;transition:.3s;}
+  .btn-verde{background:var(--verde-dark);color:#fff;box-shadow:0 10px 24px rgba(15,45,38,.35);}
+  .btn-verde:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(15,45,38,.45);}
+  .btn-outline{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.6);}
+  .btn-outline:hover{background:rgba(255,255,255,.28);}
+
+  /* SECTION SHARED */
+  section{padding:5.5rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--verde-dark);margin-bottom:.7rem;}
+  .sec-title{text-align:center;font-size:2.3rem;color:var(--text);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:600px;margin:0 auto 3rem;font-size:1.02rem;}
+
+  /* MISION VISION VALORES */
+  #mvv{background:var(--bg2);}
+  .mvv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+  .mvv-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:2.2rem 1.8rem;box-shadow:0 10px 26px rgba(20,97,82,.08);}
+  .mvv-card .icon{width:52px;height:52px;border-radius:12px;background:var(--verde-light);color:var(--verde-dark);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+  .mvv-card h3{font-size:1.1rem;color:var(--verde-dark);margin-bottom:.7rem;}
+  .mvv-card p{color:var(--text-gray);font-size:.92rem;}
+
+  /* SERVICIOS */
+  .servicios-checklist{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem;max-width:900px;margin:0 auto;}
+  .servicios-checklist ul{display:flex;flex-direction:column;gap:.9rem;}
+  .servicio-toggle{width:100%;display:flex;align-items:center;gap:.8rem;font-size:1rem;font-weight:600;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:20px;padding:.7rem 1.3rem;box-shadow:0 4px 14px rgba(20,97,82,.06);cursor:pointer;text-align:left;font-family:inherit;transition:border-radius .2s;}
+  .servicio-item.open .servicio-toggle{border-radius:20px 20px 0 0;}
+  .servicio-toggle .chk{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:var(--verde-dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:900;}
+  .servicio-toggle .chevron{margin-left:auto;font-size:.75rem;color:var(--text-gray);transition:transform .25s;}
+  .servicio-item.open .servicio-toggle .chevron{transform:rotate(180deg);}
+  .servicio-desc{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--verde-light);border:0 solid var(--border);border-radius:0 0 20px 20px;}
+  .servicio-item.open .servicio-desc{max-height:160px;border-width:0 1px 1px;}
+  .servicio-desc p{padding:.8rem 1.3rem 1rem;font-size:.85rem;color:var(--text-gray);line-height:1.5;}
+
+  /* EQUIPO */
+  #equipo{background:var(--bg2);}
+  .equipo-grid{display:flex;justify-content:center;gap:1.6rem;flex-wrap:wrap;}
+  .equipo-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.8rem;text-align:center;width:220px;box-shadow:0 10px 26px rgba(20,97,82,.08);}
+  .equipo-avatar{width:84px;height:84px;border-radius:50%;background:var(--verde-light);color:var(--verde-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+  .equipo-card h4{font-size:1rem;color:var(--text);margin-bottom:.3rem;}
+  .equipo-card span{font-size:.85rem;color:var(--verde-dark);font-weight:600;}
+
+  /* RESEÑAS */
+  .resenas-badge-solo{max-width:320px;margin:0 auto 2.5rem;background:#fff;border-radius:16px;padding:2rem;text-align:center;border:1px solid var(--border);box-shadow:0 10px 30px rgba(20,97,82,.08);}
+  .resenas-badge-solo b{display:block;font-family:'Poppins',sans-serif;font-size:2.6rem;color:var(--verde-dark);line-height:1;}
+  .resenas-badge-solo .stars{color:#f5a623;font-family:Arial,sans-serif;font-size:1rem;margin:.3rem 0 .2rem;}
+  .resenas-badge-solo span{font-size:.85rem;color:var(--text-gray);display:block;margin-bottom:1.1rem;}
+  .review-card{max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.7rem 1.9rem;box-shadow:0 6px 18px rgba(20,97,82,.06);}
+  .review-card .reviewer{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem;}
+  .review-card .avatar{width:42px;height:42px;border-radius:50%;background:var(--verde-light);color:var(--verde-dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;flex:0 0 42px;font-family:'Poppins',sans-serif;}
+  .review-card .reviewer-name{font-weight:700;color:var(--text);font-size:.98rem;}
+  .review-card .reviewer-meta{font-size:.78rem;color:var(--text-gray);}
+  .review-card .stars{color:#f5a623;font-family:Arial,sans-serif;font-size:.95rem;margin-bottom:.7rem;}
+  .review-card p{color:var(--text);font-size:.92rem;line-height:1.6;}
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .info-card{
+    background:#fff;border:1px solid var(--border);
+    border-radius:12px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;box-shadow:0 6px 18px rgba(20,97,82,.06);
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:var(--verde-light);
+    display:flex;align-items:center;justify-content:center;color:var(--verde-dark);
+  }
+  .info-card h4{font-size:.95rem;color:var(--text);margin-bottom:.3rem;font-weight:700;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;}
+  .info-card a:hover{color:var(--verde-dark);}
+  .map-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 45px rgba(20,97,82,.1);}
+  .map-wrap iframe{width:100%;height:420px;border:0;}
+
+  /* FOOTER */
+  footer{background:var(--verde-dark);color:#d3ede6;padding:3.5rem 0 2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:baseline;gap:.2rem;font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:1rem;}
+  .footer-brand span{color:#d3ede6;font-weight:600;font-size:1rem;}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;}
+  .footer-col p, .footer-col a{color:#d3ede6;font-size:.9rem;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:#fff;}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.08);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;text-align:center;color:#a9d9cc;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .mvv-grid{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero h1{font-size:2.6rem;}
+  }
+  @media(max-width:560px){
+    .servicios-checklist{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+  }
+  @media(max-width:480px){
+    .hero{padding:7rem 1.1rem 3.5rem;}
+    .hero h1{font-size:2.1rem;}
+    .sec-title{font-size:1.8rem;}
+    section{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Las<span>Colinas</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#equipo">Profesionales</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#equipo">Profesionales</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">🩺 Centro Médico de Diagnóstico</span>
+    <h1>Tu salud, <span>en manos expertas</span></h1>
+    <p>Ecografías, radiografías y especialidades médicas en Victoria, Entre Ríos. Turnos por WhatsApp.</p>
+    <div class="hero-actions">
+      <a class="btn btn-verde" href="https://wa.me/5493436463121?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener">Pedir turno por WhatsApp</a>
+      <a class="btn btn-outline" href="#servicios">Ver especialidades</a>
+    </div>
+  </div>
+</section>
+
+<section id="mvv">
+  <div class="wrap">
+    <span class="eyebrow">Quiénes Somos</span>
+    <h2 class="sec-title">Misión, Visión y Valores</h2>
+    <p class="sec-sub">El compromiso que guía la atención en Las Colinas.</p>
+    <div class="mvv-grid">
+      <div class="mvv-card reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><path d="M12 8v5M9.5 10.5h5"/></svg></div>
+        <h3>Misión</h3>
+        <p>Brindar diagnóstico médico preciso y una atención cercana a cada paciente de Victoria y la zona, combinando tecnología y calidez humana.</p>
+      </div>
+      <div class="mvv-card reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Visión</h3>
+        <p>Ser el centro de referencia en diagnóstico por imágenes y especialidades médicas de la región.</p>
+      </div>
+      <div class="mvv-card reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Valores</h3>
+        <p>Profesionalismo, compromiso y respeto por cada paciente que confía en nosotros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Qué Ofrecemos</span>
+    <h2 class="sec-title">Diagnóstico y Especialidades</h2>
+    <p class="sec-sub">Estudios y consultas con profesionales especializados.</p>
+    <div class="servicios-checklist">
+      <ul>
+        <li class="servicio-item reveal">
+          <button class="servicio-toggle"><span class="chk">✓</span><span>Ecografías</span><span class="chevron">▾</span></button>
+          <div class="servicio-desc"><p>Diagnóstico por imágenes con tecnología de última generación.</p></div>
+        </li>
+        <li class="servicio-item reveal">
+          <button class="servicio-toggle"><span class="chk">✓</span><span>Radiografías</span><span class="chevron">▾</span></button>
+          <div class="servicio-desc"><p>Placas rápidas y de calidad para un diagnóstico preciso.</p></div>
+        </li>
+        <li class="servicio-item reveal">
+          <button class="servicio-toggle"><span class="chk">✓</span><span>Escanogramas</span><span class="chevron">▾</span></button>
+          <div class="servicio-desc"><p>Estudios computarizados con resultados ágiles.</p></div>
+        </li>
+      </ul>
+      <ul>
+        <li class="servicio-item reveal">
+          <button class="servicio-toggle"><span class="chk">✓</span><span>Reumatología</span><span class="chevron">▾</span></button>
+          <div class="servicio-desc"><p>Diagnóstico y tratamiento de enfermedades de articulaciones, músculos y huesos.</p></div>
+        </li>
+        <li class="servicio-item reveal">
+          <button class="servicio-toggle"><span class="chk">✓</span><span>Hematología</span><span class="chevron">▾</span></button>
+          <div class="servicio-desc"><p>Atención especializada en enfermedades de la sangre, médula ósea y sistema linfático.</p></div>
+        </li>
+        <li class="servicio-item reveal">
+          <button class="servicio-toggle"><span class="chk">✓</span><span>Consultas Especializadas</span><span class="chevron">▾</span></button>
+          <div class="servicio-desc"><p>Turnos programados con profesionales de distintas especialidades médicas.</p></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="wrap">
+    <span class="eyebrow">Nuestro Equipo</span>
+    <h2 class="sec-title">Profesionales</h2>
+    <p class="sec-sub">Especialistas que atienden en Las Colinas.</p>
+    <div class="equipo-grid">
+      <div class="equipo-card reveal">
+        <div class="equipo-avatar"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+        <h4>Dr. Diulio Guzzardo</h4>
+        <span>Reumatólogo</span>
+      </div>
+      <div class="equipo-card reveal">
+        <div class="equipo-avatar"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+        <h4>Dra. Virginia Cicao</h4>
+        <span>Hematóloga y Oncohematóloga</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="wrap">
+    <span class="eyebrow">Reseñas</span>
+    <h2 class="sec-title">Lo Que Dicen en Google</h2>
+    <p class="sec-sub">Opiniones reales de pacientes de Las Colinas.</p>
+    <div class="resenas-badge-solo reveal">
+      <b>4.2</b>
+      <div class="stars">★★★★☆</div>
+      <span>22 reseñas en Google</span>
+      <a class="btn btn-verde" href="https://maps.app.goo.gl/9QFAW28CkRZWczup6" target="_blank" rel="noopener">Escribe una reseña</a>
+    </div>
+    <div class="review-card reveal">
+      <div class="reviewer">
+        <div class="avatar">M</div>
+        <div><div class="reviewer-name">Maria Capurro</div><div class="reviewer-meta">Local Guide · Hace 1 mes</div></div>
+      </div>
+      <div class="stars">★★★★★</div>
+      <p>Excelente atención de las chicas en mesa de entrada y rapidez en tema placas. Me hice un escanograma viviendo a 100km de Victoria y fue rapidísimo el trámite.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Visitanos</span>
+    <h2 class="sec-title">Victoria, Entre Ríos</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div><h4>Dirección</h4><p>Leandro N. Alem 197, Victoria, Entre Ríos</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><h4>Teléfono / WhatsApp</h4><a href="tel:+543436423157">03436 42-3157</a> / <a href="tel:+543436421512">42-1512</a><br><a href="https://wa.me/5493436463121" target="_blank" rel="noopener">WhatsApp: 03436 46-3121</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h4>Horarios</h4><p>Consultá horarios y disponibilidad por WhatsApp.</p></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div><h4>Turnos</h4><p>Coordinados por WhatsApp o llamando a los teléfonos de arriba.</p></div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://maps.google.com/maps?q=Leandro%20N.%20Alem%20197%2C%20Victoria%2C%20Entre%20Rios&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand">Las<span>Colinas</span></div>
+        <p>Centro Médico de Diagnóstico en Victoria, Entre Ríos. Ecografías, radiografías y especialidades médicas.</p>
+      </div>
+      <div class="footer-col footer-addr">
+        <h4>Ubicación</h4>
+        <p>Leandro N. Alem 197<br>Victoria, Entre Ríos</p>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/lascolinasvictoria" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© 2026 Las Colinas Centro Médico de Diagnóstico · Victoria, Entre Ríos</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5493436463121?text=Hola!%20Quiero%20consultar%20por%20un%20turno" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpen = burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.querySelectorAll('.servicio-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.servicio-item').classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
