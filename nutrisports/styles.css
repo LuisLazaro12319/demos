@@ -238,7 +238,20 @@ section {
     color: var(--text-gray);
 }
 
-/* --- SECCIÓN NOS ELIGEN --- */
+/* --- SECCIÓN NOSOTROS --- */
+.nosotros-box {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.nosotros-box p {
+    color: var(--text-gray);
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+}
+
+/* --- SECCIÓN QUÉ OFRECEMOS --- */
 .bg-section-destacados {
     background: url('reviews-bg.jpg') no-repeat center center/cover;
 }
