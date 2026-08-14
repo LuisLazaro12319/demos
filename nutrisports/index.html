@@ -7,7 +7,7 @@
     <meta name="description" content="Nutry Sport Gimnasio - Pasaje Perón & Pje. Laguna, C1832. Musculación, cardio y entrenamiento para powerlifters. 5.0/5 en Google.">
     <link rel="icon" type="image/png" href="logo.png">
     <!-- Vinculación con el archivo CSS externo -->
-    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="styles.css?v=15">
     <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -136,34 +136,57 @@
                 </svg>
                 <b>5.0</b>
                 <div class="stars-big">★★★★★</div>
-                <span>Reseñas en Google</span>
+                <span>13 reseñas en Google</span>
                 <a href="https://www.google.com/maps/place/GYM+NUTRY+SPORT/@-34.7348472,-58.4867371,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcc9c0d8c8e11b:0x15c079ac3c8fa941!8m2!3d-34.7348472!4d-58.4867371!16s%2Fg%2F11ydr69bjy" target="_blank" rel="noopener" class="btn btn-small">Escribe una reseña</a>
             </div>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="reviewer">
-                        <div class="avatar">D</div>
-                        <div><div class="reviewer-name">Douha Abda</div><div class="reviewer-meta">Reseña en Google</div></div>
+            <div class="resenas-carousel">
+                <button class="resenas-arrow prev" id="resenasPrev" aria-label="Reseña anterior">&#10094;</button>
+                <div class="resenas-track" id="resenasTrack">
+                    <div class="resenas-slide">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="avatar">D</div>
+                                <div><div class="reviewer-name">daniel</div><div class="reviewer-meta">Hace 7 meses</div></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                            <p>Muy buen gym, completo y con buen clima. Solo faltaría un profe más para cuando se llena. Después, todo de diez 💪</p>
+                        </div>
                     </div>
-                    <div class="stars">★★★★★</div>
-                    <p>Es muy buen gimnasio, el coach te ayuda con las rutinas de ejercicio.</p>
-                </div>
-                <div class="review-card">
-                    <div class="reviewer">
-                        <div class="avatar">D</div>
-                        <div><div class="reviewer-name">Daniel</div><div class="reviewer-meta">Reseña en Google</div></div>
+                    <div class="resenas-slide">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="avatar">J</div>
+                                <div><div class="reviewer-name">Joel Villaroel</div><div class="reviewer-meta">Hace 9 meses</div></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                            <p>Buen gimnasio, si eres powerlifter de la zona, te re sirve el gym, el coach/dueño no se molesta.</p>
+                        </div>
                     </div>
-                    <div class="stars">★★★★★</div>
-                    <p>Muy buen gym, completo y con buen clima. Después, todo de diez 💪...</p>
-                </div>
-                <div class="review-card">
-                    <div class="reviewer">
-                        <div class="avatar">J</div>
-                        <div><div class="reviewer-name">Joel Villaroel</div><div class="reviewer-meta">Reseña en Google</div></div>
+                    <div class="resenas-slide">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="avatar">I</div>
+                                <div><div class="reviewer-name">Isaias Arias Corchado</div><div class="reviewer-meta">Hace 7 meses</div></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                            <p>Un buen gimnasio mejor que lo que ido, se los recomiendo, un buen coach.</p>
+                        </div>
                     </div>
-                    <div class="stars">★★★★★</div>
-                    <p>Buen gimnasio, si eres powerlifter de la zona, te re sirve el gym, el coach/dueño no se molesta.</p>
+                    <div class="resenas-slide">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="avatar">A</div>
+                                <div><div class="reviewer-name">Adolfo Edson Flores Veliz</div><div class="reviewer-meta">Hace un año</div></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                            <p>Planta baja solo piernas y planta alta tren superior 🔥</p>
+                        </div>
+                    </div>
                 </div>
+                <button class="resenas-arrow next" id="resenasNext" aria-label="Siguiente reseña">&#10095;</button>
+            </div>
+            <div class="resenas-dots" id="resenasDots">
+                <span class="active"></span><span></span><span></span><span></span>
             </div>
         </div>
     </section>
@@ -280,6 +303,28 @@
             galeriaScrollTimer = setTimeout(() => {
                 const active = Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth);
                 galeriaDots.forEach((d, i) => d.classList.toggle('active', i === active));
+            }, 100);
+        });
+
+        const resenasTrack = document.getElementById('resenasTrack');
+        const resenasSlides = resenasTrack.querySelectorAll('.resenas-slide');
+        const resenasDots = document.querySelectorAll('#resenasDots span');
+        const goToResena = (i) => {
+            const idx = Math.max(0, Math.min(resenasSlides.length - 1, i));
+            resenasTrack.scrollTo({ left: resenasSlides[idx].offsetLeft, behavior: 'smooth' });
+        };
+        document.getElementById('resenasPrev').addEventListener('click', () => {
+            goToResena(Math.round(resenasTrack.scrollLeft / resenasTrack.clientWidth) - 1);
+        });
+        document.getElementById('resenasNext').addEventListener('click', () => {
+            goToResena(Math.round(resenasTrack.scrollLeft / resenasTrack.clientWidth) + 1);
+        });
+        let resenasScrollTimer;
+        resenasTrack.addEventListener('scroll', () => {
+            clearTimeout(resenasScrollTimer);
+            resenasScrollTimer = setTimeout(() => {
+                const active = Math.round(resenasTrack.scrollLeft / resenasTrack.clientWidth);
+                resenasDots.forEach((d, i) => d.classList.toggle('active', i === active));
             }, 100);
         });
     </script>
