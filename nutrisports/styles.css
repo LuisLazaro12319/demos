@@ -386,18 +386,40 @@ section {
                 url('reviews-bg.jpg') no-repeat center center/cover;
 }
 
-.reviews-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    margin: -30px auto 40px;
+.resenas-badge-solo {
+    max-width: 300px;
+    margin: 0 auto 45px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+    backdrop-filter: blur(5px);
 }
 
-.reviews-rating {
+.resenas-badge-solo svg { margin-bottom: 4px; }
+
+.resenas-badge-solo b {
+    display: block;
+    font-size: 2.6rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, var(--fire-red), var(--fire-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.resenas-badge-solo .stars-big {
     color: #ffc107;
-    font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    margin: 6px 0 4px;
+}
+
+.resenas-badge-solo span {
+    display: block;
+    color: var(--text-gray);
+    font-size: 0.88rem;
+    margin-bottom: 18px;
 }
 
 .btn-small {
