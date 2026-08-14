@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutry Sport Gimnasio</title>
     <!-- Vinculación con el archivo CSS externo -->
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
     <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -20,6 +20,16 @@
             <span class="logo-text">Nutry Sport</span>
         </div>
         <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Qué Ofrecemos</a></li>
+            <li><a href="#opiniones">Opiniones</a></li>
+            <li><a href="#ubicacion">Vení a Entrenar</a></li>
+        </ul>
+        <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="mobile-menu" id="mobileMenu">
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#nosotros">Nosotros</a></li>
             <li><a href="#servicios">Qué Ofrecemos</a></li>
@@ -220,6 +230,19 @@
     </a>
 
     <script>
+        const burger = document.getElementById('burger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => {
+            const isOpen = burger.classList.toggle('open');
+            mobileMenu.classList.toggle('open', isOpen);
+            burger.setAttribute('aria-expanded', isOpen);
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            burger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+        }));
+
         const galeriaTrack = document.getElementById('galeriaTrack');
         const galeriaSlides = galeriaTrack.querySelectorAll('.galeria-slide');
         const galeriaDots = document.querySelectorAll('#galeriaDots span');

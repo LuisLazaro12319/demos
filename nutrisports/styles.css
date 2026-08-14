@@ -84,6 +84,60 @@ nav {
     color: var(--fire-red);
 }
 
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 38px;
+    height: 38px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.burger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(10, 10, 12, 0.97);
+    border-top: 1px solid rgba(157, 0, 255, 0.2);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    padding: 0.8rem 5% 1.2rem;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu li { border-top: 1px solid rgba(255, 255, 255, 0.06); list-style: none; }
+.mobile-menu li:first-child { border-top: none; }
+
+.mobile-menu a {
+    display: block;
+    padding: 0.9rem 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.mobile-menu a:hover { color: var(--fire-red); }
+
 /* --- HERO SECTION --- */
 .hero {
     position: relative;
@@ -710,4 +764,5 @@ footer .fine {
     .hero p { font-size: 1rem; }
     .hero-logo { width: 140px; height: 140px; }
     .nav-links { display: none; }
+    .burger { display: flex; }
 }
