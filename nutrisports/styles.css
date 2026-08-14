@@ -510,30 +510,55 @@ section {
 
 .review-card {
     background: var(--card-bg);
-    padding: 30px;
+    padding: 1.7rem 1.9rem;
     border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 4px solid var(--fire-purple);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(5px);
+}
+
+.review-card .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+.review-card .avatar {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 50%;
+    background: rgba(255, 59, 0, 0.15);
+    color: var(--fire-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.review-card .reviewer-name {
+    font-weight: 700;
+    color: var(--text-light);
+    font-size: 0.98rem;
+}
+
+.review-card .reviewer-meta {
+    font-size: 0.78rem;
+    color: var(--text-gray);
 }
 
 .stars {
     color: #ffc107;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
 }
 
 .review-card p {
-    font-style: italic;
     color: var(--text-gray);
-    margin-bottom: 15px;
-}
-
-.author {
-    font-weight: 700;
-    color: var(--text-light);
+    font-size: 0.92rem;
+    line-height: 1.6;
 }
 
 /* --- SECCIÓN CONTACTO --- */
