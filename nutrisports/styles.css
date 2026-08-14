@@ -291,16 +291,51 @@ section {
 }
 
 /* --- SECCIÓN NOSOTROS --- */
-.nosotros-box {
-    max-width: 760px;
+.nosotros-layout {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1000px;
     margin: 0 auto;
-    text-align: center;
 }
 
 .nosotros-box p {
     color: var(--text-gray);
     font-size: 1.05rem;
     margin-bottom: 1.2rem;
+}
+
+.coach-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.coach-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fire-red);
+    font-size: 3rem;
+}
+
+.coach-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .nosotros-layout { grid-template-columns: 1fr; }
+    .coach-photo { max-width: 240px; margin: 0 auto; }
 }
 
 /* --- SECCIÓN QUÉ OFRECEMOS --- */
