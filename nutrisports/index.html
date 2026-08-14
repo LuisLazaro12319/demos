@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutry Sport Gimnasio</title>
     <!-- Vinculación con el archivo CSS externo -->
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
     <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -21,7 +21,6 @@
         </div>
         <ul class="nav-links">
             <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#servicios">Qué Ofrecemos</a></li>
             <li><a href="#destacados">Nos Eligen</a></li>
             <li><a href="#horarios">Horarios</a></li>
             <li><a href="#opiniones">Opiniones</a></li>
@@ -42,52 +41,41 @@
         </div>
     </header>
 
-    <!-- QUÉ OFRECEMOS -->
-    <section id="servicios" class="bg-section-servicios">
-        <div class="section-content">
-            <h2 class="section-title">Qué Ofrecemos</h2>
-            <div class="servicios-grid">
-                <div class="servicio-card">
-                    <div class="servicio-icon"><i class="fa-solid fa-dumbbell"></i></div>
-                    <h3>Musculación</h3>
-                    <p>Zona completa de pesas y máquinas para tu entrenamiento.</p>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                    <h3>Cardio</h3>
-                    <p>Espacio para trabajar resistencia y quemar grasa.</p>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-icon"><i class="fa-solid fa-user-check"></i></div>
-                    <h3>Coach Personalizado</h3>
-                    <p>El coach te ayuda a armar y ajustar tu rutina.</p>
-                </div>
-                <div class="servicio-card">
-                    <div class="servicio-icon"><i class="fa-solid fa-weight-hanging"></i></div>
-                    <h3>Powerlifting</h3>
-                    <p>Ideal si sos powerlifter de la zona y buscás dónde entrenar en serio.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- NOS ELIGEN -->
     <section id="destacados" class="bg-section-destacados">
         <div class="section-overlay"></div>
         <div class="section-content">
             <h2 class="section-title">Nos Eligen</h2>
             <div class="destacados-layout">
-                <div class="destacado-stat">
-                    <div class="num">5.0</div>
-                    <div class="stars-big">★★★★★</div>
-                    <p>Calificación en Google</p>
+                <div class="destacados-content">
+                    <ul class="destacado-list">
+                        <li><span class="chk">✓</span> Musculación y zona de cardio completas</li>
+                        <li><span class="chk">✓</span> El coach ayuda con las rutinas de ejercicio</li>
+                        <li><span class="chk">✓</span> Gimnasio completo, con buen clima</li>
+                        <li><span class="chk">✓</span> Ideal para powerlifters de la zona</li>
+                        <li><span class="chk">✓</span> Buena onda del coach/dueño con los socios</li>
+                    </ul>
                 </div>
-                <ul class="destacado-list">
-                    <li><span class="chk">✓</span> El coach ayuda con las rutinas de ejercicio</li>
-                    <li><span class="chk">✓</span> Gimnasio completo, con buen clima</li>
-                    <li><span class="chk">✓</span> Ideal para powerlifters de la zona</li>
-                    <li><span class="chk">✓</span> Buena onda del coach/dueño con los socios</li>
-                </ul>
+                <div class="destacados-media">
+                    <div class="galeria-carousel">
+                        <button class="galeria-arrow prev" id="galeriaPrev" aria-label="Anterior">&#10094;</button>
+                        <div class="galeria-track" id="galeriaTrack">
+                            <div class="galeria-slide">
+                                <div class="galeria-placeholder"><i class="fa-solid fa-photo-film"></i><span>Foto/video próximamente</span></div>
+                            </div>
+                            <div class="galeria-slide">
+                                <div class="galeria-placeholder"><i class="fa-solid fa-photo-film"></i><span>Foto/video próximamente</span></div>
+                            </div>
+                            <div class="galeria-slide">
+                                <div class="galeria-placeholder"><i class="fa-solid fa-photo-film"></i><span>Foto/video próximamente</span></div>
+                            </div>
+                        </div>
+                        <button class="galeria-arrow next" id="galeriaNext" aria-label="Siguiente">&#10095;</button>
+                    </div>
+                    <div class="galeria-dots" id="galeriaDots">
+                        <span class="active"></span><span></span><span></span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -205,5 +193,28 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <script>
+        const galeriaTrack = document.getElementById('galeriaTrack');
+        const galeriaSlides = galeriaTrack.querySelectorAll('.galeria-slide');
+        const galeriaDots = document.querySelectorAll('#galeriaDots span');
+        const goToSlide = (i) => {
+            const idx = Math.max(0, Math.min(galeriaSlides.length - 1, i));
+            galeriaTrack.scrollTo({ left: galeriaSlides[idx].offsetLeft, behavior: 'smooth' });
+        };
+        document.getElementById('galeriaPrev').addEventListener('click', () => {
+            goToSlide(Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth) - 1);
+        });
+        document.getElementById('galeriaNext').addEventListener('click', () => {
+            goToSlide(Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth) + 1);
+        });
+        let galeriaScrollTimer;
+        galeriaTrack.addEventListener('scroll', () => {
+            clearTimeout(galeriaScrollTimer);
+            galeriaScrollTimer = setTimeout(() => {
+                const active = Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth);
+                galeriaDots.forEach((d, i) => d.classList.toggle('active', i === active));
+            }, 100);
+        });
+    </script>
 </body>
 </html>

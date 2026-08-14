@@ -257,56 +257,6 @@ section {
     border-radius: 8px;
 }
 
-/* --- SECCIÓN SERVICIOS --- */
-.bg-section-servicios {
-    background: radial-gradient(circle at center, rgba(255, 59, 0, 0.18) 0%, rgba(10, 10, 12, 0.95) 75%), var(--bg-dark);
-}
-
-.servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-}
-
-.servicio-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 35px 20px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    transition: 0.3s;
-}
-
-.servicio-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(255, 59, 0, 0.4);
-}
-
-.servicio-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 59, 0, 0.15);
-    color: var(--fire-red);
-    font-size: 1.5rem;
-}
-
-.servicio-card h3 {
-    font-size: 1.15rem;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.servicio-card p {
-    color: var(--text-gray);
-    font-size: 0.92rem;
-}
-
 /* --- SECCIÓN NOS ELIGEN --- */
 .bg-section-destacados {
     background: url('reviews-bg.jpg') no-repeat center center/cover;
@@ -314,37 +264,9 @@ section {
 
 .destacados-layout {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
-}
-
-.destacado-stat {
-    background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 40px 35px;
-    text-align: center;
-    min-width: 220px;
-}
-
-.destacado-stat .num {
-    font-size: 3rem;
-    font-weight: 900;
-    background: linear-gradient(45deg, var(--fire-red), var(--fire-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.destacado-stat .stars-big {
-    color: #ffc107;
-    font-size: 1.3rem;
-    margin: 8px 0;
-}
-
-.destacado-stat p {
-    color: var(--text-gray);
-    font-size: 0.92rem;
 }
 
 .destacado-list {
@@ -375,9 +297,104 @@ section {
     margin-top: 2px;
 }
 
+.destacados-media { width: 100%; }
+
+.galeria-carousel { position: relative; max-width: 480px; margin: 0 auto; }
+
+.galeria-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border-radius: 14px;
+}
+
+.galeria-track::-webkit-scrollbar { display: none; }
+
+.galeria-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+.galeria-slide video, .galeria-slide img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 14px;
+    background: #000;
+    display: block;
+}
+
+.galeria-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 14px;
+    background: var(--card-bg);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--fire-red);
+}
+
+.galeria-placeholder i { font-size: 2.4rem; }
+
+.galeria-placeholder span {
+    color: var(--text-gray);
+    font-size: 0.88rem;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.galeria-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: var(--card-bg);
+    color: #fff;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s;
+    z-index: 2;
+}
+
+.galeria-arrow:hover { background: var(--fire-red); }
+.galeria-arrow.prev { left: -1.2rem; }
+.galeria-arrow.next { right: -1.2rem; }
+
+.galeria-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+}
+
+.galeria-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background 0.2s;
+}
+
+.galeria-dots span.active { background: var(--fire-red); }
+
 @media (max-width: 768px) {
     .destacados-layout { grid-template-columns: 1fr; gap: 35px; }
-    .destacado-stat { margin: 0 auto; }
+    .galeria-arrow.prev { left: 0.3rem; }
+    .galeria-arrow.next { right: 0.3rem; }
 }
 
 /* --- SECCIÓN OPINIONES --- */
