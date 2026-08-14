@@ -69,6 +69,13 @@ nav {
     text-transform: uppercase;
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin-left: auto;
+}
+
 .nav-links {
     display: flex;
     list-style: none;
@@ -76,9 +83,12 @@ nav {
 }
 
 .nav-links a {
-    color: var(--text-light);
+    color: #9aa0a8;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
     transition: 0.3s;
 }
 
