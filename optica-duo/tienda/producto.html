@@ -32,7 +32,7 @@
 
   /* NAV (igual que la tienda) */
   nav{position:fixed;top:0;left:0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);box-shadow:0 2px 16px rgba(0,0,0,.08);}
-  .brand{display:flex;align-items:center;gap:.4rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);}
+  .brand{display:flex;align-items:center;gap:.4rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);white-space:nowrap;}
   .brand span{color:var(--gold);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.9rem;}
@@ -53,7 +53,7 @@
   .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
 
   /* BREADCRUMB */
-  .crumb{margin-top:64px;background:var(--bg2);border-bottom:1px solid var(--border);}
+  .crumb{margin-top:68px;background:var(--bg2);border-bottom:1px solid var(--border);}
   .crumb .wrap{padding:1rem 1.5rem;font-size:.85rem;color:var(--text-gray);}
   .crumb a{color:var(--navy);font-weight:600;}
   .crumb .sep{margin:0 .5rem;color:var(--border);}
@@ -130,6 +130,16 @@
     .detalle{grid-template-columns:1fr;gap:1.8rem;padding:1.8rem 0 2.5rem;}
     .info h1{font-size:1.6rem;}
   }
+  @media(max-width:560px){
+    nav{padding:.7rem 1rem;}
+    .brand{font-size:1.3rem;}
+    .nav-right{gap:.7rem;}
+    .nav-cart{padding:.5rem .85rem;}
+    .crumb{margin-top:62px;}
+  }
+  @media(max-width:380px){
+    .nav-cart .cart-txt{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -144,7 +154,7 @@
       <li><a href="../#faqs">Preguntas Frecuentes</a></li>
     </ul>
     <a class="nav-cart" href="./#pedido" aria-label="Ver pedido">
-      <i class="fa-solid fa-bag-shopping"></i> Pedido
+      <i class="fa-solid fa-bag-shopping"></i> <span class="cart-txt">Pedido</span>
       <span class="count" id="cartCount">0</span>
     </a>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>

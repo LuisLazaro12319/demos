@@ -33,7 +33,7 @@
 
   /* NAV */
   nav{position:fixed;top:0;left:0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);box-shadow:0 2px 16px rgba(0,0,0,.08);}
-  .brand{display:flex;align-items:center;gap:.4rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);}
+  .brand{display:flex;align-items:center;gap:.4rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);white-space:nowrap;}
   .brand span{color:var(--gold);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.9rem;}
@@ -54,7 +54,7 @@
   .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
 
   /* PROMO BAR */
-  .promo-bar{margin-top:64px;background:var(--navy);color:#fff;font-size:.82rem;font-weight:600;letter-spacing:.3px;}
+  .promo-bar{margin-top:68px;background:var(--navy);color:#fff;font-size:.82rem;font-weight:600;letter-spacing:.3px;}
   .promo-bar .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 2rem;padding:.6rem 1.5rem;text-align:center;}
   .promo-bar b{color:var(--gold);}
 
@@ -167,7 +167,7 @@
 
   @media(max-width:980px){
     .shop{grid-template-columns:1fr;gap:1.5rem;}
-    .sidebar{position:sticky;top:64px;z-index:50;background:#fff;}
+    .sidebar{position:sticky;top:68px;z-index:50;background:#fff;}
     .cat-list{display:flex;overflow-x:auto;border-radius:10px;margin-bottom:1rem;}
     .cat-list button{border-top:none;border-left:1px solid var(--border);white-space:nowrap;}
     .cat-list button:first-child{border-left:none;}
@@ -182,11 +182,20 @@
     .burger{display:flex;}
   }
   @media(max-width:560px){
+    nav{padding:.7rem 1rem;}
+    .brand{font-size:1.3rem;}
+    .nav-right{gap:.7rem;}
+    .nav-cart{padding:.5rem .85rem;}
+    .promo-bar{margin-top:62px;}
+    .sidebar{top:62px;}
     .grid{grid-template-columns:repeat(2,1fr);gap:.9rem;}
     .card-body{padding:.8rem .8rem 1rem;}
     .price-now{font-size:1.1rem;}
     .page-hero h1{font-size:1.8rem;}
     .promo-bar .wrap{gap:.4rem 1.2rem;font-size:.74rem;}
+  }
+  @media(max-width:380px){
+    .nav-cart .cart-txt{display:none;}
   }
 </style>
 </head>
@@ -202,7 +211,7 @@
       <li><a href="../#faqs">Preguntas Frecuentes</a></li>
     </ul>
     <button class="nav-cart" id="cartBtn" aria-label="Ver carrito">
-      <i class="fa-solid fa-bag-shopping"></i> Pedido
+      <i class="fa-solid fa-bag-shopping"></i> <span class="cart-txt">Pedido</span>
       <span class="count" id="cartCount">0</span>
     </button>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
