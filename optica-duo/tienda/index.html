@@ -81,7 +81,7 @@
   .side-card>i{font-size:1.6rem;color:var(--gold);margin-bottom:.6rem;}
   .side-card h4{font-size:1rem;margin-bottom:.4rem;}
   .side-card p{font-size:.83rem;color:#c3ccda;margin-bottom:1rem;}
-  .side-card a{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold);color:#fff;padding:.55rem 1rem;border-radius:7px;font-size:.82rem;font-weight:700;}
+  .side-card a{display:flex;width:100%;align-items:center;justify-content:center;gap:.5rem;background:var(--gold);color:#fff;padding:.7rem 1rem;border-radius:7px;font-size:.82rem;font-weight:700;}
 
   /* TOOLBAR */
   .toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem;}
@@ -159,6 +159,8 @@
   .social-btn.instagram:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
   .social-btn.whatsapp:hover{background:#25d366;border-color:transparent;}
   .footer-tel{font-size:.85rem;color:#b8c0cc;display:block;}
+  .footer-email{display:inline-flex;align-items:center;gap:.5rem;margin-top:.9rem;padding:.55rem 1rem;border:1px solid rgba(255,255,255,.25);border-radius:8px;font-size:.85rem;font-weight:600;color:#fff;transition:.2s;}
+  .footer-email:hover{background:var(--gold);border-color:var(--gold);color:#fff;}
   footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;text-align:center;color:#9aa4b2;}
 
   .float-wa{position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(0,0,0,.25);z-index:999;transition:.3s;color:#fff;font-size:1.6rem;}
@@ -303,6 +305,7 @@
         </div>
         <span class="footer-tel">Pres. Quintana 138, Lanús Oeste</span>
         <span class="footer-tel">011 4225-2837</span>
+        <a class="footer-email" href="mailto:optica_duo@live.com.ar"><i class="fa-regular fa-envelope"></i> optica_duo@live.com.ar</a>
       </div>
     </div>
     <p class="fine">© 2026 Óptica Duo · Lanús Oeste, Buenos Aires · Productos y precios de ejemplo (demo)</p>
@@ -323,6 +326,7 @@ const CATS = [
   { id:"ofertas",   nombre:"🔥 Ofertas" },
   { id:"receta",    nombre:"Anteojos de receta" },
   { id:"sol",       nombre:"Anteojos de sol" },
+  { id:"cristales", nombre:"Cristales" },
   { id:"contacto",  nombre:"Lentes de contacto" },
   { id:"ninos",     nombre:"Anteojos para niños" },
   { id:"accesorios",nombre:"Accesorios" },
@@ -339,6 +343,10 @@ const PRODUCTOS = [
   { id:"sol-wayf",    cat:"sol",        nombre:"Anteojo de Sol Modelo Wave",    precio:43000 },
   { id:"sol-deport",  cat:"sol",        nombre:"Anteojo de Sol Deportivo",      precio:58000 },
   { id:"sol-cateye",  cat:"sol",        nombre:"Anteojo de Sol Cat Eye",        precio:49000, antes:62000 },
+  { id:"cr-monofocal",cat:"cristales",  nombre:"Cristales Monofocales AR",      precio:38000 },
+  { id:"cr-multifocal",cat:"cristales", nombre:"Cristales Multifocales",        precio:95000, destacado:true },
+  { id:"cr-blue",     cat:"cristales",  nombre:"Cristales Filtro Luz Azul",     precio:45000, antes:55000 },
+  { id:"cr-foto",     cat:"cristales",  nombre:"Cristales Fotocromáticos",      precio:72000 },
   { id:"lc-diarias",  cat:"contacto",   nombre:"Lentes de Contacto Diarias x30",precio:36000, destacado:true },
   { id:"lc-mensual",  cat:"contacto",   nombre:"Lentes de Contacto Mensuales x6",precio:41000 },
   { id:"lc-astig",    cat:"contacto",   nombre:"Lentes de Contacto Astigmatismo",precio:52000 },
@@ -365,10 +373,12 @@ function media(p){
 /* ====== PLACEHOLDERS SVG POR CATEGORÍA ====== */
 /* Los productos sin foto muestran una silueta según su categoría. */
 function svgFor(cat){
-  const bgs = {receta:"#eef2f8", sol:"#f3ecdd", contacto:"#eaf3ef", ninos:"#f7edf0", accesorios:"#eef0f3"};
+  const bgs = {receta:"#eef2f8", sol:"#f3ecdd", cristales:"#eaf0f8", contacto:"#eaf3ef", ninos:"#f7edf0", accesorios:"#eef0f3"};
   const bg = bgs[cat] || "#eef2f8";
   let shape = "";
-  if(cat==="sol"){
+  if(cat==="cristales"){
+    shape = `<g fill="none" stroke="#0f4c81" stroke-width="7"><ellipse cx="100" cy="100" rx="50" ry="62"/></g><path d="M82 66 Q70 100 84 134" fill="none" stroke="#0f4c81" stroke-width="5" opacity=".45"/>`;
+  } else if(cat==="sol"){
     shape = `<g fill="#1b2a4a"><path d="M40 92c0-13 10-22 24-22s24 9 24 22-10 22-24 22-24-9-24-22z"/><path d="M112 92c0-13 10-22 24-22s24 9 24 22-10 22-24 22-24-9-24-22z"/><rect x="86" y="86" width="28" height="8" rx="4"/><rect x="18" y="72" width="14" height="7" rx="3.5"/><rect x="168" y="72" width="14" height="7" rx="3.5"/></g>`;
   } else if(cat==="contacto"){
     shape = `<g fill="none" stroke="#1b2a4a" stroke-width="6"><circle cx="100" cy="100" r="46"/><circle cx="100" cy="100" r="22"/></g><circle cx="118" cy="82" r="7" fill="#fff"/>`;
