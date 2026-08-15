@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio 6 de Agosto</title>
+    <meta name="description" content="Gimnasio 6 de Agosto - Calle 4 y La Paz, Olimpo. Musculación, boxeo, zumba, aeróbicos, crossfit y funcional.">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <!-- Vinculación con el archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css?v=1">
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="logo-text">6 de<span> Agosto</span></span>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Qué Ofrecemos</a></li>
+                <li><a href="#ubicacion">Vení a Entrenar</a></li>
+            </ul>
+            <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <ul class="mobile-menu" id="mobileMenu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Qué Ofrecemos</a></li>
+            <li><a href="#ubicacion">Vení a Entrenar</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Gimnasio 6 de Agosto</h1>
+            <p>Musculación, boxeo, zumba, aeróbicos, crossfit y funcional. Todo en un mismo lugar, en Olimpo.</p>
+            <a href="#ubicacion" class="btn">Vení a Entrenar</a>
+        </div>
+    </header>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros">
+        <div class="section-content">
+            <h2 class="section-title">Nosotros</h2>
+            <div class="nosotros-layout">
+                <div class="nosotros-box">
+                    <p>Gimnasio 6 de Agosto es un espacio pensado para entrenar de la forma que más te guste, sin tener que anotarte en tres lugares distintos: musculación, boxeo, zumba, aeróbicos, crossfit y funcional, todo bajo el mismo techo, en el corazón de Olimpo.</p>
+                    <p>Ya sea que busques levantar fierros, soltar los puños en el ring o sumarte a una clase grupal, acá encontrás variedad real y un ambiente que acompaña, todos los días de la semana.</p>
+                </div>
+                <div class="coach-card">
+                    <div class="coach-photo">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <span class="coach-name">Profe ..........</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUÉ OFRECEMOS -->
+    <section id="servicios" class="bg-section-destacados">
+        <div class="section-overlay"></div>
+        <div class="section-content">
+            <h2 class="section-title">Qué Ofrecemos</h2>
+            <div class="destacados-layout">
+                <div class="destacados-content">
+                    <div class="horarios-mini">
+                        <div class="horarios-mini-item">
+                            <i class="fa-solid fa-sun"></i>
+                            <div><strong>Turno mañana</strong><span>07:00 a 12:00 hs</span></div>
+                        </div>
+                        <div class="horarios-mini-item">
+                            <i class="fa-solid fa-moon"></i>
+                            <div><strong>Turno tarde</strong><span>14:00 a 22:00 hs</span></div>
+                        </div>
+                    </div>
+                    <ul class="destacado-list">
+                        <li><span class="chk">✓</span> Musculación</li>
+                        <li><span class="chk">✓</span> Boxeo</li>
+                        <li><span class="chk">✓</span> Zumba</li>
+                        <li><span class="chk">✓</span> Aeróbicos</li>
+                        <li><span class="chk">✓</span> Crossfit</li>
+                        <li><span class="chk">✓</span> Funcional</li>
+                    </ul>
+                </div>
+                <div class="destacados-media">
+                    <div class="galeria-carousel">
+                        <button class="galeria-arrow prev" id="galeriaPrev" aria-label="Anterior">&#10094;</button>
+                        <div class="galeria-track" id="galeriaTrack">
+                            <div class="galeria-slide">
+                                <div class="galeria-placeholder"><i class="fa-solid fa-photo-film"></i><span>Foto/video próximamente</span></div>
+                            </div>
+                            <div class="galeria-slide">
+                                <div class="galeria-placeholder"><i class="fa-solid fa-photo-film"></i><span>Foto/video próximamente</span></div>
+                            </div>
+                            <div class="galeria-slide">
+                                <div class="galeria-placeholder"><i class="fa-solid fa-photo-film"></i><span>Foto/video próximamente</span></div>
+                            </div>
+                        </div>
+                        <button class="galeria-arrow next" id="galeriaNext" aria-label="Siguiente">&#10095;</button>
+                    </div>
+                    <div class="galeria-dots" id="galeriaDots">
+                        <span class="active"></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: VENÍ A ENTRENAR -->
+    <section id="ubicacion" class="contact-section">
+        <div class="section-content">
+            <span class="sub-title">CONTACTO</span>
+            <h2 class="section-title main-heading">VENÍ A ENTRENAR</h2>
+
+            <div class="contacto-grid">
+                <div>
+                    <div class="info-card">
+                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div><h4>Dirección</h4><p>Calle 4 y La Paz, Olimpo</p></div>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><i class="fa-brands fa-tiktok"></i></div>
+                        <div><h4>Contacto</h4><a href="https://www.tiktok.com/@gimnasio6deagostoo" target="_blank" rel="noopener">@gimnasio6deagostoo</a></div>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><i class="fa-regular fa-clock"></i></div>
+                        <div><h4>Horarios</h4><p>07:00 a 12:00 hs<br>14:00 a 22:00 hs</p></div>
+                    </div>
+                </div>
+                <div class="map-wrap">
+                    <iframe
+                        src="https://www.google.com/maps?q=Calle%204%20y%20La%20Paz%2C%20Olimpo%2C%20Buenos%20Aires&output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col about">
+                <div class="footer-brand">6 de<span> Agosto</span></div>
+                <p>Gimnasio en Olimpo. Musculación, boxeo, zumba, aeróbicos, crossfit y funcional.</p>
+            </div>
+            <div class="footer-col footer-addr">
+                <h4>Ubicación</h4>
+                <p>Calle 4 y La Paz<br>Olimpo</p>
+                <p>07 a 12 hs<br>14 a 22 hs</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <div class="footer-nav">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#servicios">Qué Ofrecemos</a>
+                    <a href="#ubicacion">Vení a Entrenar</a>
+                </div>
+            </div>
+            <div class="footer-col contact">
+                <h4>Seguinos en Nuestras Redes</h4>
+                <div class="footer-socials">
+                    <a href="https://www.tiktok.com/@gimnasio6deagostoo" target="_blank" rel="noopener" class="social-btn tiktok" title="TikTok">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </div>
+                <a class="footer-tel" href="https://www.tiktok.com/@gimnasio6deagostoo" target="_blank" rel="noopener">TikTok: @gimnasio6deagostoo</a>
+            </div>
+        </div>
+        <p class="fine">© 2026 Gimnasio 6 de Agosto · Olimpo, Buenos Aires</p>
+    </footer>
+
+    <!-- Botón flotante de TikTok -->
+    <a href="https://www.tiktok.com/@gimnasio6deagostoo" class="float-whatsapp" target="_blank" rel="noopener" title="Seguinos en TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+    </a>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => {
+            const isOpen = burger.classList.toggle('open');
+            mobileMenu.classList.toggle('open', isOpen);
+            burger.setAttribute('aria-expanded', isOpen);
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            burger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+        }));
+
+        const galeriaTrack = document.getElementById('galeriaTrack');
+        const galeriaSlides = galeriaTrack.querySelectorAll('.galeria-slide');
+        const galeriaDots = document.querySelectorAll('#galeriaDots span');
+        const goToSlide = (i) => {
+            const idx = Math.max(0, Math.min(galeriaSlides.length - 1, i));
+            galeriaTrack.scrollTo({ left: galeriaSlides[idx].offsetLeft, behavior: 'smooth' });
+        };
+        document.getElementById('galeriaPrev').addEventListener('click', () => {
+            goToSlide(Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth) - 1);
+        });
+        document.getElementById('galeriaNext').addEventListener('click', () => {
+            goToSlide(Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth) + 1);
+        });
+        let galeriaScrollTimer;
+        galeriaTrack.addEventListener('scroll', () => {
+            clearTimeout(galeriaScrollTimer);
+            galeriaScrollTimer = setTimeout(() => {
+                const active = Math.round(galeriaTrack.scrollLeft / galeriaTrack.clientWidth);
+                galeriaDots.forEach((d, i) => d.classList.toggle('active', i === active));
+            }, 100);
+        });
+    </script>
+</body>
+</html>
