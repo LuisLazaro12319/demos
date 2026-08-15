@@ -95,15 +95,13 @@
   .card-media{position:relative;aspect-ratio:1/1;overflow:hidden;}
   .card-media svg{width:100%;height:100%;}
   .badge{position:absolute;top:.7rem;left:.7rem;background:var(--gold);color:var(--navy-dark);font-size:.7rem;font-weight:800;padding:.28rem .6rem;border-radius:20px;letter-spacing:.3px;}
-  .badge.out{background:#333;color:#fff;left:auto;right:.7rem;}
+  .badge.sale{background:#d6483b;color:#fff;font-size:.78rem;}
   .card-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;flex:1;}
   .card-cat{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);margin-bottom:.35rem;}
   .card-name{font-size:.98rem;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:.7rem;font-family:'Poppins',sans-serif;}
   .price-row{display:flex;align-items:baseline;gap:.5rem;margin-top:auto;}
-  .price-old{font-size:.82rem;color:var(--text-gray);text-decoration:line-through;}
+  .price-old{font-size:.85rem;color:var(--text-gray);text-decoration:line-through;}
   .price-now{font-size:1.25rem;font-weight:800;color:var(--navy);font-family:'Poppins',sans-serif;}
-  .price-transf{font-size:.8rem;color:var(--green);font-weight:700;margin-top:.25rem;}
-  .price-cuotas{font-size:.76rem;color:var(--text-gray);margin-top:.15rem;}
   .add-btn{margin-top:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;background:var(--navy);color:#fff;border:none;padding:.75rem;border-radius:9px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;}
   .add-btn:hover{background:var(--navy-dark);}
   .add-btn.added{background:var(--green);}
@@ -136,8 +134,7 @@
   .drawer-foot{border-top:1px solid var(--border);padding:1.3rem 1.4rem;}
   .drawer-foot .tot{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem;}
   .drawer-foot .tot .lbl{font-size:.9rem;color:var(--text-gray);}
-  .drawer-foot .tot .val{font-size:1.5rem;font-weight:800;color:var(--navy);font-family:'Poppins',sans-serif;}
-  .drawer-foot .transf-note{font-size:.8rem;color:var(--green);font-weight:700;margin-bottom:1rem;}
+  .drawer-foot .tot .val{font-size:1.5rem;font-weight:800;color:var(--navy);font-family:'Poppins',sans-serif;margin-bottom:1rem;}
   .checkout{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;background:#25d366;color:#fff;border:none;padding:.95rem;border-radius:10px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit;}
   .checkout:hover{background:#1eb857;}
   .checkout i{font-size:1.2rem;}
@@ -215,9 +212,9 @@
 
 <div class="promo-bar">
   <div class="wrap">
-    <span>💳 Hasta <b>6 cuotas sin interés</b></span>
-    <span>🏦 <b>15% OFF</b> pagando por transferencia</span>
-    <span>🚚 <b>Envíos</b> a todo el país</span>
+    <span>👓 <b>Reservá online</b> y retiralo en el local</span>
+    <span>📄 Enviános tu <b>receta</b> por WhatsApp</span>
+    <span>🔥 <b>Productos en descuento</b></span>
   </div>
 </div>
 
@@ -269,7 +266,6 @@
   <div class="drawer-body" id="cartBody"></div>
   <div class="drawer-foot" id="cartFoot" style="display:none;">
     <div class="tot"><span class="lbl">Total</span><span class="val" id="cartTotal">$0</span></div>
-    <div class="transf-note" id="transfNote"></div>
     <button class="checkout" id="checkoutBtn"><i class="fa-brands fa-whatsapp"></i> Hacer el pedido por WhatsApp</button>
     <p class="fine">Se abre WhatsApp con tu pedido ya escrito. Coordinás pago y entrega por el chat.</p>
   </div>
@@ -316,11 +312,11 @@
 <script>
 /* ====== CONFIG ====== */
 const WA = "5491128835374";
-const TRANSFER_OFF = 0.15; // 15% OFF transferencia
 
 /* ====== CATEGORÍAS ====== */
 const CATS = [
   { id:"todos",     nombre:"Todos los productos" },
+  { id:"ofertas",   nombre:"🔥 Ofertas" },
   { id:"receta",    nombre:"Anteojos de receta" },
   { id:"sol",       nombre:"Anteojos de sol" },
   { id:"contacto",  nombre:"Lentes de contacto" },
@@ -329,23 +325,24 @@ const CATS = [
 ];
 
 /* ====== PRODUCTOS (DEMO: modelos y precios de ejemplo) ====== */
+/* "antes" = precio anterior; si está, el producto está en oferta. */
 const PRODUCTOS = [
   { id:"rx-milano",   cat:"receta",     nombre:"Armazón Milano Acetato",        precio:52000, destacado:true },
-  { id:"rx-titanio",  cat:"receta",     nombre:"Armazón Titanio Ultraliviano",  precio:68000, destacado:true },
+  { id:"rx-titanio",  cat:"receta",     nombre:"Armazón Titanio Ultraliviano",  precio:68000, antes:82000, destacado:true },
   { id:"rx-metal",    cat:"receta",     nombre:"Armazón Metal Redondo",         precio:44000 },
   { id:"rx-clasico",  cat:"receta",     nombre:"Armazón Clásico Rectangular",   precio:39000 },
-  { id:"sol-aviador", cat:"sol",        nombre:"Anteojo de Sol Aviador",        precio:47000, destacado:true },
+  { id:"sol-aviador", cat:"sol",        nombre:"Anteojo de Sol Aviador",        precio:47000, antes:59000, destacado:true },
   { id:"sol-wayf",    cat:"sol",        nombre:"Anteojo de Sol Modelo Wave",    precio:43000 },
   { id:"sol-deport",  cat:"sol",        nombre:"Anteojo de Sol Deportivo",      precio:58000 },
-  { id:"sol-cateye",  cat:"sol",        nombre:"Anteojo de Sol Cat Eye",        precio:49000 },
+  { id:"sol-cateye",  cat:"sol",        nombre:"Anteojo de Sol Cat Eye",        precio:49000, antes:62000 },
   { id:"lc-diarias",  cat:"contacto",   nombre:"Lentes de Contacto Diarias x30",precio:36000, destacado:true },
   { id:"lc-mensual",  cat:"contacto",   nombre:"Lentes de Contacto Mensuales x6",precio:41000 },
   { id:"lc-astig",    cat:"contacto",   nombre:"Lentes de Contacto Astigmatismo",precio:52000 },
   { id:"ni-flex",     cat:"ninos",      nombre:"Armazón Infantil Flexible",     precio:34000 },
-  { id:"ni-color",    cat:"ninos",      nombre:"Armazón Infantil Colores",      precio:31000 },
+  { id:"ni-color",    cat:"ninos",      nombre:"Armazón Infantil Colores",      precio:31000, antes:38000 },
   { id:"ac-liquido",  cat:"accesorios", nombre:"Líquido para Lentes de Contacto 360ml", precio:12000 },
   { id:"ac-estuche",  cat:"accesorios", nombre:"Estuche Rígido + Paño",         precio:8500 },
-  { id:"ac-cordon",   cat:"accesorios", nombre:"Cordón / Cadena para Anteojos", precio:6500 },
+  { id:"ac-cordon",   cat:"accesorios", nombre:"Cordón / Cadena para Anteojos", precio:6500, antes:9000 },
 ];
 
 /* ====== PLACEHOLDERS SVG POR CATEGORÍA ====== */
@@ -370,8 +367,6 @@ function svgFor(cat){
 
 /* ====== FORMATO ====== */
 const fmt = n => "$" + n.toLocaleString("es-AR");
-const cuota = n => "$" + Math.round(n/6).toLocaleString("es-AR");
-const transf = n => Math.round(n*(1-TRANSFER_OFF));
 
 /* ====== ESTADO ====== */
 let filtro = "todos";
@@ -385,7 +380,9 @@ const getProd = id => PRODUCTOS.find(p=>p.id===id);
 function renderCats(){
   const cont = document.getElementById("catList");
   cont.innerHTML = CATS.map(c=>{
-    const n = c.id==="todos" ? PRODUCTOS.length : PRODUCTOS.filter(p=>p.cat===c.id).length;
+    const n = c.id==="todos" ? PRODUCTOS.length
+            : c.id==="ofertas" ? PRODUCTOS.filter(p=>p.antes).length
+            : PRODUCTOS.filter(p=>p.cat===c.id).length;
     return `<button data-cat="${c.id}" class="${c.id===filtro?'active':''}">${c.nombre} <span class="n">${n}</span></button>`;
   }).join("");
   cont.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
@@ -395,7 +392,9 @@ function renderCats(){
 
 /* ====== GRID ====== */
 function renderGrid(){
-  let items = filtro==="todos" ? [...PRODUCTOS] : PRODUCTOS.filter(p=>p.cat===filtro);
+  let items = filtro==="todos"   ? [...PRODUCTOS]
+            : filtro==="ofertas" ? PRODUCTOS.filter(p=>p.antes)
+            : PRODUCTOS.filter(p=>p.cat===filtro);
   if(orden==="precio-asc") items.sort((a,b)=>a.precio-b.precio);
   else if(orden==="precio-desc") items.sort((a,b)=>b.precio-a.precio);
   else if(orden==="nombre") items.sort((a,b)=>a.nombre.localeCompare(b.nombre));
@@ -407,24 +406,25 @@ function renderGrid(){
   const grid = document.getElementById("grid");
   if(!items.length){ grid.innerHTML = `<p class="empty">No hay productos en esta categoría todavía.</p>`; return; }
 
-  grid.innerHTML = items.map(p=>`
+  grid.innerHTML = items.map(p=>{
+    const off = p.antes ? Math.round((p.antes-p.precio)/p.antes*100) : 0;
+    return `
     <article class="card">
       <div class="card-media">
-        ${p.destacado?'<span class="badge">Destacado</span>':''}
+        ${p.antes?`<span class="badge sale">-${off}%</span>`:(p.destacado?'<span class="badge">Destacado</span>':'')}
         ${svgFor(p.cat)}
       </div>
       <div class="card-body">
         <div class="card-cat">${CATS.find(c=>c.id===p.cat).nombre}</div>
         <div class="card-name">${p.nombre}</div>
         <div class="price-row">
+          ${p.antes?`<span class="price-old">${fmt(p.antes)}</span>`:''}
           <span class="price-now">${fmt(p.precio)}</span>
         </div>
-        <div class="price-transf">${fmt(transf(p.precio))} por transferencia</div>
-        <div class="price-cuotas">6 cuotas sin interés de ${cuota(p.precio)}</div>
         <button class="add-btn" data-add="${p.id}"><i class="fa-solid fa-plus"></i> Agregar al pedido</button>
       </div>
-    </article>
-  `).join("");
+    </article>`;
+  }).join("");
 
   grid.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click",()=>{
     addToCart(b.dataset.add);
@@ -471,9 +471,7 @@ function renderCart(){
     </div>`;
   }).join("");
 
-  const total = cartTotal();
-  document.getElementById("cartTotal").textContent = fmt(total);
-  document.getElementById("transfNote").textContent = `${fmt(transf(total))} pagando por transferencia (15% OFF)`;
+  document.getElementById("cartTotal").textContent = fmt(cartTotal());
   foot.style.display = "block";
 
   body.querySelectorAll("[data-inc]").forEach(b=>b.onclick=()=>setQty(b.dataset.inc, cart[b.dataset.inc]+1));
@@ -490,10 +488,8 @@ function checkout(){
     const p = getProd(id), q = cart[id];
     msg += `• ${p.nombre}\n  ${q} x ${fmt(p.precio)} = ${fmt(p.precio*q)}\n\n`;
   });
-  const total = cartTotal();
-  msg += `Total: ${fmt(total)}\n`;
-  msg += `Por transferencia (15% OFF): ${fmt(transf(total))}\n\n`;
-  msg += "Quedo atento para coordinar pago y entrega.";
+  msg += `Total: ${fmt(cartTotal())}\n\n`;
+  msg += "¿Me confirman disponibilidad? Coordinamos por acá cuándo paso a retirarlo.";
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
