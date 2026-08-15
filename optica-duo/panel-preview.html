@@ -20,6 +20,7 @@
     --text:#13233a;
     --text-gray:#5a6b7e;
     --border:#d9e5f1;
+    --star:#f5b301;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
@@ -27,7 +28,7 @@
   a{text-decoration:none;color:inherit;}
   img{max-width:100%;display:block;}
 
-  .preview-ribbon{background:var(--gold);color:var(--navy-dark);text-align:center;font-size:.85rem;font-weight:700;padding:.7rem 1rem;position:sticky;top:0;z-index:200;}
+  .preview-ribbon{background:var(--gold);color:#fff;text-align:center;font-size:.85rem;font-weight:700;padding:.7rem 1rem;position:sticky;top:0;z-index:200;}
   .preview-ribbon i{margin-right:.4rem;}
 
   .shell{display:flex;min-height:100vh;}
@@ -37,17 +38,21 @@
   .sidebar .brand{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:800;margin-bottom:2.2rem;}
   .sidebar .brand span{color:var(--gold);}
   .side-nav{display:flex;flex-direction:column;gap:.3rem;flex:1;}
-  .side-nav a{display:flex;align-items:center;gap:.8rem;padding:.75rem .9rem;border-radius:8px;font-size:.9rem;font-weight:600;color:#c3cad8;}
-  .side-nav a i{width:18px;text-align:center;}
-  .side-nav a.active{background:rgba(201,151,77,.16);color:var(--gold);}
+  .side-nav button{display:flex;align-items:center;gap:.8rem;padding:.75rem .9rem;border-radius:8px;font-size:.9rem;font-weight:600;color:#c3cad8;background:none;border:none;cursor:pointer;font-family:inherit;text-align:left;width:100%;}
+  .side-nav button i{width:18px;text-align:center;}
+  .side-nav button.active{background:rgba(43,143,230,.18);color:#fff;}
+  .side-nav button:hover{color:#fff;}
   .sidebar .plan-note{margin-top:auto;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem;font-size:.78rem;color:#c3cad8;line-height:1.5;}
   .sidebar .plan-note b{color:#fff;}
 
   /* MAIN */
-  .main{flex:1;padding:2rem 2.4rem 3rem;}
+  .main{flex:1;padding:2rem 2.4rem 3rem;max-width:100%;overflow-x:hidden;}
   .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
   .topbar h1{font-size:1.5rem;}
-  .mode-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold-light);color:#8a6a2f;font-size:.75rem;font-weight:700;padding:.35rem .8rem;border-radius:20px;}
+  .mode-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold-light);color:var(--navy);font-size:.75rem;font-weight:700;padding:.35rem .8rem;border-radius:20px;}
+
+  .view{display:none;}
+  .view.active{display:block;}
 
   .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2.2rem;}
   .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;}
@@ -56,8 +61,9 @@
   .stat-card .ex{font-size:.72rem;color:var(--text-gray);margin-top:.3rem;}
 
   .panel-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.6rem 1.7rem;margin-bottom:1.6rem;}
-  .panel-card h2{font-size:1.05rem;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:space-between;}
+  .panel-card h2{font-size:1.05rem;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
   .panel-card h2 small{font-size:.75rem;font-weight:600;color:var(--text-gray);}
+  .add-top{display:inline-flex;align-items:center;gap:.4rem;background:var(--navy);color:#fff;font-size:.8rem;font-weight:700;padding:.5rem .9rem;border-radius:7px;cursor:not-allowed;opacity:.85;border:none;}
 
   table{width:100%;border-collapse:collapse;}
   th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-gray);padding:.6rem .5rem;border-bottom:1px solid var(--border);}
@@ -66,130 +72,385 @@
   .cat-thumb{display:flex;align-items:center;gap:.7rem;}
   .cat-thumb .ph{width:38px;height:38px;border-radius:8px;background:var(--gold-light);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex:0 0 38px;overflow:hidden;}
   .cat-thumb .ph img{width:100%;height:100%;object-fit:cover;}
-  .status-chip{display:inline-block;background:#e6f6ec;color:#1c8a4d;font-size:.72rem;font-weight:700;padding:.25rem .6rem;border-radius:12px;}
-  .row-actions{display:flex;gap:.5rem;}
-  .mini-btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;padding:.4rem .7rem;border-radius:6px;border:1px solid var(--border);background:#fbfbfc;color:var(--text-gray);cursor:not-allowed;opacity:.7;}
+  .price-cell{font-weight:700;color:var(--navy);white-space:nowrap;}
+  .price-cell s{color:var(--text-gray);font-weight:400;font-size:.8rem;margin-right:.3rem;}
+  .status-chip{display:inline-block;background:#e6f6ec;color:#1c8a4d;font-size:.72rem;font-weight:700;padding:.25rem .6rem;border-radius:12px;white-space:nowrap;}
+  .status-chip.off{background:#fdeceb;color:#c0392b;}
+  .status-chip.low{background:#fef4e6;color:#b9770e;}
+  .row-actions{display:flex;gap:.4rem;flex-wrap:wrap;}
+  .mini-btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;padding:.4rem .7rem;border-radius:6px;border:1px solid var(--border);background:#fbfbfc;color:var(--text-gray);cursor:not-allowed;}
+  .mini-btn.del{color:#c0392b;border-color:#f3d0cc;background:#fdf3f2;}
 
   .field-group{margin-bottom:1.1rem;}
   .field-group label{display:block;font-size:.8rem;font-weight:600;color:var(--text-gray);margin-bottom:.4rem;}
-  .field-group input,.field-group textarea{width:100%;padding:.7rem .85rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.88rem;color:var(--text);background:#fbfbfc;cursor:not-allowed;}
-  .field-actions{display:flex;align-items:center;gap:.9rem;margin-top:.8rem;}
-  .btn-disabled{background:var(--border);color:#9aa3b0;font-weight:700;font-size:.85rem;padding:.7rem 1.4rem;border-radius:8px;cursor:not-allowed;border:none;}
+  .field-group input,.field-group textarea,.field-group select{width:100%;padding:.7rem .85rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.88rem;color:var(--text);background:#fbfbfc;cursor:not-allowed;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 1.2rem;}
+  .form-grid .full{grid-column:1/-1;}
+  .dropzone{display:flex;align-items:center;gap:1rem;border:1.5px dashed var(--border);border-radius:10px;padding:1rem 1.1rem;background:#fbfbfc;color:var(--text-gray);font-size:.83rem;}
+  .dropzone .thumb{width:66px;height:66px;flex:0 0 66px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--gold-light);}
+  .dropzone .thumb img{width:100%;height:100%;object-fit:cover;}
+  .dropzone .up{display:inline-flex;align-items:center;gap:.4rem;color:var(--navy);font-weight:600;}
+  .field-actions{display:flex;align-items:center;gap:.9rem;margin-top:.4rem;flex-wrap:wrap;}
+  .btn-disabled{background:var(--border);color:#8a95a3;font-weight:700;font-size:.85rem;padding:.7rem 1.4rem;border-radius:8px;cursor:not-allowed;border:none;display:inline-flex;align-items:center;gap:.5rem;}
   .lock-note{font-size:.78rem;color:var(--text-gray);display:flex;align-items:center;gap:.4rem;}
 
-  .cta-card{background:linear-gradient(120deg,var(--navy),var(--navy-dark));color:#fff;border-radius:14px;padding:2rem 2.2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;}
+  /* PROMO ITEMS */
+  .promo-item{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem;}
+  .promo-item .drag{color:var(--border);font-size:1rem;}
+  .promo-item input{flex:1;padding:.65rem .8rem;border:1px solid var(--border);border-radius:8px;background:#fbfbfc;color:var(--text);font-family:inherit;font-size:.86rem;cursor:not-allowed;}
+
+  /* REVIEWS */
+  .review-item{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--border);}
+  .review-item:last-child{border-bottom:none;}
+  .review-item .av{width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:var(--gold-light);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .review-item .body{flex:1;min-width:0;}
+  .review-item .name{font-weight:700;font-size:.9rem;}
+  .review-item .stars{color:var(--star);font-size:.85rem;letter-spacing:1px;margin:.15rem 0 .3rem;}
+  .review-item .txt{font-size:.85rem;color:var(--text-gray);}
+  .review-item .acts{display:flex;flex-direction:column;gap:.4rem;flex:0 0 auto;}
+  .src-note{font-size:.8rem;color:var(--text-gray);background:var(--gold-light);border-radius:8px;padding:.7rem .9rem;margin-bottom:1.2rem;display:flex;gap:.5rem;}
+  .src-note i{color:var(--navy);margin-top:.15rem;}
+
+  .cta-card{background:linear-gradient(120deg,var(--navy),var(--navy-dark));color:#fff;border-radius:14px;padding:2rem 2.2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;margin-top:1.6rem;}
   .cta-card h3{font-size:1.2rem;margin-bottom:.4rem;}
   .cta-card p{font-size:.88rem;color:#c3cad8;}
-  .btn-wa{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--navy-dark);font-weight:700;font-size:.9rem;padding:.9rem 1.6rem;border-radius:8px;white-space:nowrap;}
+  .btn-wa{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:#fff;font-weight:700;font-size:.9rem;padding:.9rem 1.6rem;border-radius:8px;white-space:nowrap;}
   .btn-wa:hover{filter:brightness(1.05);}
+
+  .mobile-tabs{display:none;}
 
   @media(max-width:900px){
     .sidebar{display:none;}
     .stat-grid{grid-template-columns:1fr;}
-    table{display:block;overflow-x:auto;}
+    .form-grid{grid-template-columns:1fr;}
+    table{display:block;overflow-x:auto;white-space:nowrap;}
+    .mobile-tabs{display:flex;gap:.5rem;overflow-x:auto;padding:.8rem 1rem;background:var(--navy-dark);position:sticky;top:41px;z-index:150;}
+    .mobile-tabs button{flex:0 0 auto;background:rgba(255,255,255,.1);color:#fff;border:none;border-radius:20px;padding:.5rem 1rem;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;}
+    .mobile-tabs button.active{background:var(--gold);}
+    .main{padding:1.4rem 1.1rem 2.5rem;}
   }
 </style>
 </head>
 <body>
 
-<div class="preview-ribbon"><i class="fa-solid fa-circle-info"></i>Esto es una demostración visual del panel — la edición en vivo se activa cuando confirmes tu plan con panel de administración.</div>
+<div class="preview-ribbon"><i class="fa-solid fa-circle-info"></i>Vista previa del panel — así lo manejarías vos. La edición en vivo se activa al confirmar tu plan con panel de administración.</div>
+
+<div class="mobile-tabs" id="mtabs"></div>
 
 <div class="shell">
   <aside class="sidebar">
     <div class="brand">Óptica<span> Duo</span></div>
-    <nav class="side-nav">
-      <a href="#" class="active"><i class="fa-solid fa-house"></i> Inicio</a>
-      <a href="#"><i class="fa-solid fa-glasses"></i> Categorías</a>
-      <a href="#"><i class="fa-solid fa-image"></i> Banners y Promos</a>
-      <a href="#"><i class="fa-solid fa-star"></i> Reseñas</a>
-      <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+    <nav class="side-nav" id="sideNav">
+      <button data-view="inicio" class="active"><i class="fa-solid fa-house"></i> Inicio</button>
+      <button data-view="productos"><i class="fa-solid fa-glasses"></i> Productos</button>
+      <button data-view="categorias"><i class="fa-solid fa-layer-group"></i> Categorías</button>
+      <button data-view="banners"><i class="fa-solid fa-image"></i> Banners y Promos</button>
+      <button data-view="resenas"><i class="fa-solid fa-star"></i> Reseñas</button>
+      <button data-view="config"><i class="fa-solid fa-gear"></i> Configuración</button>
     </nav>
-    <div class="plan-note"><b>Modo vista previa.</b> Así se vería tu panel para editar el sitio vos mismo, sin depender de nadie. Se activa junto con tu plan.</div>
+    <div class="plan-note"><b>Modo vista previa.</b> Así se vería tu panel para editar el sitio vos misma, sin depender de nadie. Se activa junto con tu plan.</div>
   </aside>
 
   <main class="main">
     <div class="topbar">
-      <h1>Panel de administración</h1>
+      <h1 id="viewTitle">Panel de administración</h1>
       <span class="mode-badge"><i class="fa-solid fa-eye"></i> Vista previa</span>
     </div>
 
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="lbl">Visitas al sitio</div>
-        <div class="val">128</div>
-        <div class="ex">Ej. últimos 30 días</div>
+    <!-- ============ INICIO ============ -->
+    <section class="view active" id="view-inicio">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="lbl">Visitas al sitio</div>
+          <div class="val">128</div>
+          <div class="ex">Ej. últimos 30 días</div>
+        </div>
+        <div class="stat-card">
+          <div class="lbl">Consultas por WhatsApp</div>
+          <div class="val">34</div>
+          <div class="ex">Ej. últimos 30 días</div>
+        </div>
+        <div class="stat-card">
+          <div class="lbl">Productos publicados</div>
+          <div class="val">20</div>
+          <div class="ex">En 6 categorías</div>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="lbl">Consultas por WhatsApp</div>
-        <div class="val">34</div>
-        <div class="ex">Ej. últimos 30 días</div>
-      </div>
-      <div class="stat-card">
-        <div class="lbl">Categorías publicadas</div>
-        <div class="val">5</div>
-        <div class="ex">Armazones, Sol, Contacto, Niños, Accesorios</div>
-      </div>
-    </div>
 
-    <div class="panel-card">
-      <h2>Categorías <small>Editá nombre, foto y estado de cada una</small></h2>
-      <table>
-        <thead><tr><th>Categoría</th><th>Estado</th><th>Acciones</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="cat-thumb"><div class="ph"><img src="img/armazones.jpg" alt=""></div>Armazones de receta</div></td>
-            <td><span class="status-chip">Publicado</span></td>
-            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
-          </tr>
-          <tr>
-            <td><div class="cat-thumb"><div class="ph"><img src="img/sol.jpg" alt=""></div>Lentes de sol</div></td>
-            <td><span class="status-chip">Publicado</span></td>
-            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
-          </tr>
-          <tr>
-            <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-circle-dot"></i></div>Lentes de contacto</div></td>
-            <td><span class="status-chip">Publicado</span></td>
-            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
-          </tr>
-          <tr>
-            <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-child-reaching"></i></div>Niños</div></td>
-            <td><span class="status-chip">Publicado</span></td>
-            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
-          </tr>
-          <tr>
-            <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-box-open"></i></div>Accesorios y líquidos</div></td>
-            <td><span class="status-chip">Publicado</span></td>
-            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="panel-card">
+        <h2>Resumen <small>Un vistazo rápido de tu sitio</small></h2>
+        <table>
+          <tbody>
+            <tr><td><i class="fa-solid fa-glasses" style="color:var(--navy);margin-right:.6rem;"></i> Productos activos</td><td style="text-align:right;font-weight:700;">20</td></tr>
+            <tr><td><i class="fa-solid fa-tag" style="color:var(--navy);margin-right:.6rem;"></i> Productos en oferta</td><td style="text-align:right;font-weight:700;">6</td></tr>
+            <tr><td><i class="fa-solid fa-box-open" style="color:var(--navy);margin-right:.6rem;"></i> Sin stock</td><td style="text-align:right;font-weight:700;">1</td></tr>
+            <tr><td><i class="fa-solid fa-star" style="color:var(--star);margin-right:.6rem;"></i> Reseñas publicadas</td><td style="text-align:right;font-weight:700;">3</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="panel-card">
-      <h2>Banner principal <small>El texto que se ve al entrar al sitio</small></h2>
-      <div class="field-group">
-        <label>Título</label>
-        <input type="text" value="Tu óptica de confianza en Lanús Oeste" disabled>
+      <div class="cta-card">
+        <div>
+          <h3>¿Te gustaría manejar tu sitio así?</h3>
+          <p>Activamos el panel real para que edites productos, fotos, precios y más, vos misma cuando quieras.</p>
+        </div>
+        <a class="btn-wa" href="https://wa.me/5491156199449?text=Hola!%20Vi%20la%20vista%20previa%20del%20panel%20de%20%C3%93ptica%20Duo%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar</a>
       </div>
-      <div class="field-group">
-        <label>Bajada</label>
-        <textarea rows="2" disabled>Armazones de receta, lentes de sol y lentes de contacto, con asesoramiento personalizado.</textarea>
-      </div>
-      <div class="field-actions">
-        <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Guardar cambios</button>
-        <span class="lock-note"><i class="fa-solid fa-lock"></i> Disponible con tu plan de panel</span>
-      </div>
-    </div>
+    </section>
 
-    <div class="cta-card">
-      <div>
-        <h3>¿Te gustaría manejar tu sitio así?</h3>
-        <p>Activamos el panel real para que edites categorías, fotos y banners vos mismo, cuando quieras.</p>
+    <!-- ============ PRODUCTOS ============ -->
+    <section class="view" id="view-productos">
+      <div class="panel-card">
+        <h2>Agregar producto <small>Cargá una prenda nueva con su foto, precio y descripción</small></h2>
+        <div class="form-grid">
+          <div class="field-group full">
+            <label>Fotos del producto</label>
+            <div class="dropzone">
+              <div class="thumb"><img src="img/prod/sol-aviador.jpg" alt=""></div>
+              <span><span class="up"><i class="fa-solid fa-cloud-arrow-up"></i> Subir fotos</span> — arrastrá o tocá para elegir desde el celular. Podés cargar varias.</span>
+            </div>
+          </div>
+          <div class="field-group"><label>Nombre</label><input type="text" placeholder="Ej: Anteojo de Sol Aviador" disabled></div>
+          <div class="field-group"><label>Categoría</label><select disabled><option>Anteojos de sol</option></select></div>
+          <div class="field-group"><label>Precio</label><input type="text" placeholder="$ 0" disabled></div>
+          <div class="field-group"><label>Precio anterior (si está en oferta)</label><input type="text" placeholder="$ 0" disabled></div>
+          <div class="field-group full"><label>Descripción</label><textarea rows="3" placeholder="Material, medidas, colores disponibles, protección UV…" disabled></textarea></div>
+          <div class="field-group"><label>Stock</label><select disabled><option>Disponible</option></select></div>
+          <div class="field-group"><label>Destacar en la tienda</label><select disabled><option>No</option></select></div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Guardar producto</button>
+          <span class="lock-note"><i class="fa-solid fa-lock"></i> Disponible con tu plan de panel</span>
+        </div>
       </div>
-      <a class="btn-wa" href="https://wa.me/5491156199449?text=Hola!%20Vi%20la%20vista%20previa%20del%20panel%20de%20%C3%93ptica%20Duo%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a>
-    </div>
+
+      <div class="panel-card">
+        <h2>Productos cargados <button class="add-top" disabled><i class="fa-solid fa-plus"></i> Agregar producto</button></h2>
+        <table>
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/prod/sol-aviador.jpg" alt=""></div>Anteojo de Sol Aviador</div></td>
+              <td>Anteojos de sol</td>
+              <td class="price-cell"><s>$59.000</s>$47.000</td>
+              <td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i> Eliminar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/prod/rx-titanio.jpg" alt=""></div>Armazón Titanio Ultraliviano</div></td>
+              <td>Anteojos de receta</td>
+              <td class="price-cell">$68.000</td>
+              <td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i> Eliminar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-glasses"></i></div>Cristales Multifocales</div></td>
+              <td>Cristales</td>
+              <td class="price-cell">$95.000</td>
+              <td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i> Eliminar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-circle-dot"></i></div>Lentes de Contacto Diarias x30</div></td>
+              <td>Lentes de contacto</td>
+              <td class="price-cell">$36.000</td>
+              <td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i> Eliminar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/prod/rx-milano.jpg" alt=""></div>Armazón Milano Acetato</div></td>
+              <td>Anteojos de receta</td>
+              <td class="price-cell">$52.000</td>
+              <td><span class="status-chip low">Últimas unidades</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i> Eliminar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-box-open"></i></div>Estuche Rígido + Paño</div></td>
+              <td>Accesorios</td>
+              <td class="price-cell">$8.500</td>
+              <td><span class="status-chip off">Oculto</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye"></i> Mostrar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i> Eliminar</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ CATEGORÍAS ============ -->
+    <section class="view" id="view-categorias">
+      <div class="panel-card">
+        <h2>Categorías <button class="add-top" disabled><i class="fa-solid fa-plus"></i> Agregar categoría</button></h2>
+        <table>
+          <thead><tr><th>Categoría</th><th>Productos</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/armazones.jpg" alt=""></div>Anteojos de receta</div></td>
+              <td>4</td><td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/sol.jpg" alt=""></div>Anteojos de sol</div></td>
+              <td>4</td><td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-glasses"></i></div>Cristales</div></td>
+              <td>4</td><td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/contacto.jpg" alt=""></div>Lentes de contacto</div></td>
+              <td>3</td><td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><img src="img/ninos.jpg" alt=""></div>Niños</div></td>
+              <td>2</td><td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+            </tr>
+            <tr>
+              <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-box-open"></i></div>Accesorios</div></td>
+              <td>3</td><td><span class="status-chip">Publicado</span></td>
+              <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ BANNERS Y PROMOS ============ -->
+    <section class="view" id="view-banners">
+      <div class="panel-card">
+        <h2>Banner principal <small>Lo primero que se ve al entrar al sitio</small></h2>
+        <div class="field-group">
+          <label>Imagen de fondo</label>
+          <div class="dropzone">
+            <div class="thumb"><img src="img/hero.jpg" alt=""></div>
+            <span><span class="up"><i class="fa-solid fa-cloud-arrow-up"></i> Cambiar imagen</span> — la foto de fondo del inicio (hoy, la fachada del local).</span>
+          </div>
+        </div>
+        <div class="field-group"><label>Título</label><input type="text" value="Tu óptica de confianza en Lanús Oeste" disabled></div>
+        <div class="field-group"><label>Bajada</label><textarea rows="2" disabled>Armazones de receta, lentes de sol y lentes de contacto, con asesoramiento personalizado.</textarea></div>
+        <div class="field-actions">
+          <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Guardar cambios</button>
+          <span class="lock-note"><i class="fa-solid fa-lock"></i> Disponible con tu plan de panel</span>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>Barra de promociones <small>Los avisos de la franja de la tienda</small></h2>
+        <div class="promo-item"><i class="fa-solid fa-grip-vertical drag"></i><input value="👓 Reservá online y retiralo en el local" disabled></div>
+        <div class="promo-item"><i class="fa-solid fa-grip-vertical drag"></i><input value="📄 Enviános tu receta por WhatsApp" disabled></div>
+        <div class="promo-item"><i class="fa-solid fa-grip-vertical drag"></i><input value="🔥 Productos en descuento" disabled></div>
+        <div class="field-actions">
+          <button class="add-top" disabled><i class="fa-solid fa-plus"></i> Agregar aviso</button>
+          <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Guardar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESEÑAS ============ -->
+    <section class="view" id="view-resenas">
+      <div class="panel-card">
+        <h2>Reseñas de clientes <small>Se muestran en tu sitio</small></h2>
+        <div class="src-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Podés mostrar u ocultar cada reseña, o cargar manualmente las que te dejan por WhatsApp. Las reseñas reales no se inventan: se toman de tu Google o las que te autoriza el cliente.</span>
+        </div>
+        <div class="review-item">
+          <div class="av">I</div>
+          <div class="body">
+            <div class="name">Ivana Alonso</div>
+            <div class="stars">★★★★★</div>
+            <div class="txt">"Muy buena óptica! Los lentes estuvieron a tiempo, son bonitos y el personal es atento."</div>
+          </div>
+          <div class="acts"><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i></span></div>
+        </div>
+        <div class="review-item">
+          <div class="av">V</div>
+          <div class="body">
+            <div class="name">Victor De Ferrari</div>
+            <div class="stars">★★★★★</div>
+            <div class="txt">"Compro siempre mis lentes en esta óptica. Excelente asesoramiento, atención y calidad."</div>
+          </div>
+          <div class="acts"><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i></span></div>
+        </div>
+        <div class="review-item">
+          <div class="av">Y</div>
+          <div class="body">
+            <div class="name">Yamila Touceda</div>
+            <div class="stars">★★★★★</div>
+            <div class="txt">"Buena atención y lentes de calidad a buen precio."</div>
+          </div>
+          <div class="acts"><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span><span class="mini-btn del"><i class="fa-solid fa-trash"></i></span></div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>Cargar una reseña <small>Para las que te dejan en persona o por WhatsApp</small></h2>
+        <div class="form-grid">
+          <div class="field-group"><label>Nombre del cliente</label><input type="text" placeholder="Ej: Juan Pérez" disabled></div>
+          <div class="field-group"><label>Estrellas</label><select disabled><option>★★★★★ (5)</option></select></div>
+          <div class="field-group full"><label>Comentario</label><textarea rows="2" placeholder="Lo que dijo el cliente…" disabled></textarea></div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Publicar reseña</button>
+          <span class="lock-note"><i class="fa-solid fa-lock"></i> Disponible con tu plan de panel</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONFIGURACIÓN ============ -->
+    <section class="view" id="view-config">
+      <div class="panel-card">
+        <h2>Datos del negocio <small>Aparecen en el sitio y en los pedidos</small></h2>
+        <div class="form-grid">
+          <div class="field-group"><label>Nombre</label><input type="text" value="Óptica Duo" disabled></div>
+          <div class="field-group"><label>WhatsApp</label><input type="text" value="+54 11 2883-5374" disabled></div>
+          <div class="field-group"><label>Dirección</label><input type="text" value="Pres. Quintana 138, Lanús Oeste" disabled></div>
+          <div class="field-group"><label>Teléfono</label><input type="text" value="011 4225-2837" disabled></div>
+          <div class="field-group"><label>Email</label><input type="text" value="optica_duo@live.com.ar" disabled></div>
+          <div class="field-group"><label>Instagram</label><input type="text" value="@opticaduolanus" disabled></div>
+          <div class="field-group full"><label>Horarios</label><input type="text" value="Lun a Vie 9 a 18 hs · Sáb 9 a 13 hs" disabled></div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Guardar cambios</button>
+          <span class="lock-note"><i class="fa-solid fa-lock"></i> Disponible con tu plan de panel</span>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
+<script>
+  const TITULOS = {
+    inicio:"Panel de administración", productos:"Productos",
+    categorias:"Categorías", banners:"Banners y Promos",
+    resenas:"Reseñas", config:"Configuración",
+  };
+  const views = document.querySelectorAll('.view');
+  const sideBtns = document.querySelectorAll('#sideNav button');
+
+  function mostrar(v){
+    views.forEach(s => s.classList.toggle('active', s.id === 'view-'+v));
+    sideBtns.forEach(b => b.classList.toggle('active', b.dataset.view === v));
+    document.querySelectorAll('#mtabs button').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+    document.getElementById('viewTitle').textContent = TITULOS[v];
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  sideBtns.forEach(b => b.addEventListener('click', () => mostrar(b.dataset.view)));
+
+  // Tabs para celular (misma navegación)
+  const mtabs = document.getElementById('mtabs');
+  Object.entries(TITULOS).forEach(([v,t]) => {
+    const b = document.createElement('button');
+    b.dataset.view = v; b.textContent = v==='inicio' ? 'Inicio' : t;
+    if(v==='inicio') b.classList.add('active');
+    b.addEventListener('click', () => mostrar(v));
+    mtabs.appendChild(b);
+  });
+</script>
 </body>
 </html>
