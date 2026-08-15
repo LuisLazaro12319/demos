@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto | Óptica Duo</title>
+<meta name="description" content="Detalle de producto de Óptica Duo. Armá tu pedido y lo coordinamos por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --navy:#0f4c81;
+    --navy-dark:#0a3558;
+    --gold:#2b8fe6;
+    --gold-light:#e6f2fc;
+    --bg:#ffffff;
+    --bg2:#f2f7fc;
+    --text:#13233a;
+    --text-gray:#5a6b7e;
+    --border:#d9e5f1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+
+  /* NAV (igual que la tienda) */
+  nav{position:fixed;top:0;left:0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);box-shadow:0 2px 16px rgba(0,0,0,.08);}
+  .brand{display:flex;align-items:center;gap:.4rem;font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);}
+  .brand span{color:var(--gold);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--text-gray);transition:.2s;}
+  .nav-links a.active,.nav-links a:hover{color:var(--navy);}
+  .nav-cart{position:relative;display:flex;align-items:center;gap:.5rem;background:var(--navy);color:#fff;padding:.6rem 1.2rem;border-radius:30px;font-size:.85rem;font-weight:700;}
+  .nav-cart:hover{background:var(--navy-dark);}
+  .nav-cart .count{position:absolute;top:-6px;right:-6px;background:var(--gold);color:#fff;width:20px;height:20px;border-radius:50%;font-size:.72rem;display:flex;align-items:center;justify-content:center;font-weight:800;}
+  .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;}
+  .burger span{display:block;width:100%;height:2px;background:var(--navy);border-radius:2px;transition:.3s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;background:#fff;border-top:1px solid var(--border);box-shadow:0 12px 25px rgba(0,0,0,.12);padding:.8rem 2rem 1.2rem;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu li{border-top:1px solid var(--border);}
+  .mobile-menu li:first-child{border-top:none;}
+  .mobile-menu a{display:block;padding:.9rem 0;font-size:.95rem;font-weight:600;color:var(--text);}
+
+  /* BREADCRUMB */
+  .crumb{margin-top:64px;background:var(--bg2);border-bottom:1px solid var(--border);}
+  .crumb .wrap{padding:1rem 1.5rem;font-size:.85rem;color:var(--text-gray);}
+  .crumb a{color:var(--navy);font-weight:600;}
+  .crumb .sep{margin:0 .5rem;color:var(--border);}
+
+  /* DETALLE */
+  .detalle{display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding:2.5rem 0 3.5rem;}
+  .gallery .main{aspect-ratio:1/1;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
+  .gallery .main svg,.gallery .main img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumbs{display:flex;gap:.7rem;margin-top:.9rem;}
+  .thumbs .t{width:74px;height:74px;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;background:#fff;transition:.2s;padding:0;}
+  .thumbs .t.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-light);}
+  .thumbs .t svg,.thumbs .t img{width:100%;height:100%;object-fit:cover;}
+  .thumbs .t.ph{display:flex;align-items:center;justify-content:center;color:var(--border);font-size:1.2rem;background:var(--bg2);cursor:default;}
+
+  .info .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:.5rem;}
+  .info h1{font-size:1.9rem;color:var(--navy);line-height:1.2;margin-bottom:1.1rem;}
+  .price-row{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.4rem;}
+  .price-old{font-size:1.1rem;color:var(--text-gray);text-decoration:line-through;}
+  .price-now{font-size:2rem;font-weight:800;color:var(--navy);font-family:'Poppins',sans-serif;}
+  .off-tag{display:inline-block;background:#d6483b;color:#fff;font-size:.8rem;font-weight:800;padding:.2rem .6rem;border-radius:6px;}
+  .stock{margin:1rem 0 1.4rem;font-size:.9rem;font-weight:600;display:inline-flex;align-items:center;gap:.5rem;}
+  .stock.ok{color:#1f8a5b;}
+  .stock.low{color:#d98324;}
+  .stock i{font-size:.7rem;}
+
+  .buy{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+  .qty{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:9px;}
+  .qty button{background:none;border:none;width:38px;height:44px;font-size:1.2rem;color:var(--text-gray);cursor:pointer;}
+  .qty span{width:38px;text-align:center;font-weight:700;}
+  .add-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--navy);color:#fff;border:none;padding:0 1.8rem;height:46px;border-radius:9px;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;}
+  .add-btn:hover{background:var(--navy-dark);}
+  .add-btn.added{background:#1f8a5b;}
+  .ver-pedido{display:none;margin-top:1rem;align-items:center;gap:.5rem;color:var(--navy);font-weight:700;font-size:.9rem;}
+  .ver-pedido.show{display:inline-flex;}
+  .consultar{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;border:1px solid var(--border);color:var(--navy);padding:.7rem 1.3rem;border-radius:9px;font-size:.88rem;font-weight:700;transition:.2s;}
+  .consultar:hover{background:var(--gold);border-color:var(--gold);color:#fff;}
+  .consultar i{color:#25d366;}
+  .consultar:hover i{color:#fff;}
+
+  .meta{margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--border);font-size:.85rem;color:var(--text-gray);}
+  .meta b{color:var(--text);}
+
+  /* DESCRIPCIÓN */
+  .desc{border-top:1px solid var(--border);padding:2.5rem 0 1rem;}
+  .desc h2{font-size:1.3rem;color:var(--navy);margin-bottom:1rem;}
+  .desc .box{background:var(--bg2);border:1px dashed var(--border);border-radius:12px;padding:1.4rem 1.6rem;color:var(--text-gray);font-size:.95rem;}
+  .desc .box .note{display:block;margin-top:.7rem;font-size:.8rem;color:var(--navy);font-style:italic;}
+
+  /* FOOTER */
+  footer{background:var(--navy-dark);color:#fff;padding:3.5rem 0 2rem;margin-top:2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:1rem;}
+  .footer-brand span{color:var(--gold);}
+  .footer-col p{font-size:.85rem;color:#b8c0cc;}
+  .footer-col h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;color:#fff;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a{font-size:.85rem;color:#b8c0cc;}
+  .footer-nav a:hover{color:var(--gold);}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1rem;}
+  .social-btn{width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(255,255,255,.08);transition:.3s;}
+  .social-btn.whatsapp:hover{background:#25d366;border-color:transparent;}
+  .footer-tel{font-size:.85rem;color:#b8c0cc;display:block;}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;text-align:center;color:#9aa4b2;}
+
+  .float-wa{position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(0,0,0,.25);z-index:999;transition:.3s;color:#fff;font-size:1.6rem;}
+  .float-wa:hover{transform:scale(1.1);}
+
+  @media(max-width:900px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .detalle{grid-template-columns:1fr;gap:1.8rem;padding:1.8rem 0 2.5rem;}
+    .info h1{font-size:1.6rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="../">Óptica<span> Duo</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="../">Home</a></li>
+      <li><a href="./">Tienda</a></li>
+      <li><a href="../#contacto">Contacto</a></li>
+      <li><a href="../#faqs">Preguntas Frecuentes</a></li>
+    </ul>
+    <a class="nav-cart" href="./#pedido" aria-label="Ver pedido">
+      <i class="fa-solid fa-bag-shopping"></i> Pedido
+      <span class="count" id="cartCount">0</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="../">Home</a></li>
+    <li><a href="./">Tienda</a></li>
+    <li><a href="../#contacto">Contacto</a></li>
+    <li><a href="../#faqs">Preguntas Frecuentes</a></li>
+  </ul>
+</nav>
+
+<div class="crumb">
+  <div class="wrap" id="crumb">
+    <a href="../">Inicio</a><span class="sep">/</span><a href="./">Tienda</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="detalle" id="detalle">
+    <!-- se completa por JS según ?id= -->
+  </div>
+
+  <section class="desc" id="descSection" style="display:none;">
+    <div class="wrap" style="padding:0;">
+      <h2>Descripción</h2>
+      <div class="box">
+        <span id="descText">Este producto todavía no tiene una descripción cargada.</span>
+        <span class="note">El local completará acá los detalles: material, medidas, colores disponibles, protección UV, etc.</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand">Óptica<span> Duo</span></div>
+        <p>Óptica en Lanús Oeste. Armazones de receta, lentes de sol y lentes de contacto con asesoramiento personalizado.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="../">Home</a>
+          <a href="./">Tienda</a>
+          <a href="../#contacto">Contacto</a>
+          <a href="../#faqs">Preguntas Frecuentes</a>
+        </div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Contacto</h4>
+        <div class="footer-socials">
+          <a href="https://wa.me/5491128835374?text=Hola!%20Quiero%20consultar" target="_blank" rel="noopener" class="social-btn whatsapp" title="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+        <span class="footer-tel">Pres. Quintana 138, Lanús Oeste</span>
+        <span class="footer-tel">011 4225-2837</span>
+        <span class="footer-tel">optica_duo@live.com.ar</span>
+      </div>
+    </div>
+    <p class="fine">© 2026 Óptica Duo · Lanús Oeste, Buenos Aires · Producto de ejemplo (demo)</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5491128835374?text=Hola!%20Quiero%20consultar" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script>
+/* ============================================================
+   ⚠️ DEMO: esta lista debe reflejar la de tienda/index.html.
+   Cuando se conecte la base de datos (panel del dueño), ambas
+   páginas leen del mismo lugar y esto se elimina.
+   ============================================================ */
+const WA = "5491128835374";
+
+const CATS = {
+  todos:"Todos los productos", ofertas:"Ofertas",
+  receta:"Anteojos de receta", sol:"Anteojos de sol",
+  contacto:"Lentes de contacto", ninos:"Anteojos para niños",
+  accesorios:"Accesorios",
+};
+
+const PRODUCTOS = [
+  { id:"rx-milano",   cat:"receta",     nombre:"Armazón Milano Acetato",        precio:52000 },
+  { id:"rx-titanio",  cat:"receta",     nombre:"Armazón Titanio Ultraliviano",  precio:68000, antes:82000 },
+  { id:"rx-metal",    cat:"receta",     nombre:"Armazón Metal Redondo",         precio:44000 },
+  { id:"rx-clasico",  cat:"receta",     nombre:"Armazón Clásico Rectangular",   precio:39000 },
+  { id:"sol-aviador", cat:"sol",        nombre:"Anteojo de Sol Aviador",        precio:47000, antes:59000 },
+  { id:"sol-wayf",    cat:"sol",        nombre:"Anteojo de Sol Modelo Wave",    precio:43000 },
+  { id:"sol-deport",  cat:"sol",        nombre:"Anteojo de Sol Deportivo",      precio:58000 },
+  { id:"sol-cateye",  cat:"sol",        nombre:"Anteojo de Sol Cat Eye",        precio:49000, antes:62000 },
+  { id:"lc-diarias",  cat:"contacto",   nombre:"Lentes de Contacto Diarias x30",precio:36000 },
+  { id:"lc-mensual",  cat:"contacto",   nombre:"Lentes de Contacto Mensuales x6",precio:41000 },
+  { id:"lc-astig",    cat:"contacto",   nombre:"Lentes de Contacto Astigmatismo",precio:52000 },
+  { id:"ni-flex",     cat:"ninos",      nombre:"Armazón Infantil Flexible",     precio:34000 },
+  { id:"ni-color",    cat:"ninos",      nombre:"Armazón Infantil Colores",      precio:31000, antes:38000 },
+  { id:"ac-liquido",  cat:"accesorios", nombre:"Líquido para Lentes de Contacto 360ml", precio:12000 },
+  { id:"ac-estuche",  cat:"accesorios", nombre:"Estuche Rígido + Paño",         precio:8500 },
+  { id:"ac-cordon",   cat:"accesorios", nombre:"Cordón / Cadena para Anteojos", precio:6500, antes:9000 },
+];
+
+const CON_FOTO = new Set([
+  "rx-milano","rx-titanio","rx-metal","rx-clasico",
+  "sol-aviador","sol-wayf","sol-deport","sol-cateye",
+]);
+
+function svgFor(cat){
+  const bgs = {receta:"#eef2f8", sol:"#f3ecdd", contacto:"#eaf3ef", ninos:"#f7edf0", accesorios:"#eef0f3"};
+  const bg = bgs[cat] || "#eef2f8";
+  let shape = "";
+  if(cat==="sol"){
+    shape = `<g fill="#0f4c81"><path d="M40 92c0-13 10-22 24-22s24 9 24 22-10 22-24 22-24-9-24-22z"/><path d="M112 92c0-13 10-22 24-22s24 9 24 22-10 22-24 22-24-9-24-22z"/><rect x="86" y="86" width="28" height="8" rx="4"/><rect x="18" y="72" width="14" height="7" rx="3.5"/><rect x="168" y="72" width="14" height="7" rx="3.5"/></g>`;
+  } else if(cat==="contacto"){
+    shape = `<g fill="none" stroke="#0f4c81" stroke-width="6"><circle cx="100" cy="100" r="46"/><circle cx="100" cy="100" r="22"/></g><circle cx="118" cy="82" r="7" fill="#fff"/>`;
+  } else if(cat==="ninos"){
+    shape = `<g fill="none" stroke="#0f4c81" stroke-width="7"><circle cx="66" cy="104" r="26"/><circle cx="134" cy="104" r="26"/><path d="M92 104q8-10 16 0"/><path d="M40 92l-14-10"/><path d="M160 92l14-10"/></g>`;
+  } else if(cat==="accesorios"){
+    shape = `<g fill="none" stroke="#0f4c81" stroke-width="7"><rect x="58" y="60" width="84" height="80" rx="14"/><path d="M58 96h84"/></g><circle cx="100" cy="118" r="9" fill="#0f4c81"/>`;
+  } else {
+    shape = `<g fill="none" stroke="#0f4c81" stroke-width="7"><rect x="38" y="82" width="52" height="38" rx="12"/><rect x="110" y="82" width="52" height="38" rx="12"/><path d="M90 96q10-8 20 0"/><path d="M38 92l-14-8"/><path d="M162 92l14-8"/></g>`;
+  }
+  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${bg}"/>${shape}</svg>`;
+}
+function mediaBig(p){
+  return CON_FOTO.has(p.id)
+    ? `<img src="../img/prod/${p.id}.jpg" alt="${p.nombre}">`
+    : svgFor(p.cat);
+}
+
+const fmt = n => "$" + n.toLocaleString("es-AR");
+const getProd = id => PRODUCTOS.find(p=>p.id===id);
+
+/* ====== CARRITO (compartido con la tienda) ====== */
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem("opticaduo.cart")||"{}"); } catch(e){ cart = {}; }
+const guardar = () => localStorage.setItem("opticaduo.cart", JSON.stringify(cart));
+const cartCount = () => Object.values(cart).reduce((a,b)=>a+b,0);
+function refreshCount(){ document.getElementById("cartCount").textContent = cartCount(); }
+
+/* ====== RENDER DE LA FICHA ====== */
+const params = new URLSearchParams(location.search);
+const prod = getProd(params.get("id"));
+
+if(!prod){
+  document.getElementById("detalle").innerHTML =
+    `<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;">
+       <h1 style="color:var(--navy);font-size:1.5rem;margin-bottom:1rem;">Producto no encontrado</h1>
+       <a href="./" style="color:var(--gold);font-weight:700;">← Volver a la tienda</a>
+     </div>`;
+} else {
+  document.title = `${prod.nombre} | Óptica Duo`;
+  const off = prod.antes ? Math.round((prod.antes-prod.precio)/prod.antes*100) : 0;
+  const stockBajo = !!prod.antes;   // demo: los productos en oferta muestran stock bajo
+  const sku = "OD-" + prod.id.toUpperCase().replace(/-/g,"");
+
+  // Breadcrumb
+  document.getElementById("crumb").innerHTML =
+    `<a href="../">Inicio</a><span class="sep">/</span>` +
+    `<a href="./">Tienda</a><span class="sep">/</span>` +
+    `<a href="./?cat=${prod.cat}">${CATS[prod.cat]}</a><span class="sep">/</span>` +
+    `<span>${prod.nombre}</span>`;
+
+  // Galería: imagen principal + tira de miniaturas (1 real + placeholders)
+  const thumbs =
+    `<button class="t active">${mediaBig(prod)}</button>` +
+    `<span class="t ph"><i class="fa-solid fa-camera"></i></span>`.repeat(3);
+
+  document.getElementById("detalle").innerHTML = `
+    <div class="gallery">
+      <div class="main">${mediaBig(prod)}</div>
+      <div class="thumbs">${thumbs}</div>
+    </div>
+    <div class="info">
+      <div class="cat">${CATS[prod.cat]}</div>
+      <h1>${prod.nombre}</h1>
+      <div class="price-row">
+        ${prod.antes?`<span class="price-old">${fmt(prod.antes)}</span>`:''}
+        <span class="price-now">${fmt(prod.precio)}</span>
+        ${prod.antes?`<span class="off-tag">-${off}%</span>`:''}
+      </div>
+      <div class="stock ${stockBajo?'low':'ok'}">
+        <i class="fa-solid fa-circle"></i>
+        ${stockBajo?'Últimas unidades disponibles':'Disponible en el local'}
+      </div>
+      <div class="buy">
+        <div class="qty">
+          <button id="dec" aria-label="Restar">−</button><span id="qval">1</span><button id="inc" aria-label="Sumar">+</button>
+        </div>
+        <button class="add-btn" id="addBtn"><i class="fa-solid fa-plus"></i> Agregar al pedido</button>
+      </div>
+      <a class="ver-pedido" id="verPedido" href="./#pedido"><i class="fa-solid fa-arrow-right"></i> Ver mi pedido</a>
+      <br>
+      <a class="consultar" href="https://wa.me/${WA}?text=${encodeURIComponent('¡Hola Óptica Duo! Quería consultar por: '+prod.nombre)}" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
+      </a>
+      <div class="meta">
+        <div>SKU: <b>${sku}</b></div>
+        <div>Categoría: <b><a href="./?cat=${prod.cat}" style="color:var(--navy);">${CATS[prod.cat]}</a></b></div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("descSection").style.display = "block";
+
+  // Cantidad
+  let qty = 1;
+  const qval = document.getElementById("qval");
+  document.getElementById("inc").onclick = () => { qty++; qval.textContent = qty; };
+  document.getElementById("dec").onclick = () => { if(qty>1){ qty--; qval.textContent = qty; } };
+
+  // Agregar al pedido
+  document.getElementById("addBtn").onclick = () => {
+    cart[prod.id] = (cart[prod.id]||0) + qty;
+    guardar(); refreshCount();
+    const b = document.getElementById("addBtn");
+    b.classList.add("added"); b.innerHTML = '<i class="fa-solid fa-check"></i> Agregado';
+    document.getElementById("verPedido").classList.add("show");
+    setTimeout(()=>{ b.classList.remove("added"); b.innerHTML='<i class="fa-solid fa-plus"></i> Agregar al pedido'; }, 1600);
+  };
+}
+
+refreshCount();
+
+/* ====== BURGER ====== */
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  const isOpen = burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open'); mobileMenu.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+}));
+</script>
+</body>
+</html>
