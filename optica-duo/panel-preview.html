@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vista previa · Panel de administración | Óptica Duo</title>
+<meta name="description" content="Vista previa de cómo se vería el panel de administración de Óptica Duo. Demostración visual, sin funcionalidad activa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --navy-dark:#0f1830;
+    --gold:#c9974d;
+    --gold-light:#f6ecd9;
+    --bg:#f4f6f9;
+    --panel:#ffffff;
+    --text:#1e2530;
+    --text-gray:#5f6a78;
+    --border:#e2e6ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+  h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .preview-ribbon{background:var(--gold);color:var(--navy-dark);text-align:center;font-size:.85rem;font-weight:700;padding:.7rem 1rem;position:sticky;top:0;z-index:200;}
+  .preview-ribbon i{margin-right:.4rem;}
+
+  .shell{display:flex;min-height:100vh;}
+
+  /* SIDEBAR */
+  .sidebar{width:250px;flex:0 0 250px;background:var(--navy-dark);color:#fff;padding:1.6rem 1.2rem;display:flex;flex-direction:column;}
+  .sidebar .brand{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:800;margin-bottom:2.2rem;}
+  .sidebar .brand span{color:var(--gold);}
+  .side-nav{display:flex;flex-direction:column;gap:.3rem;flex:1;}
+  .side-nav a{display:flex;align-items:center;gap:.8rem;padding:.75rem .9rem;border-radius:8px;font-size:.9rem;font-weight:600;color:#c3cad8;}
+  .side-nav a i{width:18px;text-align:center;}
+  .side-nav a.active{background:rgba(201,151,77,.16);color:var(--gold);}
+  .sidebar .plan-note{margin-top:auto;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem;font-size:.78rem;color:#c3cad8;line-height:1.5;}
+  .sidebar .plan-note b{color:#fff;}
+
+  /* MAIN */
+  .main{flex:1;padding:2rem 2.4rem 3rem;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+  .topbar h1{font-size:1.5rem;}
+  .mode-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold-light);color:#8a6a2f;font-size:.75rem;font-weight:700;padding:.35rem .8rem;border-radius:20px;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2.2rem;}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;}
+  .stat-card .lbl{font-size:.78rem;color:var(--text-gray);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem;}
+  .stat-card .val{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:700;color:var(--navy);}
+  .stat-card .ex{font-size:.72rem;color:var(--text-gray);margin-top:.3rem;}
+
+  .panel-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.6rem 1.7rem;margin-bottom:1.6rem;}
+  .panel-card h2{font-size:1.05rem;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:space-between;}
+  .panel-card h2 small{font-size:.75rem;font-weight:600;color:var(--text-gray);}
+
+  table{width:100%;border-collapse:collapse;}
+  th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-gray);padding:.6rem .5rem;border-bottom:1px solid var(--border);}
+  td{padding:.7rem .5rem;border-bottom:1px solid var(--border);font-size:.88rem;vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  .cat-thumb{display:flex;align-items:center;gap:.7rem;}
+  .cat-thumb .ph{width:38px;height:38px;border-radius:8px;background:var(--gold-light);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex:0 0 38px;overflow:hidden;}
+  .cat-thumb .ph img{width:100%;height:100%;object-fit:cover;}
+  .status-chip{display:inline-block;background:#e6f6ec;color:#1c8a4d;font-size:.72rem;font-weight:700;padding:.25rem .6rem;border-radius:12px;}
+  .row-actions{display:flex;gap:.5rem;}
+  .mini-btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;padding:.4rem .7rem;border-radius:6px;border:1px solid var(--border);background:#fbfbfc;color:var(--text-gray);cursor:not-allowed;opacity:.7;}
+
+  .field-group{margin-bottom:1.1rem;}
+  .field-group label{display:block;font-size:.8rem;font-weight:600;color:var(--text-gray);margin-bottom:.4rem;}
+  .field-group input,.field-group textarea{width:100%;padding:.7rem .85rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.88rem;color:var(--text);background:#fbfbfc;cursor:not-allowed;}
+  .field-actions{display:flex;align-items:center;gap:.9rem;margin-top:.8rem;}
+  .btn-disabled{background:var(--border);color:#9aa3b0;font-weight:700;font-size:.85rem;padding:.7rem 1.4rem;border-radius:8px;cursor:not-allowed;border:none;}
+  .lock-note{font-size:.78rem;color:var(--text-gray);display:flex;align-items:center;gap:.4rem;}
+
+  .cta-card{background:linear-gradient(120deg,var(--navy),var(--navy-dark));color:#fff;border-radius:14px;padding:2rem 2.2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;}
+  .cta-card h3{font-size:1.2rem;margin-bottom:.4rem;}
+  .cta-card p{font-size:.88rem;color:#c3cad8;}
+  .btn-wa{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--navy-dark);font-weight:700;font-size:.9rem;padding:.9rem 1.6rem;border-radius:8px;white-space:nowrap;}
+  .btn-wa:hover{filter:brightness(1.05);}
+
+  @media(max-width:900px){
+    .sidebar{display:none;}
+    .stat-grid{grid-template-columns:1fr;}
+    table{display:block;overflow-x:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-ribbon"><i class="fa-solid fa-circle-info"></i>Esto es una demostración visual del panel — la edición en vivo se activa cuando confirmes tu plan con panel de administración.</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">Óptica<span> Duo</span></div>
+    <nav class="side-nav">
+      <a href="#" class="active"><i class="fa-solid fa-house"></i> Inicio</a>
+      <a href="#"><i class="fa-solid fa-glasses"></i> Categorías</a>
+      <a href="#"><i class="fa-solid fa-image"></i> Banners y Promos</a>
+      <a href="#"><i class="fa-solid fa-star"></i> Reseñas</a>
+      <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+    </nav>
+    <div class="plan-note"><b>Modo vista previa.</b> Así se vería tu panel para editar el sitio vos mismo, sin depender de nadie. Se activa junto con tu plan.</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <h1>Panel de administración</h1>
+      <span class="mode-badge"><i class="fa-solid fa-eye"></i> Vista previa</span>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="lbl">Visitas al sitio</div>
+        <div class="val">128</div>
+        <div class="ex">Ej. últimos 30 días</div>
+      </div>
+      <div class="stat-card">
+        <div class="lbl">Consultas por WhatsApp</div>
+        <div class="val">34</div>
+        <div class="ex">Ej. últimos 30 días</div>
+      </div>
+      <div class="stat-card">
+        <div class="lbl">Categorías publicadas</div>
+        <div class="val">5</div>
+        <div class="ex">Armazones, Sol, Contacto, Niños, Accesorios</div>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <h2>Categorías <small>Editá nombre, foto y estado de cada una</small></h2>
+      <table>
+        <thead><tr><th>Categoría</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="cat-thumb"><div class="ph"><img src="img/armazones.jpg" alt=""></div>Armazones de receta</div></td>
+            <td><span class="status-chip">Publicado</span></td>
+            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="cat-thumb"><div class="ph"><img src="img/sol.jpg" alt=""></div>Lentes de sol</div></td>
+            <td><span class="status-chip">Publicado</span></td>
+            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-circle-dot"></i></div>Lentes de contacto</div></td>
+            <td><span class="status-chip">Publicado</span></td>
+            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-child-reaching"></i></div>Niños</div></td>
+            <td><span class="status-chip">Publicado</span></td>
+            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="cat-thumb"><div class="ph"><i class="fa-solid fa-box-open"></i></div>Accesorios y líquidos</div></td>
+            <td><span class="status-chip">Publicado</span></td>
+            <td><div class="row-actions"><span class="mini-btn"><i class="fa-solid fa-pen"></i> Editar</span><span class="mini-btn"><i class="fa-solid fa-eye-slash"></i> Ocultar</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel-card">
+      <h2>Banner principal <small>El texto que se ve al entrar al sitio</small></h2>
+      <div class="field-group">
+        <label>Título</label>
+        <input type="text" value="Tu óptica de confianza en Lanús Oeste" disabled>
+      </div>
+      <div class="field-group">
+        <label>Bajada</label>
+        <textarea rows="2" disabled>Armazones de receta, lentes de sol y lentes de contacto, con asesoramiento personalizado.</textarea>
+      </div>
+      <div class="field-actions">
+        <button class="btn-disabled" disabled><i class="fa-solid fa-lock"></i> Guardar cambios</button>
+        <span class="lock-note"><i class="fa-solid fa-lock"></i> Disponible con tu plan de panel</span>
+      </div>
+    </div>
+
+    <div class="cta-card">
+      <div>
+        <h3>¿Te gustaría manejar tu sitio así?</h3>
+        <p>Activamos el panel real para que edites categorías, fotos y banners vos mismo, cuando quieras.</p>
+      </div>
+      <a class="btn-wa" href="https://wa.me/5491156199449?text=Hola!%20Vi%20la%20vista%20previa%20del%20panel%20de%20%C3%93ptica%20Duo%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
