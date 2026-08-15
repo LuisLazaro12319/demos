@@ -178,7 +178,7 @@
     .side-card{display:none;}
     .sidebar h3{display:none;}
     .grid{grid-template-columns:repeat(2,1fr);}
-    .receta-banner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;background:var(--navy);color:#fff;border-radius:14px;padding:1.4rem 1.5rem;margin-top:2rem;}
+    .receta-banner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;background:var(--navy);color:#fff;border-radius:14px;padding:1.4rem 1.5rem;margin:2rem 0 0;}
     .receta-banner h3{font-size:1.05rem;margin-bottom:.3rem;}
     .receta-banner p{font-size:.85rem;color:#c3ccda;max-width:22rem;}
     .receta-banner .rb-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.75rem 1.3rem;border-radius:8px;font-size:.85rem;font-weight:700;white-space:nowrap;}
@@ -255,6 +255,15 @@
 </section>
 
 <div class="wrap">
+  <!-- Banner de receta: solo en celular, arriba de los filtros (en PC está la tarjeta del sidebar) -->
+  <a class="receta-banner" href="https://wa.me/5491128835374?text=Hola!%20Quiero%20enviar%20mi%20receta%20para%20un%20presupuesto" target="_blank" rel="noopener">
+    <div class="rb-text">
+      <h3>¿Tenés tu receta?</h3>
+      <p>Enviános una foto y te armamos el presupuesto con los cristales.</p>
+    </div>
+    <span class="rb-btn"><i class="fa-brands fa-whatsapp"></i> Enviar receta</span>
+  </a>
+
   <div class="shop">
 
     <aside class="sidebar">
@@ -279,15 +288,6 @@
         </select>
       </div>
       <div class="grid" id="grid"></div>
-
-      <!-- Banner de receta: solo en celular (en PC está la tarjeta del sidebar) -->
-      <a class="receta-banner" href="https://wa.me/5491128835374?text=Hola!%20Quiero%20enviar%20mi%20receta%20para%20un%20presupuesto" target="_blank" rel="noopener">
-        <div class="rb-text">
-          <h3>¿Tenés tu receta?</h3>
-          <p>Enviános una foto y te armamos el presupuesto con los cristales.</p>
-        </div>
-        <span class="rb-btn"><i class="fa-brands fa-whatsapp"></i> Enviar receta</span>
-      </a>
     </div>
 
   </div>
