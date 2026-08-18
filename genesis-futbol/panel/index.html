@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0f0c;--bg2:#0f1512;--accent:#1fd65f;--accent-light:#5cf097;
+    --bg:#0a0f0c;--bg2:#0f1512;--accent:#1eff6e;--accent-light:#86ffb3;
     --text:#e9f2ec;--text-gray:#94a39b;--card:#131b16;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -19,12 +19,11 @@
   img{max-width:100%;display:block;}
 
   .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1rem;
-    padding:1rem 1.6rem;background:rgba(10,15,12,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(31,214,95,.15);}
-  .tb-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.5px;color:#fff;}
-  .tb-brand .ball{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
-  .tb-brand span{color:var(--accent);}
+    padding:1rem 1.6rem;background:rgba(10,15,12,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,255,110,.15);}
+  .tb-brand{display:flex;align-items:center;gap:.7rem;font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.5px;color:var(--text-gray);text-transform:uppercase;}
+  .tb-brand img{height:34px;width:auto;}
   .tb-right{display:flex;align-items:center;gap:1rem;}
-  .vp-pill{background:rgba(31,214,95,.14);color:var(--accent);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.35rem .8rem;border-radius:20px;}
+  .vp-pill{background:rgba(30,255,110,.14);color:var(--accent);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.35rem .8rem;border-radius:20px;}
   .tb-back{font-size:.85rem;color:var(--text-gray);font-weight:600;}
   .tb-back:hover{color:var(--accent);}
 
@@ -34,15 +33,15 @@
 
   .card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.7rem;margin-top:1.6rem;}
   .card-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;}
-  .card-head .num{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:rgba(31,214,95,.14);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;}
+  .card-head .num{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:rgba(30,255,110,.14);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;}
   .card-head h3{font-size:1.15rem;color:#fff;font-weight:700;}
   .card .desc{color:var(--text-gray);font-size:.9rem;margin:.1rem 0 1.2rem 0;}
 
   /* INICIO */
   .portada{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center;}
   .portada img{width:190px;height:120px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.08);}
-  .btn-soft{display:inline-flex;align-items:center;gap:.5rem;background:rgba(31,214,95,.12);color:var(--accent);border:1px solid rgba(31,214,95,.3);border-radius:9px;padding:.7rem 1.2rem;font-size:.86rem;font-weight:700;cursor:pointer;}
-  .btn-soft:hover{background:rgba(31,214,95,.2);}
+  .btn-soft{display:inline-flex;align-items:center;gap:.5rem;background:rgba(30,255,110,.12);color:var(--accent);border:1px solid rgba(30,255,110,.3);border-radius:9px;padding:.7rem 1.2rem;font-size:.86rem;font-weight:700;cursor:pointer;}
+  .btn-soft:hover{background:rgba(30,255,110,.2);}
 
   /* HORARIOS */
   .grid-scroll{overflow-x:auto;padding-bottom:.4rem;}
@@ -50,7 +49,7 @@
   .hhead{font-family:'Anton',sans-serif;text-transform:uppercase;text-align:center;color:var(--accent);font-size:.8rem;padding:.35rem 0;}
   .htime{display:flex;align-items:center;justify-content:flex-end;padding-right:.4rem;color:var(--text-gray);font-size:.76rem;font-weight:600;}
   .slot{border-radius:6px;padding:.55rem .2rem;text-align:center;font-size:.68rem;font-weight:700;cursor:pointer;user-select:none;transition:.15s;}
-  .slot.libre{background:rgba(31,214,95,.15);color:var(--accent-light);border:1px solid rgba(31,214,95,.32);}
+  .slot.libre{background:rgba(30,255,110,.15);color:var(--accent-light);border:1px solid rgba(30,255,110,.32);}
   .slot.ocupado{background:rgba(255,255,255,.04);color:#59685f;border:1px solid rgba(255,255,255,.06);}
   .slot:hover{transform:translateY(-1px);filter:brightness(1.15);}
   .hint{color:var(--text-gray);font-size:.8rem;margin-top:.9rem;font-style:italic;}
@@ -75,7 +74,7 @@
 <body>
 
 <div class="topbar">
-  <div class="tb-brand"><span class="ball"></span>Génesis <span>F5</span> · Panel</div>
+  <div class="tb-brand"><img src="../img/logo.png" alt="Génesis Fútbol 5"> · Panel</div>
   <div class="tb-right">
     <span class="vp-pill">Vista previa</span>
     <a class="tb-back" href="../">← Volver a la web</a>
