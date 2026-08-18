@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel · Génesis Fútbol 5</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0f0c;--bg2:#0f1512;--accent:#1fd65f;--accent-light:#5cf097;
+    --text:#e9f2ec;--text-gray:#94a39b;--card:#131b16;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:1rem 1.6rem;background:rgba(10,15,12,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(31,214,95,.15);}
+  .tb-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:.5px;color:#fff;}
+  .tb-brand .ball{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
+  .tb-brand span{color:var(--accent);}
+  .tb-right{display:flex;align-items:center;gap:1rem;}
+  .vp-pill{background:rgba(31,214,95,.14);color:var(--accent);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.35rem .8rem;border-radius:20px;}
+  .tb-back{font-size:.85rem;color:var(--text-gray);font-weight:600;}
+  .tb-back:hover{color:var(--accent);}
+
+  .wrap{max-width:900px;margin:0 auto;padding:2.4rem 1.4rem 5rem;}
+  .head h1{font-family:'Anton',sans-serif;font-size:2.1rem;text-transform:uppercase;letter-spacing:.5px;color:#fff;}
+  .head p{color:var(--text-gray);margin-top:.4rem;font-size:.98rem;}
+
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.7rem;margin-top:1.6rem;}
+  .card-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;}
+  .card-head .num{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:rgba(31,214,95,.14);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;}
+  .card-head h3{font-size:1.15rem;color:#fff;font-weight:700;}
+  .card .desc{color:var(--text-gray);font-size:.9rem;margin:.1rem 0 1.2rem 0;}
+
+  /* INICIO */
+  .portada{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center;}
+  .portada img{width:190px;height:120px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.08);}
+  .btn-soft{display:inline-flex;align-items:center;gap:.5rem;background:rgba(31,214,95,.12);color:var(--accent);border:1px solid rgba(31,214,95,.3);border-radius:9px;padding:.7rem 1.2rem;font-size:.86rem;font-weight:700;cursor:pointer;}
+  .btn-soft:hover{background:rgba(31,214,95,.2);}
+
+  /* HORARIOS */
+  .grid-scroll{overflow-x:auto;padding-bottom:.4rem;}
+  .hgrid{display:grid;grid-template-columns:56px repeat(7,minmax(72px,1fr));gap:5px;min-width:600px;}
+  .hhead{font-family:'Anton',sans-serif;text-transform:uppercase;text-align:center;color:var(--accent);font-size:.8rem;padding:.35rem 0;}
+  .htime{display:flex;align-items:center;justify-content:flex-end;padding-right:.4rem;color:var(--text-gray);font-size:.76rem;font-weight:600;}
+  .slot{border-radius:6px;padding:.55rem .2rem;text-align:center;font-size:.68rem;font-weight:700;cursor:pointer;user-select:none;transition:.15s;}
+  .slot.libre{background:rgba(31,214,95,.15);color:var(--accent-light);border:1px solid rgba(31,214,95,.32);}
+  .slot.ocupado{background:rgba(255,255,255,.04);color:#59685f;border:1px solid rgba(255,255,255,.06);}
+  .slot:hover{transform:translateY(-1px);filter:brightness(1.15);}
+  .hint{color:var(--text-gray);font-size:.8rem;margin-top:.9rem;font-style:italic;}
+  .price-row{display:flex;align-items:center;gap:.7rem;margin-top:1.3rem;flex-wrap:wrap;}
+  .price-row label{color:var(--text-gray);font-size:.9rem;}
+  .price-row .inp{background:var(--bg2);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .9rem;color:#fff;font-size:.95rem;font-weight:700;width:130px;}
+
+  /* NOSOTROS */
+  .fotos-grid{display:flex;flex-wrap:wrap;gap:.9rem;}
+  .foto-item{position:relative;width:150px;height:100px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+  .foto-item img{width:100%;height:100%;object-fit:cover;}
+  .foto-item .del{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;background:rgba(200,40,40,.9);color:#fff;border:none;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .add-foto{width:150px;height:100px;border:1.5px dashed rgba(255,255,255,.2);border-radius:10px;display:flex;flex-direction:column;gap:.3rem;align-items:center;justify-content:center;color:var(--text-gray);font-size:.8rem;cursor:pointer;}
+  .add-foto svg{color:var(--accent);}
+  .add-foto:hover{border-color:var(--accent);color:var(--accent);}
+
+  .locked{display:flex;align-items:center;gap:.8rem;margin-top:1.4rem;flex-wrap:wrap;}
+  .locked .lbtn{background:rgba(255,255,255,.08);color:var(--text-gray);border-radius:9px;padding:.7rem 1.4rem;font-size:.88rem;font-weight:700;}
+  .locked small{color:var(--text-gray);font-size:.8rem;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-brand"><span class="ball"></span>Génesis <span>F5</span> · Panel</div>
+  <div class="tb-right">
+    <span class="vp-pill">Vista previa</span>
+    <a class="tb-back" href="../">← Volver a la web</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="head">
+    <h1>Tu panel de control</h1>
+    <p>Manejás tu cancha vos mismo, sin código. Editás dos cosas: los <b style="color:var(--accent-light)">horarios</b> y las <b style="color:var(--accent-light)">fotos</b> de la web.</p>
+  </div>
+
+  <!-- ===== INICIO ===== -->
+  <div class="card">
+    <div class="card-head"><span class="num">1</span><h3>Inicio</h3></div>
+    <p class="desc">Cambiá la foto de portada que se ve arriba de todo en la web.</p>
+    <div class="portada">
+      <img src="../img/hero.jpg" alt="Foto de portada actual">
+      <button class="btn-soft" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m3 17 5-4 4 3 3-2 6 5"/></svg>
+        Cambiar foto de portada
+      </button>
+    </div>
+    <div class="locked"><span class="lbtn">🔒 Guardar</span><small>Disponible cuando actives tu plan</small></div>
+  </div>
+
+  <!-- ===== HORARIOS ===== -->
+  <div class="card">
+    <div class="card-head"><span class="num">2</span><h3>Horarios</h3></div>
+    <p class="desc">Tocá cada turno para marcarlo <b style="color:var(--accent-light)">libre</b> u <b>ocupado</b>. Lo que dejás acá es lo que ven tus clientes al instante.</p>
+    <div class="grid-scroll"><div class="hgrid" id="hgrid"></div></div>
+    <p class="hint">Verde = libre · Gris = ocupado. Probá tocando los turnos 👆</p>
+    <div class="price-row">
+      <label>Precio del turno (1 hora):</label>
+      <input class="inp" type="text" value="$ 15.000">
+    </div>
+    <div class="locked"><span class="lbtn">🔒 Guardar</span><small>Disponible cuando actives tu plan</small></div>
+  </div>
+
+  <!-- ===== NOSOTROS ===== -->
+  <div class="card">
+    <div class="card-head"><span class="num">3</span><h3>Nosotros</h3></div>
+    <p class="desc">Subí las fotos de tu cancha. Aparecen en el carrusel de la sección Nosotros. Podés agregar las que quieras.</p>
+    <div class="fotos-grid">
+      <div class="foto-item"><img src="../img/hero.jpg" alt=""><button class="del" type="button" aria-label="Quitar">×</button></div>
+      <div class="foto-item"><img src="../img/cancha2.jpg" alt=""><button class="del" type="button" aria-label="Quitar">×</button></div>
+      <div class="add-foto">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg>
+        Agregar foto
+      </div>
+    </div>
+    <div class="locked"><span class="lbtn">🔒 Guardar</span><small>Disponible cuando actives tu plan</small></div>
+  </div>
+</div>
+
+<script>
+  const DIAS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  const HORAS = ['18:00','19:00','20:00','21:00','22:00','23:00'];
+  const OCUPADO = new Set(['Lun|20:00','Mar|19:00','Mié|21:00','Jue|20:00','Vie|20:00','Vie|21:00','Sáb|18:00','Sáb|21:00','Dom|20:00']);
+  const grid = document.getElementById('hgrid');
+  let html = '<div class="hhead"></div>' + DIAS.map(d => `<div class="hhead">${d}</div>`).join('');
+  HORAS.forEach(h => {
+    html += `<div class="htime">${h}</div>`;
+    DIAS.forEach(d => {
+      const ocup = OCUPADO.has(`${d}|${h}`);
+      html += `<div class="slot ${ocup?'ocupado':'libre'}">${ocup?'Ocupado':'Libre'}</div>`;
+    });
+  });
+  grid.innerHTML = html;
+  grid.addEventListener('click', (e) => {
+    const c = e.target.closest('.slot');
+    if (!c) return;
+    const libre = c.classList.toggle('libre');
+    c.classList.toggle('ocupado', !libre);
+    c.textContent = libre ? 'Libre' : 'Ocupado';
+  });
+</script>
+</body>
+</html>
