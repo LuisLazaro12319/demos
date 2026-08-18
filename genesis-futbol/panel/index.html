@@ -64,6 +64,8 @@
   .slot.ocupado{background:rgba(214,48,48,.12);color:#e05a52;border:1px solid rgba(214,48,48,.35);}
   .slot:hover{transform:translateY(-1px);filter:brightness(1.15);}
   .hint{color:var(--text-gray);font-size:.8rem;margin-top:.9rem;font-style:italic;}
+  .range-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.1rem;color:var(--text-gray);font-size:.9rem;}
+  .range-row select{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:.4rem .55rem;color:var(--heading);font-weight:700;font-size:.9rem;cursor:pointer;}
   .price-row{display:flex;align-items:center;gap:.7rem;margin-top:1.3rem;flex-wrap:wrap;}
   .price-row label{color:var(--text-gray);font-size:.9rem;}
   .price-row .inp{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:.6rem .9rem;color:var(--heading);font-size:.95rem;font-weight:700;width:130px;}
@@ -119,9 +121,14 @@
   <!-- ===== HORARIOS ===== -->
   <div class="card">
     <div class="card-head"><span class="num">2</span><h3>Horarios</h3></div>
-    <p class="desc">Tocá cada turno para marcarlo <b style="color:var(--accent-light)">libre</b> u <b>ocupado</b>. Lo que dejás acá es lo que ven tus clientes al instante.</p>
+    <p class="desc">Elegí de qué hora a qué hora abrís y tocá cada turno para marcarlo <b style="color:var(--accent-light)">libre</b> u <b>ocupado</b>. Lo que dejás acá es lo que ven tus clientes al instante.</p>
+    <div class="range-row">
+      <label>Horario de atención:</label>
+      <span>Desde <select id="hDesde"></select></span>
+      <span>Hasta <select id="hHasta"></select></span>
+    </div>
     <div class="grid-scroll"><div class="hgrid" id="hgrid"></div></div>
-    <p class="hint">Verde = libre · Gris = ocupado. Probá tocando los turnos 👆</p>
+    <p class="hint">Ampliá el horario (ej. de 12:00 a 00:00) y las filas se agregan solas. Rojo = ocupado · Verde = libre 👆</p>
     <div class="price-row">
       <label>Precio del turno (1 hora):</label>
       <input class="inp" type="text" value="$ 15.000">
@@ -154,18 +161,35 @@
   });
 
   const DIAS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
-  const HORAS = ['18:00','19:00','20:00','21:00','22:00','23:00'];
   const OCUPADO = new Set(['Lun|20:00','Mar|19:00','Mié|21:00','Jue|20:00','Vie|20:00','Vie|21:00','Sáb|18:00','Sáb|21:00','Dom|20:00']);
   const grid = document.getElementById('hgrid');
-  let html = '<div class="hhead"></div>' + DIAS.map(d => `<div class="hhead">${d}</div>`).join('');
-  HORAS.forEach(h => {
-    html += `<div class="htime">${h}</div>`;
-    DIAS.forEach(d => {
-      const ocup = OCUPADO.has(`${d}|${h}`);
-      html += `<div class="slot ${ocup?'ocupado':'libre'}">${ocup?'Ocupado':'Libre'}</div>`;
-    });
-  });
-  grid.innerHTML = html;
+  const selD = document.getElementById('hDesde'), selH = document.getElementById('hHasta');
+  const hLabel = (h) => (h % 24).toString().padStart(2, '0') + ':00';
+  function fill(sel, def) {
+    for (let h = 8; h <= 24; h++) {
+      const o = document.createElement('option');
+      o.value = h; o.textContent = hLabel(h);
+      if (h === def) o.selected = true;
+      sel.appendChild(o);
+    }
+  }
+  fill(selD, 18); fill(selH, 23);
+  function render() {
+    let d = +selD.value, hh = +selH.value; if (hh < d) hh = d;
+    let html = '<div class="hhead"></div>' + DIAS.map(x => `<div class="hhead">${x}</div>`).join('');
+    for (let h = d; h <= hh; h++) {
+      const lbl = hLabel(h);
+      html += `<div class="htime">${lbl}</div>`;
+      DIAS.forEach(x => {
+        const oc = OCUPADO.has(`${x}|${lbl}`);
+        html += `<div class="slot ${oc ? 'ocupado' : 'libre'}">${oc ? 'Ocupado' : 'Libre'}</div>`;
+      });
+    }
+    grid.innerHTML = html;
+  }
+  selD.addEventListener('change', render);
+  selH.addEventListener('change', render);
+  render();
   grid.addEventListener('click', (e) => {
     const c = e.target.closest('.slot');
     if (!c) return;
