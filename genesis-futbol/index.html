@@ -22,9 +22,9 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .text-cyan-brand { color: #22d3ee; }
-    .bg-cyan-brand { background-color: #22d3ee; }
-    .border-cyan-brand { border-color: #22d3ee; }
+    .text-green-brand { color: #22c55e; }
+    .bg-green-brand { background-color: #22c55e; }
+    .border-green-brand { border-color: #22c55e; }
     
     .card-dark {
       background-color: #12181d;
@@ -57,12 +57,12 @@
       cursor: pointer;
     }
     .slot-free {
-      background-color: #13232c;
-      border: 1px solid #1e3a4c;
-      color: #38bdf8;
+      background-color: #142e1b;
+      border: 1px solid #1e532b;
+      color: #4ade80;
     }
     .slot-free:hover {
-      background-color: #0284c7;
+      background-color: #16a34a;
       color: #ffffff;
     }
     .slot-occupied {
@@ -74,107 +74,80 @@
     }
   </style>
 </head>
-<body class="antialiased selection:bg-cyan-500 selection:text-black">
+<body class="antialiased selection:bg-green-500 selection:text-black">
 
-  <!-- NAVBAR CON MODO DÍA/NOCHE Y BOTÓN PANEL -->
+  <!-- NAVBAR CON MODO DÍA/NOCHE Y PANEL -->
   <nav class="sticky top-0 z-40 bg-[#0b0f12]/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="#" class="font-heading text-xl font-bold text-white tracking-wider">
-        MONUMENTAL <span class="text-cyan-brand">F5</span>
+        MONUMENTAL <span class="text-green-brand">F5</span>
       </a>
 
       <div class="flex items-center gap-3">
         <!-- Switch Modo Día/Noche -->
-        <button id="theme-toggle" class="p-2 rounded-lg card-dark text-slate-300 hover:text-cyan-brand transition flex items-center gap-2 text-xs font-semibold">
+        <button id="theme-toggle" class="p-2 rounded-lg card-dark text-slate-300 hover:text-green-brand transition flex items-center gap-2 text-xs font-semibold">
           <span id="theme-icon">☀️</span>
           <span id="theme-text" class="hidden sm:inline">Modo Día</span>
         </button>
 
-        <!-- Botón Demo Panel Admin -->
-        <button id="panel-open-btn" class="bg-cyan-brand text-black font-semibold px-3 py-1.5 rounded-lg text-xs hover:bg-cyan-400 transition flex items-center gap-1.5 shadow-lg shadow-cyan-500/10">
+        <!-- Botón Panel Admin -->
+        <button id="panel-open-btn" class="bg-green-brand text-black font-semibold px-3 py-1.5 rounded-lg text-xs hover:bg-green-400 transition flex items-center gap-1.5 shadow-lg shadow-green-500/10">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-          Panel Admin (Demo)
+          Panel Admin
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- PANEL DE ADMINISTRACIÓN LATERAL (EDITAR SITIO EN VIVO) -->
+  <!-- PANEL DE ADMINISTRACIÓN LATERAL -->
   <aside id="admin-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-900 border-l border-slate-700 p-6 z-50 transform translate-x-full transition-transform duration-300 shadow-2xl overflow-y-auto">
     <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
       <div>
         <h3 class="font-heading text-xl font-bold text-white">PANEL DE CONTROL</h3>
-        <p class="text-xs text-slate-400">Edición en tiempo real para cliente</p>
+        <p class="text-xs text-slate-400">Edición en tiempo real</p>
       </div>
       <button id="panel-close-btn" class="text-slate-400 hover:text-white p-2 text-xl font-bold">&times;</button>
     </div>
 
-    <!-- Banner Venta del Panel -->
-    <div class="bg-cyan-950/60 border border-cyan-500/30 p-4 rounded-xl mb-6 text-xs text-cyan-200">
-      💡 <strong>Demostración comercial:</strong> Editá los textos desde acá o hací clic directo en la tabla de horarios para simular el panel de gestión.
-    </div>
-
     <div class="space-y-6">
-      <!-- Editar Nueva Sección "La Cancha" -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-bold text-cyan-brand uppercase tracking-wider">Sección: La Cancha</h4>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">Título Principal</label>
-          <input type="text" id="edit-cancha-title" value="LA CANCHA DEL BARRIO" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">Descripción</label>
-          <textarea id="edit-cancha-desc" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">Monumental es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</textarea>
-        </div>
-      </div>
-
-      <hr class="border-slate-800"/>
-
       <!-- Editar Precios -->
       <div class="space-y-3">
-        <h4 class="text-xs font-bold text-cyan-brand uppercase tracking-wider">Sección: Precios</h4>
+        <h4 class="text-xs font-bold text-green-brand uppercase tracking-wider">Editar Precios</h4>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs text-slate-400 mb-1">Turno Suelto ($)</label>
-            <input type="text" id="edit-price-suelto" value="$15.000" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">
+            <input type="text" id="edit-price-suelto" value="$15.000" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-green-brand outline-none">
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Turno Fijo ($)</label>
-            <input type="text" id="edit-price-fijo" value="$13.500" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">
+            <input type="text" id="edit-price-fijo" value="$13.500" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-green-brand outline-none">
           </div>
         </div>
       </div>
 
       <hr class="border-slate-800"/>
 
-      <!-- Instrucciones de Horarios -->
+      <!-- Instrucción de Horarios -->
       <div>
-        <h4 class="text-xs font-bold text-cyan-brand uppercase tracking-wider mb-2">Edición de Horarios</h4>
+        <h4 class="text-xs font-bold text-green-brand uppercase tracking-wider mb-2">Gestión de Horarios</h4>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Podés modificar la disponibilidad directamente haciendo clic sobre cualquier botón de hora en la grilla principal (cambia de <strong>Libre</strong> a <strong>Ocupado</strong> al toque).
+          Para modificar la disponibilidad de la grilla, hacé clic directamente sobre cada bloque de horario en la pantalla principal.
         </p>
-      </div>
-
-      <!-- CTA Adquirir Panel -->
-      <div class="pt-4">
-        <a href="#contacto" class="block w-full text-center bg-green-500 hover:bg-green-600 text-black font-bold p-3 rounded-xl transition text-sm">
-          Añadir Panel Autoadministrable +$
-        </a>
       </div>
     </div>
   </aside>
 
-  <!-- HERO SECTION -->
+  <!-- HERO SECTION (EN VERDE) -->
   <header class="relative min-h-[85vh] flex flex-col justify-between bg-cover bg-center px-4 py-8 md:p-12" style="background-image: linear-gradient(to bottom, rgba(11, 15, 18, 0.5), rgba(11, 15, 18, 0.95)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600&auto=format&fit=crop');">
     <div class="max-w-6xl mx-auto w-full pt-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-xs md:text-sm text-cyan-brand mb-6 backdrop-blur-sm">
-        <span class="w-2 h-2 rounded-full bg-cyan-brand inline-block"></span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-xs md:text-sm text-green-brand mb-6 backdrop-blur-sm">
+        <span class="w-2 h-2 rounded-full bg-green-brand inline-block"></span>
         Barrio Olimpo · CABA · Fútbol 5
       </div>
 
       <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-none mb-4 tracking-tight text-white">
         TU CANCHA<br/>
-        <span class="text-cyan-brand">EN EL BARRIO</span>
+        <span class="text-green-brand">EN EL BARRIO</span>
       </h1>
 
       <p class="max-w-xl text-slate-300 text-base md:text-lg mb-8 font-light">
@@ -182,7 +155,7 @@
       </p>
 
       <div class="flex flex-wrap gap-4 mb-12">
-        <a href="#horarios" class="bg-cyan-brand text-black font-semibold px-6 py-3 rounded-lg hover:bg-cyan-400 transition-colors">
+        <a href="#horarios" class="bg-green-brand text-black font-semibold px-6 py-3 rounded-lg hover:bg-green-400 transition-colors">
           VER HORARIOS
         </a>
         <a href="#contacto" class="border border-slate-700 bg-slate-900/50 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors backdrop-blur-sm">
@@ -214,84 +187,16 @@
     </div>
   </header>
 
-  <!-- NUEVA SECCIÓN: LA CANCHA (EDITABLE DESDE EL PANEL) -->
-  <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
-      <!-- Lado Izquierdo: Galería -->
-      <div class="lg:col-span-6 space-y-4">
-        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-xl h-64 md:h-80">
-          <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=1000&auto=format&fit=crop" alt="Cancha de Fútbol 5" class="w-full h-full object-cover">
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="rounded-2xl overflow-hidden border border-slate-800 h-44 sm:h-auto">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600&auto=format&fit=crop" alt="Partido nocturno" class="w-full h-full object-cover">
-          </div>
-          <div class="card-dark p-6 rounded-2xl flex flex-col justify-center">
-            <h3 class="text-2xl font-heading font-bold text-cyan-brand mb-2">5 vs 5</h3>
-            <p class="text-sm text-slate-400">Medida reglamentaria, arcos con red nueva y pecheras incluidas.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lado Derecho: Contenido dinámico -->
-      <div class="lg:col-span-6 space-y-6">
-        <div>
-          <span class="text-xs font-bold text-cyan-brand uppercase tracking-wider">LA CANCHA</span>
-          <h2 id="target-cancha-title" class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-4">LA CANCHA DEL BARRIO</h2>
-          <p id="target-cancha-desc" class="text-slate-300 font-light leading-relaxed">
-            Monumental es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-          <div class="card-dark p-5 rounded-2xl">
-            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            </div>
-            <h4 class="font-heading text-lg font-bold text-white mb-1">Césped sintético premium</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">Superficie pareja, con buen pique y amortiguación para jugar sin lastimarte.</p>
-          </div>
-
-          <div class="card-dark p-5 rounded-2xl">
-            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            </div>
-            <h4 class="font-heading text-lg font-bold text-white mb-1">Iluminación LED</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">Torres que dejan la cancha como de día. Jugás cómodo hasta la última hora.</p>
-          </div>
-
-          <div class="card-dark p-5 rounded-2xl">
-            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <h4 class="font-heading text-lg font-bold text-white mb-1">Reserva en 10 segundos</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">Tocás el horario libre en la grilla y te abre WhatsApp con el mensaje listo.</p>
-          </div>
-
-          <div class="card-dark p-5 rounded-2xl">
-            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </div>
-            <h4 class="font-heading text-lg font-bold text-white mb-1">Vestuario y estacionamiento</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">Espacio para cambiarte y lugar para dejar el auto sobre la calle.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- SECCIÓN HORARIOS INTERACTIVOS -->
   <section id="horarios" class="py-20 px-4 md:px-12 max-w-6xl mx-auto text-center">
-    <span class="text-xs font-bold text-cyan-brand uppercase tracking-wider">DISPONIBILIDAD</span>
+    <span class="text-xs font-bold text-green-brand uppercase tracking-wider">DISPONIBILIDAD</span>
     <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-2">HORARIOS DE LA SEMANA</h2>
-    <p class="text-slate-400 text-sm mb-8">Tocá un horario para probar el cambio de estado (Libre / Ocupado).</p>
+    <p class="text-slate-400 text-sm mb-8">Tocá un horario para cambiar su estado (Libre / Ocupado).</p>
 
     <div class="card-dark p-4 md:p-8 rounded-3xl overflow-x-auto">
       <table class="w-full min-w-[650px] text-center border-separate border-spacing-2">
         <thead>
-          <tr class="text-cyan-brand font-heading text-lg">
+          <tr class="text-green-brand font-heading text-lg">
             <th class="p-2"></th>
             <th class="p-2">LUN</th>
             <th class="p-2">MAR</th>
@@ -363,7 +268,7 @@
 
       <div class="flex items-center justify-center gap-6 mt-6 text-xs text-slate-400">
         <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded bg-cyan-500"></span> Libre
+          <span class="w-3 h-3 rounded bg-green-500"></span> Libre
         </div>
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded bg-red-500"></span> Ocupado
@@ -372,53 +277,53 @@
     </div>
   </section>
 
-  <!-- SECCIÓN PRECIOS EDITABLES -->
+  <!-- SECCIÓN PRECIOS -->
   <section class="py-20 px-4 md:px-12 max-w-6xl mx-auto text-center">
-    <span class="text-xs font-bold text-cyan-brand uppercase tracking-wider">PRECIOS</span>
+    <span class="text-xs font-bold text-green-brand uppercase tracking-wider">PRECIOS</span>
     <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-2">ELEGÍ CÓMO JUGAR</h2>
     <p class="text-slate-400 text-sm mb-12 max-w-lg mx-auto">
-      Seña por WhatsApp para dejar el turno tomado. El resto lo abonás en la cancha.
+      Seña por WhatsApp para dejar el turno reservado.
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
       <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
         <div>
           <h3 class="font-heading text-xl text-white font-bold mb-2">Turno suelto</h3>
-          <div id="target-price-suelto" class="text-3xl font-heading font-bold text-cyan-brand mb-1">$15.000</div>
+          <div id="target-price-suelto" class="text-3xl font-heading font-bold text-green-brand mb-1">$15.000</div>
           <div class="text-xs text-slate-400 mb-6">1 hora de cancha</div>
           <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Pelota y pecheras</li>
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Vestuario</li>
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Reserva por WhatsApp</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Pelota y pecheras</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Vestuario</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Reserva por WhatsApp</li>
           </ul>
         </div>
         <a href="#contacto" class="mt-8 block text-center border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition font-semibold text-sm text-white">CONSULTAR</a>
       </div>
 
-      <div class="card-dark p-8 rounded-3xl border-2 border-cyan-brand relative flex flex-col justify-between shadow-[0_0_30px_rgba(34,211,238,0.15)]">
-        <span class="absolute -top-3 right-6 bg-cyan-brand text-black font-bold text-xs px-3 py-1 rounded-full uppercase font-heading">MÁS ELEGIDO</span>
+      <div class="card-dark p-8 rounded-3xl border-2 border-green-brand relative flex flex-col justify-between shadow-[0_0_30px_rgba(34,197,94,0.15)]">
+        <span class="absolute -top-3 right-6 bg-green-brand text-black font-bold text-xs px-3 py-1 rounded-full uppercase font-heading">MÁS ELEGIDO</span>
         <div>
           <h3 class="font-heading text-xl text-white font-bold mb-2">Turno fijo semanal</h3>
-          <div id="target-price-fijo" class="text-3xl font-heading font-bold text-cyan-brand mb-1">$13.500</div>
+          <div id="target-price-fijo" class="text-3xl font-heading font-bold text-green-brand mb-1">$13.500</div>
           <div class="text-xs text-slate-400 mb-6">por semana · mismo día y hora</div>
           <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> 10% off sobre el turno</li>
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Horario reservado todo el mes</li>
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Prioridad ante cambios</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Descuento sobre el turno</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Horario reservado todo el mes</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Prioridad ante cambios</li>
           </ul>
         </div>
-        <a href="#contacto" class="mt-8 block text-center bg-cyan-brand text-black py-3 rounded-xl hover:bg-cyan-400 transition font-semibold text-sm">CONSULTAR</a>
+        <a href="#contacto" class="mt-8 block text-center bg-green-brand text-black py-3 rounded-xl hover:bg-green-400 transition font-semibold text-sm">CONSULTAR</a>
       </div>
 
       <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
         <div>
           <h3 class="font-heading text-xl text-white font-bold mb-2">Torneo / evento</h3>
-          <div class="text-3xl font-heading font-bold text-cyan-brand mb-1">A convenir</div>
+          <div class="text-3xl font-heading font-bold text-green-brand mb-1">A convenir</div>
           <div class="text-xs text-slate-400 mb-6">3 horas o más</div>
           <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Fixture armado</li>
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Cancha exclusiva</li>
-            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Cumpleaños y despedidas</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Fixture armado</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Cancha exclusiva</li>
+            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Cumpleaños y despedidas</li>
           </ul>
         </div>
         <a href="#contacto" class="mt-8 block text-center border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition font-semibold text-sm text-white">CONSULTAR</a>
@@ -426,7 +331,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN CONTACTO -->
+  <!-- SECCIÓN CONTACTO Y FOOTER -->
   <footer id="contacto" class="border-t border-slate-800 bg-black/40 py-12 px-4 md:px-12 text-center text-slate-400 text-sm">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="text-left">
@@ -434,7 +339,7 @@
         <p class="text-xs text-slate-500 mt-1">Barrio Olimpo, CABA · Fútbol 5</p>
       </div>
       <div>
-        <p>Reservas directas por WhatsApp: <a href="#" class="text-cyan-brand hover:underline font-semibold">+54 9 11 1234-5678</a></p>
+        <p>Reservas directas por WhatsApp: <a href="#" class="text-green-brand hover:underline font-semibold">+54 9 11 1234-5678</a></p>
       </div>
     </div>
   </footer>
@@ -446,7 +351,7 @@
 
   <!-- JAVASCRIPT DE INTERACTIVIDAD -->
   <script>
-    // 1. Alternar Modo Día / Noche
+    // 1. Modo Día / Noche
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const themeText = document.getElementById('theme-text');
@@ -458,7 +363,7 @@
       themeText.textContent = isLight ? 'Modo Noche' : 'Modo Día';
     });
 
-    // 2. Abrir / Cerrar Panel Lateral Admin
+    // 2. Panel Admin Lateral
     const adminPanel = document.getElementById('admin-panel');
     const panelOpenBtn = document.getElementById('panel-open-btn');
     const panelCloseBtn = document.getElementById('panel-close-btn');
@@ -466,21 +371,7 @@
     panelOpenBtn.addEventListener('click', () => adminPanel.classList.remove('translate-x-full'));
     panelCloseBtn.addEventListener('click', () => adminPanel.classList.add('translate-x-full'));
 
-    // 3. Edición en Vivo de Título y Descripción de "La Cancha"
-    const inputTitle = document.getElementById('edit-cancha-title');
-    const inputDesc = document.getElementById('edit-cancha-desc');
-    const targetTitle = document.getElementById('target-cancha-title');
-    const targetDesc = document.getElementById('target-cancha-desc');
-
-    inputTitle.addEventListener('input', (e) => {
-      targetTitle.textContent = e.target.value || 'LA CANCHA DEL BARRIO';
-    });
-
-    inputDesc.addEventListener('input', (e) => {
-      targetDesc.textContent = e.target.value;
-    });
-
-    // 4. Edición en Vivo de Precios
+    // 3. Edición en Vivo de Precios
     const inputPriceSuelto = document.getElementById('edit-price-suelto');
     const inputPriceFijo = document.getElementById('edit-price-fijo');
     const targetPriceSuelto = document.getElementById('target-price-suelto');
@@ -496,7 +387,7 @@
       targetPriceFijo.textContent = e.target.value;
     });
 
-    // 5. Interactividad en la Tabla de Horarios (Cambiar Libre / Ocupado)
+    // 4. Cambiar Estado en Grilla de Horarios
     document.querySelectorAll('.slot-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.classList.contains('slot-free')) {
