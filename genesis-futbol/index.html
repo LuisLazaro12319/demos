@@ -1,514 +1,500 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Génesis Fútbol 5 | Cancha en Barrio Olimpo</title>
-<meta name="description" content="Génesis Fútbol 5 — cancha de fútbol 5 en Barrio Olimpo (CABA). Mirá los horarios disponibles y reservá tu turno por WhatsApp.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(){try{if(localStorage.getItem('genesis-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
-<style>
-  :root{
-    --bg:#0a0f0c;
-    --bg2:#0f1512;
-    --accent:#1eff6e;
-    --accent-light:#86ffb3;
-    --text:#e9f2ec;
-    --text-gray:#94a39b;
-    --card:#131b16;
-    --heading:#ffffff;
-    --line:rgba(255,255,255,.07);
-    --soft:rgba(255,255,255,.05);
-  }
-  /* MODO DÍA (claro). Por defecto arranca en modo noche. */
-  :root[data-theme="light"]{
-    --bg:#eef2ef;
-    --bg2:#ffffff;
-    --card:#ffffff;
-    --text:#243029;
-    --text-gray:#586a60;
-    --heading:#0e1a13;
-    --accent:#0fae52;
-    --accent-light:#0c9848;
-    --line:rgba(0,0,0,.1);
-    --soft:rgba(0,0,0,.045);
-  }
-  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--heading);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;flex:0 0 38px;}
-  .theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
-  .theme-toggle .moon{display:none;}
-  :root[data-theme="light"] .theme-toggle .sun{display:none;}
-  :root[data-theme="light"] .theme-toggle .moon{display:block;}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
-  h1,h2,h3,.disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;}
-  a{text-decoration:none;color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
-  ul{list-style:none;}
-
-  /* NAV */
-  /* Header: OPACO cuando está quieto arriba; TRANSPARENTE al desplazarse. */
-  nav{
-    position:fixed;top:0;left:0;width:100%;z-index:1000;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:.55rem 2rem;
-    background:var(--bg);
-    border-bottom:1px solid rgba(30,255,110,.18);
-    transition:background .3s ease, border-color .3s ease;
-  }
-  nav.scrolled{background:transparent;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:transparent;}
-  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:var(--heading);}
-  .brand-logo{height:48px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
-  .brand-name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;}
-  .brand-name b{color:var(--accent);font-weight:400;}
-  .brand .brand-name{color:var(--heading);}
-  .footer-brand .brand-name{color:#fff;}
-  .footer-logo{height:52px;width:auto;}
-  .social-btn.wa:hover{background:#25d366;border-color:transparent;}
-  @media(max-width:420px){ .brand-name{display:none;} }
-  .brand .ball{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
-  .brand span{color:var(--accent);}
-  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
-  .nav-links{display:flex;gap:1.8rem;}
-  .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
-  .nav-links a:hover{color:var(--accent);}
-  /* Menú hamburguesa (solo móvil) */
-  .nav-toggle{display:none;width:40px;height:40px;border:none;background:transparent;color:var(--heading);cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;flex:0 0 40px;}
-  .nav-toggle span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:.25s;}
-  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-  .nav-toggle.open span:nth-child(2){opacity:0;}
-  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  .mobile-menu{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:.4rem 1.4rem 1rem;flex-direction:column;box-shadow:0 20px 40px rgba(0,0,0,.35);}
-  .mobile-menu a{padding:.85rem .2rem;color:var(--text-gray);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);}
-  .mobile-menu a:last-child{border-bottom:none;}
-  .mobile-menu a:hover{color:var(--accent);}
-  .mobile-menu.open{display:flex;}
-  .nav-cta{
-    display:flex;align-items:center;gap:.5rem;background:var(--accent);color:#06110a;
-    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
-    box-shadow:0 6px 18px rgba(30,255,110,.3);transition:transform .25s;
-  }
-  .nav-cta:hover{transform:translateY(-2px);}
-
-  /* HERO */
-  .hero{
-    position:relative;min-height:100vh;display:flex;flex-direction:column;
-    align-items:flex-start;justify-content:center;
-    padding:8rem 1.5rem 5rem;
-    background:linear-gradient(90deg, rgba(5,8,6,.95) 12%, rgba(5,8,6,.6) 58%, rgba(30,255,110,.18) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
-  }
-  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
-  .hero-badge{
-    display:inline-flex;align-items:center;gap:.5rem;background:rgba(30,255,110,.1);
-    border:1px solid rgba(30,255,110,.35);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
-    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
-  }
-  .hero-badge b{color:var(--accent-light);}
-  .hero h1{font-size:4.6rem;color:#fff;max-width:820px;line-height:1.02;text-shadow:0 4px 25px rgba(0,0,0,.5);}
-  .hero h1 span{color:var(--accent);}
-  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:560px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
-  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
-  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
-  .btn-accent{background:var(--accent);color:#06110a;box-shadow:0 10px 28px rgba(30,255,110,.35);}
-  .btn-accent:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(30,255,110,.5);}
-  .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
-  .btn-outline:hover{background:rgba(255,255,255,.14);}
-
-  /* SECTION SHARED */
-  section{padding:6rem 0;}
-  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;font-family:'Inter',sans-serif;}
-  .sec-title{text-align:center;font-size:2.6rem;color:var(--heading);margin-bottom:.9rem;}
-  .sec-sub{text-align:center;color:var(--text-gray);max-width:620px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
-
-  /* NOSOTROS */
-  .nos-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
-  .nos-img{border-radius:14px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(30,255,110,.15);min-height:320px;background:url('img/hero.jpg') center/cover;}
-  .nos-text .eyebrow{text-align:left;}
-  .nos-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;color:var(--heading);}
-  .nos-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
-  .nos-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem;}
-  .nos-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:var(--text);font-family:'Inter',sans-serif;}
-  .nos-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#06110a;font-size:.7rem;font-weight:900;}
-  /* CARRUSEL Nosotros */
-  .carrusel{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(30,255,110,.15);}
-  .carrusel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;}
-  .carrusel-track::-webkit-scrollbar{display:none;}
-  .carrusel-slide{flex:0 0 100%;scroll-snap-align:center;}
-  .carrusel-slide img{width:100%;height:380px;object-fit:cover;display:block;}
-  .carrusel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;background:rgba(10,15,12,.7);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:.2s;z-index:2;}
-  .carrusel-arrow:hover{background:var(--accent);color:#06110a;}
-  .carrusel-arrow.prev{left:.8rem;}
-  .carrusel-arrow.next{right:.8rem;}
-  .carrusel-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:2;}
-  .carrusel-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);transition:.2s;}
-  .carrusel-dots span.active{background:var(--accent);width:22px;border-radius:4px;}
-
-  /* HORARIOS */
-  .horarios{background:var(--bg2);}
-  .grid-scroll{overflow-x:auto;padding-bottom:.6rem;}
-  .hgrid{display:grid;grid-template-columns:64px repeat(7,minmax(82px,1fr));gap:6px;min-width:660px;}
-  .hhead{font-family:'Anton',sans-serif;text-transform:uppercase;text-align:center;color:var(--accent);font-size:.9rem;padding:.5rem 0;letter-spacing:.5px;}
-  .htime{display:flex;align-items:center;justify-content:flex-end;padding-right:.5rem;color:var(--text-gray);font-size:.8rem;font-weight:600;}
-  .slot{border-radius:7px;padding:.7rem .3rem;text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.3px;transition:.2s;}
-  .slot.libre{background:rgba(30,255,110,.14);color:var(--accent-light);border:1px solid rgba(30,255,110,.32);cursor:pointer;}
-  .slot.libre:hover{background:var(--accent);color:#06110a;transform:translateY(-2px);}
-  .slot.ocupado{background:rgba(224,49,49,.26);color:#e23b3b;border:1px solid rgba(224,49,49,.5);text-decoration:line-through;}
-  .hor-legend{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin:1.6rem 0 .4rem;font-size:.82rem;color:var(--text-gray);}
-  .hor-legend span{display:inline-flex;align-items:center;gap:.45rem;}
-  .dot{width:12px;height:12px;border-radius:3px;}
-  .dot.l{background:rgba(30,255,110,.5);}
-  .dot.o{background:rgba(224,49,49,.7);}
-  .nota-demo{text-align:center;color:var(--text-gray);font-size:.82rem;margin-top:1rem;font-style:italic;}
-  .precio-band{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;justify-content:space-between;background:var(--card);border:1px solid rgba(30,255,110,.25);border-radius:14px;padding:1.5rem 1.9rem;margin-top:2.4rem;}
-  .precio-band .p-main{font-family:'Anton',sans-serif;font-size:1.9rem;color:var(--heading);}
-  .precio-band .p-main span{color:var(--accent);}
-  .precio-band .p-sub{color:var(--text-gray);font-size:.9rem;}
-
-  /* CONTACTO */
-  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
-  .info-card{
-    background:var(--card);border:1px solid var(--line);
-    border-radius:10px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
-    display:flex;gap:1rem;align-items:flex-start;
-  }
-  .info-card .icon{
-    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(30,255,110,.12);
-    display:flex;align-items:center;justify-content:center;color:var(--accent);
-  }
-  .info-card h4{font-size:.95rem;color:var(--heading);margin-bottom:.3rem;font-weight:700;font-family:'Inter',sans-serif;text-transform:none;letter-spacing:0;}
-  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
-  .info-card a:hover{color:var(--accent);}
-  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(30,255,110,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);height:100%;min-height:420px;}
-  .map-wrap iframe{width:100%;height:100%;min-height:420px;border:0;filter:grayscale(50%) invert(90%) contrast(88%);}
-
-  /* PANEL PREVIEW */
-  .panel{background:var(--bg2);}
-  .panel-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;align-items:stretch;margin-top:.6rem;}
-  .panel-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.7rem;position:relative;}
-  .panel-card h4{color:#fff;font-size:1.05rem;font-family:'Inter',sans-serif;font-weight:700;text-transform:none;letter-spacing:0;margin-bottom:.4rem;}
-  .panel-card .desc{color:var(--text-gray);font-size:.88rem;margin-bottom:1.2rem;}
-  .mini-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;}
-  .mini-slot{height:26px;border-radius:5px;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:700;}
-  .mini-slot.l{background:rgba(30,255,110,.16);color:var(--accent-light);border:1px solid rgba(30,255,110,.3);}
-  .mini-slot.o{background:rgba(255,255,255,.04);color:#59685f;border:1px solid rgba(255,255,255,.05);}
-  .upload-slot{border:1.5px dashed rgba(255,255,255,.18);border-radius:10px;height:96px;display:flex;flex-direction:column;gap:.35rem;align-items:center;justify-content:center;color:var(--text-gray);font-size:.8rem;margin-bottom:.9rem;}
-  .upload-slot svg{color:var(--accent);}
-  .locked{display:flex;align-items:center;gap:.7rem;margin-top:1.3rem;}
-  .locked .lbtn{background:rgba(255,255,255,.08);color:var(--text-gray);border-radius:8px;padding:.7rem 1.3rem;font-size:.85rem;font-weight:700;}
-  .locked small{color:var(--text-gray);font-size:.78rem;}
-  .vp-tag{position:absolute;top:1.2rem;right:1.2rem;background:rgba(30,255,110,.14);color:var(--accent);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.3rem .7rem;border-radius:20px;}
-
-  /* FOOTER */
-  footer{background:#070a08;color:#8b918b;padding:4rem 0 2rem;border-top:1px solid rgba(30,255,110,.1);}
-  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
-  .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;}
-  .footer-brand .ball{width:12px;height:12px;border-radius:50%;background:var(--accent);}
-  .footer-brand span{color:var(--accent);}
-  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Inter',sans-serif;}
-  .footer-col p, .footer-col a{color:#8b918b;font-size:.9rem;font-family:'Inter',sans-serif;}
-  .footer-col.about p{line-height:1.7;max-width:280px;}
-  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
-  .footer-nav a:hover{color:var(--accent);}
-  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
-  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
-  .social-btn{
-    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
-    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
-    color:#fff;background:rgba(255,255,255,.04);transition:.3s;
-  }
-  .social-btn svg{display:block;flex-shrink:0;}
-  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
-  .footer-tel{display:block;color:#c3c9c3;margin-bottom:.4rem;}
-  .footer-tel:hover{color:var(--accent);}
-  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center;}
-
-  .float-wa{
-    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
-    background:#25d366;display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:999;transition:.3s;
-  }
-  .float-wa:hover{transform:scale(1.1);}
-
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
-
-  @media(max-width:900px){
-    .nos-grid{grid-template-columns:1fr;}
-    .contacto-grid{grid-template-columns:1fr;}
-    .panel-wrap{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-    .nav-links{display:none;}
-    .nav-toggle{display:flex;}
-    .hero{min-height:76vh;padding:7rem 1.3rem 3.5rem;}
-    .hero h1{font-size:2.8rem;}
-  }
-  @media(max-width:560px){
-    .footer-grid{grid-template-columns:1fr;gap:2rem;}
-    .footer-col.about p{max-width:none;}
-  }
-  @media(max-width:480px){
-    .hero{min-height:66vh;padding:6rem 1.1rem 2.8rem;}
-    .hero h1{font-size:2.2rem;}
-    .sec-title{font-size:1.9rem;}
-    section{padding:4rem 0;}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fútbol 5 Génesis | Reserva Tu Cancha Online</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        genesis: {
+                            bg: '#0a0e0b',
+                            card: '#121a14',
+                            cardHover: '#18241c',
+                            border: '#213326',
+                            neon: '#00ff66',
+                            accent: '#10b981',
+                            darkGreen: '#0d2818',
+                            muted: '#8ba391'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(0, 255, 102, 0.25)',
+                        'neon-lg': '0 0 35px rgba(0, 255, 102, 0.4)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0e0b; }
+        ::-webkit-scrollbar-thumb { background: #213326; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff66; }
+        .glow-effect { position: relative; }
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.15);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .glow-effect:hover::after { opacity: 1; }
+    </style>
 </head>
-<body>
+<body class="bg-genesis-bg text-gray-100 font-sans antialiased selection:bg-genesis-neon selection:text-black">
 
-<nav id="nav">
-  <a href="#inicio" class="brand" aria-label="Génesis Fútbol 5"><img src="img/logo.png" alt="Génesis Fútbol 5" class="brand-logo"><span class="brand-name">Fútbol 5 <b>Génesis</b></span></a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#horarios">Horarios</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-      <li><a href="panel/">Panel</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
-      <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-    </button>
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#horarios">Horarios</a>
-    <a href="#contacto">Contacto</a>
-    <a href="panel/">Panel</a>
-  </div>
-</nav>
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 bg-genesis-bg/90 backdrop-blur-md border-b border-genesis-border/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-genesis-neon to-genesis-accent p-[2px] shadow-neon">
+                    <div class="w-full h-full bg-genesis-bg rounded-[10px] flex items-center justify-center">
+                        <svg class="w-6 h-6 text-genesis-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 3a9 9 0 0 0 0 18" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M12 7l3 2v4l-3 2-3-2V9l3-2z" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-display text-2xl font-bold tracking-wider uppercase bg-gradient-to-r from-white via-gray-200 to-genesis-neon bg-clip-text text-transparent">
+                        GÉNESIS
+                    </span>
+                    <span class="block text-[10px] font-extrabold uppercase tracking-[0.25em] text-genesis-neon -mt-1">
+                        Fútbol 5 & Eventos
+                    </span>
+                </div>
+            </a>
 
-<section class="hero" id="inicio">
-  <div class="hero-inner">
-    <span class="hero-badge">📍 <b>Barrio Olimpo</b> · Fútbol 5</span>
-    <h1>Tu cancha <span>en el barrio</span></h1>
-    <p>Fútbol 5 en Barrio Olimpo. Mirá los horarios disponibles, elegí tu turno y reservá al toque por WhatsApp.</p>
-    <div class="hero-actions">
-      <a class="btn btn-accent" href="#horarios">Ver horarios</a>
-    </div>
-  </div>
-</section>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-genesis-muted">
+                <a href="#canchas" class="hover:text-genesis-neon transition-colors">Canchas</a>
+                <a href="#reservas" class="hover:text-genesis-neon transition-colors">Reservar Turno</a>
+                <a href="#servicios" class="hover:text-genesis-neon transition-colors">Servicios</a>
+                <a href="#ubicacion" class="hover:text-genesis-neon transition-colors">Ubicación</a>
+            </nav>
 
-<section id="nosotros">
-  <div class="wrap nos-grid">
-    <div class="carrusel reveal">
-      <button class="carrusel-arrow prev" id="carruselPrev" aria-label="Anterior">&#10094;</button>
-      <div class="carrusel-track" id="carruselTrack">
-        <div class="carrusel-slide"><img src="img/hero.jpg" alt="Cancha de fútbol 5 Génesis"></div>
-        <div class="carrusel-slide"><img src="img/cancha2.jpg" alt="Césped de la cancha"></div>
-      </div>
-      <button class="carrusel-arrow next" id="carruselNext" aria-label="Siguiente">&#10095;</button>
-      <div class="carrusel-dots" id="carruselDots"><span class="active"></span><span></span></div>
-    </div>
-    <div class="nos-text reveal">
-      <span class="eyebrow">Nosotros</span>
-      <h2>La cancha del barrio</h2>
-      <p>Génesis es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</p>
-      <div class="nos-list">
-        <li><span class="chk">✓</span> Cancha de fútbol 5</li>
-        <li><span class="chk">✓</span> Turnos todos los días</li>
-        <li><span class="chk">✓</span> Reservás fácil por WhatsApp</li>
-        <li><span class="chk">✓</span> A metros de tu casa, en Barrio Olimpo</li>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="horarios" class="horarios">
-  <div class="wrap">
-    <span class="eyebrow">Disponibilidad</span>
-    <h2 class="sec-title">Horarios de la Semana</h2>
-    <p class="sec-sub">Tocá un horario <b style="color:var(--accent-light)">libre</b> y te lleva directo a WhatsApp para reservarlo.</p>
-    <div class="grid-scroll">
-      <div class="hgrid" id="hgrid"></div>
-    </div>
-    <div class="hor-legend">
-      <span><i class="dot l"></i> Libre — tocá para reservar</span>
-      <span><i class="dot o"></i> Ocupado</span>
-    </div>
-    <div class="precio-band reveal">
-      <div>
-        <div class="p-main">Turno 1 hora · <span>$15.000</span></div>
-        <div class="p-sub">Fútbol 5 · seña por WhatsApp para dejarlo reservado</div>
-      </div>
-    </div>
-    <p class="nota-demo">* Precios y disponibilidad de ejemplo — se editan desde el panel.</p>
-  </div>
-</section>
-
-<section id="contacto">
-  <div class="wrap">
-    <span class="eyebrow">Dónde estamos</span>
-    <h2 class="sec-title">Barrio Olimpo</h2>
-    <div class="contacto-grid">
-      <div>
-        <div class="info-card reveal">
-          <div class="icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-          </div>
-          <div><h4>Dirección</h4><a href="https://maps.app.goo.gl/ux2eFYZ8MkKLdJ2V6" target="_blank" rel="noopener">Raúl Lloberas al 4100<br>Barrio Olimpo · CABA<br><span style="color:var(--accent);font-weight:600">Ver en Google Maps →</span></a></div>
+            <a href="#reservas" class="inline-flex items-center gap-2 bg-genesis-neon hover:bg-emerald-400 text-black font-extrabold px-5 py-2.5 rounded-xl transition-all transform hover:scale-105 shadow-neon uppercase text-xs tracking-wider">
+                <span>Reservar Hora</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
         </div>
-        <div class="info-card reveal">
-          <div class="icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div><h4>Reservas</h4><a href="https://wa.me/5491168005613?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20la%20cancha" target="_blank" rel="noopener">11-6800-5613</a></div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden py-16 lg:py-24 border-b border-genesis-border/40">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#00ff66_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-genesis-neon/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-genesis-darkGreen/80 border border-genesis-neon/30 text-genesis-neon text-xs font-bold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-genesis-neon animate-ping"></span>
+                        <span>CÉSPED SINTÉTICO DE ÚLTIMA GENERACIÓN</span>
+                    </div>
+
+                    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-none">
+                        TU MEJOR <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-genesis-neon to-emerald-400">PARTIDO SE JUEGA</span> <br/>
+                        EN GÉNESIS
+                    </h1>
+
+                    <p class="text-genesis-muted text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                        Canchas profesionales con iluminación LED de alta potencia, vestuarios de primer nivel, buffet con parrilla y el mejor ambiente futbolero.
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-bold text-gray-300">
+                        <div class="flex items-center gap-2 bg-genesis-card px-4 py-2.5 rounded-xl border border-genesis-border">
+                            <span class="text-genesis-neon text-base">⚽</span> 2 Canchas Sintéticas
+                        </div>
+                        <div class="flex items-center gap-2 bg-genesis-card px-4 py-2.5 rounded-xl border border-genesis-border">
+                            <span class="text-genesis-neon text-base">💡</span> Luces LED 500W
+                        </div>
+                        <div class="flex items-center gap-2 bg-genesis-card px-4 py-2.5 rounded-xl border border-genesis-border">
+                            <span class="text-genesis-neon text-base">🥩</span> Parrilla & Tercer Tiempo
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#reservas" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-genesis-neon hover:bg-emerald-400 text-black font-extrabold px-8 py-4 rounded-xl transition-all shadow-neon text-sm uppercase tracking-wider">
+                            <span>Elegir Horario y Reservar</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="#ubicacion" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-genesis-card hover:bg-genesis-cardHover text-white font-bold px-6 py-4 rounded-xl border border-genesis-border transition-all text-sm uppercase tracking-wider">
+                            <span>Ver Dónde Estamos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-2xl bg-gradient-to-b from-genesis-card to-genesis-bg border border-genesis-border p-3 shadow-2xl overflow-hidden group">
+                        <div class="relative h-80 sm:h-96 rounded-xl overflow-hidden bg-zinc-900">
+                            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop');"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-genesis-bg via-genesis-bg/40 to-transparent"></div>
+                            
+                            <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-genesis-border flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-genesis-neon animate-pulse"></span>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">Abierto de 14:00 a 01:00 hs</span>
+                            </div>
+
+                            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-genesis-card/90 backdrop-blur-md border border-genesis-border/80">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-genesis-neon uppercase tracking-wider">Reserva Express en 1 Clic</p>
+                                        <h3 class="font-display text-xl font-bold text-white uppercase">Canchas Habilitadas Hoy</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-2xl font-black text-white">$18.000</span>
+                                        <span class="block text-[10px] text-genesis-muted uppercase">por hora</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="info-card reveal">
-          <div class="icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </div>
-          <div><h4>Instagram</h4><a href="https://www.instagram.com/_.genesis2/" target="_blank" rel="noopener">@_.genesis2</a></div>
+    </section>
+
+    <!-- SECTION 2: CANCHAS -->
+    <section id="canchas" class="py-16 bg-genesis-bg/50 border-b border-genesis-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">NUESTRAS INSTALACIONES</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold text-white uppercase tracking-tight mt-1">Elegí tu Cancha</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Cancha 1 Card -->
+                <div class="bg-genesis-card rounded-2xl border border-genesis-border overflow-hidden hover:border-genesis-neon/50 transition-all glow-effect">
+                    <div class="relative h-56 bg-zinc-800 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=1000&auto=format&fit=crop" alt="Cancha 1 Génesis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-genesis-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-genesis-neon text-black font-extrabold text-xs px-3 py-1 rounded-md uppercase tracking-wider">CANCHA 1 · TECHADA</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-display text-2xl font-bold text-white uppercase">Cancha 1 (Techada Pro)</h3>
+                            <span class="text-lg font-black text-genesis-neon">$20.000 <span class="text-xs font-normal text-genesis-muted">/h</span></span>
+                        </div>
+                        <p class="text-genesis-muted text-xs leading-relaxed">
+                            Cancha techada ideal para días de lluvia o sol intenso. Red de contención de alta resistencia y césped Forbex 50mm.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-gray-300">
+                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Techada 100%</span>
+                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Iluminación LED</span>
+                        </div>
+                        <a href="#reservas" onclick="seleccionarCancha('Cancha 1')" class="block w-full text-center bg-genesis-darkGreen hover:bg-genesis-neon hover:text-black text-genesis-neon font-bold py-3 rounded-xl border border-genesis-neon/30 transition-all text-xs uppercase tracking-wider">
+                            Ver Horarios Cancha 1 →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cancha 2 Card -->
+                <div class="bg-genesis-card rounded-2xl border border-genesis-border overflow-hidden hover:border-genesis-neon/50 transition-all glow-effect">
+                    <div class="relative h-56 bg-zinc-800 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1000&auto=format&fit=crop" alt="Cancha 2 Génesis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-genesis-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-emerald-500 text-black font-extrabold text-xs px-3 py-1 rounded-md uppercase tracking-wider">CANCHA 2 · AL AIRE LIBRE</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-display text-2xl font-bold text-white uppercase">Cancha 2 (Aire Libre)</h3>
+                            <span class="text-lg font-black text-genesis-neon">$18.000 <span class="text-xs font-normal text-genesis-muted">/h</span></span>
+                        </div>
+                        <p class="text-genesis-muted text-xs leading-relaxed">
+                            Cancha descubierta al aire libre con óptimo drenaje. Rodeada de reja de seguridad y reflectores HQ.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-gray-300">
+                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Aire Libre</span>
+                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Luces LED 500W</span>
+                        </div>
+                        <a href="#reservas" onclick="seleccionarCancha('Cancha 2')" class="block w-full text-center bg-genesis-darkGreen hover:bg-genesis-neon hover:text-black text-genesis-neon font-bold py-3 rounded-xl border border-genesis-neon/30 transition-all text-xs uppercase tracking-wider">
+                            Ver Horarios Cancha 2 →
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="info-card reveal">
-          <div class="icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div><h4>Abierto</h4><p>Todos los días · consultá disponibilidad</p></div>
+    </section>
+
+    <!-- SECTION 3: RESERVA INTERACTIVA DE HORARIOS -->
+    <section id="reservas" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">SISTEMA DE RESERVA EN VIVO</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold text-white uppercase tracking-tight mt-1">
+                    Elegí el Horario y Reservá
+                </h2>
+                <p class="text-genesis-muted text-sm mt-2">
+                    Hacé clic en el horario verde disponible y te redirigimos instantáneamente a WhatsApp con la reserva lista para confirmar.
+                </p>
+            </div>
+
+            <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border shadow-xl space-y-6 max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-genesis-border/60">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-genesis-muted mb-2">1. Seleccioná la Cancha:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="btnCancha1" onclick="cambiarCancha('Cancha 1')" class="py-3 px-4 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-neon">
+                                <span>⚽ Cancha 1 (Techada)</span>
+                            </button>
+                            <button id="btnCancha2" onclick="cambiarCancha('Cancha 2')" class="py-3 px-4 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
+                                <span>⚽ Cancha 2 (Exterior)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-genesis-muted mb-2">2. Seleccioná el Día:</label>
+                        <div class="grid grid-cols-3 gap-2" id="daySelectorContainer"></div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs font-medium px-2">
+                    <span class="text-white font-bold uppercase tracking-wide flex items-center gap-2">
+                        <span>Horarios para:</span>
+                        <span id="labelCanchaDia" class="text-genesis-neon underline decoration-genesis-neon/50">Cancha 1 - Hoy</span>
+                    </span>
+
+                    <div class="flex items-center gap-4 text-[11px]">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-genesis-neon shadow-neon"></span>
+                            <span class="text-white font-semibold">Disponible</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-red-950 border border-red-800"></span>
+                            <span class="text-gray-400">Ocupado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRID DINÁMICO DE HORARIOS -->
+                <div id="gridHorarios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 pt-2"></div>
+            </div>
         </div>
-      </div>
-      <div class="map-wrap reveal">
-        <iframe src="https://www.google.com/maps?q=-34.732845,-58.479166&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-col about">
-        <div class="footer-brand"><img src="img/logo.png" alt="Génesis Fútbol 5" class="footer-logo"><span class="brand-name">Fútbol 5 <b>Génesis</b></span></div>
-        <p>Cancha de fútbol 5 en Barrio Olimpo. Reservá tu turno por WhatsApp.</p>
-      </div>
-      <div class="footer-col footer-addr">
-        <h4>Dónde estamos</h4>
-        <p>Raúl Lloberas al 4100<br>Barrio Olimpo<br>CABA</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navegación</h4>
-        <div class="footer-nav">
-          <a href="#inicio">Inicio</a>
-          <a href="#nosotros">Nosotros</a>
-          <a href="#horarios">Horarios</a>
-          <a href="#contacto">Contacto</a>
-          <a href="panel/">Panel</a>
+    <!-- SECTION 4: SERVICIOS / INSTALACIONES -->
+    <section id="servicios" class="py-16 bg-genesis-card/30 border-y border-genesis-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">TODO PARA EL TERCER TIEMPO</span>
+                <h2 class="font-display text-4xl font-bold text-white uppercase tracking-tight mt-1">Servicios Incluidos</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">🚿</div>
+                    <h3 class="font-display text-xl font-bold text-white uppercase">Vestuarios Pro</h3>
+                    <p class="text-genesis-muted text-xs">Duchas de agua caliente y sanitarios sanitizados continuamente.</p>
+                </div>
+
+                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">🍔</div>
+                    <h3 class="font-display text-xl font-bold text-white uppercase">Buffet & Parrilla</h3>
+                    <p class="text-genesis-muted text-xs">Hamburguesas, bebidas frías y alquiler de parrilla para tu grupo.</p>
+                </div>
+
+                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">⚽</div>
+                    <h3 class="font-display text-xl font-bold text-white uppercase">Pelotas & Pecheras</h3>
+                    <p class="text-genesis-muted text-xs">Pelotas oficiales F5 número 4 y juegos completos de pecheras gratis.</p>
+                </div>
+
+                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">🚗</div>
+                    <h3 class="font-display text-xl font-bold text-white uppercase">Estacionamiento</h3>
+                    <p class="text-genesis-muted text-xs">Espacio privado monitoreado con cámaras de seguridad sin costo extra.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="footer-col contact">
-        <h4>Seguinos en Nuestras Redes</h4>
-        <div class="footer-socials">
-          <a class="social-btn" href="https://www.instagram.com/_.genesis2/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a class="social-btn wa" href="https://wa.me/5491168005613" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.96L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.25-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
-          </a>
+    </section>
+
+    <!-- SECTION 5: UBICACIÓN Y CONTACTO -->
+    <section id="ubicacion" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">¿DÓNDE ESTAMOS?</span>
+                        <h2 class="font-display text-4xl font-bold text-white uppercase tracking-tight mt-1">Vení a Jugar</h2>
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start gap-4 bg-genesis-card p-4 rounded-xl border border-genesis-border">
+                            <span class="text-2xl">📍</span>
+                            <div>
+                                <h4 class="font-bold text-white uppercase">Dirección</h4>
+                                <p class="text-genesis-muted text-xs">Av. Principal 1234, Buenos Aires</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-genesis-card p-4 rounded-xl border border-genesis-border">
+                            <span class="text-2xl">🕒</span>
+                            <div>
+                                <h4 class="font-bold text-white uppercase">Horarios de Atención</h4>
+                                <p class="text-genesis-muted text-xs">Lunes a Domingos: 14:00 hs a 01:00 hs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="relative w-full h-80 rounded-2xl overflow-hidden border border-genesis-border bg-genesis-card">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105072.0436214561!2d-58.50333852089843!3d-34.60372229999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf7359a0f7%3A0xdf66d40010915998!2sBuenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+                            class="w-full h-full grayscale opacity-80 hover:opacity-100 transition-opacity" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a class="footer-tel" href="https://wa.me/5491168005613" target="_blank" rel="noopener">Celular: 11-6800-5613</a>
-      </div>
-    </div>
-    <p class="fine">© 2026 Génesis Fútbol 5 · Barrio Olimpo · CABA</p>
-  </div>
-</footer>
+    </section>
 
-<a class="float-wa" href="https://wa.me/5491168005613?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20la%20cancha" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
-</a>
+    <footer class="bg-black border-t border-genesis-border py-8 text-center text-xs text-genesis-muted">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Fútbol 5 Génesis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    <!-- SCRIPT DE RESERVA DE HORARIOS -->
+    <script>
+        const WHATSAPP_NUMBER = "5491112345678"; // <--- Cambiá este número por el tuyo de WhatsApp
+        
+        let estadoReserva = { cancha: 'Cancha 1', diaLabel: 'Hoy', fechaTexto: '' };
 
-  // Menú móvil (hamburguesa)
-  const navToggle = document.getElementById('navToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (navToggle && mobileMenu) {
-    navToggle.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      navToggle.classList.toggle('open', open);
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    }));
-  }
+        const HORARIOS_BASE = ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00'];
 
-  // Modo día / noche (arranca en noche; se recuerda la elección)
-  const tt = document.getElementById('themeToggle');
-  if (tt) tt.addEventListener('click', () => {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    if (isLight) { document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('genesis-theme','dark');}catch(e){} }
-    else { document.documentElement.setAttribute('data-theme','light'); try{localStorage.setItem('genesis-theme','light');}catch(e){} }
-  });
+        const OCUPADOS_MOCK = {
+            'Cancha 1_Hoy': ['19:00', '21:00', '22:00'],
+            'Cancha 1_Mañana': ['20:00', '22:00'],
+            'Cancha 2_Hoy': ['18:00', '20:00', '23:00'],
+            'Cancha 2_Mañana': ['19:00', '21:00']
+        };
 
-  // --- Grilla de horarios (disponibilidad de ejemplo, editable desde el panel) ---
-  const DIAS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
-  const DIA_FULL = {Lun:'el lunes',Mar:'el martes','Mié':'el miércoles',Jue:'el jueves',Vie:'el viernes','Sáb':'el sábado',Dom:'el domingo'};
-  const HORAS = ['18:00','19:00','20:00','21:00','22:00','23:00'];
-  // Turnos ocupados de ejemplo: "Dia|Hora"
-  const OCUPADO = new Set([
-    'Lun|20:00','Mar|19:00','Mar|22:00','Mié|21:00','Jue|20:00','Jue|23:00',
-    'Vie|20:00','Vie|21:00','Vie|22:00','Sáb|18:00','Sáb|21:00','Sáb|22:00','Dom|20:00','Dom|21:00'
-  ]);
-  const WA = '5491168005613';
+        function generarDias() {
+            const container = document.getElementById('daySelectorContainer');
+            container.innerHTML = '';
+            const hoy = new Date();
+            const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
-  const grid = document.getElementById('hgrid');
-  let html = '<div class="hhead"></div>' + DIAS.map(d => `<div class="hhead">${d}</div>`).join('');
-  HORAS.forEach(h => {
-    html += `<div class="htime">${h}</div>`;
-    DIAS.forEach(d => {
-      const ocup = OCUPADO.has(`${d}|${h}`);
-      if (ocup) {
-        html += `<div class="slot ocupado">Ocupado</div>`;
-      } else {
-        html += `<div class="slot libre" data-dia="${d}" data-hora="${h}">Libre</div>`;
-      }
-    });
-  });
-  grid.innerHTML = html;
+            for (let i = 0; i < 3; i++) {
+                const d = new Date(hoy);
+                d.setDate(hoy.getDate() + i);
 
-  grid.addEventListener('click', (e) => {
-    const cell = e.target.closest('.slot.libre');
-    if (!cell) return;
-    const dia = cell.dataset.dia, hora = cell.dataset.hora;
-    const msg = `Hola! Quiero reservar la cancha ${DIA_FULL[dia]} a las ${hora}hs`;
-    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-  });
+                const diaNombre = i === 0 ? 'Hoy' : i === 1 ? 'Mañana' : `${diasSemana[d.getDay()]} ${d.getDate()}`;
+                const fechaFormateada = `${d.getDate()}/${d.getMonth() + 1}`;
 
-  // --- Carrusel de Nosotros ---
-  const track = document.getElementById('carruselTrack');
-  if (track) {
-    const dotsWrap = document.getElementById('carruselDots');
-    const goTo = (i) => {
-      const slides = track.querySelectorAll('.carrusel-slide');
-      const idx = Math.max(0, Math.min(slides.length - 1, i));
-      track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
-    };
-    document.getElementById('carruselPrev').addEventListener('click', () => goTo(Math.round(track.scrollLeft / track.clientWidth) - 1));
-    document.getElementById('carruselNext').addEventListener('click', () => goTo(Math.round(track.scrollLeft / track.clientWidth) + 1));
-    let scrollTimer;
-    track.addEventListener('scroll', () => {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        const active = Math.round(track.scrollLeft / track.clientWidth);
-        dotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === active));
-      }, 100);
-    });
-  }
+                if (i === 0) estadoReserva.fechaTexto = `${diaNombre} (${fechaFormateada})`;
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
+                const activeClass = i === 0 
+                    ? 'border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold shadow-neon' 
+                    : 'border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-medium';
+
+                container.innerHTML += `
+                    <button onclick="cambiarDia('${diaNombre}', '${fechaFormateada}', this)" class="btnDia py-2.5 px-3 rounded-xl border text-xs uppercase tracking-wider text-center transition-all ${activeClass}">
+                        <span class="block font-bold">${diaNombre}</span>
+                        <span class="text-[10px] opacity-75">${fechaFormateada}</span>
+                    </button>
+                `;
+            }
+        }
+
+        function cambiarCancha(canchaNombre) {
+            estadoReserva.cancha = canchaNombre;
+            const btn1 = document.getElementById('btnCancha1');
+            const btn2 = document.getElementById('btnCancha2');
+
+            if (canchaNombre === 'Cancha 1') {
+                btn1.className = "py-3 px-4 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-neon";
+                btn2.className = "py-3 px-4 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all";
+            } else {
+                btn2.className = "py-3 px-4 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-neon";
+                btn1.className = "py-3 px-4 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all";
+            }
+            actualizarHorariosGrid();
+        }
+
+        function cambiarDia(diaLabel, fechaFormateada, element) {
+            estadoReserva.diaLabel = diaLabel;
+            estadoReserva.fechaTexto = `${diaLabel} (${fechaFormateada})`;
+
+            document.querySelectorAll('.btnDia').forEach(btn => {
+                btn.className = "btnDia py-2.5 px-3 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-medium text-xs uppercase tracking-wider text-center transition-all";
+            });
+
+            element.className = "btnDia py-2.5 px-3 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider text-center transition-all shadow-neon";
+            actualizarHorariosGrid();
+        }
+
+        function actualizarHorariosGrid() {
+            const grid = document.getElementById('gridHorarios');
+            const label = document.getElementById('labelCanchaDia');
+            label.textContent = `${estadoReserva.cancha} - ${estadoReserva.fechaTexto}`;
+
+            grid.innerHTML = '';
+            const keyMock = `${estadoReserva.cancha}_${estadoReserva.diaLabel.split(' ')[0]}`;
+            const ocupados = OCUPADOS_MOCK[keyMock] || ['21:00'];
+
+            HORARIOS_BASE.forEach(hora => {
+                const esOcupado = ocupados.includes(hora);
+
+                if (esOcupado) {
+                    grid.innerHTML += `
+                        <div class="p-3 rounded-xl bg-red-950/40 border border-red-900/40 text-center select-none cursor-not-allowed opacity-60">
+                            <span class="block text-sm font-bold text-red-400 line-through">${hora} HS</span>
+                            <span class="text-[10px] font-bold text-red-500 uppercase tracking-wider">Ocupado</span>
+                        </div>
+                    `;
+                } else {
+                    grid.innerHTML += `
+                        <button onclick="reservarHorario('${hora}')" class="p-3 rounded-xl bg-genesis-darkGreen/80 hover:bg-genesis-neon hover:text-black border border-genesis-neon/50 text-genesis-neon transition-all transform hover:scale-105 shadow-sm hover:shadow-neon text-center group">
+                            <span class="block text-sm font-black group-hover:text-black">${hora} HS</span>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider group-hover:text-black">Reservar →</span>
+                        </button>
+                    `;
+                }
+            });
+        }
+
+        function reservarHorario(hora) {
+            const mensaje = `¡Hola *Fútbol 5 Génesis*! 👋%0A%0AQuiero reservar un turno con los siguientes detalles:%0A%0A⚽ *Cancha:* ${estadoReserva.cancha}%0A📅 *Día:* ${estadoReserva.fechaTexto}%0A⏰ *Horario:* ${hora} hs%0A%0A¿Me confirman disponibilidad y los datos para la seña? ¡Gracias!`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`, '_blank');
+        }
+
+        function seleccionarCancha(cancha) {
+            cambiarCancha(cancha);
+            document.getElementById('reservas').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generarDias();
+            actualizarHorariosGrid();
+        });
+    </script>
 </body>
 </html>
