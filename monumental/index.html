@@ -62,13 +62,13 @@
   nav.scrolled{background:transparent;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:transparent;}
   .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:var(--heading);}
   .brand-logo{height:48px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
-  .brand-name{font-family:'Anton',sans-serif;font-size:1.3rem;letter-spacing:.5px;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;}
+  .brand-name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;}
   .brand-name b{color:var(--accent);font-weight:400;}
   .brand .brand-name{color:var(--heading);}
   .footer-brand .brand-name{color:#fff;}
   .footer-logo{height:52px;width:auto;}
   .social-btn.wa:hover{background:#25d366;border-color:transparent;}
-  @media(max-width:420px){ .brand-name{font-size:1.05rem;} }
+  @media(max-width:420px){ .brand-name{display:none;} }
   .brand .ball{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
   .brand span{color:var(--accent);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
@@ -155,7 +155,7 @@
   .slot{border-radius:7px;padding:.7rem .3rem;text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.3px;transition:.2s;}
   .slot.libre{background:rgba(56,189,248,.14);color:var(--accent-light);border:1px solid rgba(56,189,248,.32);cursor:pointer;}
   .slot.libre:hover{background:var(--accent);color:#06110a;transform:translateY(-2px);}
-  .slot.ocupado{background:rgba(214,48,48,.12);color:#e05a52;border:1px solid rgba(214,48,48,.35);text-decoration:line-through;}
+  .slot.ocupado{background:rgba(224,49,49,.26);color:#e23b3b;border:1px solid rgba(224,49,49,.5);text-decoration:line-through;}
   .hor-legend{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin:1.6rem 0 .4rem;font-size:.82rem;color:var(--text-gray);}
   .hor-legend span{display:inline-flex;align-items:center;gap:.45rem;}
   .dot{width:12px;height:12px;border-radius:3px;}
@@ -260,7 +260,7 @@
 <body>
 
 <nav id="nav">
-  <a href="#inicio" class="brand" aria-label="Cancha Monumental"><span class="ball"></span><span class="brand-name">Cancha <b>Monumental</b></span></a>
+  <a href="#inicio" class="brand" aria-label="Cancha Monumental"><img src="img/logo.png" alt="Cancha Monumental" class="brand-logo"><span class="brand-name">Cancha <b>Monumental</b></span></a>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#inicio">Inicio</a></li>
@@ -378,7 +378,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col about">
-        <div class="footer-brand"><span class="ball"></span><span class="brand-name">Cancha <b>Monumental</b></span></div>
+        <div class="footer-brand"><img src="img/logo.png" alt="Cancha Monumental" class="footer-logo"><span class="brand-name">Cancha <b>Monumental</b></span></div>
         <p>Cancha de fútbol 5 en Barrio Olimpo. Reservá tu turno por WhatsApp.</p>
       </div>
       <div class="footer-col footer-addr">
