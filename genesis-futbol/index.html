@@ -1,500 +1,516 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fútbol 5 Génesis | Reserva Tu Cancha Online</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        genesis: {
-                            bg: '#0a0e0b',
-                            card: '#121a14',
-                            cardHover: '#18241c',
-                            border: '#213326',
-                            neon: '#00ff66',
-                            accent: '#10b981',
-                            darkGreen: '#0d2818',
-                            muted: '#8ba391'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        display: ['Oswald', 'sans-serif']
-                    },
-                    boxShadow: {
-                        'neon': '0 0 20px rgba(0, 255, 102, 0.25)',
-                        'neon-lg': '0 0 35px rgba(0, 255, 102, 0.4)'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0e0b; }
-        ::-webkit-scrollbar-thumb { background: #213326; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00ff66; }
-        .glow-effect { position: relative; }
-        .glow-effect::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.15);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        .glow-effect:hover::after { opacity: 1; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tu Cancha en el Barrio - Fútbol 5</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Estilos Modo Noche (Default) */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f12;
+      color: #e5e7eb;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .text-cyan-brand { color: #22d3ee; }
+    .bg-cyan-brand { background-color: #22d3ee; }
+    .border-cyan-brand { border-color: #22d3ee; }
+    
+    .card-dark {
+      background-color: #12181d;
+      border: 1px solid #1e293b;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    /* Modificadores para Modo Día */
+    body.light-mode {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    body.light-mode .card-dark {
+      background-color: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body.light-mode .text-white { color: #0f172a !important; }
+    body.light-mode .text-slate-300,
+    body.light-mode .text-slate-400 { color: #475569 !important; }
+    body.light-mode nav { background-color: rgba(255, 255, 255, 0.9) !important; border-color: #e2e8f0 !important; }
+
+    /* Estado de Slots (Horarios) */
+    .slot-btn {
+      width: 100%;
+      padding: 0.625rem 0;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .slot-free {
+      background-color: #13232c;
+      border: 1px solid #1e3a4c;
+      color: #38bdf8;
+    }
+    .slot-free:hover {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+    .slot-occupied {
+      background-color: #2a1518;
+      border: 1px solid #451a1d;
+      color: #ef4444;
+      text-decoration: line-through;
+      opacity: 0.75;
+    }
+  </style>
 </head>
-<body class="bg-genesis-bg text-gray-100 font-sans antialiased selection:bg-genesis-neon selection:text-black">
+<body class="antialiased selection:bg-cyan-500 selection:text-black">
 
-    <!-- NAVBAR -->
-    <header class="sticky top-0 z-50 bg-genesis-bg/90 backdrop-blur-md border-b border-genesis-border/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-genesis-neon to-genesis-accent p-[2px] shadow-neon">
-                    <div class="w-full h-full bg-genesis-bg rounded-[10px] flex items-center justify-center">
-                        <svg class="w-6 h-6 text-genesis-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 3a9 9 0 0 0 0 18" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="M12 7l3 2v4l-3 2-3-2V9l3-2z" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.2"/>
-                        </svg>
-                    </div>
-                </div>
-                <div>
-                    <span class="font-display text-2xl font-bold tracking-wider uppercase bg-gradient-to-r from-white via-gray-200 to-genesis-neon bg-clip-text text-transparent">
-                        GÉNESIS
-                    </span>
-                    <span class="block text-[10px] font-extrabold uppercase tracking-[0.25em] text-genesis-neon -mt-1">
-                        Fútbol 5 & Eventos
-                    </span>
-                </div>
-            </a>
+  <!-- NAVBAR CON MODO DÍA/NOCHE Y BOTÓN PANEL -->
+  <nav class="sticky top-0 z-40 bg-[#0b0f12]/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#" class="font-heading text-xl font-bold text-white tracking-wider">
+        MONUMENTAL <span class="text-cyan-brand">F5</span>
+      </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-genesis-muted">
-                <a href="#canchas" class="hover:text-genesis-neon transition-colors">Canchas</a>
-                <a href="#reservas" class="hover:text-genesis-neon transition-colors">Reservar Turno</a>
-                <a href="#servicios" class="hover:text-genesis-neon transition-colors">Servicios</a>
-                <a href="#ubicacion" class="hover:text-genesis-neon transition-colors">Ubicación</a>
-            </nav>
+      <div class="flex items-center gap-3">
+        <!-- Switch Modo Día/Noche -->
+        <button id="theme-toggle" class="p-2 rounded-lg card-dark text-slate-300 hover:text-cyan-brand transition flex items-center gap-2 text-xs font-semibold">
+          <span id="theme-icon">☀️</span>
+          <span id="theme-text" class="hidden sm:inline">Modo Día</span>
+        </button>
 
-            <a href="#reservas" class="inline-flex items-center gap-2 bg-genesis-neon hover:bg-emerald-400 text-black font-extrabold px-5 py-2.5 rounded-xl transition-all transform hover:scale-105 shadow-neon uppercase text-xs tracking-wider">
-                <span>Reservar Hora</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
-            </a>
+        <!-- Botón Demo Panel Admin -->
+        <button id="panel-open-btn" class="bg-cyan-brand text-black font-semibold px-3 py-1.5 rounded-lg text-xs hover:bg-cyan-400 transition flex items-center gap-1.5 shadow-lg shadow-cyan-500/10">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Panel Admin (Demo)
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PANEL DE ADMINISTRACIÓN LATERAL (EDITAR SITIO EN VIVO) -->
+  <aside id="admin-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-900 border-l border-slate-700 p-6 z-50 transform translate-x-full transition-transform duration-300 shadow-2xl overflow-y-auto">
+    <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+      <div>
+        <h3 class="font-heading text-xl font-bold text-white">PANEL DE CONTROL</h3>
+        <p class="text-xs text-slate-400">Edición en tiempo real para cliente</p>
+      </div>
+      <button id="panel-close-btn" class="text-slate-400 hover:text-white p-2 text-xl font-bold">&times;</button>
+    </div>
+
+    <!-- Banner Venta del Panel -->
+    <div class="bg-cyan-950/60 border border-cyan-500/30 p-4 rounded-xl mb-6 text-xs text-cyan-200">
+      💡 <strong>Demostración comercial:</strong> Editá los textos desde acá o hací clic directo en la tabla de horarios para simular el panel de gestión.
+    </div>
+
+    <div class="space-y-6">
+      <!-- Editar Nueva Sección "La Cancha" -->
+      <div class="space-y-3">
+        <h4 class="text-xs font-bold text-cyan-brand uppercase tracking-wider">Sección: La Cancha</h4>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Título Principal</label>
+          <input type="text" id="edit-cancha-title" value="LA CANCHA DEL BARRIO" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">
         </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="relative overflow-hidden py-16 lg:py-24 border-b border-genesis-border/40">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#00ff66_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-genesis-neon/15 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-genesis-darkGreen/80 border border-genesis-neon/30 text-genesis-neon text-xs font-bold tracking-wide">
-                        <span class="w-2 h-2 rounded-full bg-genesis-neon animate-ping"></span>
-                        <span>CÉSPED SINTÉTICO DE ÚLTIMA GENERACIÓN</span>
-                    </div>
-
-                    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-none">
-                        TU MEJOR <br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-genesis-neon to-emerald-400">PARTIDO SE JUEGA</span> <br/>
-                        EN GÉNESIS
-                    </h1>
-
-                    <p class="text-genesis-muted text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                        Canchas profesionales con iluminación LED de alta potencia, vestuarios de primer nivel, buffet con parrilla y el mejor ambiente futbolero.
-                    </p>
-
-                    <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-bold text-gray-300">
-                        <div class="flex items-center gap-2 bg-genesis-card px-4 py-2.5 rounded-xl border border-genesis-border">
-                            <span class="text-genesis-neon text-base">⚽</span> 2 Canchas Sintéticas
-                        </div>
-                        <div class="flex items-center gap-2 bg-genesis-card px-4 py-2.5 rounded-xl border border-genesis-border">
-                            <span class="text-genesis-neon text-base">💡</span> Luces LED 500W
-                        </div>
-                        <div class="flex items-center gap-2 bg-genesis-card px-4 py-2.5 rounded-xl border border-genesis-border">
-                            <span class="text-genesis-neon text-base">🥩</span> Parrilla & Tercer Tiempo
-                        </div>
-                    </div>
-
-                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a href="#reservas" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-genesis-neon hover:bg-emerald-400 text-black font-extrabold px-8 py-4 rounded-xl transition-all shadow-neon text-sm uppercase tracking-wider">
-                            <span>Elegir Horario y Reservar</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </a>
-                        <a href="#ubicacion" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-genesis-card hover:bg-genesis-cardHover text-white font-bold px-6 py-4 rounded-xl border border-genesis-border transition-all text-sm uppercase tracking-wider">
-                            <span>Ver Dónde Estamos</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5">
-                    <div class="relative rounded-2xl bg-gradient-to-b from-genesis-card to-genesis-bg border border-genesis-border p-3 shadow-2xl overflow-hidden group">
-                        <div class="relative h-80 sm:h-96 rounded-xl overflow-hidden bg-zinc-900">
-                            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop');"></div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-genesis-bg via-genesis-bg/40 to-transparent"></div>
-                            
-                            <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-genesis-border flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-genesis-neon animate-pulse"></span>
-                                <span class="text-xs font-bold text-white uppercase tracking-wider">Abierto de 14:00 a 01:00 hs</span>
-                            </div>
-
-                            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-genesis-card/90 backdrop-blur-md border border-genesis-border/80">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-bold text-genesis-neon uppercase tracking-wider">Reserva Express en 1 Clic</p>
-                                        <h3 class="font-display text-xl font-bold text-white uppercase">Canchas Habilitadas Hoy</h3>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-2xl font-black text-white">$18.000</span>
-                                        <span class="block text-[10px] text-genesis-muted uppercase">por hora</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Descripción</label>
+          <textarea id="edit-cancha-desc" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">Monumental es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</textarea>
         </div>
-    </section>
+      </div>
 
-    <!-- SECTION 2: CANCHAS -->
-    <section id="canchas" class="py-16 bg-genesis-bg/50 border-b border-genesis-border/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">NUESTRAS INSTALACIONES</span>
-                <h2 class="font-display text-4xl sm:text-5xl font-bold text-white uppercase tracking-tight mt-1">Elegí tu Cancha</h2>
-            </div>
+      <hr class="border-slate-800"/>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Cancha 1 Card -->
-                <div class="bg-genesis-card rounded-2xl border border-genesis-border overflow-hidden hover:border-genesis-neon/50 transition-all glow-effect">
-                    <div class="relative h-56 bg-zinc-800 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=1000&auto=format&fit=crop" alt="Cancha 1 Génesis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-genesis-card via-transparent to-transparent"></div>
-                        <span class="absolute top-4 left-4 bg-genesis-neon text-black font-extrabold text-xs px-3 py-1 rounded-md uppercase tracking-wider">CANCHA 1 · TECHADA</span>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-display text-2xl font-bold text-white uppercase">Cancha 1 (Techada Pro)</h3>
-                            <span class="text-lg font-black text-genesis-neon">$20.000 <span class="text-xs font-normal text-genesis-muted">/h</span></span>
-                        </div>
-                        <p class="text-genesis-muted text-xs leading-relaxed">
-                            Cancha techada ideal para días de lluvia o sol intenso. Red de contención de alta resistencia y césped Forbex 50mm.
-                        </p>
-                        <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-gray-300">
-                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Techada 100%</span>
-                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Iluminación LED</span>
-                        </div>
-                        <a href="#reservas" onclick="seleccionarCancha('Cancha 1')" class="block w-full text-center bg-genesis-darkGreen hover:bg-genesis-neon hover:text-black text-genesis-neon font-bold py-3 rounded-xl border border-genesis-neon/30 transition-all text-xs uppercase tracking-wider">
-                            Ver Horarios Cancha 1 →
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Cancha 2 Card -->
-                <div class="bg-genesis-card rounded-2xl border border-genesis-border overflow-hidden hover:border-genesis-neon/50 transition-all glow-effect">
-                    <div class="relative h-56 bg-zinc-800 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1000&auto=format&fit=crop" alt="Cancha 2 Génesis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-genesis-card via-transparent to-transparent"></div>
-                        <span class="absolute top-4 left-4 bg-emerald-500 text-black font-extrabold text-xs px-3 py-1 rounded-md uppercase tracking-wider">CANCHA 2 · AL AIRE LIBRE</span>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-display text-2xl font-bold text-white uppercase">Cancha 2 (Aire Libre)</h3>
-                            <span class="text-lg font-black text-genesis-neon">$18.000 <span class="text-xs font-normal text-genesis-muted">/h</span></span>
-                        </div>
-                        <p class="text-genesis-muted text-xs leading-relaxed">
-                            Cancha descubierta al aire libre con óptimo drenaje. Rodeada de reja de seguridad y reflectores HQ.
-                        </p>
-                        <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-gray-300">
-                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Aire Libre</span>
-                            <span class="bg-genesis-darkGreen/60 border border-genesis-border px-2.5 py-1 rounded-md text-genesis-neon">✓ Luces LED 500W</span>
-                        </div>
-                        <a href="#reservas" onclick="seleccionarCancha('Cancha 2')" class="block w-full text-center bg-genesis-darkGreen hover:bg-genesis-neon hover:text-black text-genesis-neon font-bold py-3 rounded-xl border border-genesis-neon/30 transition-all text-xs uppercase tracking-wider">
-                            Ver Horarios Cancha 2 →
-                        </a>
-                    </div>
-                </div>
-            </div>
+      <!-- Editar Precios -->
+      <div class="space-y-3">
+        <h4 class="text-xs font-bold text-cyan-brand uppercase tracking-wider">Sección: Precios</h4>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Turno Suelto ($)</label>
+            <input type="text" id="edit-price-suelto" value="$15.000" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Turno Fijo ($)</label>
+            <input type="text" id="edit-price-fijo" value="$13.500" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-cyan-brand outline-none">
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- SECTION 3: RESERVA INTERACTIVA DE HORARIOS -->
-    <section id="reservas" class="py-16 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-10">
-                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">SISTEMA DE RESERVA EN VIVO</span>
-                <h2 class="font-display text-4xl sm:text-5xl font-bold text-white uppercase tracking-tight mt-1">
-                    Elegí el Horario y Reservá
-                </h2>
-                <p class="text-genesis-muted text-sm mt-2">
-                    Hacé clic en el horario verde disponible y te redirigimos instantáneamente a WhatsApp con la reserva lista para confirmar.
-                </p>
-            </div>
+      <hr class="border-slate-800"/>
 
-            <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border shadow-xl space-y-6 max-w-5xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-genesis-border/60">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-genesis-muted mb-2">1. Seleccioná la Cancha:</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button id="btnCancha1" onclick="cambiarCancha('Cancha 1')" class="py-3 px-4 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-neon">
-                                <span>⚽ Cancha 1 (Techada)</span>
-                            </button>
-                            <button id="btnCancha2" onclick="cambiarCancha('Cancha 2')" class="py-3 px-4 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
-                                <span>⚽ Cancha 2 (Exterior)</span>
-                            </button>
-                        </div>
-                    </div>
+      <!-- Instrucciones de Horarios -->
+      <div>
+        <h4 class="text-xs font-bold text-cyan-brand uppercase tracking-wider mb-2">Edición de Horarios</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Podés modificar la disponibilidad directamente haciendo clic sobre cualquier botón de hora en la grilla principal (cambia de <strong>Libre</strong> a <strong>Ocupado</strong> al toque).
+        </p>
+      </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-genesis-muted mb-2">2. Seleccioná el Día:</label>
-                        <div class="grid grid-cols-3 gap-2" id="daySelectorContainer"></div>
-                    </div>
-                </div>
+      <!-- CTA Adquirir Panel -->
+      <div class="pt-4">
+        <a href="#contacto" class="block w-full text-center bg-green-500 hover:bg-green-600 text-black font-bold p-3 rounded-xl transition text-sm">
+          Añadir Panel Autoadministrable +$
+        </a>
+      </div>
+    </div>
+  </aside>
 
-                <div class="flex items-center justify-between text-xs font-medium px-2">
-                    <span class="text-white font-bold uppercase tracking-wide flex items-center gap-2">
-                        <span>Horarios para:</span>
-                        <span id="labelCanchaDia" class="text-genesis-neon underline decoration-genesis-neon/50">Cancha 1 - Hoy</span>
-                    </span>
+  <!-- HERO SECTION -->
+  <header class="relative min-h-[85vh] flex flex-col justify-between bg-cover bg-center px-4 py-8 md:p-12" style="background-image: linear-gradient(to bottom, rgba(11, 15, 18, 0.5), rgba(11, 15, 18, 0.95)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600&auto=format&fit=crop');">
+    <div class="max-w-6xl mx-auto w-full pt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-xs md:text-sm text-cyan-brand mb-6 backdrop-blur-sm">
+        <span class="w-2 h-2 rounded-full bg-cyan-brand inline-block"></span>
+        Barrio Olimpo · CABA · Fútbol 5
+      </div>
 
-                    <div class="flex items-center gap-4 text-[11px]">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-full bg-genesis-neon shadow-neon"></span>
-                            <span class="text-white font-semibold">Disponible</span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-full bg-red-950 border border-red-800"></span>
-                            <span class="text-gray-400">Ocupado</span>
-                        </div>
-                    </div>
-                </div>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-none mb-4 tracking-tight text-white">
+        TU CANCHA<br/>
+        <span class="text-cyan-brand">EN EL BARRIO</span>
+      </h1>
 
-                <!-- GRID DINÁMICO DE HORARIOS -->
-                <div id="gridHorarios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 pt-2"></div>
-            </div>
+      <p class="max-w-xl text-slate-300 text-base md:text-lg mb-8 font-light">
+        Césped sintético, luces LED y turnos todos los días. Mirá la grilla, elegí tu horario y reservalo por WhatsApp en un toque.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mb-12">
+        <a href="#horarios" class="bg-cyan-brand text-black font-semibold px-6 py-3 rounded-lg hover:bg-cyan-400 transition-colors">
+          VER HORARIOS
+        </a>
+        <a href="#contacto" class="border border-slate-700 bg-slate-900/50 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors backdrop-blur-sm">
+          CONSULTAR
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-6 rounded-2xl card-dark backdrop-blur-md">
+        <div class="border-r border-slate-800/80 last:border-0 pr-2">
+          <div class="text-2xl md:text-3xl font-heading font-bold text-white">1 h</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Duración del turno</div>
         </div>
-    </section>
-
-    <!-- SECTION 4: SERVICIOS / INSTALACIONES -->
-    <section id="servicios" class="py-16 bg-genesis-card/30 border-y border-genesis-border/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">TODO PARA EL TERCER TIEMPO</span>
-                <h2 class="font-display text-4xl font-bold text-white uppercase tracking-tight mt-1">Servicios Incluidos</h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
-                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">🚿</div>
-                    <h3 class="font-display text-xl font-bold text-white uppercase">Vestuarios Pro</h3>
-                    <p class="text-genesis-muted text-xs">Duchas de agua caliente y sanitarios sanitizados continuamente.</p>
-                </div>
-
-                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
-                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">🍔</div>
-                    <h3 class="font-display text-xl font-bold text-white uppercase">Buffet & Parrilla</h3>
-                    <p class="text-genesis-muted text-xs">Hamburguesas, bebidas frías y alquiler de parrilla para tu grupo.</p>
-                </div>
-
-                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
-                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">⚽</div>
-                    <h3 class="font-display text-xl font-bold text-white uppercase">Pelotas & Pecheras</h3>
-                    <p class="text-genesis-muted text-xs">Pelotas oficiales F5 número 4 y juegos completos de pecheras gratis.</p>
-                </div>
-
-                <div class="bg-genesis-card p-6 rounded-2xl border border-genesis-border text-center space-y-3">
-                    <div class="w-12 h-12 mx-auto rounded-xl bg-genesis-darkGreen flex items-center justify-center text-2xl text-genesis-neon">🚗</div>
-                    <h3 class="font-display text-xl font-bold text-white uppercase">Estacionamiento</h3>
-                    <p class="text-genesis-muted text-xs">Espacio privado monitoreado con cámaras de seguridad sin costo extra.</p>
-                </div>
-            </div>
+        <div class="border-r border-slate-800/80 last:border-0 pr-2">
+          <div id="stat-price-display" class="text-2xl md:text-3xl font-heading font-bold text-white">$15.000</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Precio por turno</div>
         </div>
-    </section>
+        <div class="border-r border-slate-800/80 last:border-0 pr-2">
+          <div class="text-2xl md:text-3xl font-heading font-bold text-white">18-24</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Horarios de juego</div>
+        </div>
+        <div>
+          <div class="text-2xl md:text-3xl font-heading font-bold text-white">7 días</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Abierto toda la semana</div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <!-- SECTION 5: UBICACIÓN Y CONTACTO -->
-    <section id="ubicacion" class="py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-5 space-y-6">
-                    <div>
-                        <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-genesis-neon">¿DÓNDE ESTAMOS?</span>
-                        <h2 class="font-display text-4xl font-bold text-white uppercase tracking-tight mt-1">Vení a Jugar</h2>
-                    </div>
+  <!-- NUEVA SECCIÓN: LA CANCHA (EDITABLE DESDE EL PANEL) -->
+  <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Lado Izquierdo: Galería -->
+      <div class="lg:col-span-6 space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-xl h-64 md:h-80">
+          <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=1000&auto=format&fit=crop" alt="Cancha de Fútbol 5" class="w-full h-full object-cover">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="rounded-2xl overflow-hidden border border-slate-800 h-44 sm:h-auto">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600&auto=format&fit=crop" alt="Partido nocturno" class="w-full h-full object-cover">
+          </div>
+          <div class="card-dark p-6 rounded-2xl flex flex-col justify-center">
+            <h3 class="text-2xl font-heading font-bold text-cyan-brand mb-2">5 vs 5</h3>
+            <p class="text-sm text-slate-400">Medida reglamentaria, arcos con red nueva y pecheras incluidas.</p>
+          </div>
+        </div>
+      </div>
 
-                    <div class="space-y-4 text-sm">
-                        <div class="flex items-start gap-4 bg-genesis-card p-4 rounded-xl border border-genesis-border">
-                            <span class="text-2xl">📍</span>
-                            <div>
-                                <h4 class="font-bold text-white uppercase">Dirección</h4>
-                                <p class="text-genesis-muted text-xs">Av. Principal 1234, Buenos Aires</p>
-                            </div>
-                        </div>
+      <!-- Lado Derecho: Contenido dinámico -->
+      <div class="lg:col-span-6 space-y-6">
+        <div>
+          <span class="text-xs font-bold text-cyan-brand uppercase tracking-wider">LA CANCHA</span>
+          <h2 id="target-cancha-title" class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-4">LA CANCHA DEL BARRIO</h2>
+          <p id="target-cancha-desc" class="text-slate-300 font-light leading-relaxed">
+            Monumental es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.
+          </p>
+        </div>
 
-                        <div class="flex items-start gap-4 bg-genesis-card p-4 rounded-xl border border-genesis-border">
-                            <span class="text-2xl">🕒</span>
-                            <div>
-                                <h4 class="font-bold text-white uppercase">Horarios de Atención</h4>
-                                <p class="text-genesis-muted text-xs">Lunes a Domingos: 14:00 hs a 01:00 hs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-7">
-                    <div class="relative w-full h-80 rounded-2xl overflow-hidden border border-genesis-border bg-genesis-card">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105072.0436214561!2d-58.50333852089843!3d-34.60372229999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf7359a0f7%3A0xdf66d40010915998!2sBuenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
-                            class="w-full h-full grayscale opacity-80 hover:opacity-100 transition-opacity" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy">
-                        </iframe>
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="card-dark p-5 rounded-2xl">
+            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             </div>
+            <h4 class="font-heading text-lg font-bold text-white mb-1">Césped sintético premium</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">Superficie pareja, con buen pique y amortiguación para jugar sin lastimarte.</p>
+          </div>
+
+          <div class="card-dark p-5 rounded-2xl">
+            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h4 class="font-heading text-lg font-bold text-white mb-1">Iluminación LED</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">Torres que dejan la cancha como de día. Jugás cómodo hasta la última hora.</p>
+          </div>
+
+          <div class="card-dark p-5 rounded-2xl">
+            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h4 class="font-heading text-lg font-bold text-white mb-1">Reserva en 10 segundos</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">Tocás el horario libre en la grilla y te abre WhatsApp con el mensaje listo.</p>
+          </div>
+
+          <div class="card-dark p-5 rounded-2xl">
+            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-brand mb-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </div>
+            <h4 class="font-heading text-lg font-bold text-white mb-1">Vestuario y estacionamiento</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">Espacio para cambiarte y lugar para dejar el auto sobre la calle.</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <footer class="bg-black border-t border-genesis-border py-8 text-center text-xs text-genesis-muted">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© 2026 Fútbol 5 Génesis. Todos los derechos reservados.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN HORARIOS INTERACTIVOS -->
+  <section id="horarios" class="py-20 px-4 md:px-12 max-w-6xl mx-auto text-center">
+    <span class="text-xs font-bold text-cyan-brand uppercase tracking-wider">DISPONIBILIDAD</span>
+    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-2">HORARIOS DE LA SEMANA</h2>
+    <p class="text-slate-400 text-sm mb-8">Tocá un horario para probar el cambio de estado (Libre / Ocupado).</p>
+
+    <div class="card-dark p-4 md:p-8 rounded-3xl overflow-x-auto">
+      <table class="w-full min-w-[650px] text-center border-separate border-spacing-2">
+        <thead>
+          <tr class="text-cyan-brand font-heading text-lg">
+            <th class="p-2"></th>
+            <th class="p-2">LUN</th>
+            <th class="p-2">MAR</th>
+            <th class="p-2">MIÉ</th>
+            <th class="p-2">JUE</th>
+            <th class="p-2">VIE</th>
+            <th class="p-2">SÁB</th>
+            <th class="p-2">DOM</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm">
+          <!-- 18:00 -->
+          <tr>
+            <td class="text-slate-400 font-mono pr-2">18:00</td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+          </tr>
+          <!-- 19:00 -->
+          <tr>
+            <td class="text-slate-400 font-mono pr-2">19:00</td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+          </tr>
+          <!-- 20:00 -->
+          <tr>
+            <td class="text-slate-400 font-mono pr-2">20:00</td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+          </tr>
+          <!-- 21:00 -->
+          <tr>
+            <td class="text-slate-400 font-mono pr-2">21:00</td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+          </tr>
+          <!-- 22:00 -->
+          <tr>
+            <td class="text-slate-400 font-mono pr-2">22:00</td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
+            <td><button class="slot-btn slot-free">Libre</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="flex items-center justify-center gap-6 mt-6 text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded bg-cyan-500"></span> Libre
         </div>
-    </footer>
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded bg-red-500"></span> Ocupado
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- SCRIPT DE RESERVA DE HORARIOS -->
-    <script>
-        const WHATSAPP_NUMBER = "5491112345678"; // <--- Cambiá este número por el tuyo de WhatsApp
-        
-        let estadoReserva = { cancha: 'Cancha 1', diaLabel: 'Hoy', fechaTexto: '' };
+  <!-- SECCIÓN PRECIOS EDITABLES -->
+  <section class="py-20 px-4 md:px-12 max-w-6xl mx-auto text-center">
+    <span class="text-xs font-bold text-cyan-brand uppercase tracking-wider">PRECIOS</span>
+    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-2">ELEGÍ CÓMO JUGAR</h2>
+    <p class="text-slate-400 text-sm mb-12 max-w-lg mx-auto">
+      Seña por WhatsApp para dejar el turno tomado. El resto lo abonás en la cancha.
+    </p>
 
-        const HORARIOS_BASE = ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00'];
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+      <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
+        <div>
+          <h3 class="font-heading text-xl text-white font-bold mb-2">Turno suelto</h3>
+          <div id="target-price-suelto" class="text-3xl font-heading font-bold text-cyan-brand mb-1">$15.000</div>
+          <div class="text-xs text-slate-400 mb-6">1 hora de cancha</div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Pelota y pecheras</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Vestuario</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Reserva por WhatsApp</li>
+          </ul>
+        </div>
+        <a href="#contacto" class="mt-8 block text-center border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition font-semibold text-sm text-white">CONSULTAR</a>
+      </div>
 
-        const OCUPADOS_MOCK = {
-            'Cancha 1_Hoy': ['19:00', '21:00', '22:00'],
-            'Cancha 1_Mañana': ['20:00', '22:00'],
-            'Cancha 2_Hoy': ['18:00', '20:00', '23:00'],
-            'Cancha 2_Mañana': ['19:00', '21:00']
-        };
+      <div class="card-dark p-8 rounded-3xl border-2 border-cyan-brand relative flex flex-col justify-between shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+        <span class="absolute -top-3 right-6 bg-cyan-brand text-black font-bold text-xs px-3 py-1 rounded-full uppercase font-heading">MÁS ELEGIDO</span>
+        <div>
+          <h3 class="font-heading text-xl text-white font-bold mb-2">Turno fijo semanal</h3>
+          <div id="target-price-fijo" class="text-3xl font-heading font-bold text-cyan-brand mb-1">$13.500</div>
+          <div class="text-xs text-slate-400 mb-6">por semana · mismo día y hora</div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> 10% off sobre el turno</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Horario reservado todo el mes</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Prioridad ante cambios</li>
+          </ul>
+        </div>
+        <a href="#contacto" class="mt-8 block text-center bg-cyan-brand text-black py-3 rounded-xl hover:bg-cyan-400 transition font-semibold text-sm">CONSULTAR</a>
+      </div>
 
-        function generarDias() {
-            const container = document.getElementById('daySelectorContainer');
-            container.innerHTML = '';
-            const hoy = new Date();
-            const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
+        <div>
+          <h3 class="font-heading text-xl text-white font-bold mb-2">Torneo / evento</h3>
+          <div class="text-3xl font-heading font-bold text-cyan-brand mb-1">A convenir</div>
+          <div class="text-xs text-slate-400 mb-6">3 horas o más</div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Fixture armado</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Cancha exclusiva</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-brand">✓</span> Cumpleaños y despedidas</li>
+          </ul>
+        </div>
+        <a href="#contacto" class="mt-8 block text-center border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition font-semibold text-sm text-white">CONSULTAR</a>
+      </div>
+    </div>
+  </section>
 
-            for (let i = 0; i < 3; i++) {
-                const d = new Date(hoy);
-                d.setDate(hoy.getDate() + i);
+  <!-- SECCIÓN CONTACTO -->
+  <footer id="contacto" class="border-t border-slate-800 bg-black/40 py-12 px-4 md:px-12 text-center text-slate-400 text-sm">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-left">
+        <h3 class="text-white font-heading text-2xl font-bold">TU CANCHA EN EL BARRIO</h3>
+        <p class="text-xs text-slate-500 mt-1">Barrio Olimpo, CABA · Fútbol 5</p>
+      </div>
+      <div>
+        <p>Reservas directas por WhatsApp: <a href="#" class="text-cyan-brand hover:underline font-semibold">+54 9 11 1234-5678</a></p>
+      </div>
+    </div>
+  </footer>
 
-                const diaNombre = i === 0 ? 'Hoy' : i === 1 ? 'Mañana' : `${diasSemana[d.getDay()]} ${d.getDate()}`;
-                const fechaFormateada = `${d.getDate()}/${d.getMonth() + 1}`;
+  <!-- Botón Flotante WhatsApp -->
+  <a href="#" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all z-40 flex items-center justify-center">
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+  </a>
 
-                if (i === 0) estadoReserva.fechaTexto = `${diaNombre} (${fechaFormateada})`;
+  <!-- JAVASCRIPT DE INTERACTIVIDAD -->
+  <script>
+    // 1. Alternar Modo Día / Noche
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeText = document.getElementById('theme-text');
 
-                const activeClass = i === 0 
-                    ? 'border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold shadow-neon' 
-                    : 'border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-medium';
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      themeIcon.textContent = isLight ? '🌙' : '☀️';
+      themeText.textContent = isLight ? 'Modo Noche' : 'Modo Día';
+    });
 
-                container.innerHTML += `
-                    <button onclick="cambiarDia('${diaNombre}', '${fechaFormateada}', this)" class="btnDia py-2.5 px-3 rounded-xl border text-xs uppercase tracking-wider text-center transition-all ${activeClass}">
-                        <span class="block font-bold">${diaNombre}</span>
-                        <span class="text-[10px] opacity-75">${fechaFormateada}</span>
-                    </button>
-                `;
-            }
+    // 2. Abrir / Cerrar Panel Lateral Admin
+    const adminPanel = document.getElementById('admin-panel');
+    const panelOpenBtn = document.getElementById('panel-open-btn');
+    const panelCloseBtn = document.getElementById('panel-close-btn');
+
+    panelOpenBtn.addEventListener('click', () => adminPanel.classList.remove('translate-x-full'));
+    panelCloseBtn.addEventListener('click', () => adminPanel.classList.add('translate-x-full'));
+
+    // 3. Edición en Vivo de Título y Descripción de "La Cancha"
+    const inputTitle = document.getElementById('edit-cancha-title');
+    const inputDesc = document.getElementById('edit-cancha-desc');
+    const targetTitle = document.getElementById('target-cancha-title');
+    const targetDesc = document.getElementById('target-cancha-desc');
+
+    inputTitle.addEventListener('input', (e) => {
+      targetTitle.textContent = e.target.value || 'LA CANCHA DEL BARRIO';
+    });
+
+    inputDesc.addEventListener('input', (e) => {
+      targetDesc.textContent = e.target.value;
+    });
+
+    // 4. Edición en Vivo de Precios
+    const inputPriceSuelto = document.getElementById('edit-price-suelto');
+    const inputPriceFijo = document.getElementById('edit-price-fijo');
+    const targetPriceSuelto = document.getElementById('target-price-suelto');
+    const targetPriceFijo = document.getElementById('target-price-fijo');
+    const statPriceDisplay = document.getElementById('stat-price-display');
+
+    inputPriceSuelto.addEventListener('input', (e) => {
+      targetPriceSuelto.textContent = e.target.value;
+      statPriceDisplay.textContent = e.target.value;
+    });
+
+    inputPriceFijo.addEventListener('input', (e) => {
+      targetPriceFijo.textContent = e.target.value;
+    });
+
+    // 5. Interactividad en la Tabla de Horarios (Cambiar Libre / Ocupado)
+    document.querySelectorAll('.slot-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('slot-free')) {
+          btn.classList.remove('slot-free');
+          btn.classList.add('slot-occupied');
+          btn.textContent = 'Ocupado';
+        } else {
+          btn.classList.remove('slot-occupied');
+          btn.classList.add('slot-free');
+          btn.textContent = 'Libre';
         }
+      });
+    });
+  </script>
 
-        function cambiarCancha(canchaNombre) {
-            estadoReserva.cancha = canchaNombre;
-            const btn1 = document.getElementById('btnCancha1');
-            const btn2 = document.getElementById('btnCancha2');
-
-            if (canchaNombre === 'Cancha 1') {
-                btn1.className = "py-3 px-4 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-neon";
-                btn2.className = "py-3 px-4 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all";
-            } else {
-                btn2.className = "py-3 px-4 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-neon";
-                btn1.className = "py-3 px-4 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all";
-            }
-            actualizarHorariosGrid();
-        }
-
-        function cambiarDia(diaLabel, fechaFormateada, element) {
-            estadoReserva.diaLabel = diaLabel;
-            estadoReserva.fechaTexto = `${diaLabel} (${fechaFormateada})`;
-
-            document.querySelectorAll('.btnDia').forEach(btn => {
-                btn.className = "btnDia py-2.5 px-3 rounded-xl border border-genesis-border bg-genesis-bg text-genesis-muted hover:text-white font-medium text-xs uppercase tracking-wider text-center transition-all";
-            });
-
-            element.className = "btnDia py-2.5 px-3 rounded-xl border border-genesis-neon bg-genesis-darkGreen text-genesis-neon font-bold text-xs uppercase tracking-wider text-center transition-all shadow-neon";
-            actualizarHorariosGrid();
-        }
-
-        function actualizarHorariosGrid() {
-            const grid = document.getElementById('gridHorarios');
-            const label = document.getElementById('labelCanchaDia');
-            label.textContent = `${estadoReserva.cancha} - ${estadoReserva.fechaTexto}`;
-
-            grid.innerHTML = '';
-            const keyMock = `${estadoReserva.cancha}_${estadoReserva.diaLabel.split(' ')[0]}`;
-            const ocupados = OCUPADOS_MOCK[keyMock] || ['21:00'];
-
-            HORARIOS_BASE.forEach(hora => {
-                const esOcupado = ocupados.includes(hora);
-
-                if (esOcupado) {
-                    grid.innerHTML += `
-                        <div class="p-3 rounded-xl bg-red-950/40 border border-red-900/40 text-center select-none cursor-not-allowed opacity-60">
-                            <span class="block text-sm font-bold text-red-400 line-through">${hora} HS</span>
-                            <span class="text-[10px] font-bold text-red-500 uppercase tracking-wider">Ocupado</span>
-                        </div>
-                    `;
-                } else {
-                    grid.innerHTML += `
-                        <button onclick="reservarHorario('${hora}')" class="p-3 rounded-xl bg-genesis-darkGreen/80 hover:bg-genesis-neon hover:text-black border border-genesis-neon/50 text-genesis-neon transition-all transform hover:scale-105 shadow-sm hover:shadow-neon text-center group">
-                            <span class="block text-sm font-black group-hover:text-black">${hora} HS</span>
-                            <span class="text-[10px] font-extrabold uppercase tracking-wider group-hover:text-black">Reservar →</span>
-                        </button>
-                    `;
-                }
-            });
-        }
-
-        function reservarHorario(hora) {
-            const mensaje = `¡Hola *Fútbol 5 Génesis*! 👋%0A%0AQuiero reservar un turno con los siguientes detalles:%0A%0A⚽ *Cancha:* ${estadoReserva.cancha}%0A📅 *Día:* ${estadoReserva.fechaTexto}%0A⏰ *Horario:* ${hora} hs%0A%0A¿Me confirman disponibilidad y los datos para la seña? ¡Gracias!`;
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`, '_blank');
-        }
-
-        function seleccionarCancha(cancha) {
-            cambiarCancha(cancha);
-            document.getElementById('reservas').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            generarDias();
-            actualizarHorariosGrid();
-        });
-    </script>
 </body>
 </html>
