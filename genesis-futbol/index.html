@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fútbol 5 Génesis | Cancha en Barrio Olimpo</title>
-<meta name="description" content="Fútbol 5 Génesis — cancha de fútbol 5 en Barrio Olimpo (CABA). Mirá los precios, horarios disponibles y reservá tu turno por WhatsApp.">
+<meta name="description" content="Fútbol 5 Génesis — cancha de fútbol 5 en Barrio Olimpo (CABA). Mirá los horarios disponibles, precios y reservá tu turno por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -122,38 +122,6 @@
   .sec-title{text-align:center;font-size:2.6rem;color:var(--heading);margin-bottom:.9rem;}
   .sec-sub{text-align:center;color:var(--text-gray);max-width:620px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
 
-  /* SECCIÓN PRECIOS */
-  .precios-sec{background:var(--bg);}
-  .precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2rem;align-items:stretch;}
-  .precio-card{
-    background:var(--card);border:1px solid var(--line);
-    border-radius:16px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;
-    position:relative;transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-  }
-  .precio-card:hover{transform:translateY(-4px);border-color:rgba(34,197,94,.4);}
-  .precio-card.featured{
-    border:1px solid var(--accent);box-shadow:0 10px 30px rgba(34,197,94,.15);
-    background:linear-gradient(180deg, var(--card) 0%, rgba(34,197,94,.05) 100%);
-  }
-  .p-tag{
-    position:absolute;top:1.2rem;right:1.2rem;
-    background:rgba(34,197,94,.18);color:var(--accent-light);border:1px solid rgba(34,197,94,.35);
-    font-size:.68rem;font-weight:700;padding:.3rem .6rem;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;
-  }
-  .precio-card h3{font-size:1.35rem;color:var(--heading);margin-bottom:.8rem;font-family:'Inter',sans-serif;font-weight:700;text-transform:none;}
-  .p-amount{font-family:'Anton',sans-serif;font-size:2.6rem;color:var(--accent);line-height:1;}
-  .p-amount.p-convenir{font-size:2.2rem;color:var(--heading);}
-  .p-period{font-size:.85rem;color:var(--text-gray);margin-top:.4rem;margin-bottom:1.8rem;}
-  .p-features{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.85rem;flex-grow:1;}
-  .p-features li{display:flex;align-items:center;gap:.75rem;font-size:.92rem;color:var(--text);}
-  .p-features .chk{
-    width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,.2);color:var(--accent);
-    display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;
-  }
-  .btn-card-outline{width:100%;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--heading);padding:.85rem;border-radius:8px;font-size:.85rem;}
-  .btn-card-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(34,197,94,.08);}
-  .btn-card-fill{width:100%;justify-content:center;padding:.85rem;border-radius:8px;font-size:.85rem;}
-
   /* NOSOTROS */
   .nos-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
   .nos-text .eyebrow{text-align:left;}
@@ -190,6 +158,38 @@
   .dot{width:12px;height:12px;border-radius:3px;}
   .dot.l{background:rgba(34,197,94,.5);}
   .dot.o{background:rgba(224,49,49,.7);}
+
+  /* SECCIÓN PRECIOS */
+  .precios-sec{background:var(--bg);}
+  .precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2rem;align-items:stretch;}
+  .precio-card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;
+    position:relative;transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .precio-card:hover{transform:translateY(-4px);border-color:rgba(34,197,94,.4);}
+  .precio-card.featured{
+    border:1px solid var(--accent);box-shadow:0 10px 30px rgba(34,197,94,.15);
+    background:linear-gradient(180deg, var(--card) 0%, rgba(34,197,94,.05) 100%);
+  }
+  .p-tag{
+    position:absolute;top:1.2rem;right:1.2rem;
+    background:rgba(34,197,94,.18);color:var(--accent-light);border:1px solid rgba(34,197,94,.35);
+    font-size:.68rem;font-weight:700;padding:.3rem .6rem;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;
+  }
+  .precio-card h3{font-size:1.35rem;color:var(--heading);margin-bottom:.8rem;font-family:'Inter',sans-serif;font-weight:700;text-transform:none;}
+  .p-amount{font-family:'Anton',sans-serif;font-size:2.6rem;color:var(--accent);line-height:1;}
+  .p-amount.p-convenir{font-size:2.2rem;color:var(--heading);}
+  .p-period{font-size:.85rem;color:var(--text-gray);margin-top:.4rem;margin-bottom:1.8rem;}
+  .p-features{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.85rem;flex-grow:1;}
+  .p-features li{display:flex;align-items:center;gap:.75rem;font-size:.92rem;color:var(--text);}
+  .p-features .chk{
+    width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,.2);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;
+  }
+  .btn-card-outline{width:100%;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--heading);padding:.85rem;border-radius:8px;font-size:.85rem;}
+  .btn-card-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(34,197,94,.08);}
+  .btn-card-fill{width:100%;justify-content:center;padding:.85rem;border-radius:8px;font-size:.85rem;}
 
   /* CONTACTO */
   .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
@@ -273,8 +273,8 @@
     <ul class="nav-links">
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#precios">Precios</a></li>
       <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#precios">Precios</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li><a href="panel/">Panel</a></li>
     </ul>
@@ -287,8 +287,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
-    <a href="#precios">Precios</a>
     <a href="#horarios">Horarios</a>
+    <a href="#precios">Precios</a>
     <a href="#contacto">Contacto</a>
     <a href="panel/">Panel</a>
   </div>
@@ -324,6 +324,48 @@
         <span class="stat-val">7 días</span>
         <span class="stat-lbl">ABIERTO TODA LA SEMANA</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="wrap nos-grid">
+    <div class="carrusel reveal">
+      <button class="carrusel-arrow prev" id="carruselPrev" aria-label="Anterior">&#10094;</button>
+      <div class="carrusel-track" id="carruselTrack">
+        <div class="carrusel-slide"><img src="img/hero.jpg" alt="Fútbol 5 Génesis cancha"></div>
+        <div class="carrusel-slide"><img src="img/cancha2.jpg" alt="Césped sintético Génesis"></div>
+      </div>
+      <button class="carrusel-arrow next" id="carruselNext" aria-label="Siguiente">&#10095;</button>
+      <div class="carrusel-dots" id="carruselDots"><span class="active"></span><span></span></div>
+    </div>
+    <div class="nos-text reveal">
+      <span class="eyebrow">Nosotros</span>
+      <h2>La cancha del barrio</h2>
+      <p>Génesis es tu cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</p>
+      <div class="nos-list">
+        <li><span class="chk">✓</span> Cancha de fútbol 5</li>
+        <li><span class="chk">✓</span> Turnos todos los días</li>
+        <li><span class="chk">✓</span> Reservás fácil por WhatsApp</li>
+        <li><span class="chk">✓</span> A metros de tu casa, en Barrio Olimpo</li>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios" class="horarios">
+  <div class="wrap">
+    <span class="eyebrow">Disponibilidad</span>
+    <h2 class="sec-title">Horarios de la Semana</h2>
+    <p class="sec-sub">Tocá un horario <b style="color:var(--accent-light)">libre</b> y te lleva directo a WhatsApp para reservarlo.</p>
+    <div class="grid-scroll">
+      <div class="hgrid" id="hgrid"></div>
+    </div>
+    <div class="hor-legend">
+      <span><i class="dot l"></i> Libre — tocá para reservar</span>
+      <span><i class="dot o"></i> Ocupado</span>
     </div>
   </div>
 </section>
@@ -379,48 +421,6 @@
   </div>
 </section>
 
-<!-- NOSOTROS -->
-<section id="nosotros">
-  <div class="wrap nos-grid">
-    <div class="carrusel reveal">
-      <button class="carrusel-arrow prev" id="carruselPrev" aria-label="Anterior">&#10094;</button>
-      <div class="carrusel-track" id="carruselTrack">
-        <div class="carrusel-slide"><img src="img/hero.jpg" alt="Fútbol 5 Génesis cancha"></div>
-        <div class="carrusel-slide"><img src="img/cancha2.jpg" alt="Césped sintético Génesis"></div>
-      </div>
-      <button class="carrusel-arrow next" id="carruselNext" aria-label="Siguiente">&#10095;</button>
-      <div class="carrusel-dots" id="carruselDots"><span class="active"></span><span></span></div>
-    </div>
-    <div class="nos-text reveal">
-      <span class="eyebrow">Nosotros</span>
-      <h2>La cancha del barrio</h2>
-      <p>Génesis es tu cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</p>
-      <div class="nos-list">
-        <li><span class="chk">✓</span> Cancha de fútbol 5</li>
-        <li><span class="chk">✓</span> Turnos todos los días</li>
-        <li><span class="chk">✓</span> Reservás fácil por WhatsApp</li>
-        <li><span class="chk">✓</span> A metros de tu casa, en Barrio Olimpo</li>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HORARIOS -->
-<section id="horarios" class="horarios">
-  <div class="wrap">
-    <span class="eyebrow">Disponibilidad</span>
-    <h2 class="sec-title">Horarios de la Semana</h2>
-    <p class="sec-sub">Tocá un horario <b style="color:var(--accent-light)">libre</b> y te lleva directo a WhatsApp para reservarlo.</p>
-    <div class="grid-scroll">
-      <div class="hgrid" id="hgrid"></div>
-    </div>
-    <div class="hor-legend">
-      <span><i class="dot l"></i> Libre — tocá para reservar</span>
-      <span><i class="dot o"></i> Ocupado</span>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="wrap">
@@ -471,8 +471,8 @@
         <div class="footer-nav">
           <a href="#inicio">Inicio</a>
           <a href="#nosotros">Nosotros</a>
-          <a href="#precios">Precios</a>
           <a href="#horarios">Horarios</a>
+          <a href="#precios">Precios</a>
           <a href="#contacto">Contacto</a>
           <a href="panel/">Panel</a>
         </div>
