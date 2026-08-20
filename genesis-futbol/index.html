@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cancha Monumental | Fútbol 5 en Barrio Olimpo</title>
-<meta name="description" content="Cancha Monumental — cancha de fútbol 5 en Barrio Olimpo (CABA). Mirá los horarios disponibles y reservá tu turno por WhatsApp.">
+<title>Fútbol 5 Génesis | Cancha en Barrio Olimpo</title>
+<meta name="description" content="Fútbol 5 Génesis — cancha de fútbol 5 en Barrio Olimpo (CABA). Mirá los precios, horarios disponibles y reservá tu turno por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(){try{if(localStorage.getItem('monumental-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+<script>(function(){try{if(localStorage.getItem('genesis-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 <style>
   :root{
     --bg:#0a0f0c;
@@ -19,10 +19,9 @@
     --text-gray:#94a39b;
     --card:#131b16;
     --heading:#ffffff;
-    --line:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.08);
     --soft:rgba(255,255,255,.05);
   }
-  /* MODO DÍA (claro). Por defecto arranca en modo noche. */
   :root[data-theme="light"]{
     --bg:#eef2ef;
     --bg2:#ffffff;
@@ -60,16 +59,13 @@
   }
   nav.scrolled{background:transparent;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:transparent;}
   .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:var(--heading);}
-  .brand-logo{height:48px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
-  .brand-name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;}
+  .brand-logo{height:44px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
+  .brand-name{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:.5px;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;}
   .brand-name b{color:var(--accent);font-weight:400;}
   .brand .brand-name{color:var(--heading);}
   .footer-brand .brand-name{color:#fff;}
-  .footer-logo{height:52px;width:auto;}
-  .social-btn.wa:hover{background:#25d366;border-color:transparent;}
+  .footer-logo{height:48px;width:auto;}
   @media(max-width:420px){ .brand-name{display:none;} }
-  .brand .ball{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
-  .brand span{color:var(--accent);}
   .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.8rem;}
   .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
@@ -84,42 +80,79 @@
   .mobile-menu a:last-child{border-bottom:none;}
   .mobile-menu a:hover{color:var(--accent);}
   .mobile-menu.open{display:flex;}
-  .nav-cta{
-    display:flex;align-items:center;gap:.5rem;background:var(--accent);color:#06110a;
-    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
-    box-shadow:0 6px 18px rgba(34,197,94,.3);transition:transform .25s;
-  }
-  .nav-cta:hover{transform:translateY(-2px);}
 
-  /* HERO VERDE */
+  /* HERO */
   .hero{
     position:relative;min-height:100vh;display:flex;flex-direction:column;
     align-items:flex-start;justify-content:center;
     padding:8rem 1.5rem 5rem;
-    background:linear-gradient(90deg, rgba(5,8,6,.95) 12%, rgba(5,8,6,.6) 58%, rgba(34,197,94,.18) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
+    background:linear-gradient(90deg, rgba(5,8,6,.96) 15%, rgba(5,8,6,.75) 60%, rgba(34,197,94,.12) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
   }
   .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
   .hero-badge{
     display:inline-flex;align-items:center;gap:.5rem;background:rgba(34,197,94,.1);
-    border:1px solid rgba(34,197,94,.35);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
-    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
+    border:1px solid rgba(34,197,94,.35);color:#fff;padding:.45rem 1rem;border-radius:20px;
+    font-size:.8rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
   }
-  .hero-badge b{color:var(--accent-light);}
+  .hero-badge span{color:var(--accent);}
   .hero h1{font-size:4.6rem;color:#fff;max-width:820px;line-height:1.02;text-shadow:0 4px 25px rgba(0,0,0,.5);}
   .hero h1 span{color:var(--accent);}
-  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:560px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
-  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
-  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:580px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
+  .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;cursor:pointer;}
   .btn-accent{background:var(--accent);color:#06110a;box-shadow:0 10px 28px rgba(34,197,94,.35);}
   .btn-accent:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(34,197,94,.5);}
-  .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
-  .btn-outline:hover{background:rgba(255,255,255,.14);}
+  .btn-outline{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.2);}
+  .btn-outline:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);}
+
+  /* HERO STATS BAR */
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;
+    margin-top:3.5rem;background:rgba(15,21,18,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.8rem;max-width:840px;
+  }
+  .stat-item{display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:1.2rem;}
+  .stat-item:last-child{border-right:none;}
+  .stat-val{font-family:'Anton',sans-serif;font-size:2rem;color:var(--heading);line-height:1;}
+  .stat-lbl{font-size:.72rem;font-weight:700;color:var(--text-gray);letter-spacing:.5px;margin-top:.4rem;text-transform:uppercase;}
 
   /* SECCIONES GENERALES */
   section{padding:6rem 0;}
   .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;font-family:'Inter',sans-serif;}
   .sec-title{text-align:center;font-size:2.6rem;color:var(--heading);margin-bottom:.9rem;}
   .sec-sub{text-align:center;color:var(--text-gray);max-width:620px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+
+  /* SECCIÓN PRECIOS */
+  .precios-sec{background:var(--bg);}
+  .precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2rem;align-items:stretch;}
+  .precio-card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;
+    position:relative;transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .precio-card:hover{transform:translateY(-4px);border-color:rgba(34,197,94,.4);}
+  .precio-card.featured{
+    border:1px solid var(--accent);box-shadow:0 10px 30px rgba(34,197,94,.15);
+    background:linear-gradient(180deg, var(--card) 0%, rgba(34,197,94,.05) 100%);
+  }
+  .p-tag{
+    position:absolute;top:1.2rem;right:1.2rem;
+    background:rgba(34,197,94,.18);color:var(--accent-light);border:1px solid rgba(34,197,94,.35);
+    font-size:.68rem;font-weight:700;padding:.3rem .6rem;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;
+  }
+  .precio-card h3{font-size:1.35rem;color:var(--heading);margin-bottom:.8rem;font-family:'Inter',sans-serif;font-weight:700;text-transform:none;}
+  .p-amount{font-family:'Anton',sans-serif;font-size:2.6rem;color:var(--accent);line-height:1;}
+  .p-amount.p-convenir{font-size:2.2rem;color:var(--heading);}
+  .p-period{font-size:.85rem;color:var(--text-gray);margin-top:.4rem;margin-bottom:1.8rem;}
+  .p-features{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.85rem;flex-grow:1;}
+  .p-features li{display:flex;align-items:center;gap:.75rem;font-size:.92rem;color:var(--text);}
+  .p-features .chk{
+    width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,.2);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;
+  }
+  .btn-card-outline{width:100%;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--heading);padding:.85rem;border-radius:8px;font-size:.85rem;}
+  .btn-card-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(34,197,94,.08);}
+  .btn-card-fill{width:100%;justify-content:center;padding:.85rem;border-radius:8px;font-size:.85rem;}
 
   /* NOSOTROS */
   .nos-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
@@ -158,18 +191,6 @@
   .dot.l{background:rgba(34,197,94,.5);}
   .dot.o{background:rgba(224,49,49,.7);}
 
-  /* SECCIÓN PRECIOS Y PAGOS */
-  .precio-band{
-    display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between;
-    background:var(--card);border:1px solid rgba(34,197,94,.3);border-radius:14px;
-    padding:1.8rem 2rem;margin-top:2.4rem;box-shadow:0 10px 30px rgba(0,0,0,.3);
-  }
-  .precio-band .p-main{font-family:'Anton',sans-serif;font-size:2.1rem;color:var(--heading);}
-  .precio-band .p-main span{color:var(--accent);}
-  .precio-band .p-sub{color:var(--text-gray);font-size:.92rem;margin-top:.2rem;}
-  .pagos-badges{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;}
-  .p-badge{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);padding:.4rem .8rem;border-radius:6px;font-size:.8rem;font-weight:600;}
-
   /* CONTACTO */
   .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
   .info-card{
@@ -191,8 +212,6 @@
   footer{background:#070a08;color:#8b918b;padding:4rem 0 2rem;border-top:1px solid rgba(34,197,94,.1);}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
   .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;}
-  .footer-brand .ball{width:12px;height:12px;border-radius:50%;background:var(--accent);}
-  .footer-brand span{color:var(--accent);}
   .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Inter',sans-serif;}
   .footer-col p, .footer-col a{color:#8b918b;font-size:.9rem;font-family:'Inter',sans-serif;}
   .footer-col.about p{line-height:1.7;max-width:280px;}
@@ -205,8 +224,7 @@
     display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
     color:#fff;background:rgba(255,255,255,.04);transition:.3s;
   }
-  .social-btn svg{display:block;flex-shrink:0;}
-  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  .social-btn.wa:hover{background:#25d366;border-color:transparent;}
   .footer-tel{display:block;color:#c3c9c3;margin-bottom:.4rem;}
   .footer-tel:hover{color:var(--accent);}
   footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center;}
@@ -223,20 +241,25 @@
 
   @media(max-width:900px){
     .nos-grid{grid-template-columns:1fr;}
+    .precios-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
     .nav-toggle{display:flex;}
-    .hero{min-height:76vh;padding:7rem 1.3rem 3.5rem;}
+    .hero{min-height:auto;padding:7rem 1.3rem 3.5rem;}
     .hero h1{font-size:2.8rem;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+    .stat-item:nth-child(2){border-right:none;}
   }
   @media(max-width:560px){
     .footer-grid{grid-template-columns:1fr;gap:2rem;}
     .footer-col.about p{max-width:none;}
   }
   @media(max-width:480px){
-    .hero{min-height:66vh;padding:6rem 1.1rem 2.8rem;}
     .hero h1{font-size:2.2rem;}
+    .hero-stats{grid-template-columns:1fr;}
+    .stat-item{border-right:none;border-bottom:1px solid var(--line);padding-bottom:.8rem;}
+    .stat-item:last-child{border-bottom:none;padding-bottom:0;}
     .sec-title{font-size:1.9rem;}
     section{padding:4rem 0;}
   }
@@ -245,11 +268,12 @@
 <body>
 
 <nav id="nav">
-  <a href="#inicio" class="brand" aria-label="Cancha Monumental"><img src="img/logo.png" alt="Cancha Monumental" class="brand-logo"><span class="brand-name">Cancha <b>Monumental</b></span></a>
+  <a href="#inicio" class="brand" aria-label="Fútbol 5 Génesis"><img src="img/logo.png" alt="Fútbol 5 Génesis" class="brand-logo"><span class="brand-name">Fútbol 5 <b>Génesis</b></span></a>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#precios">Precios</a></li>
       <li><a href="#horarios">Horarios</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li><a href="panel/">Panel</a></li>
@@ -263,30 +287,106 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
+    <a href="#precios">Precios</a>
     <a href="#horarios">Horarios</a>
     <a href="#contacto">Contacto</a>
     <a href="panel/">Panel</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-inner">
-    <span class="hero-badge">📍 <b>Barrio Olimpo</b> · Fútbol 5</span>
-    <h1>Tu cancha <span>en el barrio</span></h1>
-    <p>Fútbol 5 en Barrio Olimpo. Mirá los horarios disponibles, elegí tu turno y reservá al toque por WhatsApp.</p>
+    <span class="hero-badge">📍 <b>Barrio Olimpo · CABA · Fútbol 5</b></span>
+    <h1>TU CANCHA <span>EN EL BARRIO</span></h1>
+    <p>Césped sintético, luces LED y turnos todos los días. Mirá la grilla, elegí tu horario y reservalo por WhatsApp en un toque.</p>
+    
     <div class="hero-actions">
-      <a class="btn btn-accent" href="#horarios">Ver horarios y precios</a>
+      <a class="btn btn-accent" href="#horarios">VER HORARIOS</a>
+      <a class="btn btn-outline" href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20un%20turno%20en%20F%C3%BAtbol%205%20G%C3%A9nesis" target="_blank" rel="noopener">CONSULTAR</a>
+    </div>
+
+    <!-- HERO STATS BAR -->
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-val">1 h</span>
+        <span class="stat-lbl">DURACIÓN DEL TURNO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">$15.000</span>
+        <span class="stat-lbl">PRECIO POR TURNO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">18-24</span>
+        <span class="stat-lbl">HORARIOS DE JUEGO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">7 días</span>
+        <span class="stat-lbl">ABIERTO TODA LA SEMANA</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- SECCIÓN PRECIOS -->
+<section id="precios" class="precios-sec">
+  <div class="wrap">
+    <span class="eyebrow">PRECIOS</span>
+    <h2 class="sec-title">ELEGÍ CÓMO JUGAR</h2>
+    <p class="sec-sub">Seña por WhatsApp para dejar el turno tomado. El resto lo abonás en la cancha.</p>
+
+    <div class="precios-grid">
+      <!-- Tarjeta 1 -->
+      <div class="precio-card reveal">
+        <h3>Turno suelto</h3>
+        <div class="p-amount">$15.000</div>
+        <div class="p-period">1 hora de cancha</div>
+        <ul class="p-features">
+          <li><span class="chk">✓</span> Pelota y pecheras</li>
+          <li><span class="chk">✓</span> Vestuario</li>
+          <li><span class="chk">✓</span> Reserva por WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20un%20Turno%20Suelto%20en%20F%C3%BAtbol%205%20G%C3%A9nesis" target="_blank" rel="noopener" class="btn btn-card-outline">CONSULTAR</a>
+      </div>
+
+      <!-- Tarjeta 2 (Destacada) -->
+      <div class="precio-card featured reveal">
+        <span class="p-tag">MÁS ELEGIDO</span>
+        <h3>Turno fijo semanal</h3>
+        <div class="p-amount">$13.500</div>
+        <div class="p-period">por semana · mismo día y hora</div>
+        <ul class="p-features">
+          <li><span class="chk">✓</span> 10% off sobre el turno</li>
+          <li><span class="chk">✓</span> Horario reservado todo el mes</li>
+          <li><span class="chk">✓</span> Prioridad ante cambios</li>
+        </ul>
+        <a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20un%20Turno%20Fijo%20Semanal%20en%20F%C3%BAtbol%205%20G%C3%A9nesis" target="_blank" rel="noopener" class="btn btn-accent btn-card-fill">CONSULTAR</a>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="precio-card reveal">
+        <h3>Torneo / evento</h3>
+        <div class="p-amount p-convenir">A convenir</div>
+        <div class="p-period">3 horas o más</div>
+        <ul class="p-features">
+          <li><span class="chk">✓</span> Fixture armado</li>
+          <li><span class="chk">✓</span> Cancha exclusiva</li>
+          <li><span class="chk">✓</span> Cumpleaños y despedidas</li>
+        </ul>
+        <a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20Torneo%20o%20Evento%20en%20F%C3%BAtbol%205%20G%C3%A9nesis" target="_blank" rel="noopener" class="btn btn-card-outline">CONSULTAR</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
 <section id="nosotros">
   <div class="wrap nos-grid">
     <div class="carrusel reveal">
       <button class="carrusel-arrow prev" id="carruselPrev" aria-label="Anterior">&#10094;</button>
       <div class="carrusel-track" id="carruselTrack">
-        <div class="carrusel-slide"><img src="img/hero.jpg" alt="Cancha Monumental fútbol 5"></div>
-        <div class="carrusel-slide"><img src="img/cancha2.jpg" alt="Césped de la cancha"></div>
+        <div class="carrusel-slide"><img src="img/hero.jpg" alt="Fútbol 5 Génesis cancha"></div>
+        <div class="carrusel-slide"><img src="img/cancha2.jpg" alt="Césped sintético Génesis"></div>
       </div>
       <button class="carrusel-arrow next" id="carruselNext" aria-label="Siguiente">&#10095;</button>
       <div class="carrusel-dots" id="carruselDots"><span class="active"></span><span></span></div>
@@ -294,7 +394,7 @@
     <div class="nos-text reveal">
       <span class="eyebrow">Nosotros</span>
       <h2>La cancha del barrio</h2>
-      <p>Monumental es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</p>
+      <p>Génesis es tu cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</p>
       <div class="nos-list">
         <li><span class="chk">✓</span> Cancha de fútbol 5</li>
         <li><span class="chk">✓</span> Turnos todos los días</li>
@@ -305,9 +405,10 @@
   </div>
 </section>
 
+<!-- HORARIOS -->
 <section id="horarios" class="horarios">
   <div class="wrap">
-    <span class="eyebrow">Disponibilidad & Tarifas</span>
+    <span class="eyebrow">Disponibilidad</span>
     <h2 class="sec-title">Horarios de la Semana</h2>
     <p class="sec-sub">Tocá un horario <b style="color:var(--accent-light)">libre</b> y te lleva directo a WhatsApp para reservarlo.</p>
     <div class="grid-scroll">
@@ -317,22 +418,10 @@
       <span><i class="dot l"></i> Libre — tocá para reservar</span>
       <span><i class="dot o"></i> Ocupado</span>
     </div>
-
-    <!-- SECCIÓN PRECIOS Y MÉTODOS DE PAGO -->
-    <div class="precio-band reveal">
-      <div>
-        <div class="p-main">Turno 1 hora · <span>$15.000</span></div>
-        <div class="p-sub">Fútbol 5 · Seña previa para congelar la reserva</div>
-      </div>
-      <div class="pagos-badges">
-        <span class="p-badge">💳 Mercado Pago</span>
-        <span class="p-badge">🏦 Transferencia</span>
-        <span class="p-badge">💵 Efectivo</span>
-      </div>
-    </div>
   </div>
 </section>
 
+<!-- CONTACTO -->
 <section id="contacto">
   <div class="wrap">
     <span class="eyebrow">Dónde estamos</span>
@@ -343,13 +432,13 @@
           <div class="icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
           </div>
-          <div><h4>Dirección</h4><a href="https://maps.app.goo.gl/r82aHWgVsE7TX3c9A" target="_blank" rel="noopener">Cancha Sintética Monumental<br>Barrio Olimpo · CABA<br><span style="color:var(--accent);font-weight:600">Ver en Google Maps →</span></a></div>
+          <div><h4>Dirección</h4><a href="https://maps.app.goo.gl/r82aHWgVsE7TX3c9A" target="_blank" rel="noopener">Cancha Sintética Génesis<br>Barrio Olimpo · CABA<br><span style="color:var(--accent);font-weight:600">Ver en Google Maps →</span></a></div>
         </div>
         <div class="info-card reveal">
           <div class="icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-          <div><h4>Reservas</h4><a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20la%20cancha" target="_blank" rel="noopener">11-2597-1185</a></div>
+          <div><h4>Reservas</h4><a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20F%C3%BAtbol%205%20G%C3%A9nesis" target="_blank" rel="noopener">11-2597-1185</a></div>
         </div>
         <div class="info-card reveal">
           <div class="icon">
@@ -365,11 +454,12 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col about">
-        <div class="footer-brand"><img src="img/logo.png" alt="Cancha Monumental" class="footer-logo"><span class="brand-name">Cancha <b>Monumental</b></span></div>
+        <div class="footer-brand"><img src="img/logo.png" alt="Fútbol 5 Génesis" class="footer-logo"><span class="brand-name">Fútbol 5 <b>Génesis</b></span></div>
         <p>Cancha de fútbol 5 en Barrio Olimpo. Reservá tu turno por WhatsApp.</p>
       </div>
       <div class="footer-col footer-addr">
@@ -381,6 +471,7 @@
         <div class="footer-nav">
           <a href="#inicio">Inicio</a>
           <a href="#nosotros">Nosotros</a>
+          <a href="#precios">Precios</a>
           <a href="#horarios">Horarios</a>
           <a href="#contacto">Contacto</a>
           <a href="panel/">Panel</a>
@@ -389,10 +480,10 @@
       <div class="footer-col contact">
         <h4>Seguinos en Nuestras Redes</h4>
         <div class="footer-socials">
-          <span class="social-btn" style="cursor:default" title="Instagram · próximamente" aria-label="Instagram (próximamente)">
+          <span class="social-btn" style="cursor:default" title="Instagram · próximamente" aria-label="Instagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </span>
-          <span class="social-btn" style="cursor:default" title="TikTok · próximamente" aria-label="TikTok (próximamente)">
+          <span class="social-btn" style="cursor:default" title="TikTok · próximamente" aria-label="TikTok">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.02-2.82H12.5v12.35a2.53 2.53 0 1 1-2.53-2.53c.2 0 .4.03.59.08V9.66a5.66 5.66 0 0 0-.59-.03A5.63 5.63 0 1 0 15.6 15.3V9.4a7.32 7.32 0 0 0 4.3 1.38V7.66a4.28 4.28 0 0 1-3.3-1.84z"/></svg>
           </span>
           <a class="social-btn wa" href="https://wa.me/5491125971185" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -402,11 +493,11 @@
         <a class="footer-tel" href="https://wa.me/5491125971185" target="_blank" rel="noopener">Celular: 11-2597-1185</a>
       </div>
     </div>
-    <p class="fine">© 2026 Cancha Monumental · Barrio Olimpo · CABA</p>
+    <p class="fine">© 2026 Fútbol 5 Génesis · Barrio Olimpo · CABA</p>
   </div>
 </footer>
 
-<a class="float-wa" href="https://wa.me/5491125971185?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20la%20cancha" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a class="float-wa" href="https://wa.me/5491125971185?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20F%C3%BAtbol%205%20G%C3%A9nesis" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
 </a>
 
@@ -432,8 +523,8 @@
   const tt = document.getElementById('themeToggle');
   if (tt) tt.addEventListener('click', () => {
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    if (isLight) { document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('monumental-theme','dark');}catch(e){} }
-    else { document.documentElement.setAttribute('data-theme','light'); try{localStorage.setItem('monumental-theme','light');}catch(e){} }
+    if (isLight) { document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('genesis-theme','dark');}catch(e){} }
+    else { document.documentElement.setAttribute('data-theme','light'); try{localStorage.setItem('genesis-theme','light');}catch(e){} }
   });
 
   const DIAS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
@@ -464,7 +555,7 @@
     const cell = e.target.closest('.slot.libre');
     if (!cell) return;
     const dia = cell.dataset.dia, hora = cell.dataset.hora;
-    const msg = `Hola! Quiero reservar la cancha ${DIA_FULL[dia]} a las ${hora}hs`;
+    const msg = `Hola! Quiero reservar la cancha ${DIA_FULL[dia]} a las ${hora}hs en Fútbol 5 Génesis`;
     window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   });
 
