@@ -1,407 +1,497 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tu Cancha en el Barrio - Fútbol 5</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    /* Estilos Modo Noche (Default) */
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0b0f12;
-      color: #e5e7eb;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .font-heading {
-      font-family: 'Oswald', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .text-green-brand { color: #22c55e; }
-    .bg-green-brand { background-color: #22c55e; }
-    .border-green-brand { border-color: #22c55e; }
-    
-    .card-dark {
-      background-color: #12181d;
-      border: 1px solid #1e293b;
-      transition: background-color 0.3s, border-color 0.3s;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancha Monumental | Fútbol 5 en Barrio Olimpo</title>
+<meta name="description" content="Cancha Monumental — cancha de fútbol 5 en Barrio Olimpo (CABA). Mirá los horarios disponibles y reservá tu turno por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{if(localStorage.getItem('monumental-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+<style>
+  :root{
+    --bg:#0a0f0c;
+    --bg2:#0f1512;
+    --accent:#22c55e;
+    --accent-light:#86efac;
+    --text:#e9f2ec;
+    --text-gray:#94a39b;
+    --card:#131b16;
+    --heading:#ffffff;
+    --line:rgba(255,255,255,.07);
+    --soft:rgba(255,255,255,.05);
+  }
+  /* MODO DÍA (claro). Por defecto arranca en modo noche. */
+  :root[data-theme="light"]{
+    --bg:#eef2ef;
+    --bg2:#ffffff;
+    --card:#ffffff;
+    --text:#243029;
+    --text-gray:#586a60;
+    --heading:#0e1a13;
+    --accent:#16a34a;
+    --accent-light:#15803d;
+    --line:rgba(0,0,0,.1);
+    --soft:rgba(0,0,0,.045);
+  }
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--heading);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;flex:0 0 38px;}
+  .theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+  .theme-toggle .moon{display:none;}
+  :root[data-theme="light"] .theme-toggle .sun{display:none;}
+  :root[data-theme="light"] .theme-toggle .moon{display:block;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;}
+  ul{list-style:none;}
 
-    /* Modificadores para Modo Día */
-    body.light-mode {
-      background-color: #f1f5f9;
-      color: #0f172a;
-    }
-    body.light-mode .card-dark {
-      background-color: #ffffff;
-      border-color: #cbd5e1;
-      color: #0f172a;
-    }
-    body.light-mode .text-white { color: #0f172a !important; }
-    body.light-mode .text-slate-300,
-    body.light-mode .text-slate-400 { color: #475569 !important; }
-    body.light-mode nav { background-color: rgba(255, 255, 255, 0.9) !important; border-color: #e2e8f0 !important; }
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.55rem 2rem;
+    background:var(--bg);
+    border-bottom:1px solid rgba(34,197,94,.18);
+    transition:background .3s ease, border-color .3s ease;
+  }
+  nav.scrolled{background:transparent;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:transparent;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:var(--heading);}
+  .brand-logo{height:48px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
+  .brand-name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;}
+  .brand-name b{color:var(--accent);font-weight:400;}
+  .brand .brand-name{color:var(--heading);}
+  .footer-brand .brand-name{color:#fff;}
+  .footer-logo{height:52px;width:auto;}
+  .social-btn.wa:hover{background:#25d366;border-color:transparent;}
+  @media(max-width:420px){ .brand-name{display:none;} }
+  .brand .ball{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
+  .brand span{color:var(--accent);}
+  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-links{display:flex;gap:1.8rem;}
+  .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-toggle{display:none;width:40px;height:40px;border:none;background:transparent;color:var(--heading);cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;flex:0 0 40px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:.25s;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:.4rem 1.4rem 1rem;flex-direction:column;box-shadow:0 20px 40px rgba(0,0,0,.35);}
+  .mobile-menu a{padding:.85rem .2rem;color:var(--text-gray);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:hover{color:var(--accent);}
+  .mobile-menu.open{display:flex;}
+  .nav-cta{
+    display:flex;align-items:center;gap:.5rem;background:var(--accent);color:#06110a;
+    padding:.6rem 1.3rem;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+    box-shadow:0 6px 18px rgba(34,197,94,.3);transition:transform .25s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
 
-    /* Estado de Slots (Horarios) */
-    .slot-btn {
-      width: 100%;
-      padding: 0.625rem 0;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    .slot-free {
-      background-color: #142e1b;
-      border: 1px solid #1e532b;
-      color: #4ade80;
-    }
-    .slot-free:hover {
-      background-color: #16a34a;
-      color: #ffffff;
-    }
-    .slot-occupied {
-      background-color: #2a1518;
-      border: 1px solid #451a1d;
-      color: #ef4444;
-      text-decoration: line-through;
-      opacity: 0.75;
-    }
-  </style>
+  /* HERO VERDE */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:8rem 1.5rem 5rem;
+    background:linear-gradient(90deg, rgba(5,8,6,.95) 12%, rgba(5,8,6,.6) 58%, rgba(34,197,94,.18) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.35);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
+    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
+  }
+  .hero-badge b{color:var(--accent-light);}
+  .hero h1{font-size:4.6rem;color:#fff;max-width:820px;line-height:1.02;text-shadow:0 4px 25px rgba(0,0,0,.5);}
+  .hero h1 span{color:var(--accent);}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:560px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
+  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
+  .btn-accent{background:var(--accent);color:#06110a;box-shadow:0 10px 28px rgba(34,197,94,.35);}
+  .btn-accent:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(34,197,94,.5);}
+  .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
+  .btn-outline:hover{background:rgba(255,255,255,.14);}
+
+  /* SECCIONES GENERALES */
+  section{padding:6rem 0;}
+  .eyebrow{display:block;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;font-family:'Inter',sans-serif;}
+  .sec-title{text-align:center;font-size:2.6rem;color:var(--heading);margin-bottom:.9rem;}
+  .sec-sub{text-align:center;color:var(--text-gray);max-width:620px;margin:0 auto 3.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+
+  /* NOSOTROS */
+  .nos-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;align-items:center;}
+  .nos-text .eyebrow{text-align:left;}
+  .nos-text h2{font-size:2.2rem;text-align:left;margin-bottom:1.1rem;color:var(--heading);}
+  .nos-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .nos-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem;}
+  .nos-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:var(--text);font-family:'Inter',sans-serif;}
+  .nos-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#06110a;font-size:.7rem;font-weight:900;}
+  .carrusel{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(34,197,94,.15);}
+  .carrusel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;}
+  .carrusel-track::-webkit-scrollbar{display:none;}
+  .carrusel-slide{flex:0 0 100%;scroll-snap-align:center;}
+  .carrusel-slide img{width:100%;height:380px;object-fit:cover;display:block;}
+  .carrusel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;background:rgba(10,15,12,.7);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:.2s;z-index:2;}
+  .carrusel-arrow:hover{background:var(--accent);color:#06110a;}
+  .carrusel-arrow.prev{left:.8rem;}
+  .carrusel-arrow.next{right:.8rem;}
+  .carrusel-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:2;}
+  .carrusel-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);transition:.2s;}
+  .carrusel-dots span.active{background:var(--accent);width:22px;border-radius:4px;}
+
+  /* HORARIOS */
+  .horarios{background:var(--bg2);}
+  .grid-scroll{overflow-x:auto;padding-bottom:.6rem;}
+  .hgrid{display:grid;grid-template-columns:64px repeat(7,minmax(82px,1fr));gap:6px;min-width:660px;}
+  .hhead{font-family:'Anton',sans-serif;text-transform:uppercase;text-align:center;color:var(--accent);font-size:.9rem;padding:.5rem 0;letter-spacing:.5px;}
+  .htime{display:flex;align-items:center;justify-content:flex-end;padding-right:.5rem;color:var(--text-gray);font-size:.8rem;font-weight:600;}
+  .slot{border-radius:7px;padding:.7rem .3rem;text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.3px;transition:.2s;}
+  .slot.libre{background:rgba(34,197,94,.14);color:var(--accent-light);border:1px solid rgba(34,197,94,.32);cursor:pointer;}
+  .slot.libre:hover{background:var(--accent);color:#06110a;transform:translateY(-2px);}
+  .slot.ocupado{background:rgba(224,49,49,.26);color:#e23b3b;border:1px solid rgba(224,49,49,.5);text-decoration:line-through;}
+  .hor-legend{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin:1.6rem 0 .4rem;font-size:.82rem;color:var(--text-gray);}
+  .hor-legend span{display:inline-flex;align-items:center;gap:.45rem;}
+  .dot{width:12px;height:12px;border-radius:3px;}
+  .dot.l{background:rgba(34,197,94,.5);}
+  .dot.o{background:rgba(224,49,49,.7);}
+
+  /* SECCIÓN PRECIOS Y PAGOS */
+  .precio-band{
+    display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between;
+    background:var(--card);border:1px solid rgba(34,197,94,.3);border-radius:14px;
+    padding:1.8rem 2rem;margin-top:2.4rem;box-shadow:0 10px 30px rgba(0,0,0,.3);
+  }
+  .precio-band .p-main{font-family:'Anton',sans-serif;font-size:2.1rem;color:var(--heading);}
+  .precio-band .p-main span{color:var(--accent);}
+  .precio-band .p-sub{color:var(--text-gray);font-size:.92rem;margin-top:.2rem;}
+  .pagos-badges{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;}
+  .p-badge{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);padding:.4rem .8rem;border-radius:6px;font-size:.8rem;font-weight:600;}
+
+  /* CONTACTO */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+  .info-card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .info-card .icon{
+    width:44px;height:44px;flex:0 0 44px;border-radius:8px;background:rgba(34,197,94,.12);
+    display:flex;align-items:center;justify-content:center;color:var(--accent);
+  }
+  .info-card h4{font-size:.95rem;color:var(--heading);margin-bottom:.3rem;font-weight:700;font-family:'Inter',sans-serif;text-transform:none;letter-spacing:0;}
+  .info-card p, .info-card a{color:var(--text-gray);font-size:.92rem;text-transform:none;font-family:'Inter',sans-serif;}
+  .info-card a:hover{color:var(--accent);}
+  .map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(34,197,94,.25);box-shadow:0 20px 50px rgba(0,0,0,.5);height:100%;min-height:420px;}
+  .map-wrap iframe{width:100%;height:100%;min-height:420px;border:0;filter:grayscale(50%) invert(90%) contrast(88%);}
+
+  /* FOOTER */
+  footer{background:#070a08;color:#8b918b;padding:4rem 0 2rem;border-top:1px solid rgba(34,197,94,.1);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;}
+  .footer-brand .ball{width:12px;height:12px;border-radius:50%;background:var(--accent);}
+  .footer-brand span{color:var(--accent);}
+  .footer-col h4{color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;font-family:'Inter',sans-serif;}
+  .footer-col p, .footer-col a{color:#8b918b;font-size:.9rem;font-family:'Inter',sans-serif;}
+  .footer-col.about p{line-height:1.7;max-width:280px;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a:hover{color:var(--accent);}
+  .footer-addr p{line-height:1.7;margin-bottom:.8rem;}
+  .footer-socials{display:flex;gap:.8rem;margin-bottom:1.3rem;}
+  .social-btn{
+    width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.04);transition:.3s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  .footer-tel{display:block;color:#c3c9c3;margin-bottom:.4rem;}
+  .footer-tel:hover{color:var(--accent);}
+  footer .fine{font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center;}
+
+  .float-wa{
+    position:fixed;bottom:1.6rem;right:1.6rem;width:60px;height:60px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:999;transition:.3s;
+  }
+  .float-wa:hover{transform:scale(1.1);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .nos-grid{grid-template-columns:1fr;}
+    .contacto-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .nav-toggle{display:flex;}
+    .hero{min-height:76vh;padding:7rem 1.3rem 3.5rem;}
+    .hero h1{font-size:2.8rem;}
+  }
+  @media(max-width:560px){
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
+  }
+  @media(max-width:480px){
+    .hero{min-height:66vh;padding:6rem 1.1rem 2.8rem;}
+    .hero h1{font-size:2.2rem;}
+    .sec-title{font-size:1.9rem;}
+    section{padding:4rem 0;}
+  }
+</style>
 </head>
-<body class="antialiased selection:bg-green-500 selection:text-black">
+<body>
 
-  <!-- NAVBAR CON MODO DÍA/NOCHE Y PANEL -->
-  <nav class="sticky top-0 z-40 bg-[#0b0f12]/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <a href="#" class="font-heading text-xl font-bold text-white tracking-wider">
-        MONUMENTAL <span class="text-green-brand">F5</span>
-      </a>
+<nav id="nav">
+  <a href="#inicio" class="brand" aria-label="Cancha Monumental"><img src="img/logo.png" alt="Cancha Monumental" class="brand-logo"><span class="brand-name">Cancha <b>Monumental</b></span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="panel/">Panel</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
+      <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#horarios">Horarios</a>
+    <a href="#contacto">Contacto</a>
+    <a href="panel/">Panel</a>
+  </div>
+</nav>
 
-      <div class="flex items-center gap-3">
-        <!-- Switch Modo Día/Noche -->
-        <button id="theme-toggle" class="p-2 rounded-lg card-dark text-slate-300 hover:text-green-brand transition flex items-center gap-2 text-xs font-semibold">
-          <span id="theme-icon">☀️</span>
-          <span id="theme-text" class="hidden sm:inline">Modo Día</span>
-        </button>
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <span class="hero-badge">📍 <b>Barrio Olimpo</b> · Fútbol 5</span>
+    <h1>Tu cancha <span>en el barrio</span></h1>
+    <p>Fútbol 5 en Barrio Olimpo. Mirá los horarios disponibles, elegí tu turno y reservá al toque por WhatsApp.</p>
+    <div class="hero-actions">
+      <a class="btn btn-accent" href="#horarios">Ver horarios y precios</a>
+    </div>
+  </div>
+</section>
 
-        <!-- Botón Panel Admin -->
-        <button id="panel-open-btn" class="bg-green-brand text-black font-semibold px-3 py-1.5 rounded-lg text-xs hover:bg-green-400 transition flex items-center gap-1.5 shadow-lg shadow-green-500/10">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-          Panel Admin
-        </button>
+<section id="nosotros">
+  <div class="wrap nos-grid">
+    <div class="carrusel reveal">
+      <button class="carrusel-arrow prev" id="carruselPrev" aria-label="Anterior">&#10094;</button>
+      <div class="carrusel-track" id="carruselTrack">
+        <div class="carrusel-slide"><img src="img/hero.jpg" alt="Cancha Monumental fútbol 5"></div>
+        <div class="carrusel-slide"><img src="img/cancha2.jpg" alt="Césped de la cancha"></div>
+      </div>
+      <button class="carrusel-arrow next" id="carruselNext" aria-label="Siguiente">&#10095;</button>
+      <div class="carrusel-dots" id="carruselDots"><span class="active"></span><span></span></div>
+    </div>
+    <div class="nos-text reveal">
+      <span class="eyebrow">Nosotros</span>
+      <h2>La cancha del barrio</h2>
+      <p>Monumental es una cancha de fútbol 5 en el corazón de Barrio Olimpo. Juntá a los pibes, elegí el día y la hora, y armá el partido sin vueltas.</p>
+      <div class="nos-list">
+        <li><span class="chk">✓</span> Cancha de fútbol 5</li>
+        <li><span class="chk">✓</span> Turnos todos los días</li>
+        <li><span class="chk">✓</span> Reservás fácil por WhatsApp</li>
+        <li><span class="chk">✓</span> A metros de tu casa, en Barrio Olimpo</li>
       </div>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <!-- PANEL DE ADMINISTRACIÓN LATERAL -->
-  <aside id="admin-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-900 border-l border-slate-700 p-6 z-50 transform translate-x-full transition-transform duration-300 shadow-2xl overflow-y-auto">
-    <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+<section id="horarios" class="horarios">
+  <div class="wrap">
+    <span class="eyebrow">Disponibilidad & Tarifas</span>
+    <h2 class="sec-title">Horarios de la Semana</h2>
+    <p class="sec-sub">Tocá un horario <b style="color:var(--accent-light)">libre</b> y te lleva directo a WhatsApp para reservarlo.</p>
+    <div class="grid-scroll">
+      <div class="hgrid" id="hgrid"></div>
+    </div>
+    <div class="hor-legend">
+      <span><i class="dot l"></i> Libre — tocá para reservar</span>
+      <span><i class="dot o"></i> Ocupado</span>
+    </div>
+
+    <!-- SECCIÓN PRECIOS Y MÉTODOS DE PAGO -->
+    <div class="precio-band reveal">
       <div>
-        <h3 class="font-heading text-xl font-bold text-white">PANEL DE CONTROL</h3>
-        <p class="text-xs text-slate-400">Edición en tiempo real</p>
+        <div class="p-main">Turno 1 hora · <span>$15.000</span></div>
+        <div class="p-sub">Fútbol 5 · Seña previa para congelar la reserva</div>
       </div>
-      <button id="panel-close-btn" class="text-slate-400 hover:text-white p-2 text-xl font-bold">&times;</button>
+      <div class="pagos-badges">
+        <span class="p-badge">💳 Mercado Pago</span>
+        <span class="p-badge">🏦 Transferencia</span>
+        <span class="p-badge">💵 Efectivo</span>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="space-y-6">
-      <!-- Editar Precios -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-bold text-green-brand uppercase tracking-wider">Editar Precios</h4>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">Turno Suelto ($)</label>
-            <input type="text" id="edit-price-suelto" value="$15.000" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-green-brand outline-none">
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Dónde estamos</span>
+    <h2 class="sec-title">Barrio Olimpo</h2>
+    <div class="contacto-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
           </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">Turno Fijo ($)</label>
-            <input type="text" id="edit-price-fijo" value="$13.500" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-green-brand outline-none">
+          <div><h4>Dirección</h4><a href="https://maps.app.goo.gl/r82aHWgVsE7TX3c9A" target="_blank" rel="noopener">Cancha Sintética Monumental<br>Barrio Olimpo · CABA<br><span style="color:var(--accent);font-weight:600">Ver en Google Maps →</span></a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
+          <div><h4>Reservas</h4><a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20la%20cancha" target="_blank" rel="noopener">11-2597-1185</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h4>Abierto</h4><p>Todos los días · consultá disponibilidad</p></div>
         </div>
       </div>
-
-      <hr class="border-slate-800"/>
-
-      <!-- Instrucción de Horarios -->
-      <div>
-        <h4 class="text-xs font-bold text-green-brand uppercase tracking-wider mb-2">Gestión de Horarios</h4>
-        <p class="text-xs text-slate-400 leading-relaxed">
-          Para modificar la disponibilidad de la grilla, hacé clic directamente sobre cada bloque de horario en la pantalla principal.
-        </p>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps?q=-34.7402965,-58.4909233&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
-  </aside>
+  </div>
+</section>
 
-  <!-- HERO SECTION (EN VERDE) -->
-  <header class="relative min-h-[85vh] flex flex-col justify-between bg-cover bg-center px-4 py-8 md:p-12" style="background-image: linear-gradient(to bottom, rgba(11, 15, 18, 0.5), rgba(11, 15, 18, 0.95)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600&auto=format&fit=crop');">
-    <div class="max-w-6xl mx-auto w-full pt-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-xs md:text-sm text-green-brand mb-6 backdrop-blur-sm">
-        <span class="w-2 h-2 rounded-full bg-green-brand inline-block"></span>
-        Barrio Olimpo · CABA · Fútbol 5
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <div class="footer-brand"><img src="img/logo.png" alt="Cancha Monumental" class="footer-logo"><span class="brand-name">Cancha <b>Monumental</b></span></div>
+        <p>Cancha de fútbol 5 en Barrio Olimpo. Reservá tu turno por WhatsApp.</p>
       </div>
-
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-none mb-4 tracking-tight text-white">
-        TU CANCHA<br/>
-        <span class="text-green-brand">EN EL BARRIO</span>
-      </h1>
-
-      <p class="max-w-xl text-slate-300 text-base md:text-lg mb-8 font-light">
-        Césped sintético, luces LED y turnos todos los días. Mirá la grilla, elegí tu horario y reservalo por WhatsApp en un toque.
-      </p>
-
-      <div class="flex flex-wrap gap-4 mb-12">
-        <a href="#horarios" class="bg-green-brand text-black font-semibold px-6 py-3 rounded-lg hover:bg-green-400 transition-colors">
-          VER HORARIOS
-        </a>
-        <a href="#contacto" class="border border-slate-700 bg-slate-900/50 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors backdrop-blur-sm">
-          CONSULTAR
-        </a>
+      <div class="footer-col footer-addr">
+        <h4>Dónde estamos</h4>
+        <p>Barrio Olimpo<br>CABA</p>
       </div>
-    </div>
-
-    <!-- Quick Stats Bar -->
-    <div class="max-w-6xl mx-auto w-full">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-6 rounded-2xl card-dark backdrop-blur-md">
-        <div class="border-r border-slate-800/80 last:border-0 pr-2">
-          <div class="text-2xl md:text-3xl font-heading font-bold text-white">1 h</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider">Duración del turno</div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#inicio">Inicio</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#horarios">Horarios</a>
+          <a href="#contacto">Contacto</a>
+          <a href="panel/">Panel</a>
         </div>
-        <div class="border-r border-slate-800/80 last:border-0 pr-2">
-          <div id="stat-price-display" class="text-2xl md:text-3xl font-heading font-bold text-white">$15.000</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider">Precio por turno</div>
+      </div>
+      <div class="footer-col contact">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <span class="social-btn" style="cursor:default" title="Instagram · próximamente" aria-label="Instagram (próximamente)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="social-btn" style="cursor:default" title="TikTok · próximamente" aria-label="TikTok (próximamente)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.02-2.82H12.5v12.35a2.53 2.53 0 1 1-2.53-2.53c.2 0 .4.03.59.08V9.66a5.66 5.66 0 0 0-.59-.03A5.63 5.63 0 1 0 15.6 15.3V9.4a7.32 7.32 0 0 0 4.3 1.38V7.66a4.28 4.28 0 0 1-3.3-1.84z"/></svg>
+          </span>
+          <a class="social-btn wa" href="https://wa.me/5491125971185" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.96L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.25-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
+          </a>
         </div>
-        <div class="border-r border-slate-800/80 last:border-0 pr-2">
-          <div class="text-2xl md:text-3xl font-heading font-bold text-white">18-24</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider">Horarios de juego</div>
-        </div>
-        <div>
-          <div class="text-2xl md:text-3xl font-heading font-bold text-white">7 días</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider">Abierto toda la semana</div>
-        </div>
+        <a class="footer-tel" href="https://wa.me/5491125971185" target="_blank" rel="noopener">Celular: 11-2597-1185</a>
       </div>
     </div>
-  </header>
+    <p class="fine">© 2026 Cancha Monumental · Barrio Olimpo · CABA</p>
+  </div>
+</footer>
 
-  <!-- SECCIÓN HORARIOS INTERACTIVOS -->
-  <section id="horarios" class="py-20 px-4 md:px-12 max-w-6xl mx-auto text-center">
-    <span class="text-xs font-bold text-green-brand uppercase tracking-wider">DISPONIBILIDAD</span>
-    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-2">HORARIOS DE LA SEMANA</h2>
-    <p class="text-slate-400 text-sm mb-8">Tocá un horario para cambiar su estado (Libre / Ocupado).</p>
+<a class="float-wa" href="https://wa.me/5491125971185?text=Hola!%20Quiero%20reservar%20un%20turno%20en%20la%20cancha" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.22 8.26-8.22zm-4.53 4.7c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.13.16 1.72 2.7 4.23 3.68 2.09.82 2.51.66 2.97.62.46-.04 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.28-.25-.13-1.48-.73-1.71-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.37-.78-1.87-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01z"/></svg>
+</a>
 
-    <div class="card-dark p-4 md:p-8 rounded-3xl overflow-x-auto">
-      <table class="w-full min-w-[650px] text-center border-separate border-spacing-2">
-        <thead>
-          <tr class="text-green-brand font-heading text-lg">
-            <th class="p-2"></th>
-            <th class="p-2">LUN</th>
-            <th class="p-2">MAR</th>
-            <th class="p-2">MIÉ</th>
-            <th class="p-2">JUE</th>
-            <th class="p-2">VIE</th>
-            <th class="p-2">SÁB</th>
-            <th class="p-2">DOM</th>
-          </tr>
-        </thead>
-        <tbody class="text-sm">
-          <!-- 18:00 -->
-          <tr>
-            <td class="text-slate-400 font-mono pr-2">18:00</td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-          </tr>
-          <!-- 19:00 -->
-          <tr>
-            <td class="text-slate-400 font-mono pr-2">19:00</td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-          </tr>
-          <!-- 20:00 -->
-          <tr>
-            <td class="text-slate-400 font-mono pr-2">20:00</td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-          </tr>
-          <!-- 21:00 -->
-          <tr>
-            <td class="text-slate-400 font-mono pr-2">21:00</td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-          </tr>
-          <!-- 22:00 -->
-          <tr>
-            <td class="text-slate-400 font-mono pr-2">22:00</td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-occupied">Ocupado</button></td>
-            <td><button class="slot-btn slot-free">Libre</button></td>
-          </tr>
-        </tbody>
-      </table>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
 
-      <div class="flex items-center justify-center gap-6 mt-6 text-xs text-slate-400">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded bg-green-500"></span> Libre
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded bg-red-500"></span> Ocupado
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN PRECIOS -->
-  <section class="py-20 px-4 md:px-12 max-w-6xl mx-auto text-center">
-    <span class="text-xs font-bold text-green-brand uppercase tracking-wider">PRECIOS</span>
-    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-1 mb-2">ELEGÍ CÓMO JUGAR</h2>
-    <p class="text-slate-400 text-sm mb-12 max-w-lg mx-auto">
-      Seña por WhatsApp para dejar el turno reservado.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-      <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
-        <div>
-          <h3 class="font-heading text-xl text-white font-bold mb-2">Turno suelto</h3>
-          <div id="target-price-suelto" class="text-3xl font-heading font-bold text-green-brand mb-1">$15.000</div>
-          <div class="text-xs text-slate-400 mb-6">1 hora de cancha</div>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Pelota y pecheras</li>
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Vestuario</li>
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Reserva por WhatsApp</li>
-          </ul>
-        </div>
-        <a href="#contacto" class="mt-8 block text-center border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition font-semibold text-sm text-white">CONSULTAR</a>
-      </div>
-
-      <div class="card-dark p-8 rounded-3xl border-2 border-green-brand relative flex flex-col justify-between shadow-[0_0_30px_rgba(34,197,94,0.15)]">
-        <span class="absolute -top-3 right-6 bg-green-brand text-black font-bold text-xs px-3 py-1 rounded-full uppercase font-heading">MÁS ELEGIDO</span>
-        <div>
-          <h3 class="font-heading text-xl text-white font-bold mb-2">Turno fijo semanal</h3>
-          <div id="target-price-fijo" class="text-3xl font-heading font-bold text-green-brand mb-1">$13.500</div>
-          <div class="text-xs text-slate-400 mb-6">por semana · mismo día y hora</div>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Descuento sobre el turno</li>
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Horario reservado todo el mes</li>
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Prioridad ante cambios</li>
-          </ul>
-        </div>
-        <a href="#contacto" class="mt-8 block text-center bg-green-brand text-black py-3 rounded-xl hover:bg-green-400 transition font-semibold text-sm">CONSULTAR</a>
-      </div>
-
-      <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
-        <div>
-          <h3 class="font-heading text-xl text-white font-bold mb-2">Torneo / evento</h3>
-          <div class="text-3xl font-heading font-bold text-green-brand mb-1">A convenir</div>
-          <div class="text-xs text-slate-400 mb-6">3 horas o más</div>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Fixture armado</li>
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Cancha exclusiva</li>
-            <li class="flex items-center gap-2"><span class="text-green-brand">✓</span> Cumpleaños y despedidas</li>
-          </ul>
-        </div>
-        <a href="#contacto" class="mt-8 block text-center border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition font-semibold text-sm text-white">CONSULTAR</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN CONTACTO Y FOOTER -->
-  <footer id="contacto" class="border-t border-slate-800 bg-black/40 py-12 px-4 md:px-12 text-center text-slate-400 text-sm">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="text-left">
-        <h3 class="text-white font-heading text-2xl font-bold">TU CANCHA EN EL BARRIO</h3>
-        <p class="text-xs text-slate-500 mt-1">Barrio Olimpo, CABA · Fútbol 5</p>
-      </div>
-      <div>
-        <p>Reservas directas por WhatsApp: <a href="#" class="text-green-brand hover:underline font-semibold">+54 9 11 1234-5678</a></p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Botón Flotante WhatsApp -->
-  <a href="#" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all z-40 flex items-center justify-center">
-    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-  </a>
-
-  <!-- JAVASCRIPT DE INTERACTIVIDAD -->
-  <script>
-    // 1. Modo Día / Noche
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const themeText = document.getElementById('theme-text');
-
-    themeToggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      const isLight = document.body.classList.contains('light-mode');
-      themeIcon.textContent = isLight ? '🌙' : '☀️';
-      themeText.textContent = isLight ? 'Modo Noche' : 'Modo Día';
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+    mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+  }
 
-    // 2. Panel Admin Lateral
-    const adminPanel = document.getElementById('admin-panel');
-    const panelOpenBtn = document.getElementById('panel-open-btn');
-    const panelCloseBtn = document.getElementById('panel-close-btn');
+  const tt = document.getElementById('themeToggle');
+  if (tt) tt.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) { document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('monumental-theme','dark');}catch(e){} }
+    else { document.documentElement.setAttribute('data-theme','light'); try{localStorage.setItem('monumental-theme','light');}catch(e){} }
+  });
 
-    panelOpenBtn.addEventListener('click', () => adminPanel.classList.remove('translate-x-full'));
-    panelCloseBtn.addEventListener('click', () => adminPanel.classList.add('translate-x-full'));
+  const DIAS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  const DIA_FULL = {Lun:'el lunes',Mar:'el martes','Mié':'el miércoles',Jue:'el jueves',Vie:'el viernes','Sáb':'el sábado',Dom:'el domingo'};
+  const HORAS = ['18:00','19:00','20:00','21:00','22:00','23:00'];
+  const OCUPADO = new Set([
+    'Lun|20:00','Mar|19:00','Mar|22:00','Mié|21:00','Jue|20:00','Jue|23:00',
+    'Vie|20:00','Vie|21:00','Vie|22:00','Sáb|18:00','Sáb|21:00','Sáb|22:00','Dom|20:00','Dom|21:00'
+  ]);
+  const WA = '5491125971185';
 
-    // 3. Edición en Vivo de Precios
-    const inputPriceSuelto = document.getElementById('edit-price-suelto');
-    const inputPriceFijo = document.getElementById('edit-price-fijo');
-    const targetPriceSuelto = document.getElementById('target-price-suelto');
-    const targetPriceFijo = document.getElementById('target-price-fijo');
-    const statPriceDisplay = document.getElementById('stat-price-display');
-
-    inputPriceSuelto.addEventListener('input', (e) => {
-      targetPriceSuelto.textContent = e.target.value;
-      statPriceDisplay.textContent = e.target.value;
+  const grid = document.getElementById('hgrid');
+  let html = '<div class="hhead"></div>' + DIAS.map(d => `<div class="hhead">${d}</div>`).join('');
+  HORAS.forEach(h => {
+    html += `<div class="htime">${h}</div>`;
+    DIAS.forEach(d => {
+      const ocup = OCUPADO.has(`${d}|${h}`);
+      if (ocup) {
+        html += `<div class="slot ocupado">Ocupado</div>`;
+      } else {
+        html += `<div class="slot libre" data-dia="${d}" data-hora="${h}">Libre</div>`;
+      }
     });
+  });
+  grid.innerHTML = html;
 
-    inputPriceFijo.addEventListener('input', (e) => {
-      targetPriceFijo.textContent = e.target.value;
+  grid.addEventListener('click', (e) => {
+    const cell = e.target.closest('.slot.libre');
+    if (!cell) return;
+    const dia = cell.dataset.dia, hora = cell.dataset.hora;
+    const msg = `Hola! Quiero reservar la cancha ${DIA_FULL[dia]} a las ${hora}hs`;
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  });
+
+  const track = document.getElementById('carruselTrack');
+  if (track) {
+    const dotsWrap = document.getElementById('carruselDots');
+    const goTo = (i) => {
+      const slides = track.querySelectorAll('.carrusel-slide');
+      const idx = Math.max(0, Math.min(slides.length - 1, i));
+      track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+    };
+    document.getElementById('carruselPrev').addEventListener('click', () => goTo(Math.round(track.scrollLeft / track.clientWidth) - 1));
+    document.getElementById('carruselNext').addEventListener('click', () => goTo(Math.round(track.scrollLeft / track.clientWidth) + 1));
+    let scrollTimer;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const active = Math.round(track.scrollLeft / track.clientWidth);
+        dotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === active));
+      }, 100);
     });
+  }
 
-    // 4. Cambiar Estado en Grilla de Horarios
-    document.querySelectorAll('.slot-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (btn.classList.contains('slot-free')) {
-          btn.classList.remove('slot-free');
-          btn.classList.add('slot-occupied');
-          btn.textContent = 'Ocupado';
-        } else {
-          btn.classList.remove('slot-occupied');
-          btn.classList.add('slot-free');
-          btn.textContent = 'Libre';
-        }
-      });
-    });
-  </script>
-
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
