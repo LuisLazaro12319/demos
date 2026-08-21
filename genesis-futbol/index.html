@@ -87,6 +87,13 @@
     align-items:flex-start;justify-content:center;
     padding:8rem 1.5rem 5rem;
     background:linear-gradient(90deg, rgba(5,8,6,.96) 15%, rgba(5,8,6,.75) 60%, rgba(34,197,94,.12) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
+    /* El hero siempre tiene la foto oscura de fondo, en modo día y de noche.
+       Por eso fijamos acá los tokens en sus valores de modo noche: si no, el
+       modo día los pisa por variables mas oscuras (pensadas para fondo
+       blanco) y el texto/las líneas se vuelven ilegibles sobre la foto. */
+    --bg:#0a0f0c;--bg2:#0f1512;--accent:#22c55e;--accent-light:#86efac;
+    --text:#e9f2ec;--text-gray:#94a39b;--card:#131b16;--heading:#ffffff;
+    --line:rgba(255,255,255,.08);--soft:rgba(255,255,255,.05);
   }
   .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
   .hero-badge{

@@ -98,24 +98,42 @@
     position:relative;min-height:100vh;display:flex;flex-direction:column;
     align-items:flex-start;justify-content:center;
     padding:8rem 1.5rem 5rem;
-    background:linear-gradient(90deg, rgba(5,8,6,.95) 12%, rgba(5,8,6,.6) 58%, rgba(56,189,248,.18) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
+    background:linear-gradient(90deg, rgba(5,8,6,.96) 15%, rgba(5,8,6,.75) 60%, rgba(56,189,248,.12) 100%), url('img/hero.jpg') center 42%/cover no-repeat;
+    /* El hero siempre tiene la foto oscura de fondo, en modo día y de noche.
+       Por eso fijamos acá los tokens en sus valores de modo noche: si no, el
+       modo día los pisa por variables mas oscuras (pensadas para fondo
+       blanco) y el texto/las líneas se vuelven ilegibles sobre la foto. */
+    --bg:#0a0f0c;--bg2:#0f1512;--accent:#38bdf8;--accent-light:#9bd9ff;
+    --text:#e9f2ec;--text-gray:#94a39b;--card:#131b16;--heading:#ffffff;
+    --line:rgba(255,255,255,.07);--soft:rgba(255,255,255,.05);
   }
   .hero-inner{max-width:1180px;margin:0 auto;width:100%;}
   .hero-badge{
     display:inline-flex;align-items:center;gap:.5rem;background:rgba(56,189,248,.1);
-    border:1px solid rgba(56,189,248,.35);color:#fff;padding:.5rem 1.1rem;border-radius:6px;
-    font-size:.82rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
+    border:1px solid rgba(56,189,248,.35);color:#fff;padding:.45rem 1rem;border-radius:20px;
+    font-size:.8rem;font-weight:600;margin-bottom:1.5rem;font-family:'Inter',sans-serif;
   }
   .hero-badge b{color:var(--accent-light);}
   .hero h1{font-size:4.6rem;color:#fff;max-width:820px;line-height:1.02;text-shadow:0 4px 25px rgba(0,0,0,.5);}
   .hero h1 span{color:var(--accent);}
-  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:560px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
-  .hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;}
-  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;}
+  .hero p{margin-top:1.4rem;font-size:1.15rem;color:#c3c9c3;max-width:580px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
+  .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;cursor:pointer;}
   .btn-accent{background:var(--accent);color:#06110a;box-shadow:0 10px 28px rgba(56,189,248,.35);}
   .btn-accent:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(56,189,248,.5);}
-  .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.25);}
-  .btn-outline:hover{background:rgba(255,255,255,.14);}
+  .btn-outline{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.2);}
+  .btn-outline:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);}
+
+  /* HERO STATS BAR */
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;
+    margin-top:3.5rem;background:rgba(15,21,18,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.8rem;max-width:840px;
+  }
+  .stat-item{display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:1.2rem;}
+  .stat-item:last-child{border-right:none;}
+  .stat-val{font-family:'Anton',sans-serif;font-size:2rem;color:var(--heading);line-height:1;}
+  .stat-lbl{font-size:.72rem;font-weight:700;color:var(--text-gray);letter-spacing:.5px;margin-top:.4rem;text-transform:uppercase;}
 
   /* SECTION SHARED */
   section{padding:6rem 0;}
@@ -161,11 +179,38 @@
   .dot{width:12px;height:12px;border-radius:3px;}
   .dot.l{background:rgba(56,189,248,.5);}
   .dot.o{background:rgba(224,49,49,.7);}
-  .nota-demo{text-align:center;color:var(--text-gray);font-size:.82rem;margin-top:1rem;font-style:italic;}
-  .precio-band{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;justify-content:space-between;background:var(--card);border:1px solid rgba(56,189,248,.25);border-radius:14px;padding:1.5rem 1.9rem;margin-top:2.4rem;}
-  .precio-band .p-main{font-family:'Anton',sans-serif;font-size:1.9rem;color:var(--heading);}
-  .precio-band .p-main span{color:var(--accent);}
-  .precio-band .p-sub{color:var(--text-gray);font-size:.9rem;}
+
+  /* SECCIÓN PRECIOS */
+  .precios-sec{background:var(--bg);}
+  .precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2rem;align-items:stretch;}
+  .precio-card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;
+    position:relative;transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .precio-card:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.4);}
+  .precio-card.featured{
+    border:1px solid var(--accent);box-shadow:0 10px 30px rgba(56,189,248,.15);
+    background:linear-gradient(180deg, var(--card) 0%, rgba(56,189,248,.05) 100%);
+  }
+  .p-tag{
+    position:absolute;top:1.2rem;right:1.2rem;
+    background:rgba(56,189,248,.18);color:var(--accent-light);border:1px solid rgba(56,189,248,.35);
+    font-size:.68rem;font-weight:700;padding:.3rem .6rem;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;
+  }
+  .precio-card h3{font-size:1.35rem;color:var(--heading);margin-bottom:.8rem;font-family:'Inter',sans-serif;font-weight:700;text-transform:none;}
+  .p-amount{font-family:'Anton',sans-serif;font-size:2.6rem;color:var(--accent);line-height:1;}
+  .p-amount.p-convenir{font-size:2.2rem;color:var(--heading);}
+  .p-period{font-size:.85rem;color:var(--text-gray);margin-top:.4rem;margin-bottom:1.8rem;}
+  .p-features{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.85rem;flex-grow:1;}
+  .p-features li{display:flex;align-items:center;gap:.75rem;font-size:.92rem;color:var(--text);}
+  .p-features .chk{
+    width:20px;height:20px;border-radius:50%;background:rgba(56,189,248,.2);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;
+  }
+  .btn-card-outline{width:100%;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--heading);padding:.85rem;border-radius:8px;font-size:.85rem;}
+  .btn-card-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.08);}
+  .btn-card-fill{width:100%;justify-content:center;padding:.85rem;border-radius:8px;font-size:.85rem;}
 
   /* CONTACTO */
   .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
@@ -237,21 +282,26 @@
 
   @media(max-width:900px){
     .nos-grid{grid-template-columns:1fr;}
+    .precios-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .panel-wrap{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
     .nav-toggle{display:flex;}
-    .hero{min-height:76vh;padding:7rem 1.3rem 3.5rem;}
+    .hero{min-height:auto;padding:7rem 1.3rem 3.5rem;}
     .hero h1{font-size:2.8rem;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+    .stat-item:nth-child(2){border-right:none;}
   }
   @media(max-width:560px){
     .footer-grid{grid-template-columns:1fr;gap:2rem;}
     .footer-col.about p{max-width:none;}
   }
   @media(max-width:480px){
-    .hero{min-height:66vh;padding:6rem 1.1rem 2.8rem;}
     .hero h1{font-size:2.2rem;}
+    .hero-stats{grid-template-columns:1fr;}
+    .stat-item{border-right:none;border-bottom:1px solid var(--line);padding-bottom:.8rem;}
+    .stat-item:last-child{border-bottom:none;padding-bottom:0;}
     .sec-title{font-size:1.9rem;}
     section{padding:4rem 0;}
   }
@@ -266,6 +316,7 @@
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#precios">Precios</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li><a href="panel/">Panel</a></li>
     </ul>
@@ -279,18 +330,42 @@
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#horarios">Horarios</a>
+    <a href="#precios">Precios</a>
     <a href="#contacto">Contacto</a>
     <a href="panel/">Panel</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-inner">
-    <span class="hero-badge">📍 <b>Barrio Olimpo</b> · Fútbol 5</span>
-    <h1>Tu cancha <span>en el barrio</span></h1>
-    <p>Fútbol 5 en Barrio Olimpo. Mirá los horarios disponibles, elegí tu turno y reservá al toque por WhatsApp.</p>
+    <span class="hero-badge">📍 <b>Barrio Olimpo · CABA · Fútbol 5</b></span>
+    <h1>TU CANCHA <span>EN EL BARRIO</span></h1>
+    <p>Césped sintético, luces LED y turnos todos los días. Mirá la grilla, elegí tu horario y reservalo por WhatsApp en un toque.</p>
+
     <div class="hero-actions">
-      <a class="btn btn-accent" href="#horarios">Ver horarios</a>
+      <a class="btn btn-accent" href="#horarios">VER HORARIOS</a>
+      <a class="btn btn-outline" href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20un%20turno%20en%20Cancha%20Monumental" target="_blank" rel="noopener">CONSULTAR</a>
+    </div>
+
+    <!-- HERO STATS BAR -->
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-val">1 h</span>
+        <span class="stat-lbl">DURACIÓN DEL TURNO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">$15.000</span>
+        <span class="stat-lbl">PRECIO POR TURNO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">18-24</span>
+        <span class="stat-lbl">HORARIOS DE JUEGO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">7 días</span>
+        <span class="stat-lbl">ABIERTO TODA LA SEMANA</span>
+      </div>
     </div>
   </div>
 </section>
@@ -332,13 +407,57 @@
       <span><i class="dot l"></i> Libre — tocá para reservar</span>
       <span><i class="dot o"></i> Ocupado</span>
     </div>
-    <div class="precio-band reveal">
-      <div>
-        <div class="p-main">Turno 1 hora · <span>$15.000</span></div>
-        <div class="p-sub">Fútbol 5 · seña por WhatsApp para dejarlo reservado</div>
+  </div>
+</section>
+
+<!-- SECCIÓN PRECIOS -->
+<section id="precios" class="precios-sec">
+  <div class="wrap">
+    <span class="eyebrow">PRECIOS</span>
+    <h2 class="sec-title">ELEGÍ CÓMO JUGAR</h2>
+    <p class="sec-sub">Seña por WhatsApp para dejar el turno tomado. El resto lo abonás en la cancha.</p>
+
+    <div class="precios-grid">
+      <!-- Tarjeta 1 -->
+      <div class="precio-card reveal">
+        <h3>Turno suelto</h3>
+        <div class="p-amount">$15.000</div>
+        <div class="p-period">1 hora de cancha</div>
+        <ul class="p-features">
+          <li><span class="chk">✓</span> Pelota y pecheras</li>
+          <li><span class="chk">✓</span> Vestuario</li>
+          <li><span class="chk">✓</span> Reserva por WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20un%20Turno%20Suelto%20en%20Cancha%20Monumental" target="_blank" rel="noopener" class="btn btn-card-outline">CONSULTAR</a>
+      </div>
+
+      <!-- Tarjeta 2 (Destacada) -->
+      <div class="precio-card featured reveal">
+        <span class="p-tag">MÁS ELEGIDO</span>
+        <h3>Turno fijo semanal</h3>
+        <div class="p-amount">$13.500</div>
+        <div class="p-period">por semana · mismo día y hora</div>
+        <ul class="p-features">
+          <li><span class="chk">✓</span> 10% off sobre el turno</li>
+          <li><span class="chk">✓</span> Horario reservado todo el mes</li>
+          <li><span class="chk">✓</span> Prioridad ante cambios</li>
+        </ul>
+        <a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20un%20Turno%20Fijo%20Semanal%20en%20Cancha%20Monumental" target="_blank" rel="noopener" class="btn btn-accent btn-card-fill">CONSULTAR</a>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="precio-card reveal">
+        <h3>Torneo / evento</h3>
+        <div class="p-amount p-convenir">A convenir</div>
+        <div class="p-period">3 horas o más</div>
+        <ul class="p-features">
+          <li><span class="chk">✓</span> Fixture armado</li>
+          <li><span class="chk">✓</span> Cancha exclusiva</li>
+          <li><span class="chk">✓</span> Cumpleaños y despedidas</li>
+        </ul>
+        <a href="https://wa.me/5491125971185?text=Hola!%20Quiero%20consultar%20por%20Torneo%20o%20Evento%20en%20Cancha%20Monumental" target="_blank" rel="noopener" class="btn btn-card-outline">CONSULTAR</a>
       </div>
     </div>
-    <p class="nota-demo">* Precios y disponibilidad de ejemplo — se editan desde el panel.</p>
   </div>
 </section>
 
