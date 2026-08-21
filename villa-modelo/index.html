@@ -59,19 +59,27 @@
     transition:background .3s ease, border-color .3s ease;
   }
   nav.scrolled{background:transparent;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:transparent;}
-  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:var(--heading);}
+  .brand{display:flex;align-items:center;gap:.7rem;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:.5px;color:var(--heading);}
   .brand-badge{
-    display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;
-    background:linear-gradient(160deg,#3a0a0f,#0a0a0b);border:2px solid var(--accent);color:var(--accent);
-    flex:0 0 40px;
+    display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;
+    background:var(--accent);border:2px solid rgba(255,255,255,.15);color:#fff;
+    font-family:'Anton',sans-serif;font-size:.72rem;letter-spacing:.5px;
+    flex:0 0 38px;box-shadow:0 4px 14px rgba(225,29,46,.4);
   }
-  .brand-name{font-family:'Anton',sans-serif;font-size:1.02rem;letter-spacing:.5px;text-transform:uppercase;line-height:1.05;white-space:nowrap;color:var(--heading);}
-  .brand-name b{color:var(--accent);font-weight:400;display:block;font-size:.7rem;letter-spacing:2px;}
+  .brand-name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;line-height:1.15;white-space:nowrap;color:var(--heading);}
+  .brand-name b{color:var(--text-gray);font-weight:400;display:block;font-size:.62rem;letter-spacing:1.5px;}
   @media(max-width:460px){ .brand-name{display:none;} }
-  .nav-right{display:flex;align-items:center;gap:2.2rem;margin-left:auto;}
+  .nav-right{display:flex;align-items:center;gap:1.6rem;margin-left:auto;}
   .nav-links{display:flex;gap:1.8rem;}
   .nav-links a{font-size:.85rem;font-weight:600;color:var(--text-gray);letter-spacing:.5px;text-transform:uppercase;transition:.2s;}
   .nav-links a:hover{color:var(--accent);}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;
+    padding:.6rem 1.4rem;border-radius:999px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    box-shadow:0 6px 18px rgba(225,29,46,.35);transition:transform .2s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+  @media(max-width:700px){ .nav-cta{display:none;} }
   .nav-toggle{display:none;width:40px;height:40px;border:none;background:transparent;color:var(--heading);cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;flex:0 0 40px;}
   .nav-toggle span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:.25s;}
   .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -82,6 +90,13 @@
   .mobile-menu a:last-child{border-bottom:none;}
   .mobile-menu a:hover{color:var(--accent);}
   .mobile-menu.open{display:flex;}
+
+  /* BARRA ROJA DE ACCESO RÁPIDO A DISCIPLINAS (aparece pegada al nav al scrollear) */
+  .quicknav{position:sticky;top:58px;z-index:900;background:var(--accent);overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
+  .quicknav::-webkit-scrollbar{display:none;}
+  .quicknav-inner{display:flex;max-width:1180px;margin:0 auto;}
+  .quicknav a{padding:.85rem 1.2rem;font-size:.74rem;font-weight:800;letter-spacing:.5px;color:#fff;white-space:nowrap;transition:background .2s;}
+  .quicknav a:hover{background:rgba(0,0,0,.18);}
 
   /* HERO (sin foto todavía: fondo con degradé + patrón, siempre oscuro) */
   .hero{
@@ -129,19 +144,17 @@
   .hero h1 span{color:var(--accent);}
   .hero p{margin-top:1.4rem;font-size:1.1rem;color:#c9c3c5;max-width:560px;font-weight:400;text-transform:none;font-family:'Inter',sans-serif;}
   .hero-actions{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap;}
-  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2rem;border-radius:7px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;cursor:pointer;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2.1rem;border-radius:999px;font-weight:700;font-size:.9rem;transition:.3s;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif;cursor:pointer;}
   .btn-accent{background:var(--accent);color:#fff;box-shadow:0 10px 28px rgba(225,29,46,.35);}
   .btn-accent:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(225,29,46,.5);}
   .btn-outline{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.2);}
   .btn-outline:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);}
 
-  .hero-stats{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;
-    margin-top:3.2rem;background:rgba(17,17,19,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.8rem;max-width:840px;
+  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3.2rem;max-width:900px;}
+  .stat-item{
+    background:rgba(255,255,255,.04);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;display:flex;flex-direction:column;
   }
-  .stat-item{display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:1.2rem;}
-  .stat-item:last-child{border-right:none;}
   .stat-val{font-family:'Anton',sans-serif;font-size:1.7rem;color:var(--heading);line-height:1;}
   .stat-lbl{font-size:.68rem;font-weight:700;color:var(--text-gray);letter-spacing:.5px;margin-top:.4rem;text-transform:uppercase;}
 
@@ -175,21 +188,32 @@
   .nos-text .eyebrow{text-align:left;}
   .nos-text h2{font-size:2.1rem;text-align:left;margin-bottom:1.1rem;color:var(--heading);}
   .nos-text p{color:var(--text-gray);margin-bottom:1.2rem;font-size:1.02rem;text-transform:none;font-family:'Inter',sans-serif;}
-  .nos-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem;}
-  .nos-list li{display:flex;align-items:center;gap:.8rem;font-size:.96rem;color:var(--text);font-family:'Inter',sans-serif;}
-  .nos-list .chk{width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:900;}
-  .nos-visual{
-    position:relative;border-radius:14px;overflow:hidden;min-height:340px;
-    background:radial-gradient(circle at 30% 30%, rgba(225,29,46,.25), transparent 60%), var(--card);
-    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  .nos-list{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.4rem;margin-top:1.4rem;}
+  .nos-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.92rem;color:var(--text);font-family:'Inter',sans-serif;}
+  .nos-list .chk{width:20px;height:20px;flex:0 0 20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:900;margin-top:.1rem;}
+  .nos-visual{position:relative;min-height:380px;}
+  .nos-visual-photo{
+    position:absolute;inset:0;border-radius:18px;overflow:hidden;
+    background:radial-gradient(circle at 30% 25%, rgba(225,29,46,.3), transparent 60%), var(--card);
+    border:1px solid var(--line);box-shadow:0 25px 60px rgba(0,0,0,.4);
+    display:flex;align-items:center;justify-content:center;
   }
-  .nos-visual svg{width:120px;height:120px;color:var(--accent);opacity:.7;}
+  .nos-visual-photo svg{width:100px;height:100px;color:var(--accent);opacity:.6;}
+  .nos-stat-float{
+    position:absolute;left:1.4rem;bottom:1.4rem;z-index:2;
+    background:rgba(10,10,11,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.1);border-top:2px solid var(--accent);
+    border-radius:12px;padding:1rem 1.4rem;box-shadow:0 15px 35px rgba(0,0,0,.45);
+  }
+  .nos-stat-float .stat-val{display:block;font-family:'Anton',sans-serif;font-size:1.5rem;color:#fff;}
+  .nos-stat-float .stat-lbl{display:block;font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text-gray);margin-top:.2rem;}
 
   /* CANCHAS */
   .canchas-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
   .cancha-card{
     position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--card);
     transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    scroll-margin-top:120px;
   }
   .cancha-card:hover{transform:translateY(-6px);border-color:rgba(225,29,46,.4);box-shadow:0 25px 60px rgba(0,0,0,.4);}
   .cancha-visual{
@@ -238,21 +262,34 @@
   .precio-band .p-main span{color:var(--accent);}
   .precio-band .p-sub{color:var(--text-gray);font-size:.9rem;}
 
-  /* DISCIPLINAS */
-  .disciplinas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
-  .disc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.7rem;transition:transform .3s ease, border-color .3s ease;}
-  .disc-card:hover{transform:translateY(-5px);border-color:rgba(225,29,46,.35);}
-  .disc-icon{
-    width:46px;height:46px;border-radius:12px;background:rgba(225,29,46,.12);color:var(--accent);
-    display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;
+  /* DISCIPLINAS — filas tipo bento (2 anchas, 3 parejas, 2 parejas) */
+  .disc-rows{display:flex;flex-direction:column;gap:1.4rem;}
+  .disc-row-2a{display:grid;grid-template-columns:1.5fr 1fr;gap:1.4rem;}
+  .disc-row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+  .disc-row-2b{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;}
+  .disc-card{
+    position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card);
+    transition:transform .3s ease, border-color .3s ease;scroll-margin-top:170px;
   }
-  .disc-icon svg{width:22px;height:22px;}
-  .disc-card h3{font-size:1.05rem;color:var(--heading);margin-bottom:.5rem;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif;font-weight:700;}
-  .disc-card p{color:var(--text-gray);font-size:.86rem;margin-bottom:.9rem;}
-  .disc-meta{display:flex;flex-direction:column;gap:.3rem;font-size:.78rem;color:var(--text-gray);}
-  .disc-meta a{color:var(--accent-light);font-weight:600;}
-  .disc-meta a:hover{color:var(--accent);}
-  .disc-tag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent-light);background:rgba(225,29,46,.1);border-radius:20px;padding:.2rem .6rem;margin-bottom:.7rem;}
+  .disc-card:hover{transform:translateY(-5px);border-color:rgba(225,29,46,.35);}
+  .disc-photo{
+    position:relative;height:190px;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:26px 26px;background-color:#150608;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .disc-row-2a .disc-card:first-child .disc-photo{height:250px;}
+  .disc-photo svg{width:52px;height:52px;color:rgba(225,29,46,.4);}
+  .disc-tag{
+    position:absolute;top:.9rem;left:.9rem;z-index:2;font-size:.64rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    color:#fff;background:rgba(225,29,46,.88);border-radius:20px;padding:.3rem .75rem;
+  }
+  .disc-body{padding:1.5rem 1.6rem 1.7rem;}
+  .disc-body h3{font-size:1.12rem;color:var(--heading);margin-bottom:.5rem;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif;font-weight:700;}
+  .disc-body p{color:var(--text-gray);font-size:.86rem;margin-bottom:.9rem;}
+  .disc-meta{display:flex;flex-direction:column;gap:.3rem;font-size:.78rem;color:#4ade80;font-weight:600;font-family:'Inter',sans-serif;}
+  .disc-meta a{color:#4ade80;}
+  .disc-meta a:hover{color:#22c55e;}
 
   /* COMO RESERVAR */
   .pasos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;}
@@ -313,8 +350,10 @@
 
   @media(max-width:900px){
     .nos-grid{grid-template-columns:1fr;}
+    .nos-visual{min-height:280px;}
     .canchas-grid{grid-template-columns:1fr;}
-    .disciplinas-grid{grid-template-columns:repeat(2,1fr);}
+    .disc-row-2a,.disc-row-3,.disc-row-2b{grid-template-columns:repeat(2,1fr);}
+    .disc-row-2a .disc-card:first-child .disc-photo{height:190px;}
     .pasos-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
@@ -323,7 +362,6 @@
     .hero{min-height:auto;padding:8rem 1.3rem 3.5rem;}
     .hero h1{font-size:2.7rem;}
     .hero-stats{grid-template-columns:repeat(2,1fr);}
-    .stat-item:nth-child(2){border-right:none;}
     .campeonatos-banner{height:220px;}
   }
   @media(max-width:560px){
@@ -333,9 +371,8 @@
   @media(max-width:480px){
     .hero h1{font-size:2.1rem;}
     .hero-stats{grid-template-columns:1fr;}
-    .disciplinas-grid{grid-template-columns:1fr;}
-    .stat-item{border-right:none;border-bottom:1px solid var(--line);padding-bottom:.8rem;}
-    .stat-item:last-child{border-bottom:none;padding-bottom:0;}
+    .nos-list{grid-template-columns:1fr;}
+    .disc-row-2a,.disc-row-3,.disc-row-2b{grid-template-columns:1fr;}
     .sec-title{font-size:1.8rem;}
     section{padding:4rem 0;}
   }
@@ -345,19 +382,17 @@
 
 <nav id="nav">
   <a href="#inicio" class="brand" aria-label="Villa Modelo Fútbol Sintético">
-    <span class="brand-badge">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 15.5 10l-1.3 4H9.8L8.5 10 12 7.5Z"/><path d="M12 3v4.5M3.5 9l4.5 1M20.5 9l-4.5 1M6 20l3.8-6M18 20l-3.8-6"/></svg>
-    </span>
-    <span class="brand-name">Villa Modelo<b>Fútbol Sintético</b></span>
+    <span class="brand-badge">VM</span>
+    <span class="brand-name">Villa Modelo<b>Fútbol Sintético · Gerli</b></span>
   </a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#nosotros">El Club</a></li>
       <li><a href="#canchas">Canchas</a></li>
       <li><a href="#disciplinas">Disciplinas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
+    <a class="nav-cta" href="https://wa.me/5491121814661?text=Hola!%20Quiero%20reservar%20una%20cancha%20en%20Villa%20Modelo" target="_blank" rel="noopener">Reservar</a>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
       <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -366,7 +401,7 @@
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
+    <a href="#nosotros">El Club</a>
     <a href="#canchas">Canchas</a>
     <a href="#disciplinas">Disciplinas</a>
     <a href="#contacto">Contacto</a>
@@ -420,23 +455,44 @@
   </div>
 </section>
 
+<!-- BARRA ROJA: acceso rápido a cada cancha/disciplina -->
+<div class="quicknav">
+  <div class="quicknav-inner">
+    <a href="#futbol-11">Fútbol 11</a>
+    <a href="#futbol-7">Fútbol 7</a>
+    <a href="#futsal-afa">Futsal AFA</a>
+    <a href="#taekwondo">Taekwondo</a>
+    <a href="#handball">Handball</a>
+    <a href="#gimnasio">Gimnasio</a>
+    <a href="#patin">Patín</a>
+    <a href="#eventos">Eventos</a>
+  </div>
+</div>
+
 <!-- NOSOTROS -->
 <section id="nosotros">
   <div class="wrap nos-grid">
     <div class="nos-visual reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 15.5 10l-1.3 4H9.8L8.5 10 12 7.5Z"/><path d="M12 3v4.5M3.5 9l4.5 1M20.5 9l-4.5 1M6 20l3.8-6M18 20l-3.8-6"/></svg>
+      <!-- Foto pendiente: reemplazar el placeholder por img/historia.jpg -->
+      <div class="nos-visual-photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 15.5 10l-1.3 4H9.8L8.5 10 12 7.5Z"/><path d="M12 3v4.5M3.5 9l4.5 1M20.5 9l-4.5 1M6 20l3.8-6M18 20l-3.8-6"/></svg>
+      </div>
+      <div class="nos-stat-float">
+        <span class="stat-val">106 años</span>
+        <span class="stat-lbl">De vida en el barrio</span>
+      </div>
     </div>
     <div class="nos-text reveal">
       <span class="eyebrow">Nuestra historia</span>
       <h2>Un club de barrio desde 1920</h2>
       <p>El Club Atlético Deportivo Villa Modelo es una institución clásica de Gerli, con más de un siglo formando parte del barrio. Hoy combina esa historia con instalaciones modernas: canchas de fútbol sobre pasto sintético, un estadio cubierto propio y espacios techados para deportes y eventos.</p>
       <p>Más que una cancha para alquilar, es un club con vida propia: escuelas formativas, equipos que compiten de forma oficial, y un salón de usos múltiples donde el barrio se sigue encontrando.</p>
-      <div class="nos-list">
+      <ul class="nos-list">
         <li><span class="chk">✓</span> Fundado en 1920, en Limay 1615, Gerli</li>
         <li><span class="chk">✓</span> Estadio cubierto propio (Alfredo Piñeyro)</li>
         <li><span class="chk">✓</span> Siete disciplinas deportivas activas</li>
         <li><span class="chk">✓</span> Salón de eventos "Ernesto Díaz"</li>
-      </div>
+      </ul>
     </div>
   </div>
 </section>
@@ -449,7 +505,7 @@
     <p class="sec-sub">Cada cancha tiene su propia grilla de horarios y reserva por WhatsApp.</p>
 
     <div class="canchas-grid">
-      <div class="cancha-card reveal">
+      <div class="cancha-card reveal" id="futbol-11">
         <div class="cancha-visual">
           <span class="cancha-tag"><span class="dot"></span> Disponible hoy</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 15.5 10l-1.3 4H9.8L8.5 10 12 7.5Z"/></svg>
@@ -467,7 +523,7 @@
         </div>
       </div>
 
-      <div class="cancha-card reveal" style="transition-delay:.08s">
+      <div class="cancha-card reveal" id="futbol-7" style="transition-delay:.08s">
         <div class="cancha-visual">
           <span class="cancha-tag"><span class="dot"></span> Disponible hoy</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 15.5 10l-1.3 4H9.8L8.5 10 12 7.5Z"/></svg>
@@ -495,81 +551,104 @@
     <h2 class="sec-title">Nuestras disciplinas</h2>
     <p class="sec-sub">Además del fútbol sobre sintético, Villa Modelo ofrece estas actividades para todas las edades.</p>
 
-    <div class="disciplinas-grid">
-      <div class="disc-card reveal">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><path d="M9 12l2 2 4-4"/></svg>
+    <div class="disc-rows">
+      <!-- Fila 1: Futsal AFA (destacado) + Futsal Inferiores -->
+      <div class="disc-row-2a">
+        <div class="disc-card reveal" id="futsal-afa">
+          <div class="disc-photo">
+            <span class="disc-tag">AFA · Primera C</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Futsal Masculino</h3>
+            <p>Compite oficialmente en la Primera División C de AFA, con estadio cubierto propio.</p>
+            <div class="disc-meta">Estadio Alfredo Piñeyro</div>
+          </div>
         </div>
-        <span class="disc-tag">AFA · Primera C</span>
-        <h3>Futsal Masculino</h3>
-        <p>Compite oficialmente en la Primera División C de AFA, con estadio cubierto propio.</p>
-        <div class="disc-meta">Estadio Alfredo Piñeyro</div>
-      </div>
 
-      <div class="disc-card reveal" style="transition-delay:.04s">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v1"/><circle cx="18" cy="8" r="2.5"/><path d="M22 21v-.8a4.5 4.5 0 0 0-3-4.24"/></svg>
-        </div>
-        <span class="disc-tag">Formativas</span>
-        <h3>Futsal Inferiores</h3>
-        <p>Categorías formativas que compiten los fines de semana, más escuela de entrenamiento para arqueros.</p>
-        <div class="disc-meta">Escuela de arqueros</div>
-      </div>
-
-      <div class="disc-card reveal" style="transition-delay:.08s">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8l6 4-6 4V8z"/></svg>
-        </div>
-        <span class="disc-tag">Academia GMG</span>
-        <h3>Taekwondo ITF</h3>
-        <p>Clases oficiales para todos los niveles, a cargo de la Academia GMG - Sabones Riquelme.</p>
-        <div class="disc-meta">
-          Lunes y miércoles · 19:00 a 20:00
-          <a href="https://www.instagram.com/villamodelogmg" target="_blank" rel="noopener">@villamodelogmg</a>
+        <div class="disc-card reveal" style="transition-delay:.04s">
+          <div class="disc-photo">
+            <span class="disc-tag">Formativas</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v1"/><circle cx="18" cy="8" r="2.5"/><path d="M22 21v-.8a4.5 4.5 0 0 0-3-4.24"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Futsal Inferiores</h3>
+            <p>Categorías formativas que compiten los fines de semana, más escuela de arqueros.</p>
+            <div class="disc-meta">Escuela de arqueros</div>
+          </div>
         </div>
       </div>
 
-      <div class="disc-card reveal" style="transition-delay:.12s">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8c0 3.5 2.5 7 7 7h1a6 6 0 0 0 6-6v-3.5a2 2 0 0 0-4 0"/></svg>
+      <!-- Fila 2: Taekwondo, Handball, Gimnasio -->
+      <div class="disc-row-3">
+        <div class="disc-card reveal" style="transition-delay:.08s" id="taekwondo">
+          <div class="disc-photo">
+            <span class="disc-tag">Academia GMG</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8l6 4-6 4V8z"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Taekwondo ITF</h3>
+            <p>Clases oficiales para todos los niveles, a cargo de la Academia GMG - Sabones Riquelme.</p>
+            <div class="disc-meta">
+              Lunes y miércoles · 19:00 a 20:00
+              <a href="https://www.instagram.com/villamodelogmg" target="_blank" rel="noopener">@villamodelogmg</a>
+            </div>
+          </div>
         </div>
-        <span class="disc-tag">Balonmano</span>
-        <h3>Handball</h3>
-        <p>Entrenamientos de balonmano dentro de la oferta deportiva del espacio cerrado del club.</p>
-        <div class="disc-meta">Espacio techado</div>
+
+        <div class="disc-card reveal" style="transition-delay:.12s" id="handball">
+          <div class="disc-photo">
+            <span class="disc-tag">Balonmano</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8c0 3.5 2.5 7 7 7h1a6 6 0 0 0 6-6v-3.5a2 2 0 0 0-4 0"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Handball</h3>
+            <p>Entrenamientos de balonmano dentro de la oferta deportiva del espacio cerrado del club.</p>
+            <div class="disc-meta">Espacio techado</div>
+          </div>
+        </div>
+
+        <div class="disc-card reveal" style="transition-delay:.16s" id="gimnasio">
+          <div class="disc-photo">
+            <span class="disc-tag">Distrito Gym</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 6.5l11 11M8 4l12 12-4 4L4 8l4-4z"/><circle cx="6" cy="18" r="2"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Gimnasio &amp; Indoor Cycle</h3>
+            <p>Musculación, entrenamiento funcional y clases de spinning dentro del predio del club.</p>
+            <div class="disc-meta">
+              Lun a Vie 07:00–21:30 · Sáb 09:00–17:00
+              <a href="https://www.instagram.com/dstgymvillamodelo" target="_blank" rel="noopener">@dstgymvillamodelo</a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="disc-card reveal" style="transition-delay:.16s">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 6.5l11 11M8 4l12 12-4 4L4 8l4-4z"/><circle cx="6" cy="18" r="2"/></svg>
+      <!-- Fila 3: Patín, Eventos -->
+      <div class="disc-row-2b">
+        <div class="disc-card reveal" style="transition-delay:.2s" id="patin">
+          <div class="disc-photo">
+            <span class="disc-tag">Tradición</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="6" r="2.5"/><path d="M12 8.5V15M8 21l4-6 4 6M6 13l6 2 6-2"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Patín Artístico</h3>
+            <p>Una de las actividades históricas del club, sobre las pistas techadas del predio.</p>
+            <div class="disc-meta">Pista techada</div>
+          </div>
         </div>
-        <span class="disc-tag">Distrito Gym</span>
-        <h3>Gimnasio &amp; Indoor Cycle</h3>
-        <p>Musculación, entrenamiento funcional y clases de spinning dentro del predio del club.</p>
-        <div class="disc-meta">
-          Lun a Vie 07:00–21:30 · Sáb 09:00–17:00
-          <a href="https://www.instagram.com/dstgymvillamodelo" target="_blank" rel="noopener">@dstgymvillamodelo</a>
-        </div>
-      </div>
 
-      <div class="disc-card reveal" style="transition-delay:.2s">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="6" r="2.5"/><path d="M12 8.5V15M8 21l4-6 4 6M6 13l6 2 6-2"/></svg>
+        <div class="disc-card reveal" style="transition-delay:.24s" id="eventos">
+          <div class="disc-photo">
+            <span class="disc-tag">Eventos</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+          </div>
+          <div class="disc-body">
+            <h3>Salón "Ernesto Díaz"</h3>
+            <p>Salón de usos múltiples techado, ideal para eventos sociales, reuniones y actividades del barrio.</p>
+            <div class="disc-meta">SUM del club</div>
+          </div>
         </div>
-        <span class="disc-tag">Tradición</span>
-        <h3>Patín Artístico</h3>
-        <p>Una de las actividades históricas del club, sobre las pistas techadas del predio.</p>
-        <div class="disc-meta">Pista techada</div>
-      </div>
-
-      <div class="disc-card reveal" style="transition-delay:.24s">
-        <div class="disc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-        </div>
-        <span class="disc-tag">Eventos</span>
-        <h3>Salón "Ernesto Díaz"</h3>
-        <p>Salón de usos múltiples techado, ideal para eventos sociales, reuniones y actividades del barrio.</p>
-        <div class="disc-meta">SUM del club</div>
       </div>
     </div>
   </div>
