@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Villa Modelo Fútbol Sintético | Club en Zona Sur</title>
-<meta name="description" content="Villa Modelo Fútbol Sintético — club deportivo en zona sur con cancha de fútbol 11 y fútbol 7 sobre pasto sintético. Campeonatos, partidos y entrenamientos.">
+<title>Club Villa Modelo | Fútbol, Futsal AFA, Taekwondo y más — Gerli</title>
+<meta name="description" content="Club Atlético Deportivo Villa Modelo — fundado en 1920 en Gerli. Fútbol 11 y 7 sobre sintético, Futsal AFA, Taekwondo ITF, Handball, Distrito Gym y Patín Artístico.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -238,6 +238,22 @@
   .precio-band .p-main span{color:var(--accent);}
   .precio-band .p-sub{color:var(--text-gray);font-size:.9rem;}
 
+  /* DISCIPLINAS */
+  .disciplinas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+  .disc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.7rem;transition:transform .3s ease, border-color .3s ease;}
+  .disc-card:hover{transform:translateY(-5px);border-color:rgba(225,29,46,.35);}
+  .disc-icon{
+    width:46px;height:46px;border-radius:12px;background:rgba(225,29,46,.12);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;
+  }
+  .disc-icon svg{width:22px;height:22px;}
+  .disc-card h3{font-size:1.05rem;color:var(--heading);margin-bottom:.5rem;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif;font-weight:700;}
+  .disc-card p{color:var(--text-gray);font-size:.86rem;margin-bottom:.9rem;}
+  .disc-meta{display:flex;flex-direction:column;gap:.3rem;font-size:.78rem;color:var(--text-gray);}
+  .disc-meta a{color:var(--accent-light);font-weight:600;}
+  .disc-meta a:hover{color:var(--accent);}
+  .disc-tag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent-light);background:rgba(225,29,46,.1);border-radius:20px;padding:.2rem .6rem;margin-bottom:.7rem;}
+
   /* COMO RESERVAR */
   .pasos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;}
   .paso-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2rem;}
@@ -298,6 +314,7 @@
   @media(max-width:900px){
     .nos-grid{grid-template-columns:1fr;}
     .canchas-grid{grid-template-columns:1fr;}
+    .disciplinas-grid{grid-template-columns:repeat(2,1fr);}
     .pasos-grid{grid-template-columns:1fr;}
     .contacto-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
@@ -316,6 +333,7 @@
   @media(max-width:480px){
     .hero h1{font-size:2.1rem;}
     .hero-stats{grid-template-columns:1fr;}
+    .disciplinas-grid{grid-template-columns:1fr;}
     .stat-item{border-right:none;border-bottom:1px solid var(--line);padding-bottom:.8rem;}
     .stat-item:last-child{border-bottom:none;padding-bottom:0;}
     .sec-title{font-size:1.8rem;}
@@ -337,6 +355,7 @@
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#canchas">Canchas</a></li>
+      <li><a href="#disciplinas">Disciplinas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
@@ -349,6 +368,7 @@
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#canchas">Canchas</a>
+    <a href="#disciplinas">Disciplinas</a>
     <a href="#contacto">Contacto</a>
   </div>
 </nav>
@@ -357,29 +377,29 @@
 <section class="hero" id="inicio">
   <div class="hero-ball" aria-hidden="true"></div>
   <div class="hero-inner">
-    <span class="hero-badge">🏆 <b>Club deportivo · Zona Sur</b></span>
-    <h1>FÚTBOL 11 Y 7 <span>SOBRE SINTÉTICO</span></h1>
-    <p>Campeonatos, partidos y entrenamientos sobre pasto sintético. Elegí tu cancha, mirá los horarios y reservá tu turno por WhatsApp.</p>
+    <span class="hero-badge">🏆 <b>Club de barrio desde 1920 · Gerli</b></span>
+    <h1>MÁS QUE UNA <span>CANCHA</span></h1>
+    <p>Fútbol 11 y 7 sobre sintético, Futsal AFA, Taekwondo, Handball, gimnasio y patín artístico. Un club de barrio con historia, para toda la familia.</p>
     <div class="hero-actions">
       <a class="btn btn-accent" href="#canchas">Ver canchas</a>
-      <a class="btn btn-outline" href="https://wa.me/5491121814661?text=Hola!%20Quiero%20consultar%20por%20una%20cancha%20en%20Villa%20Modelo" target="_blank" rel="noopener">Consultar</a>
+      <a class="btn btn-outline" href="#disciplinas">Ver disciplinas</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-val">2</span>
-        <span class="stat-lbl">Canchas · 11 y 7</span>
+        <span class="stat-val">1920</span>
+        <span class="stat-lbl">Fundado</span>
       </div>
       <div class="stat-item">
-        <span class="stat-val">Sintético</span>
-        <span class="stat-lbl">Superficie profesional</span>
+        <span class="stat-val">7+</span>
+        <span class="stat-lbl">Disciplinas</span>
       </div>
       <div class="stat-item">
-        <span class="stat-val">Torneos</span>
-        <span class="stat-lbl">Campeonatos todo el año</span>
+        <span class="stat-val">AFA</span>
+        <span class="stat-lbl">Futsal oficial</span>
       </div>
       <div class="stat-item">
         <span class="stat-val">Zona Sur</span>
-        <span class="stat-lbl">Fácil acceso</span>
+        <span class="stat-lbl">Gerli, Avellaneda</span>
       </div>
     </div>
   </div>
@@ -407,14 +427,15 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 15.5 10l-1.3 4H9.8L8.5 10 12 7.5Z"/><path d="M12 3v4.5M3.5 9l4.5 1M20.5 9l-4.5 1M6 20l3.8-6M18 20l-3.8-6"/></svg>
     </div>
     <div class="nos-text reveal">
-      <span class="eyebrow">Nosotros</span>
-      <h2>Un club, dos canchas</h2>
-      <p>Villa Modelo Fútbol Sintético es un club deportivo en zona sur pensado para partidos, entrenamientos y campeonatos sobre pasto sintético de primer nivel.</p>
+      <span class="eyebrow">Nuestra historia</span>
+      <h2>Un club de barrio desde 1920</h2>
+      <p>El Club Atlético Deportivo Villa Modelo es una institución clásica de Gerli, con más de un siglo formando parte del barrio. Hoy combina esa historia con instalaciones modernas: canchas de fútbol sobre pasto sintético, un estadio cubierto propio y espacios techados para deportes y eventos.</p>
+      <p>Más que una cancha para alquilar, es un club con vida propia: escuelas formativas, equipos que compiten de forma oficial, y un salón de usos múltiples donde el barrio se sigue encontrando.</p>
       <div class="nos-list">
-        <li><span class="chk">✓</span> Cancha de fútbol 11 y cancha de fútbol 7</li>
-        <li><span class="chk">✓</span> Pasto sintético de última generación</li>
-        <li><span class="chk">✓</span> Torneos y campeonatos organizados</li>
-        <li><span class="chk">✓</span> Reservás fácil por WhatsApp</li>
+        <li><span class="chk">✓</span> Fundado en 1920, en Limay 1615, Gerli</li>
+        <li><span class="chk">✓</span> Estadio cubierto propio (Alfredo Piñeyro)</li>
+        <li><span class="chk">✓</span> Siete disciplinas deportivas activas</li>
+        <li><span class="chk">✓</span> Salón de eventos "Ernesto Díaz"</li>
       </div>
     </div>
   </div>
@@ -462,6 +483,93 @@
           </div>
           <a href="cancha-7/" class="btn btn-accent" style="width:100%;justify-content:center;">Ver horarios y reservar</a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCIPLINAS -->
+<section id="disciplinas">
+  <div class="wrap">
+    <span class="eyebrow">Todo el club</span>
+    <h2 class="sec-title">Nuestras disciplinas</h2>
+    <p class="sec-sub">Además del fútbol sobre sintético, Villa Modelo ofrece estas actividades para todas las edades.</p>
+
+    <div class="disciplinas-grid">
+      <div class="disc-card reveal">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <span class="disc-tag">AFA · Primera C</span>
+        <h3>Futsal Masculino</h3>
+        <p>Compite oficialmente en la Primera División C de AFA, con estadio cubierto propio.</p>
+        <div class="disc-meta">Estadio Alfredo Piñeyro</div>
+      </div>
+
+      <div class="disc-card reveal" style="transition-delay:.04s">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v1"/><circle cx="18" cy="8" r="2.5"/><path d="M22 21v-.8a4.5 4.5 0 0 0-3-4.24"/></svg>
+        </div>
+        <span class="disc-tag">Formativas</span>
+        <h3>Futsal Inferiores</h3>
+        <p>Categorías formativas que compiten los fines de semana, más escuela de entrenamiento para arqueros.</p>
+        <div class="disc-meta">Escuela de arqueros</div>
+      </div>
+
+      <div class="disc-card reveal" style="transition-delay:.08s">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8l6 4-6 4V8z"/></svg>
+        </div>
+        <span class="disc-tag">Academia GMG</span>
+        <h3>Taekwondo ITF</h3>
+        <p>Clases oficiales para todos los niveles, a cargo de la Academia GMG - Sabones Riquelme.</p>
+        <div class="disc-meta">
+          Lunes y miércoles · 19:00 a 20:00
+          <a href="https://www.instagram.com/villamodelogmg" target="_blank" rel="noopener">@villamodelogmg</a>
+        </div>
+      </div>
+
+      <div class="disc-card reveal" style="transition-delay:.12s">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8c0 3.5 2.5 7 7 7h1a6 6 0 0 0 6-6v-3.5a2 2 0 0 0-4 0"/></svg>
+        </div>
+        <span class="disc-tag">Balonmano</span>
+        <h3>Handball</h3>
+        <p>Entrenamientos de balonmano dentro de la oferta deportiva del espacio cerrado del club.</p>
+        <div class="disc-meta">Espacio techado</div>
+      </div>
+
+      <div class="disc-card reveal" style="transition-delay:.16s">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 6.5l11 11M8 4l12 12-4 4L4 8l4-4z"/><circle cx="6" cy="18" r="2"/></svg>
+        </div>
+        <span class="disc-tag">Distrito Gym</span>
+        <h3>Gimnasio &amp; Indoor Cycle</h3>
+        <p>Musculación, entrenamiento funcional y clases de spinning dentro del predio del club.</p>
+        <div class="disc-meta">
+          Lun a Vie 07:00–21:30 · Sáb 09:00–17:00
+          <a href="https://www.instagram.com/dstgymvillamodelo" target="_blank" rel="noopener">@dstgymvillamodelo</a>
+        </div>
+      </div>
+
+      <div class="disc-card reveal" style="transition-delay:.2s">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="6" r="2.5"/><path d="M12 8.5V15M8 21l4-6 4 6M6 13l6 2 6-2"/></svg>
+        </div>
+        <span class="disc-tag">Tradición</span>
+        <h3>Patín Artístico</h3>
+        <p>Una de las actividades históricas del club, sobre las pistas techadas del predio.</p>
+        <div class="disc-meta">Pista techada</div>
+      </div>
+
+      <div class="disc-card reveal" style="transition-delay:.24s">
+        <div class="disc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        </div>
+        <span class="disc-tag">Eventos</span>
+        <h3>Salón "Ernesto Díaz"</h3>
+        <p>Salón de usos múltiples techado, ideal para eventos sociales, reuniones y actividades del barrio.</p>
+        <div class="disc-meta">SUM del club</div>
       </div>
     </div>
   </div>
@@ -536,7 +644,7 @@
           </span>
           <span class="brand-name" style="color:#fff">Villa Modelo<b>Fútbol Sintético</b></span>
         </div>
-        <p>Club deportivo en zona sur. Fútbol 11 y fútbol 7 sobre pasto sintético.</p>
+        <p>Club de barrio fundado en 1920 en Gerli. Fútbol, Futsal AFA, Taekwondo, Handball, gimnasio y patín artístico.</p>
       </div>
 
       <div class="footer-col footer-addr">
@@ -550,6 +658,7 @@
           <a href="#inicio">Inicio</a>
           <a href="#nosotros">Nosotros</a>
           <a href="#canchas">Canchas</a>
+          <a href="#disciplinas">Disciplinas</a>
           <a href="#contacto">Contacto</a>
         </div>
       </div>
