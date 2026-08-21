@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fútbol Palaa | Canchas de Fútbol 5</title>
+<meta name="description" content="Fútbol Palaa — dos canchas de fútbol 5 premium en un mismo predio. Reservá tu turno online por WhatsApp en segundos.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        },
+        animation: {
+          'fade-up': 'fadeUp .8s ease forwards',
+          'blob': 'blob 18s infinite ease-in-out',
+        },
+        keyframes: {
+          fadeUp: {
+            '0%': { opacity: 0, transform: 'translateY(24px)' },
+            '100%': { opacity: 1, transform: 'translateY(0)' },
+          },
+          blob: {
+            '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+            '33%': { transform: 'translate(30px, -40px) scale(1.1)' },
+            '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+          },
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #09090b; }
+  ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 20px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+</style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-emerald-500/30 selection:text-white">
+
+<!-- FONDO DECORATIVO -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+  <div class="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[120px] animate-blob"></div>
+  <div class="absolute top-[20%] right-[-10%] w-[550px] h-[550px] bg-teal-500/10 rounded-full blur-[130px] animate-blob" style="animation-delay:-6s"></div>
+  <div class="absolute bottom-[-10%] left-[20%] w-[450px] h-[450px] bg-emerald-400/10 rounded-full blur-[120px] animate-blob" style="animation-delay:-12s"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.045)_1px,transparent_0)] [background-size:32px_32px]"></div>
+</div>
+
+<!-- NAV -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div id="navInner" class="mt-4 flex items-center justify-between rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur-xl px-4 sm:px-6 py-3 transition-all duration-300">
+      <a href="#inicio" class="flex items-center gap-2.5">
+        <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-[0_0_20px_rgba(16,185,129,0.45)]">
+          <i data-lucide="circle-dot" class="w-5 h-5 text-zinc-950" stroke-width="2.5"></i>
+        </span>
+        <span class="text-lg font-extrabold tracking-tight text-white">PALAA<span class="text-emerald-400">.</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <a href="#canchas" class="hover:text-white transition-colors">Canchas</a>
+        <a href="#beneficios" class="hover:text-white transition-colors">Beneficios</a>
+        <a href="#como-reservar" class="hover:text-white transition-colors">Cómo reservar</a>
+        <a href="#ubicacion" class="hover:text-white transition-colors">Ubicación</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20una%20cancha%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener"
+           class="hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-emerald-600 px-4 py-2.5 text-sm font-bold text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_rgba(16,185,129,0.6)]">
+          <i data-lucide="calendar-check" class="w-4 h-4" stroke-width="2.5"></i>
+          Reservar ahora
+        </a>
+        <button id="menuBtn" type="button" aria-label="Abrir menú" class="md:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MENU MOBILE -->
+    <div id="mobileMenu" class="hidden mt-2 rounded-2xl border border-white/10 bg-zinc-950/95 backdrop-blur-xl p-4">
+      <div class="flex flex-col gap-1 text-sm font-medium text-zinc-300">
+        <a href="#canchas" class="rounded-lg px-3 py-2.5 hover:bg-white/5 hover:text-white transition-colors">Canchas</a>
+        <a href="#beneficios" class="rounded-lg px-3 py-2.5 hover:bg-white/5 hover:text-white transition-colors">Beneficios</a>
+        <a href="#como-reservar" class="rounded-lg px-3 py-2.5 hover:bg-white/5 hover:text-white transition-colors">Cómo reservar</a>
+        <a href="#ubicacion" class="rounded-lg px-3 py-2.5 hover:bg-white/5 hover:text-white transition-colors">Ubicación</a>
+        <a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20una%20cancha%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener"
+           class="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-emerald-600 px-4 py-3 text-sm font-bold text-zinc-950">
+          <i data-lucide="calendar-check" class="w-4 h-4" stroke-width="2.5"></i> Reservar ahora
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="inicio" class="relative pt-44 pb-24 px-5 sm:px-8">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="reveal in inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-300 mb-8">
+      <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+      Reservas online 24/7 · Sin llamadas
+    </div>
+
+    <h1 class="reveal in text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white" style="transition-delay:.05s">
+      Dos canchas.
+      <br>
+      <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500 bg-clip-text text-transparent">Cero vueltas</span>
+      para reservar.
+    </h1>
+
+    <p class="reveal in mt-7 max-w-2xl mx-auto text-lg text-zinc-400 leading-relaxed" style="transition-delay:.1s">
+      Dos canchas de fútbol 5 en un mismo predio, iluminación LED, césped sintético profesional y reserva confirmada por WhatsApp en menos de un minuto.
+    </p>
+
+    <div class="reveal in mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style="transition-delay:.15s">
+      <a href="#canchas" class="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-600 px-7 py-4 text-sm font-bold text-zinc-950 shadow-[0_0_35px_rgba(16,185,129,0.45)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(16,185,129,0.65)]">
+        Ver canchas y precios
+        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+      </a>
+      <a href="#como-reservar" class="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 backdrop-blur-md px-7 py-4 text-sm font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/25">
+        <i data-lucide="play-circle" class="w-4 h-4"></i>
+        Cómo funciona
+      </a>
+    </div>
+
+    <!-- STATS -->
+    <div class="reveal in mt-16 grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-6 sm:p-8" style="transition-delay:.2s">
+      <div class="text-center">
+        <div class="text-3xl sm:text-4xl font-black text-white">2</div>
+        <div class="mt-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-zinc-500">Canchas premium</div>
+      </div>
+      <div class="text-center border-x border-white/10">
+        <div class="text-3xl sm:text-4xl font-black text-white">07-24h</div>
+        <div class="mt-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-zinc-500">Horario disponible</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl sm:text-4xl font-black text-white">100%</div>
+        <div class="mt-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-zinc-500">Reserva online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios" class="relative py-24 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Por qué Palaa</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-black tracking-tight text-white">Pensado para que solo juegues</h2>
+      <p class="mt-4 text-zinc-400">Nos encargamos de la cancha, la iluminación y el orden del turno. Vos solo llevás el equipo.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="reveal group rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-7 transition-all duration-300 hover:border-emerald-500/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(16,185,129,0.12)]">
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/15 transition-colors">
+          <i data-lucide="calendar-clock" class="w-6 h-6"></i>
+        </div>
+        <h3 class="mt-5 font-bold text-white">Reserva en segundos</h3>
+        <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Elegís día, hora y cancha, confirmás por WhatsApp y listo. Sin llamadas ni esperas.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-7 transition-all duration-300 hover:border-emerald-500/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(16,185,129,0.12)]" style="transition-delay:.05s">
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/15 transition-colors">
+          <i data-lucide="sun" class="w-6 h-6"></i>
+        </div>
+        <h3 class="mt-5 font-bold text-white">Iluminación LED</h3>
+        <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Luz pareja en toda la cancha, de día o de noche. Cero sombras que arruinen la jugada.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-7 transition-all duration-300 hover:border-emerald-500/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(16,185,129,0.12)]" style="transition-delay:.1s">
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/15 transition-colors">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <h3 class="mt-5 font-bold text-white">Superficies profesionales</h3>
+        <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Césped sintético de última generación en las dos canchas, siempre parejo y sin pozos.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-7 transition-all duration-300 hover:border-emerald-500/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(16,185,129,0.12)]" style="transition-delay:.15s">
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/15 transition-colors">
+          <i data-lucide="shirt" class="w-6 h-6"></i>
+        </div>
+        <h3 class="mt-5 font-bold text-white">Vestuarios y parking</h3>
+        <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Vestuarios con duchas, estacionamiento propio y kiosco con bebidas frías.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CANCHAS -->
+<section id="canchas" class="relative py-24 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Nuestras instalaciones</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-black tracking-tight text-white">Elegí tu cancha</h2>
+      <p class="mt-4 text-zinc-400">Dos espacios, un mismo predio. Reservá la que se ajuste a tu partido.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- CANCHA 1: FUTBOL 5 -->
+      <div class="reveal group relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-emerald-500/30 hover:shadow-[0_0_60px_rgba(16,185,129,0.15)]">
+        <div class="relative h-56 bg-gradient-to-br from-emerald-600/30 via-zinc-900 to-zinc-950 flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] [background-size:28px_28px]"></div>
+          <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-zinc-950/70 backdrop-blur-md border border-white/10 px-3 py-1.5 text-xs font-bold text-emerald-300">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Disponible hoy
+          </div>
+          <i data-lucide="circle-dot" class="w-20 h-20 text-emerald-400/40 relative z-10" stroke-width="1"></i>
+        </div>
+
+        <div class="p-7 sm:p-8">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Cancha 1</span>
+              <h3 class="text-2xl font-black text-white mt-0.5">Fútbol 5</h3>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-2xl font-black text-white">$15.000</div>
+              <div class="text-xs text-zinc-500">por hora</div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="users" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">Hasta 10 jugadores</span>
+            </div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="ruler" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">28 x 16 metros</span>
+            </div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="layers" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">Césped sintético</span>
+            </div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="lightbulb" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">Iluminación LED</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20la%20Cancha%201%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener"
+             class="mt-7 flex items-center justify-center gap-2 w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-600 py-3.5 text-sm font-bold text-zinc-950 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(16,185,129,0.5)]">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            Reservar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- CANCHA 2: FUTBOL 5 -->
+      <div class="reveal group relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-teal-500/30 hover:shadow-[0_0_60px_rgba(45,212,191,0.15)]" style="transition-delay:.08s">
+        <div class="relative h-56 bg-gradient-to-br from-teal-600/30 via-zinc-900 to-zinc-950 flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] [background-size:28px_28px]"></div>
+          <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-zinc-950/70 backdrop-blur-md border border-white/10 px-3 py-1.5 text-xs font-bold text-teal-300">
+            <span class="h-1.5 w-1.5 rounded-full bg-teal-400 animate-pulse"></span> Disponible hoy
+          </div>
+          <i data-lucide="circle-dot" class="w-20 h-20 text-teal-400/40 relative z-10" stroke-width="1"></i>
+        </div>
+
+        <div class="p-7 sm:p-8">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-teal-400">Cancha 2</span>
+              <h3 class="text-2xl font-black text-white mt-0.5">Fútbol 5</h3>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-2xl font-black text-white">$15.000</div>
+              <div class="text-xs text-zinc-500">por hora</div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="users" class="w-4 h-4 text-teal-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">Hasta 10 jugadores</span>
+            </div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="ruler" class="w-4 h-4 text-teal-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">28 x 16 metros</span>
+            </div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="layers" class="w-4 h-4 text-teal-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">Césped sintético</span>
+            </div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white/[0.04] border border-white/5 px-3.5 py-3">
+              <i data-lucide="lightbulb" class="w-4 h-4 text-teal-400 shrink-0"></i>
+              <span class="text-xs text-zinc-300">Iluminación LED</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20la%20Cancha%202%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener"
+             class="mt-7 flex items-center justify-center gap-2 w-full rounded-2xl bg-gradient-to-r from-teal-400 to-teal-600 py-3.5 text-sm font-bold text-zinc-950 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(45,212,191,0.5)]">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            Reservar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMO RESERVAR -->
+<section id="como-reservar" class="relative py-24 px-5 sm:px-8">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Simple y rápido</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-black tracking-tight text-white">Reservá en 3 pasos</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="reveal relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-8">
+        <span class="absolute -top-4 -left-2 text-7xl font-black text-white/5">01</span>
+        <div class="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
+          <i data-lucide="mouse-pointer-click" class="w-6 h-6"></i>
+        </div>
+        <h3 class="relative mt-5 font-bold text-white">Elegí cancha y horario</h3>
+        <p class="relative mt-2 text-sm text-zinc-400 leading-relaxed">Mirá la disponibilidad de la Cancha 1 o la Cancha 2 y elegí el día y la hora que te queda cómoda.</p>
+      </div>
+
+      <div class="reveal relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-8" style="transition-delay:.08s">
+        <span class="absolute -top-4 -left-2 text-7xl font-black text-white/5">02</span>
+        <div class="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
+          <i data-lucide="message-circle" class="w-6 h-6"></i>
+        </div>
+        <h3 class="relative mt-5 font-bold text-white">Confirmá por WhatsApp</h3>
+        <p class="relative mt-2 text-sm text-zinc-400 leading-relaxed">Se abre WhatsApp con tu turno ya armado. Confirmás la seña y el turno queda reservado.</p>
+      </div>
+
+      <div class="reveal relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-8" style="transition-delay:.16s">
+        <span class="absolute -top-4 -left-2 text-7xl font-black text-white/5">03</span>
+        <div class="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
+          <i data-lucide="party-popper" class="w-6 h-6"></i>
+        </div>
+        <h3 class="relative mt-5 font-bold text-white">Llegá y jugá</h3>
+        <p class="relative mt-2 text-sm text-zinc-400 leading-relaxed">Te esperamos con la cancha lista, iluminada y el vestuario abierto. El resto lo abonás en cancha.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="relative py-24 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Dónde estamos</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-black tracking-tight text-white">Encontranos fácil</h2>
+      <p class="mt-4 text-zinc-400">A un toque de distancia, con estacionamiento propio.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="reveal flex flex-col gap-4">
+        <div class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-5">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-white text-sm">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/4eiddsBMN4QzdSgb7" target="_blank" rel="noopener" class="mt-1 block text-sm text-zinc-400 hover:text-emerald-400 transition-colors">Ver en Google Maps →</a>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-5">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-white text-sm">Reservas</h4>
+            <a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20una%20cancha%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener" class="mt-1 block text-sm text-zinc-400 hover:text-emerald-400 transition-colors">+54 9 11 6255-2571</a>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-5">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-white text-sm">Instagram</h4>
+            <a href="https://www.instagram.com/futbolpalaa" target="_blank" rel="noopener" class="mt-1 block text-sm text-zinc-400 hover:text-emerald-400 transition-colors">@futbolpalaa</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal lg:col-span-2 rounded-3xl border border-white/10 overflow-hidden min-h-[320px]" style="transition-delay:.08s">
+        <iframe src="https://www.google.com/maps?q=-34.6662319,-58.3672315&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full min-h-[320px] border-0 grayscale-[40%] contrast-[1.05]"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="relative py-24 px-5 sm:px-8">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal relative overflow-hidden rounded-[2.5rem] border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 via-zinc-900 to-zinc-950 p-10 sm:p-16 text-center">
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-emerald-500/20 rounded-full blur-[100px]"></div>
+      <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/15 rounded-full blur-[100px]"></div>
+      <div class="relative">
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">¿Listo para jugar?</h2>
+        <p class="mt-4 max-w-xl mx-auto text-zinc-400">Reservá tu cancha ahora y aseguráte el horario antes de que se lo lleve otro grupo.</p>
+        <a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20una%20cancha%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener"
+           class="mt-8 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-600 px-8 py-4 text-sm font-bold text-zinc-950 shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_55px_rgba(16,185,129,0.7)]">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          Reservar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacto" class="relative border-t border-white/10 pt-16 pb-8 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div class="md:col-span-1">
+        <a href="#inicio" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600">
+            <i data-lucide="circle-dot" class="w-5 h-5 text-zinc-950" stroke-width="2.5"></i>
+          </span>
+          <span class="text-lg font-extrabold tracking-tight text-white">PALAA<span class="text-emerald-400">.</span></span>
+        </a>
+        <p class="mt-4 text-sm text-zinc-500 leading-relaxed max-w-xs">Dos canchas de fútbol 5. Reservá tu turno online, sin vueltas.</p>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4">Navegación</h4>
+        <div class="flex flex-col gap-3 text-sm text-zinc-400">
+          <a href="#canchas" class="hover:text-white transition-colors">Canchas</a>
+          <a href="#beneficios" class="hover:text-white transition-colors">Beneficios</a>
+          <a href="#como-reservar" class="hover:text-white transition-colors">Cómo reservar</a>
+          <a href="#ubicacion" class="hover:text-white transition-colors">Ubicación</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4">Contacto</h4>
+        <div class="flex flex-col gap-3 text-sm text-zinc-400">
+          <a href="https://wa.me/5491162552571" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-white transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i> +54 9 11 6255-2571
+          </a>
+          <a href="https://maps.app.goo.gl/4eiddsBMN4QzdSgb7" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-white transition-colors">
+            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400"></i> Ver ubicación en Google Maps
+          </a>
+          <span class="flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-emerald-400"></i> Todos los días · 07:00 a 00:00
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4">Seguinos</h4>
+        <div class="flex gap-3">
+          <a href="https://www.instagram.com/futbolpalaa" target="_blank" rel="noopener" class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:border-white/20 transition-colors">
+            <i data-lucide="instagram" class="w-4 h-4"></i>
+          </a>
+          <a href="https://wa.me/5491162552571" target="_blank" rel="noopener" class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:border-white/20 transition-colors">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-600">
+      <span>© 2026 Fútbol Palaa. Todos los derechos reservados.</span>
+      <span>Demo de sitio web · Precios y disponibilidad de ejemplo</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/5491162552571?text=Hola!%20Quiero%20reservar%20una%20cancha%20en%20F%C3%BAtbol%20Palaa" target="_blank" rel="noopener" aria-label="WhatsApp"
+   class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-[0_0_30px_rgba(16,185,129,0.55)] transition-transform duration-300 hover:scale-110">
+  <i data-lucide="message-circle" class="w-6 h-6 text-zinc-950" stroke-width="2.3"></i>
+</a>
+
+<script>
+  lucide.createIcons();
+
+  // Nav: cambia de tamaño/opacidad al scrollear
+  const navInner = document.getElementById('navInner');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navInner.classList.add('shadow-2xl', 'shadow-black/40');
+    } else {
+      navInner.classList.remove('shadow-2xl', 'shadow-black/40');
+    }
+  });
+
+  // Menu mobile
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
