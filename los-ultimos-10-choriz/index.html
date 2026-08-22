@@ -161,6 +161,14 @@
   .btn-submit:hover:not(:disabled){background:var(--primary);}
   .btn-submit:disabled{opacity:.35;cursor:not-allowed;}
   .cart-note{margin-top:.6rem;text-align:center;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-faint);}
+  .btn-ticket{
+    width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;
+    background:transparent;border:1.5px dashed var(--fg-faint);color:var(--fg-soft);
+    padding:.7rem;border-radius:8px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;
+    margin-top:.9rem;transition:.2s;
+  }
+  .btn-ticket:hover:not(:disabled){border-color:var(--fg);color:var(--fg);}
+  .btn-ticket:disabled{opacity:.35;cursor:not-allowed;}
 
   /* FOOTER */
   footer{margin-top:4rem;background:var(--fg);color:var(--bg);padding:3.5rem 0;}
@@ -268,6 +276,8 @@
         </div>
         <button type="submit" class="btn-submit disp" id="submitBtn" disabled>Enviar pedido por WhatsApp</button>
         <p class="cart-note">El pedido le llega al dueño por WhatsApp para confirmar.</p>
+        <button type="button" class="btn-ticket" id="btnTicket" disabled>🧾 Descargar ticket</button>
+        <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
       </form>
     </aside>
   </div>
@@ -382,6 +392,7 @@
   const cartTotalEl = document.getElementById("cartTotal");
   const cartCountEl = document.getElementById("cartCount");
   const submitBtn = document.getElementById("submitBtn");
+  const btnTicket = document.getElementById("btnTicket");
 
   function renderCart() {
     if (cart.length === 0) {
@@ -406,6 +417,7 @@
     cartTotalEl.textContent = formatPrice(total);
     cartCountEl.textContent = count;
     submitBtn.disabled = cart.length === 0;
+    btnTicket.disabled = cart.length === 0;
   }
   cartLinesEl.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-remove]");
@@ -489,6 +501,124 @@
       .join("\n");
 
     window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+  });
+
+  /* ================== TICKET DESCARGABLE (opcional, para el cliente) ==================
+     Es solo una imagen PNG dibujada en canvas: no reemplaza el mensaje de WhatsApp
+     (un link de wa.me no puede adjuntar archivos, solo texto), es una foto del
+     pedido en ese momento para mostrar al retirarlo. Si el cliente cambia el
+     pedido, simplemente descarga uno nuevo. */
+  function dashedLine(ctx, x1, y1, x2, y2) {
+    ctx.save();
+    ctx.strokeStyle = "rgba(26,26,26,.25)";
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  btnTicket.addEventListener("click", () => {
+    if (cart.length === 0) return;
+
+    const name = document.getElementById("nombre").value.trim() || "Cliente";
+    const notes = document.getElementById("notas").value.trim();
+    const modo = document.querySelector('input[name="modo"]:checked').value;
+    const address = document.getElementById("direccion").value.trim();
+    const items = cart.map((l) => {
+      const item = MENU.find((m) => m.id === l.id);
+      return { qty: l.qty, name: item.name, price: item.price * l.qty };
+    });
+    const total = items.reduce((sum, it) => sum + it.price, 0);
+
+    const width = 480;
+    const lineH = 26;
+    const extraLines = 1 + (modo === "Delivery" ? 1 : 0) + (notes ? 1 : 0);
+    const height = 130 + items.length * lineH + 64 + extraLines * 20 + 100;
+
+    const scale = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(scale, scale);
+
+    ctx.fillStyle = "#fdfcf0";
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#ff4d00";
+    ctx.fillRect(0, 0, width, 8);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "bold 23px sans-serif";
+    ctx.fillText("LOS ÚLTIMOS 10 CHORIZ", width / 2, 44);
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "rgba(26,26,26,.6)";
+    ctx.fillText("Parrilla al paso", width / 2, 64);
+
+    const now = new Date();
+    const fecha =
+      now.toLocaleDateString("es-AR") +
+      " · " +
+      now.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
+    ctx.fillText(fecha, width / 2, 84);
+
+    dashedLine(ctx, 24, 100, width - 24, 100);
+
+    let y = 100 + 30;
+    ctx.font = "13px monospace";
+    items.forEach((it) => {
+      ctx.fillStyle = "#1a1a1a";
+      ctx.textAlign = "left";
+      ctx.fillText(`${it.qty}x ${it.name}`, 24, y);
+      ctx.textAlign = "right";
+      ctx.fillText(formatPrice(it.price), width - 24, y);
+      y += lineH;
+    });
+
+    dashedLine(ctx, 24, y, width - 24, y);
+    y += 32;
+    ctx.font = "bold 20px sans-serif";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.textAlign = "left";
+    ctx.fillText("TOTAL", 24, y);
+    ctx.fillStyle = "#ff4d00";
+    ctx.textAlign = "right";
+    ctx.fillText(formatPrice(total), width - 24, y);
+
+    y += 32;
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.textAlign = "left";
+    ctx.fillText(`Cliente: ${name}`, 24, y);
+    y += 20;
+    ctx.fillText(`Modalidad: ${modo}`, 24, y);
+    y += 20;
+    if (modo === "Delivery") {
+      ctx.fillText(`Dirección: ${address || "-"}`, 24, y);
+      y += 20;
+    }
+    if (notes) {
+      ctx.fillText(`Notas: ${notes}`, 24, y);
+      y += 20;
+    }
+
+    y += 8;
+    dashedLine(ctx, 24, y, width - 24, y);
+    y += 26;
+    ctx.textAlign = "center";
+    ctx.font = "italic 12px sans-serif";
+    ctx.fillStyle = "rgba(26,26,26,.6)";
+    ctx.fillText('"El chori que se agota primero."', width / 2, y);
+    y += 20;
+    ctx.font = "11px sans-serif";
+    ctx.fillText("Mostrá este ticket al retirar tu pedido", width / 2, y);
+
+    const link = document.createElement("a");
+    link.download = `ticket-los-ultimos-10-choriz-${Date.now()}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
   });
 
   renderMenu();
