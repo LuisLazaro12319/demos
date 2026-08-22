@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel · Los Últimos 10 Choriz</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdfcf0; --bg2:#ffffff; --card:#ffffff; --fg:#1a1a1a; --fg-soft:rgba(26,26,26,.6);
+    --fg-faint:rgba(26,26,26,.4); --line:rgba(26,26,26,.1); --primary:#ff4d00; --primary-dark:#d94100; --secondary:#ffb800;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  button,input,select,textarea{font-family:inherit;}
+
+  .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:.9rem 1.6rem;background:rgba(253,252,240,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .tb-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:.5px;color:var(--fg-soft);text-transform:uppercase;}
+  .tb-brand img{height:30px;width:auto;}
+  .tb-right{display:flex;align-items:center;gap:1rem;}
+  .vp-pill{background:rgba(255,77,0,.1);color:var(--primary-dark);font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:.35rem .8rem;border-radius:20px;}
+  .tb-back{font-size:.82rem;color:var(--fg-soft);font-weight:700;}
+  .tb-back:hover{color:var(--primary);}
+
+  .wrap{max-width:900px;margin:0 auto;padding:2.4rem 1.4rem 5rem;}
+  .head h1{font-family:'Anton',sans-serif;font-size:2rem;text-transform:uppercase;letter-spacing:.5px;}
+  .head p{color:var(--fg-soft);margin-top:.4rem;font-size:.96rem;max-width:60ch;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.7rem;margin-top:1.6rem;box-shadow:0 1px 0 var(--line) inset;}
+  .card-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;}
+  .card-head .num{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:rgba(255,77,0,.1);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;}
+  .card-head h3{font-size:1.15rem;font-weight:800;}
+  .card .desc{color:var(--fg-soft);font-size:.88rem;margin:.1rem 0 1.2rem 0;}
+
+  .locked{display:flex;align-items:center;gap:.8rem;margin-top:1.4rem;flex-wrap:wrap;}
+  .locked .lbtn{background:var(--line);color:var(--fg-soft);border-radius:9px;padding:.65rem 1.3rem;font-size:.85rem;font-weight:800;border:none;cursor:not-allowed;}
+  .locked small{color:var(--fg-faint);font-size:.78rem;}
+
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+  .field{display:flex;flex-direction:column;gap:.35rem;}
+  .field label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-soft);}
+  .field input,.field select,.field textarea{border:1px solid var(--line);border-radius:8px;padding:.6rem .7rem;font-size:.88rem;background:var(--bg2);color:var(--fg);outline:none;}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);}
+
+  /* HERO */
+  .hero-preview{background:linear-gradient(150deg,var(--primary),var(--secondary));border-radius:12px;padding:1.6rem;color:#fff;margin-bottom:1.3rem;}
+  .hero-preview .eyebrow{font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;}
+  .hero-preview h2{font-family:'Anton',sans-serif;font-size:1.7rem;text-transform:uppercase;margin:.3rem 0 .5rem;line-height:1.05;}
+  .hero-preview p{font-size:.85rem;opacity:.92;max-width:50ch;}
+
+  .slides-grid{display:flex;flex-wrap:wrap;gap:.9rem;}
+  .slide-item{position:relative;width:110px;height:150px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#111;display:flex;align-items:center;justify-content:center;}
+  .slide-item img,.slide-item video{width:100%;height:100%;object-fit:cover;}
+  .slide-item .ph{color:#fff;font-size:1.6rem;}
+  .slide-item .tag{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:.6rem;text-align:center;padding:.25rem 0;text-transform:uppercase;letter-spacing:.4px;}
+  .slide-item .del{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;background:rgba(200,40,40,.9);color:#fff;border:none;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .add-slide{width:110px;height:150px;border:1.5px dashed var(--line);border-radius:10px;display:flex;flex-direction:column;gap:.4rem;align-items:center;justify-content:center;color:var(--fg-soft);font-size:.72rem;cursor:pointer;text-align:center;padding:.5rem;}
+  .add-slide:hover{border-color:var(--primary);color:var(--primary);}
+  .add-slide svg{color:var(--primary);}
+
+  /* CATEGORÍAS */
+  .chip-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.2rem;}
+  .chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:.5rem 1rem .5rem 1.2rem;font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;}
+  .chip button{background:none;border:none;color:var(--fg-faint);font-size:.95rem;cursor:pointer;line-height:1;}
+  .chip button:hover{color:#c0392b;}
+  .add-row{display:flex;gap:.6rem;}
+  .add-row input{flex:1;}
+  .btn-add{background:var(--fg);color:var(--bg);border:none;border-radius:8px;padding:.6rem 1.2rem;font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;cursor:pointer;white-space:nowrap;}
+  .btn-add:hover{background:var(--primary);}
+
+  /* PRODUCTOS */
+  table{width:100%;border-collapse:collapse;}
+  th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-soft);padding:.6rem .5rem;border-bottom:1px solid var(--line);}
+  td{padding:.7rem .5rem;border-bottom:1px solid var(--line);font-size:.85rem;vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  .prod-thumb{display:flex;align-items:center;gap:.7rem;}
+  .prod-thumb .ph{width:40px;height:40px;border-radius:8px;background:linear-gradient(150deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;flex:0 0 40px;overflow:hidden;color:#fff;font-size:.8rem;}
+  .prod-thumb .ph img{width:100%;height:100%;object-fit:cover;}
+  .price-cell{font-weight:800;color:var(--primary-dark);white-space:nowrap;}
+  .row-actions{display:flex;gap:.4rem;flex-wrap:wrap;}
+  .mini-btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.74rem;font-weight:700;padding:.4rem .7rem;border-radius:6px;border:1px solid var(--line);background:var(--bg2);color:var(--fg-soft);cursor:pointer;}
+  .mini-btn:hover{border-color:var(--fg);color:var(--fg);}
+  .mini-btn.del{color:#c0392b;border-color:#f3d0cc;background:#fdf3f2;}
+  .mini-btn.del:hover{border-color:#c0392b;}
+  .mini-btn.save{color:#1a7a30;border-color:#bfe6c9;background:#f0faf2;}
+  .edit-input{width:100%;border:1px solid var(--line);border-radius:6px;padding:.35rem .5rem;font-size:.85rem;}
+
+  .add-top{display:inline-flex;align-items:center;gap:.4rem;background:var(--fg);color:var(--bg);font-size:.76rem;font-weight:800;padding:.5rem .9rem;border-radius:7px;cursor:pointer;border:none;}
+  .add-top:hover{background:var(--primary);}
+  .card-head-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.3rem;}
+
+  .cta-card{background:var(--fg);color:var(--bg);border-radius:14px;padding:1.8rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;margin-top:1.6rem;}
+  .cta-card h3{font-family:'Anton',sans-serif;font-size:1.25rem;text-transform:uppercase;margin-bottom:.35rem;}
+  .cta-card p{font-size:.85rem;color:rgba(253,252,240,.65);max-width:42ch;}
+  .btn-wa{display:inline-flex;align-items:center;gap:.6rem;background:var(--primary);color:#fff;font-weight:800;font-size:.85rem;padding:.85rem 1.5rem;border-radius:8px;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px;}
+  .btn-wa:hover{background:var(--primary-dark);}
+
+  @media(max-width:640px){
+    .field-row{grid-template-columns:1fr;}
+    .cta-card{flex-direction:column;align-items:flex-start;}
+    .add-row{flex-direction:column;align-items:stretch;}
+    .btn-add{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-brand"><img src="../img/logo.png" alt="Los Últimos 10 Choriz"> · Panel</div>
+  <div class="tb-right">
+    <span class="vp-pill">Vista previa</span>
+    <a class="tb-back" href="../">← Volver a la web</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="head">
+    <h1>Tu panel de control</h1>
+    <p>Así se vería el panel para manejar la web vos misma: cambiar el hero, sumar fotos o videos, armar categorías y agregar o sacar productos del menú. Todavía es una vista previa — probá tocar todo, nada se guarda hasta activar el panel real.</p>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <div class="card">
+    <div class="card-head"><span class="num">1</span><h3>Portada (Hero)</h3></div>
+    <p class="desc">Editá el título y el texto de bienvenida, y sumá o sacá fotos y videos del carrusel de la portada.</p>
+
+    <div class="hero-preview">
+      <span class="eyebrow">🔥 Parrilla al paso</span>
+      <h2 id="heroPreviewTitle">Choripán de verdad.</h2>
+      <p id="heroPreviewText">Chorizo a la parrilla y las salsas de la casa. Los últimos 10 se agotan rápido — pedí el tuyo antes de que se terminen.</p>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="heroTitle">Título</label>
+        <input id="heroTitle" value="Choripán de verdad.">
+      </div>
+      <div class="field">
+        <label for="heroText">Texto de bienvenida</label>
+        <input id="heroText" value="Chorizo a la parrilla y las salsas de la casa. Los últimos 10 se agotan rápido — pedí el tuyo antes de que se terminen.">
+      </div>
+    </div>
+
+    <p class="desc" style="margin-bottom:.7rem;">Fotos y videos del carrusel:</p>
+    <div class="slides-grid" id="slidesGrid"></div>
+    <input type="file" id="slideFile" accept="image/*,video/*" style="display:none">
+
+    <div class="locked"><span class="lbtn">🔒 Guardar cambios del hero</span><small>Disponible cuando actives el panel real</small></div>
+  </div>
+
+  <!-- ===== CATEGORÍAS ===== -->
+  <div class="card">
+    <div class="card-head"><span class="num">2</span><h3>Categorías del menú</h3></div>
+    <p class="desc">Son los botones de filtro que ven tus clientes arriba del menú (Choripanes, Parrilla, Bebidas...).</p>
+    <div class="chip-list" id="catList"></div>
+    <div class="add-row">
+      <input id="catInput" placeholder="Nombre de la nueva categoría, ej: POSTRES">
+      <button class="btn-add" id="catAddBtn" type="button">+ Agregar categoría</button>
+    </div>
+    <div class="locked"><span class="lbtn">🔒 Guardar categorías</span><small>Disponible cuando actives el panel real</small></div>
+  </div>
+
+  <!-- ===== PRODUCTOS ===== -->
+  <div class="card">
+    <div class="card-head-row">
+      <div class="card-head" style="margin-bottom:0;"><span class="num">3</span><h3>Productos del menú</h3></div>
+    </div>
+    <p class="desc">Los platos que ve el cliente en la sección del menú, con foto, precio y descripción.</p>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr></thead>
+        <tbody id="prodBody"></tbody>
+      </table>
+    </div>
+
+    <p class="desc" style="margin:1.4rem 0 .8rem;font-weight:800;color:var(--fg);">Agregar producto nuevo</p>
+    <div class="field-row">
+      <div class="field"><label>Nombre</label><input id="newName" placeholder="Ej: Choripán a la provenzal"></div>
+      <div class="field"><label>Categoría</label><select id="newCat"></select></div>
+      <div class="field"><label>Precio</label><input id="newPrice" type="number" placeholder="5000"></div>
+      <div class="field"><label>Foto</label><input id="newImg" type="file" accept="image/*"></div>
+    </div>
+    <div class="field" style="margin-bottom:1rem;"><label>Descripción</label><textarea id="newDesc" rows="2" placeholder="Ingredientes, salsas, tamaño..."></textarea></div>
+    <button class="add-top" id="prodAddBtn" type="button">+ Agregar producto</button>
+
+    <div class="locked"><span class="lbtn">🔒 Guardar cambios del menú</span><small>Disponible cuando actives el panel real</small></div>
+  </div>
+
+  <div class="cta-card">
+    <div>
+      <h3>¿Querés manejar la web así de verdad?</h3>
+      <p>Activamos el panel real para que edites el menú, las fotos y el hero vos misma, cuando quieras, sin depender de nadie.</p>
+    </div>
+    <a class="btn-wa" href="https://wa.me/5491133861673?text=Hola!%20Vi%20la%20vista%20previa%20del%20panel%20de%20Los%20%C3%9Altimos%2010%20Choriz%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+  </div>
+</div>
+
+<script>
+  /* ================== VISTA PREVIA DEL HERO ================== */
+  const heroTitle = document.getElementById('heroTitle');
+  const heroText = document.getElementById('heroText');
+  const heroPreviewTitle = document.getElementById('heroPreviewTitle');
+  const heroPreviewText = document.getElementById('heroPreviewText');
+  heroTitle.addEventListener('input', () => { heroPreviewTitle.textContent = heroTitle.value; });
+  heroText.addEventListener('input', () => { heroPreviewText.textContent = heroText.value; });
+
+  /* ================== SLIDES DEL CARRUSEL ================== */
+  let slides = [
+    { type: 'video', label: 'Video: local', src: '../video/local.mp4' },
+    { type: 'photo', label: 'Foto (de ejemplo)', src: null },
+  ];
+  const slidesGrid = document.getElementById('slidesGrid');
+  const slideFile = document.getElementById('slideFile');
+
+  function renderSlides() {
+    slidesGrid.innerHTML = '';
+    slides.forEach((s, i) => {
+      const item = document.createElement('div');
+      item.className = 'slide-item';
+      if (s.type === 'video') {
+        item.innerHTML = s.src
+          ? `<video src="${s.src}" muted></video>`
+          : `<span class="ph">🎬</span>`;
+      } else {
+        item.innerHTML = s.src ? `<img src="${s.src}" alt="">` : `<span class="ph">🖼️</span>`;
+      }
+      item.innerHTML += `<span class="tag">${s.type === 'video' ? 'Video' : 'Foto'}</span><button class="del" type="button" aria-label="Quitar">×</button>`;
+      item.querySelector('.del').addEventListener('click', () => {
+        slides.splice(i, 1);
+        renderSlides();
+      });
+      slidesGrid.appendChild(item);
+    });
+    const addBtn = document.createElement('div');
+    addBtn.className = 'add-slide';
+    addBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg>Agregar foto o video`;
+    addBtn.addEventListener('click', () => slideFile.click());
+    slidesGrid.appendChild(addBtn);
+  }
+
+  slideFile.addEventListener('change', () => {
+    const file = slideFile.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const isVideo = file.type.startsWith('video/');
+    slides.push({ type: isVideo ? 'video' : 'photo', label: file.name, src: url });
+    renderSlides();
+    slideFile.value = '';
+  });
+
+  renderSlides();
+
+  /* ================== CATEGORÍAS ================== */
+  let categories = ['CHORIPANES', 'PARRILLA', 'BEBIDAS'];
+  const catList = document.getElementById('catList');
+  const catInput = document.getElementById('catInput');
+  const catAddBtn = document.getElementById('catAddBtn');
+  const newCatSelect = document.getElementById('newCat');
+
+  function renderCats() {
+    catList.innerHTML = '';
+    categories.forEach((c, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.innerHTML = `${c} <button type="button" aria-label="Quitar categoría">×</button>`;
+      chip.querySelector('button').addEventListener('click', () => {
+        categories.splice(i, 1);
+        renderCats();
+        renderProducts();
+      });
+      catList.appendChild(chip);
+    });
+    newCatSelect.innerHTML = categories.map((c) => `<option value="${c}">${c}</option>`).join('');
+  }
+
+  catAddBtn.addEventListener('click', () => {
+    const val = catInput.value.trim().toUpperCase();
+    if (!val || categories.includes(val)) return;
+    categories.push(val);
+    catInput.value = '';
+    renderCats();
+  });
+  catInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); catAddBtn.click(); } });
+
+  /* ================== PRODUCTOS ================== */
+  let products = [
+    { name: 'Choripán Clásico', price: 4500, desc: 'Chorizo a la parrilla y chimichurri de la casa.', category: 'CHORIPANES', img: '../img/chori-clasico.jpg' },
+    { name: 'Choripán Completo', price: 5800, desc: 'Chorizo, provoleta grillada, morrón asado y chimichurri.', category: 'CHORIPANES', img: '../img/chori-completo.jpg' },
+    { name: 'Choripán Picante', price: 5000, desc: 'Chorizo parrillero con salsa criolla picante de la casa.', category: 'CHORIPANES', img: '../img/chori-picante.jpg' },
+    { name: 'Bondiola al Pan', price: 6500, desc: 'Bondiola de cerdo a la parrilla y salsa criolla.', category: 'PARRILLA', img: '../img/bondiola.jpg' },
+    { name: 'Vacío al Pan', price: 7000, desc: 'Corte de vacío a la parrilla, jugoso, con chimichurri.', category: 'PARRILLA', img: '../img/vacio.jpg' },
+    { name: 'Papas Fritas', price: 3500, desc: 'Porción grande de papas fritas bien crocantes.', category: 'PARRILLA', img: null },
+    { name: 'Gaseosa / Agua', price: 2500, desc: 'Línea Coca-Cola o agua mineral, bien fría.', category: 'BEBIDAS', img: null },
+  ];
+  const prodBody = document.getElementById('prodBody');
+  const fmt = (n) => '$' + n.toLocaleString('es-AR');
+
+  function renderProducts() {
+    prodBody.innerHTML = '';
+    products.forEach((p, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><div class="prod-thumb"><div class="ph">${p.img ? `<img src="${p.img}" alt="">` : '🍽️'}</div>${p.name}</div></td>
+        <td>${p.category}</td>
+        <td class="price-cell">${fmt(p.price)}</td>
+        <td><div class="row-actions">
+          <button class="mini-btn edit" type="button">✎ Editar</button>
+          <button class="mini-btn del" type="button">🗑 Eliminar</button>
+        </div></td>`;
+      tr.querySelector('.del').addEventListener('click', () => {
+        products.splice(i, 1);
+        renderProducts();
+      });
+      tr.querySelector('.edit').addEventListener('click', () => startEdit(tr, p, i));
+      prodBody.appendChild(tr);
+    });
+  }
+
+  function startEdit(tr, p, i) {
+    tr.innerHTML = `
+      <td><input class="edit-input" value="${p.name}" data-f="name"></td>
+      <td>
+        <select class="edit-input" data-f="category">
+          ${categories.map((c) => `<option value="${c}" ${c === p.category ? 'selected' : ''}>${c}</option>`).join('')}
+        </select>
+      </td>
+      <td><input class="edit-input" type="number" value="${p.price}" data-f="price"></td>
+      <td><div class="row-actions">
+        <button class="mini-btn save" type="button">✓ Guardar</button>
+        <button class="mini-btn" type="button">Cancelar</button>
+      </div></td>`;
+    tr.querySelector('.save').addEventListener('click', () => {
+      products[i].name = tr.querySelector('[data-f="name"]').value.trim() || p.name;
+      products[i].category = tr.querySelector('[data-f="category"]').value;
+      products[i].price = Number(tr.querySelector('[data-f="price"]').value) || p.price;
+      renderProducts();
+    });
+    tr.querySelector('.mini-btn:not(.save)').addEventListener('click', renderProducts);
+  }
+
+  document.getElementById('prodAddBtn').addEventListener('click', () => {
+    const name = document.getElementById('newName').value.trim();
+    const price = Number(document.getElementById('newPrice').value);
+    const desc = document.getElementById('newDesc').value.trim();
+    const category = newCatSelect.value;
+    const file = document.getElementById('newImg').files[0];
+    if (!name || !price) {
+      document.getElementById('newName').focus();
+      return;
+    }
+    const img = file ? URL.createObjectURL(file) : null;
+    products.push({ name, price, desc, category, img });
+    document.getElementById('newName').value = '';
+    document.getElementById('newPrice').value = '';
+    document.getElementById('newDesc').value = '';
+    document.getElementById('newImg').value = '';
+    renderProducts();
+  });
+
+  renderCats();
+  renderProducts();
+</script>
+</body>
+</html>
