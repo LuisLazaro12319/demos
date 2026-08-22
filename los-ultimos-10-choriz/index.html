@@ -57,14 +57,28 @@
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
   .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
   .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
+  .hero-visual-wrap{position:relative;width:min(100%,380px);justify-self:center;}
   .hero-visual{
     /* El video real es vertical (576x1024, 9:16) — el recuadro tiene que
        tener esa misma forma para que entre completo, sin recortar. Se usa
        width fijo (no max-width con margin:auto) porque aspect-ratio no
        resuelve bien el alto cuando el ancho depende de un auto-margin
        dentro de un grid item. */
-    position:relative;width:min(100%,380px);aspect-ratio:9/16;justify-self:center;border-radius:1.2rem;overflow:hidden;
+    position:relative;width:100%;aspect-ratio:9/16;border-radius:1.2rem;overflow:hidden;
   }
+  /* Cintita negra pegada al costado del video, va a su TikTok */
+  .tiktok-tab{
+    position:absolute;top:50%;right:100%;transform:translateY(-50%);
+    background:#000;text-decoration:none;border-radius:10px 0 0 10px;
+    padding:.9rem .5rem;box-shadow:0 4px 14px rgba(0,0,0,.3);
+    display:flex;align-items:center;justify-content:center;transition:.2s;z-index:2;
+  }
+  .tiktok-tab:hover{background:#1a1a1a;}
+  .tiktok-tab span{
+    writing-mode:vertical-rl;transform:rotate(180deg);
+    color:#fff;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;
+  }
+  @media(max-width:900px){ .tiktok-tab{display:none;} }
   .hero-slide{
     position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;
     background:linear-gradient(150deg,var(--primary) 0%,var(--secondary) 100%);
@@ -157,7 +171,7 @@
   @media(max-width:900px){
     .hero{grid-template-columns:1fr;}
     .hero h1{font-size:3.4rem;}
-    .hero-visual{width:min(100%,320px);order:-1;}
+    .hero-visual-wrap{width:min(100%,320px);order:-1;}
     .menu-layout{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
@@ -196,19 +210,24 @@
       <a href="#menu" class="btn-hero disp">Ver el menú</a>
     </div>
     <!-- Carrusel del hero: puede mezclar videos y fotos, se agregan slides nuevos acá -->
-    <div class="hero-visual">
-      <div id="heroSlides">
-        <div class="hero-slide active">
-          <video src="video/local.mp4" autoplay muted loop playsinline></video>
+    <div class="hero-visual-wrap">
+      <div class="hero-visual">
+        <div id="heroSlides">
+          <div class="hero-slide active">
+            <video src="video/local.mp4" autoplay muted loop playsinline></video>
+          </div>
+          <div class="hero-slide">
+            <!-- Cuando llegue una foto real: reemplazar el svg por <img src="img/hero-2.jpg" alt="..."> -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
+          </div>
         </div>
-        <div class="hero-slide">
-          <!-- Cuando llegue una foto real: reemplazar el svg por <img src="img/hero-2.jpg" alt="..."> -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
-        </div>
+        <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
+        <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
+        <div class="hero-dots" id="heroDots"></div>
       </div>
-      <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
-      <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
-      <div class="hero-dots" id="heroDots"></div>
+      <a href="https://www.tiktok.com/@jorge.luis.claros0" target="_blank" rel="noopener" class="tiktok-tab" aria-label="Transmisiones todos los días en TikTok">
+        <span>Transmisiones todos los días en TikTok</span>
+      </a>
     </div>
   </section>
 
