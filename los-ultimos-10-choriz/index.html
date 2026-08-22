@@ -91,8 +91,12 @@
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
 
-  /* CATEGORÍAS */
-  .cats-bar{position:sticky;top:60px;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
+  /* CATEGORÍAS — fijada por JS (no por position:sticky, que en algunos
+     celulares no se queda pegada dentro de este tipo de layout). */
+  .cats-bar{position:relative;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
+  .cats-bar.is-fixed{position:fixed;top:60px;left:0;right:0;}
+  .cats-bar-spacer{display:none;}
+  .cats-bar-spacer.is-active{display:block;}
   .cats{display:flex;flex-wrap:wrap;gap:.8rem;}
   .cat-btn{white-space:nowrap;border-radius:20px;padding:.5rem 1.3rem;font-size:.82rem;font-weight:800;border:1px solid var(--line);transition:.2s;}
   .cat-btn:hover{border-color:var(--primary);}
@@ -162,7 +166,6 @@
     .cart-box{position:static;}
     .footer-grid{grid-template-columns:1fr;gap:2rem;}
     .brand-logo{height:54px;}
-    .cats-bar{top:60px;}
   }
   @media(max-width:520px){
     .menu-grid{grid-template-columns:1fr;}
@@ -213,6 +216,7 @@
   </section>
 
   <!-- CATEGORÍAS -->
+  <div class="cats-bar-spacer" id="catsBarSpacer"></div>
   <div class="cats-bar" id="menu">
     <div class="cats" id="catsWrap"></div>
   </div>
@@ -472,6 +476,45 @@
 
   renderMenu();
   renderCart();
+
+  /* ================== BARRA DE CATEGORÍAS FIJA (con JS, no con sticky) ================== */
+  (function () {
+    const catsBar = document.getElementById("menu");
+    const spacer = document.getElementById("catsBarSpacer");
+    const NAV_HEIGHT = 60; // tiene que coincidir con el alto real del nav
+
+    // Punto de la página (en píxeles, desde arriba de todo) donde la barra
+    // empieza a quedar tapada por el nav — a partir de ahí la fijamos.
+    let triggerPoint = 0;
+    function medir() {
+      // getBoundingClientRect().top + scrollY = posición absoluta del elemento,
+      // sin importar si ya está fijo (por eso restamos lo que ya suma el spacer).
+      const spacerAlto = spacer.classList.contains("is-active") ? spacer.offsetHeight : 0;
+      triggerPoint = catsBar.getBoundingClientRect().top + window.scrollY - spacerAlto;
+    }
+
+    function actualizar() {
+      const debeFijarse = window.scrollY >= triggerPoint - NAV_HEIGHT;
+      if (debeFijarse && !catsBar.classList.contains("is-fixed")) {
+        spacer.style.height = catsBar.offsetHeight + "px";
+        catsBar.classList.add("is-fixed");
+        spacer.classList.add("is-active");
+      } else if (!debeFijarse && catsBar.classList.contains("is-fixed")) {
+        catsBar.classList.remove("is-fixed");
+        spacer.classList.remove("is-active");
+      }
+    }
+
+    medir();
+    actualizar();
+    window.addEventListener("scroll", actualizar, { passive: true });
+    window.addEventListener("resize", () => {
+      const estabaFija = catsBar.classList.contains("is-fixed");
+      if (estabaFija) { catsBar.classList.remove("is-fixed"); spacer.classList.remove("is-active"); }
+      medir();
+      actualizar();
+    });
+  })();
 
   /* ================== CARRUSEL DEL HERO (fotos y/o videos) ================== */
   (function () {
