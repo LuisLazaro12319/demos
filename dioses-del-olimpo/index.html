@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fuego &amp; Masa | Hamburguesas, pizzas y pastas a domicilio</title>
-<meta name="description" content="Pedí hamburguesas, pizzas y pastas artesanales online. Armá tu pedido y envialo por WhatsApp: delivery o retiro en el local.">
+<title>Los Dioses del Olimpo | Hamburguesería</title>
+<meta name="description" content="Los Dioses del Olimpo — hamburguesas artesanales dignas del Olimpo. Armá tu pedido y envialo por WhatsApp: delivery o retiro en el local.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -141,7 +141,7 @@
 <body>
 
 <nav>
-  <span class="brand disp">Fuego &amp; Masa</span>
+  <span class="brand disp">Los Dioses del Olimpo</span>
   <div class="nav-links">
     <a href="#menu" class="hide-mobile">Menú</a>
     <a href="#locales" class="hide-mobile">Locales</a>
@@ -154,9 +154,10 @@
   <!-- HERO -->
   <section class="hero">
     <div>
-      <h1 class="disp">Hambre de <span>verdad.</span></h1>
-      <p>Artesanos de la grasa fina y el fuego lento. Hamburguesas, pizzas y pastas diseñadas para el paladar salvaje.</p>
-      <a href="#menu" class="btn-hero disp">Ordena ahora</a>
+      <p class="eyebrow">🏛️ Batallá con nuestras hamburguesas</p>
+      <h1 class="disp">Comida de <span>dioses.</span></h1>
+      <p>Hamburguesas artesanales dignas del Olimpo. Vení a batallar con nuestras hamburguesas... sin antes morir en el intento.</p>
+      <a href="#menu" class="btn-hero disp">Ver el menú</a>
     </div>
     <!-- Cuando llegue la foto real: reemplazar por <img src="img/hero-burger.jpg" alt="..."> -->
     <div class="hero-visual">
@@ -207,18 +208,18 @@
 <footer>
   <div class="wrap footer-grid">
     <div id="nosotros">
-      <span class="brand disp">Fuego &amp; Masa</span>
-      <p class="tagline">"Donde el hambre encuentra su final."</p>
+      <span class="brand disp">Los Dioses del Olimpo</span>
+      <p class="tagline">"Vení a batallar con nuestras hamburguesas, sin antes morir en el intento."</p>
     </div>
     <div class="footer-col mono">
       <p class="flabel">Horarios</p>
-      <p>LUN-JUE: 18:00 - 23:00</p>
-      <p>VIE-DOM: 12:00 - 01:00</p>
+      <p>LUN, MIÉ, JUE: 19:00 - 00:00</p>
+      <p>VIE, SÁB: horario extendido</p>
     </div>
     <div class="footer-col mono" id="locales">
       <p class="flabel">Contacto</p>
-      <p>Av. Principal 456, Capital</p>
-      <p>+54 9 11 0000-0000</p>
+      <p><a href="https://maps.app.goo.gl/512uTJL9WmW8mCo97" target="_blank" rel="noopener" style="text-decoration:underline">Ver ubicación en Maps</a></p>
+      <p><a href="https://www.instagram.com/do.burgas" target="_blank" rel="noopener" style="text-decoration:underline">@do.burgas</a></p>
     </div>
   </div>
 </footer>
@@ -226,25 +227,24 @@
 <script>
   /* ================== DATOS (editar acá por cliente) ================== */
   const OWNER_WHATSAPP = "5491100000000"; // reemplazar por el numero real del cliente
-  const BRAND = "FUEGO & MASA";
+  const BRAND = "LOS DIOSES DEL OLIMPO";
 
-  const CATEGORIES = ["TODO", "BURGERS", "PIZZAS", "PASTAS", "BEBIDAS"];
+  const CATEGORIES = ["TODO", "BURGERS", "PAPAS", "BEBIDAS"];
 
-  // icon: "burger" | "pizza" | "pasta" | "drink" — usado para el placeholder visual
+  // icon: "burger" | "papas" | "drink" — usado para el placeholder visual
   const MENU = [
-    { id: "pizza-infarto", name: "Pizza Infarto", price: 14500, description: "Pepperoni, miel picante, mozzarella fresca y albahaca morada.", category: "PIZZAS", icon: "pizza" },
-    { id: "la-bestia", name: "La Bestia", price: 12000, description: "Doble carne de angus, queso azul, cebolla caramelizada y alioli.", category: "BURGERS", icon: "burger" },
-    { id: "bacon-brutal", name: "Bacon Brutal", price: 11500, description: "Carne madurada, cheddar fundido, bacon crocante y pepinillos.", category: "BURGERS", icon: "burger" },
-    { id: "margherita", name: "Margherita Sagrada", price: 12900, description: "Masa madre de 72h, tomate San Marzano y mozzarella de búfala.", category: "PIZZAS", icon: "pizza" },
-    { id: "pappardelle-ragu", name: "Pappardelle al Ragú", price: 13200, description: "Pasta fresca al huevo con estofado de ternera a fuego lento.", category: "PASTAS", icon: "pasta" },
-    { id: "carbonara", name: "Carbonara Real", price: 12400, description: "Guanciale, pecorino romano, huevo de campo y pimienta negra.", category: "PASTAS", icon: "pasta" },
-    { id: "bebidas-artesanales", name: "Bebidas Artesanales", price: 4500, description: "Cola de autor o limonada casera con menta, bien fría.", category: "BEBIDAS", icon: "drink" },
+    { id: "zeus", name: "Zeus", price: 12500, description: "Doble carne de angus, cheddar fundido, panceta crocante y salsa especial del Olimpo.", category: "BURGERS", icon: "burger" },
+    { id: "poseidon", name: "Poseidón", price: 11000, description: "Carne, cheddar, aros de cebolla crocantes y BBQ ahumada.", category: "BURGERS", icon: "burger" },
+    { id: "hades", name: "Hades", price: 11800, description: "Carne, blue cheese, rúcula y cebolla caramelizada. La más intensa del menú.", category: "BURGERS", icon: "burger" },
+    { id: "afrodita", name: "Afrodita", price: 10500, description: "Carne, muzzarella, tomate confitado y albahaca fresca.", category: "BURGERS", icon: "burger" },
+    { id: "papas-olimpo", name: "Papas del Olimpo", price: 5500, description: "Papas fritas con cheddar, panceta y salsa especial.", category: "PAPAS", icon: "papas" },
+    { id: "papas-clasicas", name: "Papas Clásicas", price: 3800, description: "Papas fritas bien crocantes, porción grande.", category: "PAPAS", icon: "papas" },
+    { id: "bebidas", name: "Gaseosa / Agua", price: 2500, description: "Línea Coca-Cola o agua mineral, bien fría.", category: "BEBIDAS", icon: "drink" },
   ];
 
   const ICONS = {
     burger: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>',
-    pizza: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2 22 20H2L12 2Z"/><circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/><circle cx="10" cy="16" r="1.1" fill="currentColor" stroke="none"/><circle cx="14" cy="16.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
-    pasta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 11a9 9 0 0 1 18 0"/><path d="M3 11h18l-1.5 8a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-2L3 11Z"/><path d="M8 15c1-1 3-1 4 0s3 1 4 0"/></svg>',
+    papas: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 10V5a1.5 1.5 0 0 1 3 0v5M11 10V4a1.5 1.5 0 0 1 3 0v6M16 10V5a1.5 1.5 0 0 1 3 0v5"/><path d="M4 10h16l-1.3 9.5a2 2 0 0 1-2 1.5H7.3a2 2 0 0 1-2-1.5L4 10Z"/></svg>',
     drink: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3h10l-1 16a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2L7 3Z"/><path d="M6.5 8h11M11 3v-1M13 3v-1"/></svg>',
   };
 
