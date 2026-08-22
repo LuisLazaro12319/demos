@@ -41,7 +41,7 @@
      es grande y sobresale hacia abajo con position:absolute (no empuja la
      altura del nav porque un elemento absoluto no cuenta para el alto del flex). */
   .brand-logo-box{position:relative;height:36px;width:110px;}
-  .brand-logo{position:absolute;top:0;left:0;height:80px;width:auto;}
+  .brand-logo{position:absolute;top:0;left:0;height:68px;width:auto;}
   .brand{font-size:1.8rem;letter-spacing:-1px;color:var(--primary);}
   .nav-links{display:flex;align-items:center;gap:1.5rem;}
   .nav-links a{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;transition:.2s;}
@@ -108,6 +108,7 @@
   }
   .menu-item:hover .menu-item-img{box-shadow:0 0 0 2px var(--primary);}
   .menu-item-img svg{width:34%;height:34%;color:rgba(255,255,255,.85);}
+  .menu-item-img img{width:100%;height:100%;object-fit:cover;display:block;}
   .mi-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.4rem;}
   .mi-head h3{font-size:1.35rem;}
   .mi-price{color:var(--primary);font-weight:700;flex-shrink:0;}
@@ -161,7 +162,7 @@
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
     .footer-grid{grid-template-columns:1fr;gap:2rem;}
-    .brand-logo{height:62px;}
+    .brand-logo{height:54px;}
     .cats-bar{top:60px;}
   }
   @media(max-width:520px){
@@ -281,11 +282,11 @@
 
   // icon: "chori" | "parrilla" | "drink" — usado para el placeholder visual
   const MENU = [
-    { id: "chori-clasico", name: "Choripán Clásico", price: 4500, description: "Chorizo a la parrilla, pan casero y chimichurri de la casa.", category: "CHORIPANES", icon: "chori" },
-    { id: "chori-completo", name: "Choripán Completo", price: 5800, description: "Chorizo, provoleta grillada, morrón asado y chimichurri.", category: "CHORIPANES", icon: "chori" },
-    { id: "chori-picante", name: "Choripán Picante", price: 5000, description: "Chorizo parrillero con salsa criolla picante de la casa.", category: "CHORIPANES", icon: "chori" },
-    { id: "bondiola", name: "Bondiola al Pan", price: 6500, description: "Bondiola de cerdo a la parrilla, pan casero y salsa criolla.", category: "PARRILLA", icon: "parrilla" },
-    { id: "vacio", name: "Vacío al Pan", price: 7000, description: "Corte de vacío a la parrilla, jugoso, con chimichurri.", category: "PARRILLA", icon: "parrilla" },
+    { id: "chori-clasico", name: "Choripán Clásico", price: 4500, description: "Chorizo a la parrilla, pan casero y chimichurri de la casa.", category: "CHORIPANES", icon: "chori", image: "img/chori-clasico.jpg" },
+    { id: "chori-completo", name: "Choripán Completo", price: 5800, description: "Chorizo, provoleta grillada, morrón asado y chimichurri.", category: "CHORIPANES", icon: "chori", image: "img/chori-completo.jpg" },
+    { id: "chori-picante", name: "Choripán Picante", price: 5000, description: "Chorizo parrillero con salsa criolla picante de la casa.", category: "CHORIPANES", icon: "chori", image: "img/chori-picante.jpg" },
+    { id: "bondiola", name: "Bondiola al Pan", price: 6500, description: "Bondiola de cerdo a la parrilla, pan casero y salsa criolla.", category: "PARRILLA", icon: "parrilla", image: "img/bondiola.jpg" },
+    { id: "vacio", name: "Vacío al Pan", price: 7000, description: "Corte de vacío a la parrilla, jugoso, con chimichurri.", category: "PARRILLA", icon: "parrilla", image: "img/vacio.jpg" },
     { id: "papas-parrilla", name: "Papas Fritas", price: 3500, description: "Porción grande de papas fritas bien crocantes.", category: "PARRILLA", icon: "parrilla" },
     { id: "bebidas", name: "Gaseosa / Agua", price: 2500, description: "Línea Coca-Cola o agua mineral, bien fría.", category: "BEBIDAS", icon: "drink" },
   ];
@@ -323,8 +324,8 @@
       .map(
         (item) => `
       <div class="menu-item">
-        <div class="menu-item-img" style="background:linear-gradient(150deg,var(--primary),var(--secondary))">
-          ${ICONS[item.icon]}
+        <div class="menu-item-img" style="${item.image ? "" : "background:linear-gradient(150deg,var(--primary),var(--secondary))"}">
+          ${item.image ? `<img src="${item.image}" alt="${item.name}" loading="lazy">` : ICONS[item.icon]}
         </div>
         <div class="mi-head">
           <h3 class="disp">${item.name}</h3>
