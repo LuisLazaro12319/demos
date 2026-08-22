@@ -61,17 +61,20 @@
      alto propio, con align-items:stretch (default) toma automáticamente la
      misma altura que .hero-visual, sin necesidad de position:absolute — y
      por eso funciona igual en pc y en celu. */
-  .hero-visual-wrap{position:relative;width:min(100%,380px);justify-self:center;display:flex;}
+  .hero-visual-wrap{position:relative;width:min(100%,380px);justify-self:center;display:flex;border-radius:1.2rem;box-shadow:0 10px 28px rgba(0,0,0,.28);}
   .hero-visual{
     /* El video real es vertical (576x1024, 9:16) — el recuadro tiene que
-       tener esa misma forma para que entre completo, sin recortar. */
-    position:relative;flex:1;min-width:0;aspect-ratio:9/16;border-radius:1.2rem;overflow:hidden;
+       tener esa misma forma para que entre completo, sin recortar. Solo
+       redondeado del lado derecho: del lado izquierdo se pega a la cintita
+       para que las dos piezas se vean como una sola. */
+    position:relative;flex:1;min-width:0;aspect-ratio:9/16;border-radius:0 1.2rem 1.2rem 0;overflow:hidden;
   }
-  /* Cintita negra pegada al costado del video, va a su TikTok */
+  /* Cintita negra pegada al costado del video: mismo radio que el video pero
+     solo del lado izquierdo, así ambas piezas se leen como una sola forma. */
   .tiktok-tab{
     flex-shrink:0;display:flex;align-items:center;justify-content:center;
-    background:#000;text-decoration:none;border-radius:10px 0 0 10px;
-    padding:0 .5rem;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:.2s;
+    background:#000;text-decoration:none;border-radius:1.2rem 0 0 1.2rem;
+    padding:0 .5rem;transition:.2s;
   }
   .tiktok-tab:hover{background:#1a1a1a;}
   .tiktok-tab span{
