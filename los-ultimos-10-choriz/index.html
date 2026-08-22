@@ -22,7 +22,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;}
   .disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;}
   .mono{font-family:'JetBrains Mono',monospace;}
   a{text-decoration:none;color:inherit;}
@@ -93,8 +93,7 @@
 
   /* CATEGORÍAS */
   .cats-bar{position:sticky;top:60px;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
-  .cats{display:flex;gap:.8rem;overflow-x:auto;padding-bottom:.2rem;}
-  .cats::-webkit-scrollbar{display:none;}
+  .cats{display:flex;flex-wrap:wrap;gap:.8rem;}
   .cat-btn{white-space:nowrap;border-radius:20px;padding:.5rem 1.3rem;font-size:.82rem;font-weight:800;border:1px solid var(--line);transition:.2s;}
   .cat-btn:hover{border-color:var(--primary);}
   .cat-btn.active{background:var(--fg);color:var(--bg);border-color:var(--fg);}
