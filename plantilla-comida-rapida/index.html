@@ -52,10 +52,27 @@
   .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
   .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
   .hero-visual{
-    position:relative;aspect-ratio:4/5;border-radius:1.2rem;overflow:hidden;background:linear-gradient(150deg,var(--primary) 0%,var(--secondary) 100%);
+    position:relative;aspect-ratio:4/5;border-radius:1.2rem;overflow:hidden;
+  }
+  .hero-slide{
+    position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;
+    background:linear-gradient(150deg,var(--primary) 0%,var(--secondary) 100%);
     display:flex;align-items:center;justify-content:center;
   }
-  .hero-visual svg{width:38%;height:38%;color:rgba(255,255,255,.9);}
+  .hero-slide.active{opacity:1;pointer-events:auto;}
+  .hero-slide svg{width:38%;height:38%;color:rgba(255,255,255,.9);}
+  .hero-slide video,.hero-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
+    background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:1rem;z-index:2;transition:.2s;
+  }
+  .hero-arrow:hover{background:rgba(0,0,0,.7);}
+  .hero-arrow.prev{left:.7rem;}
+  .hero-arrow.next{right:.7rem;}
+  .hero-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:2;}
+  .hero-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);transition:.2s;cursor:pointer;}
+  .hero-dots span.active{background:#fff;width:20px;border-radius:4px;}
 
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
@@ -158,9 +175,19 @@
       <p>Artesanos de la grasa fina y el fuego lento. Hamburguesas, pizzas y pastas diseñadas para el paladar salvaje.</p>
       <a href="#menu" class="btn-hero disp">Ordena ahora</a>
     </div>
-    <!-- Cuando llegue la foto real: reemplazar por <img src="img/hero-burger.jpg" alt="..."> -->
+    <!-- Carrusel del hero: acepta fotos y/o videos mezclados. Para agregar un
+         slide, copiar el bloque .hero-slide y sumar <img> o <video> adentro. -->
     <div class="hero-visual">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
+      <div id="heroSlides">
+        <div class="hero-slide active">
+          <!-- Cuando llegue la foto/video real: reemplazar el svg por
+               <img src="img/hero-1.jpg" alt="..."> o <video src="video/hero-1.mp4" autoplay muted loop playsinline></video> -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
+        </div>
+      </div>
+      <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
+      <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
+      <div class="hero-dots" id="heroDots"></div>
     </div>
   </section>
 
@@ -424,6 +451,47 @@
 
   renderMenu();
   renderCart();
+
+  /* ================== CARRUSEL DEL HERO (fotos y/o videos) ================== */
+  (function () {
+    const slidesWrap = document.getElementById("heroSlides");
+    const slides = Array.from(slidesWrap.querySelectorAll(".hero-slide"));
+    const dotsWrap = document.getElementById("heroDots");
+    const prevBtn = document.getElementById("heroPrev");
+    const nextBtn = document.getElementById("heroNext");
+    let current = 0;
+
+    if (slides.length <= 1) {
+      if (prevBtn) prevBtn.style.display = "none";
+      if (nextBtn) nextBtn.style.display = "none";
+      return;
+    }
+
+    dotsWrap.innerHTML = slides.map((_, i) => `<span data-i="${i}"></span>`).join("");
+    const dots = Array.from(dotsWrap.children);
+
+    function goTo(i) {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((s, idx) => {
+        s.classList.toggle("active", idx === current);
+        const video = s.querySelector("video");
+        if (video) {
+          if (idx === current) video.play().catch(() => {});
+          else video.pause();
+        }
+      });
+      dots.forEach((d, idx) => d.classList.toggle("active", idx === current));
+    }
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+    dotsWrap.addEventListener("click", (e) => {
+      const dot = e.target.closest("[data-i]");
+      if (dot) goTo(Number(dot.dataset.i));
+    });
+
+    goTo(0);
+  })();
 </script>
 </body>
 </html>
