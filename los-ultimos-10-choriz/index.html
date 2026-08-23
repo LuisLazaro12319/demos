@@ -141,6 +141,11 @@
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
 
+  /* PROMO */
+  .promo-banner{display:block;border-radius:1rem;overflow:hidden;margin-top:1rem;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:.25s;}
+  .promo-banner:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.2);}
+  .promo-banner img{width:100%;aspect-ratio:1856/576;object-fit:cover;display:block;}
+
   /* CATEGORÍAS — quedan fijas en su lugar normal de la página, no flotan
      al scrollear (nada de sticky ni fixed: cero riesgo de que se rompa). */
   .cats-bar{background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
@@ -319,6 +324,11 @@
       </div>
     </div>
   </section>
+
+  <!-- PROMO -->
+  <a href="#menu" class="promo-banner">
+    <img src="img/promo.jpg" alt="Promo: 2 choripanes al precio de 1, solo hoy">
+  </a>
 
   <!-- CATEGORÍAS -->
   <div class="cats-bar" id="menu">
