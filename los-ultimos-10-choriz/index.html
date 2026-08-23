@@ -141,9 +141,9 @@
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
 
-  /* PROMO */
-  .promo-banner{display:block;border-radius:1rem;overflow:hidden;margin-top:1rem;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:.25s;}
-  .promo-banner:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.2);}
+  /* PROMO — a todo el ancho de la pantalla: va afuera del .wrap (main ya no tiene
+     padding propio, son dos .wrap internos: uno antes y otro después de esto) */
+  .promo-banner{display:block;width:100%;margin-top:1rem;}
   .promo-banner img{width:100%;aspect-ratio:1856/576;object-fit:cover;display:block;}
 
   /* CATEGORÍAS — quedan fijas en su lugar normal de la página, no flotan
@@ -294,7 +294,8 @@
   </div>
 </nav>
 
-<main class="wrap">
+<main>
+  <div class="wrap">
   <!-- HERO -->
   <section class="hero" id="inicio">
     <div>
@@ -324,12 +325,14 @@
       </div>
     </div>
   </section>
+  </div>
 
   <!-- PROMO -->
   <a href="#menu" class="promo-banner">
     <img src="img/promo.jpg" alt="Promo: 2 choripanes al precio de 1, solo hoy">
   </a>
 
+  <div class="wrap">
   <!-- CATEGORÍAS -->
   <div class="cats-bar" id="menu">
     <div class="cats" id="catsWrap"></div>
@@ -369,6 +372,7 @@
         <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
       </form>
     </aside>
+  </div>
   </div>
 </main>
 
