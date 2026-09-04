@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script>(function(){try{if(localStorage.getItem('ldo-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 <style>
   :root{
     --bg:#fdfcf0;
@@ -19,10 +20,30 @@
     --primary:#ff4d00;
     --primary-dark:#d94100;
     --secondary:#ffb800;
+    --nav-bg:rgba(253,252,240,.9);
+    color-scheme:light;
   }
+  :root[data-theme="dark"]{
+    --bg:#150e0a;
+    --card:#1f1611;
+    --fg:#fdfcf0;
+    --fg-soft:rgba(253,252,240,.65);
+    --fg-faint:rgba(253,252,240,.4);
+    --line:rgba(253,252,240,.1);
+    --primary:#ff4d00;
+    --primary-dark:#ff7a3d;
+    --secondary:#ffb800;
+    --nav-bg:rgba(21,14,10,.85);
+    color-scheme:dark;
+  }
+  .theme-toggle{width:34px;height:34px;flex:0 0 34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;}
+  .theme-toggle:hover{border-color:var(--primary);color:var(--primary);}
+  .theme-toggle .moon{display:none;}
+  :root[data-theme="dark"] .theme-toggle .sun{display:none;}
+  :root[data-theme="dark"] .theme-toggle .moon{display:block;}
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;}
   .disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;}
   .mono{font-family:'JetBrains Mono',monospace;}
   a{text-decoration:none;color:inherit;}
@@ -33,16 +54,29 @@
 
   /* NAV */
   nav{
-    position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-    padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:rgba(253,252,240,.9);backdrop-filter:blur(10px);
+    position:sticky;top:0;z-index:50;
+    padding:.7rem 0;border-bottom:1px solid var(--line);background:var(--nav-bg);backdrop-filter:blur(10px);
   }
+  .nav-inner{display:flex;align-items:center;}
+  .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
   .brand{font-size:1.8rem;letter-spacing:-1px;color:var(--primary);}
-  .nav-links{display:flex;align-items:center;gap:1.5rem;}
+  .nav-links{display:flex;align-items:center;gap:1.5rem;margin-left:1.6rem;}
   .nav-links a{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;transition:.2s;}
   .nav-links a:hover{color:var(--primary);}
-  @media(max-width:700px){ .nav-links a.hide-mobile{display:none;} }
-  .cart-btn{border-radius:20px;background:var(--fg);color:var(--bg);padding:.55rem 1.1rem;font-size:.85rem;font-weight:800;transition:.2s;}
-  .cart-btn:hover{background:var(--primary);}
+  .cart-btn{position:relative;width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--line);color:var(--fg);display:flex;align-items:center;justify-content:center;transition:.2s;}
+  .cart-btn:hover{background:rgba(255,77,0,.14);color:var(--primary);}
+  .cart-badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--primary);color:#fff;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1;}
+
+  .nav-toggle{display:none;width:38px;height:38px;flex:0 0 38px;border:none;background:transparent;color:var(--fg);cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;}
+  .nav-toggle span{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;transition:.25s;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:.4rem 1.2rem 1rem;flex-direction:column;box-shadow:0 20px 40px rgba(0,0,0,.25);}
+  .mobile-menu a{padding:.85rem .2rem;color:var(--fg);font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:hover{color:var(--primary);}
+  .mobile-menu.open{display:flex;}
 
   /* HERO */
   .hero{display:grid;grid-template-columns:7fr 5fr;gap:2rem;align-items:center;padding:3.5rem 0 3rem;}
@@ -52,7 +86,12 @@
   .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
   .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
   .hero-visual{
-    position:relative;aspect-ratio:4/5;border-radius:1.2rem;overflow:hidden;
+    /* El video real es vertical (576x1024, 9:16) — el recuadro tiene que
+       tener esa misma forma para que entre completo, sin recortar. Se usa
+       width fijo (no max-width con margin:auto) porque aspect-ratio no
+       resuelve bien el alto cuando el ancho depende de un auto-margin
+       dentro de un grid item. */
+    position:relative;width:min(100%,380px);aspect-ratio:9/16;justify-self:center;border-radius:1.2rem;overflow:hidden;
   }
   .hero-slide{
     position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;
@@ -73,14 +112,17 @@
   .hero-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:2;}
   .hero-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);transition:.2s;cursor:pointer;}
   .hero-dots span.active{background:#fff;width:20px;border-radius:4px;}
+  .video-controls{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.4rem;z-index:3;}
+  .video-btn{width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:.2s;}
+  .video-btn:hover{background:rgba(0,0,0,.75);}
 
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
 
-  /* CATEGORÍAS */
-  .cats-bar{position:sticky;top:64px;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
-  .cats{display:flex;gap:.8rem;overflow-x:auto;padding-bottom:.2rem;}
-  .cats::-webkit-scrollbar{display:none;}
+  /* CATEGORÍAS — quedan fijas en su lugar normal de la página, no flotan
+     al scrollear (nada de sticky ni fixed: cero riesgo de que se rompa). */
+  .cats-bar{background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
+  .cats{display:flex;flex-wrap:wrap;gap:.8rem;}
   .cat-btn{white-space:nowrap;border-radius:20px;padding:.5rem 1.3rem;font-size:.82rem;font-weight:800;border:1px solid var(--line);transition:.2s;}
   .cat-btn:hover{border-color:var(--primary);}
   .cat-btn.active{background:var(--fg);color:var(--bg);border-color:var(--fg);}
@@ -94,6 +136,7 @@
   }
   .menu-item:hover .menu-item-img{box-shadow:0 0 0 2px var(--primary);}
   .menu-item-img svg{width:34%;height:34%;color:rgba(255,255,255,.85);}
+  .menu-item-img img{width:100%;height:100%;object-fit:cover;display:block;}
   .mi-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.4rem;}
   .mi-head h3{font-size:1.35rem;}
   .mi-price{color:var(--primary);font-weight:700;flex-shrink:0;}
@@ -130,46 +173,92 @@
   .btn-submit:hover:not(:disabled){background:var(--primary);}
   .btn-submit:disabled{opacity:.35;cursor:not-allowed;}
   .cart-note{margin-top:.6rem;text-align:center;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-faint);}
+  .btn-ticket{
+    width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;
+    background:transparent;border:1.5px dashed var(--fg-faint);color:var(--fg-soft);
+    padding:.7rem;border-radius:8px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;
+    margin-top:.9rem;transition:.2s;
+  }
+  .btn-ticket:hover:not(:disabled){border-color:var(--fg);color:var(--fg);}
+  .btn-ticket:disabled{opacity:.35;cursor:not-allowed;}
 
   /* FOOTER */
-  footer{margin-top:4rem;background:var(--fg);color:var(--bg);padding:3.5rem 0;}
-  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;}
-  .footer-grid .brand{color:var(--secondary);font-size:2.1rem;}
-  .footer-grid .tagline{margin-top:.9rem;font-size:.85rem;font-style:italic;color:rgba(253,252,240,.5);}
-  .footer-col p{font-size:.78rem;}
-  .footer-col .flabel{margin-bottom:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--secondary);font-size:.72rem;}
+  footer{margin-top:4rem;background:#1a1a1a;color:#b8b3aa;padding:4rem 0 2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
+  .footer-col.about .fbrand{font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--secondary);text-transform:uppercase;display:block;margin-bottom:.8rem;}
+  .footer-col.about p{font-size:.85rem;line-height:1.7;max-width:280px;}
+  .footer-col h4{color:#fff;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:1.1rem;}
+  .footer-col p{font-size:.85rem;}
+  .footer-col p+p{margin-top:.4rem;}
+  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
+  .footer-nav a{font-size:.85rem;}
+  .footer-nav a:hover{color:var(--primary);}
+  .footer-socials{display:flex;gap:.7rem;margin-bottom:1.2rem;}
+  .social-btn{
+    width:40px;height:40px;flex:0 0 40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
+    color:#fff;background:rgba(255,255,255,.05);transition:.25s;
+  }
+  .social-btn svg{display:block;flex-shrink:0;}
+  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
+  .social-btn.wa:hover{background:#25d366;border-color:transparent;}
+  .footer-link{display:block;color:#c3beb5;font-size:.83rem;text-decoration:underline;}
+  .footer-link:hover{color:var(--secondary);}
+  footer .fine{font-size:.78rem;color:#8a857c;border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;text-align:center;}
 
+  @media(max-width:700px){
+    .nav-links{display:none;}
+    .nav-toggle{display:flex;}
+  }
   @media(max-width:900px){
     .hero{grid-template-columns:1fr;}
     .hero h1{font-size:3.4rem;}
-    .hero-visual{aspect-ratio:16/9;order:-1;}
+    .hero-visual{width:min(100%,320px);order:-1;}
     .menu-layout{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
-    .footer-grid{grid-template-columns:1fr;gap:2rem;}
-    .cats-bar{top:60px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
   }
   @media(max-width:520px){
     .menu-grid{grid-template-columns:1fr;}
     .hero h1{font-size:2.6rem;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-col.about p{max-width:none;}
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="brand disp">Los Dioses del Olimpo</span>
-  <div class="nav-links">
-    <a href="#menu" class="hide-mobile">Menú</a>
-    <a href="#locales" class="hide-mobile">Locales</a>
-    <a href="#nosotros" class="hide-mobile">Nosotros</a>
-    <a href="#pedido" class="cart-btn">CARRITO (<span id="cartCount">0</span>)</a>
+  <div class="wrap nav-inner">
+    <a href="#inicio" class="brand disp">Los Dioses del Olimpo</a>
+    <div class="nav-links">
+      <a href="#inicio" class="hide-mobile">Inicio</a>
+      <a href="#menu" class="hide-mobile">Menú</a>
+      <a href="panel/" class="hide-mobile">Panel</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
+        <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a href="#pedido" class="cart-btn" aria-label="Carrito">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+        <span class="cart-badge" id="cartCount">0</span>
+      </a>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio">Inicio</a>
+    <a href="#menu">Menú</a>
+    <a href="panel/">Panel</a>
   </div>
 </nav>
 
 <main class="wrap">
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="inicio">
     <div>
       <p class="eyebrow">🏛️ Batallá con nuestras hamburguesas</p>
       <h1 class="disp">Comida de <span>dioses.</span></h1>
@@ -228,31 +317,73 @@
         </div>
         <button type="submit" class="btn-submit disp" id="submitBtn" disabled>Enviar pedido por WhatsApp</button>
         <p class="cart-note">El pedido le llega al dueño por WhatsApp para confirmar.</p>
+        <button type="button" class="btn-ticket" id="btnTicket" disabled>🧾 Descargar ticket</button>
+        <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
       </form>
     </aside>
   </div>
 </main>
 
 <footer>
-  <div class="wrap footer-grid">
-    <div id="nosotros">
-      <span class="brand disp">Los Dioses del Olimpo</span>
-      <p class="tagline">"Vení a batallar con nuestras hamburguesas, sin antes morir en el intento."</p>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col about">
+        <span class="fbrand">Los Dioses del Olimpo</span>
+        <p>"Vení a batallar con nuestras hamburguesas, sin antes morir en el intento."</p>
+      </div>
+      <div class="footer-col">
+        <h4>Horarios</h4>
+        <p>LUN, MIÉ, JUE: 19:00 - 00:00</p>
+        <p>VIE, SÁB: horario extendido</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <div class="footer-nav">
+          <a href="#inicio">Inicio</a>
+          <a href="#menu">Menú</a>
+          <a href="#pedido">Pedido</a>
+          <a href="panel/">Panel</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Seguinos en Nuestras Redes</h4>
+        <div class="footer-socials">
+          <a class="social-btn" href="https://www.instagram.com/do.burgas" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="social-btn wa" href="https://wa.me/5491168066400" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.96L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.25-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
+          </a>
+        </div>
+        <a class="footer-link" href="https://maps.app.goo.gl/512uTJL9WmW8mCo97" target="_blank" rel="noopener">Ver ubicación en Maps</a>
+      </div>
     </div>
-    <div class="footer-col mono">
-      <p class="flabel">Horarios</p>
-      <p>LUN, MIÉ, JUE: 19:00 - 00:00</p>
-      <p>VIE, SÁB: horario extendido</p>
-    </div>
-    <div class="footer-col mono" id="locales">
-      <p class="flabel">Contacto</p>
-      <p><a href="https://maps.app.goo.gl/512uTJL9WmW8mCo97" target="_blank" rel="noopener" style="text-decoration:underline">Ver ubicación en Maps</a></p>
-      <p><a href="https://www.instagram.com/do.burgas" target="_blank" rel="noopener" style="text-decoration:underline">@do.burgas</a></p>
-    </div>
+    <p class="fine">© 2026 Los Dioses del Olimpo · CABA</p>
   </div>
 </footer>
 
 <script>
+  /* ================== TEMA DÍA/NOCHE ================== */
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) { document.documentElement.removeAttribute('data-theme'); try { localStorage.setItem('ldo-theme', 'light'); } catch (e) {} }
+    else { document.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('ldo-theme', 'dark'); } catch (e) {} }
+  });
+
+  /* ================== NAV MÓVIL (hamburguesa) ================== */
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
   /* ================== DATOS (editar acá por cliente) ================== */
   const OWNER_WHATSAPP = "5491168066400"; // reemplazar por el numero real del cliente
   const BRAND = "LOS DIOSES DEL OLIMPO";
@@ -303,8 +434,8 @@
       .map(
         (item) => `
       <div class="menu-item">
-        <div class="menu-item-img" style="background:linear-gradient(150deg,var(--primary),var(--secondary))">
-          ${ICONS[item.icon]}
+        <div class="menu-item-img" style="${item.image ? "" : "background:linear-gradient(150deg,var(--primary),var(--secondary))"}">
+          ${item.image ? `<img src="${item.image}" alt="${item.name}" loading="lazy">` : ICONS[item.icon]}
         </div>
         <div class="mi-head">
           <h3 class="disp">${item.name}</h3>
@@ -341,6 +472,7 @@
   const cartTotalEl = document.getElementById("cartTotal");
   const cartCountEl = document.getElementById("cartCount");
   const submitBtn = document.getElementById("submitBtn");
+  const btnTicket = document.getElementById("btnTicket");
 
   function renderCart() {
     if (cart.length === 0) {
@@ -365,6 +497,7 @@
     cartTotalEl.textContent = formatPrice(total);
     cartCountEl.textContent = count;
     submitBtn.disabled = cart.length === 0;
+    btnTicket.disabled = cart.length === 0;
   }
   cartLinesEl.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-remove]");
@@ -450,6 +583,124 @@
     window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   });
 
+  /* ================== TICKET DESCARGABLE (opcional, para el cliente) ==================
+     Es solo una imagen PNG dibujada en canvas: no reemplaza el mensaje de WhatsApp
+     (un link de wa.me no puede adjuntar archivos, solo texto), es una foto del
+     pedido en ese momento para mostrar al retirarlo. Si el cliente cambia el
+     pedido, simplemente descarga uno nuevo. */
+  function dashedLine(ctx, x1, y1, x2, y2) {
+    ctx.save();
+    ctx.strokeStyle = "rgba(26,26,26,.25)";
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  btnTicket.addEventListener("click", () => {
+    if (cart.length === 0) return;
+
+    const name = document.getElementById("nombre").value.trim() || "Cliente";
+    const notes = document.getElementById("notas").value.trim();
+    const modo = document.querySelector('input[name="modo"]:checked').value;
+    const address = document.getElementById("direccion").value.trim();
+    const items = cart.map((l) => {
+      const item = MENU.find((m) => m.id === l.id);
+      return { qty: l.qty, name: item.name, price: item.price * l.qty };
+    });
+    const total = items.reduce((sum, it) => sum + it.price, 0);
+
+    const width = 480;
+    const lineH = 26;
+    const extraLines = 1 + (modo === "Delivery" ? 1 : 0) + (notes ? 1 : 0);
+    const height = 130 + items.length * lineH + 64 + extraLines * 20 + 100;
+
+    const scale = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(scale, scale);
+
+    ctx.fillStyle = "#fdfcf0";
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#ff4d00";
+    ctx.fillRect(0, 0, width, 8);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "bold 23px sans-serif";
+    ctx.fillText("LOS DIOSES DEL OLIMPO", width / 2, 44);
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "rgba(26,26,26,.6)";
+    ctx.fillText("Hamburguesería", width / 2, 64);
+
+    const now = new Date();
+    const fecha =
+      now.toLocaleDateString("es-AR") +
+      " · " +
+      now.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
+    ctx.fillText(fecha, width / 2, 84);
+
+    dashedLine(ctx, 24, 100, width - 24, 100);
+
+    let y = 100 + 30;
+    ctx.font = "13px monospace";
+    items.forEach((it) => {
+      ctx.fillStyle = "#1a1a1a";
+      ctx.textAlign = "left";
+      ctx.fillText(`${it.qty}x ${it.name}`, 24, y);
+      ctx.textAlign = "right";
+      ctx.fillText(formatPrice(it.price), width - 24, y);
+      y += lineH;
+    });
+
+    dashedLine(ctx, 24, y, width - 24, y);
+    y += 32;
+    ctx.font = "bold 20px sans-serif";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.textAlign = "left";
+    ctx.fillText("TOTAL", 24, y);
+    ctx.fillStyle = "#ff4d00";
+    ctx.textAlign = "right";
+    ctx.fillText(formatPrice(total), width - 24, y);
+
+    y += 32;
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.textAlign = "left";
+    ctx.fillText(`Cliente: ${name}`, 24, y);
+    y += 20;
+    ctx.fillText(`Modalidad: ${modo}`, 24, y);
+    y += 20;
+    if (modo === "Delivery") {
+      ctx.fillText(`Dirección: ${address || "-"}`, 24, y);
+      y += 20;
+    }
+    if (notes) {
+      ctx.fillText(`Notas: ${notes}`, 24, y);
+      y += 20;
+    }
+
+    y += 8;
+    dashedLine(ctx, 24, y, width - 24, y);
+    y += 26;
+    ctx.textAlign = "center";
+    ctx.font = "italic 12px sans-serif";
+    ctx.fillStyle = "rgba(26,26,26,.6)";
+    ctx.fillText('"Batallá con nuestras hamburguesas."', width / 2, y);
+    y += 20;
+    ctx.font = "11px sans-serif";
+    ctx.fillText("Mostrá este ticket al retirar tu pedido", width / 2, y);
+
+    const link = document.createElement("a");
+    link.download = `ticket-los-dioses-del-olimpo-${Date.now()}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+
   renderMenu();
   renderCart();
 
@@ -461,6 +712,38 @@
     const prevBtn = document.getElementById("heroPrev");
     const nextBtn = document.getElementById("heroNext");
     let current = 0;
+
+    // Controles de pausa/sonido en cada slide que tenga video (mudo por
+    // defecto porque el navegador exige eso para el autoplay; el botón de
+    // sonido recién lo activa con un click real, que sí cuenta como gesto).
+    slides.forEach((slide) => {
+      const video = slide.querySelector("video");
+      if (!video) return;
+      const controls = document.createElement("div");
+      controls.className = "video-controls";
+      controls.innerHTML =
+        '<button type="button" class="video-btn" data-role="play" aria-label="Pausar video">⏸</button>' +
+        '<button type="button" class="video-btn" data-role="mute" aria-label="Activar sonido">🔇</button>';
+      slide.appendChild(controls);
+      const playBtn = controls.querySelector('[data-role="play"]');
+      const muteBtn = controls.querySelector('[data-role="mute"]');
+      playBtn.addEventListener("click", () => {
+        if (video.paused) {
+          video.play();
+          playBtn.textContent = "⏸";
+          playBtn.setAttribute("aria-label", "Pausar video");
+        } else {
+          video.pause();
+          playBtn.textContent = "▶";
+          playBtn.setAttribute("aria-label", "Reproducir video");
+        }
+      });
+      muteBtn.addEventListener("click", () => {
+        video.muted = !video.muted;
+        muteBtn.textContent = video.muted ? "🔇" : "🔊";
+        muteBtn.setAttribute("aria-label", video.muted ? "Activar sonido" : "Silenciar");
+      });
+    });
 
     if (slides.length <= 1) {
       if (prevBtn) prevBtn.style.display = "none";
