@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script>(function(){try{if(localStorage.getItem('l10c-panel-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 <style>
   :root{
     --bg:#150e0a; --bg2:#1f1611; --card:#1f1611; --fg:#fdfcf0; --fg-soft:rgba(253,252,240,.65);
@@ -16,17 +15,6 @@
     --topbar-bg:rgba(31,22,17,.92);
     color-scheme:dark;
   }
-  :root[data-theme="light"]{
-    --bg:#fdfcf0; --bg2:#ffffff; --card:#ffffff; --fg:#1a1a1a; --fg-soft:rgba(26,26,26,.6);
-    --fg-faint:rgba(26,26,26,.4); --line:rgba(26,26,26,.1); --primary:#ff4d00; --primary-dark:#d94100; --secondary:#ffb800;
-    --topbar-bg:rgba(253,252,240,.92);
-    color-scheme:light;
-  }
-  .theme-toggle{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);color:var(--fg);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 34px;}
-  .theme-toggle:hover{border-color:var(--primary);color:var(--primary);}
-  .theme-toggle .moon{display:none;}
-  :root[data-theme="light"] .theme-toggle .sun{display:none;}
-  :root[data-theme="light"] .theme-toggle .moon{display:block;}
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;}
   a{text-decoration:none;color:inherit;}
@@ -129,10 +117,6 @@
   <div class="tb-brand"><img src="../img/logo.png" alt="Los Últimos 10 Choriz"> · Panel</div>
   <div class="tb-right">
     <span class="vp-pill">Vista previa</span>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
-      <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-    </button>
     <a class="tb-back" href="../">← Volver a la web</a>
   </div>
 </div>
@@ -220,14 +204,6 @@
 </div>
 
 <script>
-  /* ================== TEMA DÍA/NOCHE ================== */
-  const themeToggle = document.getElementById('themeToggle');
-  themeToggle.addEventListener('click', () => {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    if (isLight) { document.documentElement.removeAttribute('data-theme'); try { localStorage.setItem('l10c-panel-theme', 'dark'); } catch (e) {} }
-    else { document.documentElement.setAttribute('data-theme', 'light'); try { localStorage.setItem('l10c-panel-theme', 'light'); } catch (e) {} }
-  });
-
   /* ================== VISTA PREVIA DEL HERO ================== */
   const heroTitle = document.getElementById('heroTitle');
   const heroText = document.getElementById('heroText');
