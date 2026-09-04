@@ -59,6 +59,12 @@
   }
   .nav-inner{display:flex;align-items:center;}
   .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
+  /* Caja "fantasma" chica: mantiene el header bajito, pero el logo de adentro
+     es grande y sobresale hacia abajo con position:absolute (no empuja la
+     altura del nav porque un elemento absoluto no cuenta para el alto del flex). */
+  .brand-logo-box{position:relative;height:36px;display:flex;align-items:center;padding-left:74px;}
+  .brand-logo{position:absolute;top:-12px;left:0;height:60px;width:auto;}
+  .brand-name{font-size:1.05rem;letter-spacing:.3px;color:var(--fg);white-space:nowrap;}
   .brand{font-size:1.8rem;letter-spacing:-1px;color:var(--primary);}
   .nav-links{display:flex;align-items:center;gap:1.5rem;margin-left:1.6rem;}
   .nav-links a{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;transition:.2s;}
@@ -85,13 +91,25 @@
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
   .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
   .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
+  .hero-visual-wrap{position:relative;width:min(100%,380px);justify-self:center;display:flex;border-radius:1.2rem;box-shadow:0 10px 28px rgba(0,0,0,.28);}
   .hero-visual{
     /* El video real es vertical (576x1024, 9:16) — el recuadro tiene que
-       tener esa misma forma para que entre completo, sin recortar. Se usa
-       width fijo (no max-width con margin:auto) porque aspect-ratio no
-       resuelve bien el alto cuando el ancho depende de un auto-margin
-       dentro de un grid item. */
-    position:relative;width:min(100%,380px);aspect-ratio:9/16;justify-self:center;border-radius:1.2rem;overflow:hidden;
+       tener esa misma forma para que entre completo, sin recortar. Solo
+       redondeado del lado derecho: del lado izquierdo se pega a la cintita
+       para que las dos piezas se vean como una sola. */
+    position:relative;flex:1;min-width:0;aspect-ratio:9/16;border-radius:0 1.2rem 1.2rem 0;overflow:hidden;
+  }
+  /* Cintita negra pegada al costado del video: mismo radio que el video pero
+     solo del lado izquierdo, así ambas piezas se leen como una sola forma. */
+  .tiktok-tab{
+    flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    background:#000;text-decoration:none;border-radius:1.2rem 0 0 1.2rem;
+    padding:0 .5rem;transition:.2s;
+  }
+  .tiktok-tab:hover{background:#1a1a1a;}
+  .tiktok-tab span{
+    writing-mode:vertical-rl;transform:rotate(180deg);
+    color:#fff;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;
   }
   .hero-slide{
     position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;
@@ -134,6 +152,7 @@
     position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;margin-bottom:1rem;
     display:flex;align-items:center;justify-content:center;transition:.3s;
   }
+  .menu-item{display:flex;flex-direction:column;height:100%;}
   .menu-item:hover .menu-item-img{box-shadow:0 0 0 2px var(--primary);}
   .menu-item-img svg{width:34%;height:34%;color:rgba(255,255,255,.85);}
   .menu-item-img img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -141,7 +160,7 @@
   .mi-head h3{font-size:1.35rem;}
   .mi-price{color:var(--primary);font-weight:700;flex-shrink:0;}
   .mi-desc{font-size:.88rem;color:var(--fg-soft);margin-bottom:1rem;}
-  .btn-add{width:100%;border:2px solid var(--fg);padding:.7rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;transition:.2s;}
+  .btn-add{width:100%;border:2px solid var(--fg);padding:.7rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;transition:.2s;margin-top:auto;}
   .btn-add:hover{background:var(--fg);color:var(--bg);}
 
   .cart-box{background:var(--card);border-radius:1rem;padding:1.8rem;box-shadow:0 1px 0 var(--line) inset,0 0 0 1px var(--line);position:sticky;top:150px;}
@@ -185,7 +204,9 @@
   /* FOOTER */
   footer{margin-top:4rem;background:#1a1a1a;color:#b8b3aa;padding:4rem 0 2rem;}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
-  .footer-col.about .fbrand{font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--secondary);text-transform:uppercase;display:block;margin-bottom:.8rem;}
+  .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;text-transform:uppercase;}
+  .footer-brand span{color:var(--secondary);}
+  .footer-logo{height:44px;width:auto;}
   .footer-col.about p{font-size:.85rem;line-height:1.7;max-width:280px;}
   .footer-col h4{color:#fff;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:1.1rem;}
   .footer-col p{font-size:.85rem;}
@@ -210,14 +231,19 @@
     .nav-links{display:none;}
     .nav-toggle{display:flex;}
   }
+  @media(max-width:360px){
+    .brand-name{display:none;}
+  }
   @media(max-width:900px){
     .hero{grid-template-columns:1fr;}
     .hero h1{font-size:3.4rem;}
-    .hero-visual{width:min(100%,320px);order:-1;}
+    .hero-visual-wrap{width:min(100%,320px);order:-1;}
     .menu-layout{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
     .footer-grid{grid-template-columns:1fr 1fr;}
+    .brand-logo{height:46px;top:-4px;}
+    .brand-logo-box{padding-left:60px;}
   }
   @media(max-width:520px){
     .menu-grid{grid-template-columns:1fr;}
@@ -231,7 +257,10 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a href="#inicio" class="brand disp">Los Dioses del Olimpo</a>
+    <a href="#inicio" class="brand-logo-box">
+      <img src="img/logo.png" alt="Los Dioses del Olimpo" class="brand-logo">
+      <span class="brand-name disp">Los Dioses del Olimpo</span>
+    </a>
     <div class="nav-links">
       <a href="#inicio" class="hide-mobile">Inicio</a>
       <a href="#menu" class="hide-mobile">Menú</a>
@@ -266,19 +295,24 @@
       <a href="#menu" class="btn-hero disp">Ver el menú</a>
     </div>
     <!-- Carrusel del hero: puede mezclar videos y fotos, se agregan slides nuevos acá -->
-    <div class="hero-visual">
-      <div id="heroSlides">
-        <div class="hero-slide active">
-          <video src="video/local.mp4" autoplay muted loop playsinline></video>
+    <div class="hero-visual-wrap">
+      <a href="https://www.tiktok.com/@do.burgas" target="_blank" rel="noopener" class="tiktok-tab" aria-label="Seguinos en TikTok">
+        <span>Seguinos en TikTok</span>
+      </a>
+      <div class="hero-visual">
+        <div id="heroSlides">
+          <div class="hero-slide active">
+            <video src="video/local.mp4" autoplay muted loop playsinline></video>
+          </div>
+          <div class="hero-slide">
+            <!-- Cuando llegue una foto real: reemplazar el svg por <img src="img/hero-2.jpg" alt="..."> -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
+          </div>
         </div>
-        <div class="hero-slide">
-          <!-- Cuando llegue una foto real: reemplazar el svg por <img src="img/hero-2.jpg" alt="..."> -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
-        </div>
+        <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
+        <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
+        <div class="hero-dots" id="heroDots"></div>
       </div>
-      <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
-      <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
-      <div class="hero-dots" id="heroDots"></div>
     </div>
   </section>
 
@@ -328,7 +362,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col about">
-        <span class="fbrand">Los Dioses del Olimpo</span>
+        <div class="footer-brand"><img src="img/logo.png" alt="Los Dioses del Olimpo" class="footer-logo"><span>Los Dioses del Olimpo</span></div>
         <p>"Vení a batallar con nuestras hamburguesas, sin antes morir en el intento."</p>
       </div>
       <div class="footer-col">
@@ -350,6 +384,9 @@
         <div class="footer-socials">
           <a class="social-btn" href="https://www.instagram.com/do.burgas" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.tiktok.com/@do.burgas" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.02-2.82H12.5v12.35a2.53 2.53 0 1 1-2.53-2.53c.2 0 .4.03.59.08V9.66a5.66 5.66 0 0 0-.59-.03A5.63 5.63 0 1 0 15.6 15.3V9.4a7.32 7.32 0 0 0 4.3 1.38V7.66a4.28 4.28 0 0 1-3.3-1.84z"/></svg>
           </a>
           <a class="social-btn wa" href="https://wa.me/5491168066400" target="_blank" rel="noopener" aria-label="WhatsApp">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.96L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.25-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
