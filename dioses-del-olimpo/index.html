@@ -88,19 +88,13 @@
 
   /* HERO */
   .hero{position:relative;min-height:680px;padding-top:80px;display:flex;align-items:center;overflow:hidden;}
-  .hero-bg{position:absolute;top:0;right:0;bottom:0;width:55%;z-index:0;}
+  .hero-bg{position:absolute;top:0;right:0;bottom:0;aspect-ratio:1049/677;z-index:0;overflow:hidden;}
   .hero-bg-blur,.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;display:block;}
   .hero-bg-blur{object-fit:cover;object-position:center;filter:blur(35px);transform:scale(1.15);opacity:.6;}
   .hero-bg-img{
-    object-fit:none;object-position:center;
-    clip-path:inset(0);
+    object-fit:cover;object-position:center;
     -webkit-mask-image:linear-gradient(to right, transparent 0%, black 50%);
     mask-image:linear-gradient(to right, transparent 0%, black 50%);
-  }
-  .hero-bg-glow{
-    position:absolute;inset:0;z-index:1;pointer-events:none;
-    background: radial-gradient(circle at 49% 76%, rgba(255,190,80,.65) 0%, rgba(255,150,40,.35) 16%, rgba(255,120,20,0) 40%);
-    mix-blend-mode:screen;
   }
   .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, #120c08 0%, rgba(18,12,8,.85) 40%, rgba(18,12,8,.3) 70%, rgba(18,12,8,0) 100%);}
   .hero-content{position:relative;z-index:2;width:100%;}
@@ -317,7 +311,6 @@
         <source media="(max-width: 900px)" srcset="img/hero-fondo-mobile.jpg">
         <img src="img/hero-fondo.jpg" alt="Hamburguesa Zeus sobre un pedestal, ambientación del Olimpo" class="hero-bg-img">
       </picture>
-      <div class="hero-bg-glow"></div>
     </div>
     <div class="hero-fade"></div>
     <div class="hero-content wrap">
