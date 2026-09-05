@@ -48,6 +48,20 @@
     border-bottom-color:var(--line);
   }
   nav, nav .brand-name{color:#fff;}
+  .brand-accent{color:#53c0f0;}
+  @supports (background-clip:text) or (-webkit-background-clip:text){
+    .brand-accent{
+      background: url('img/fondo-letras.jpg') center/cover;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+  }
+  .footer-brand span.brand-accent{color:#53c0f0;}
+  @supports (background-clip:text) or (-webkit-background-clip:text){
+    .footer-brand span.brand-accent{
+      background: url('img/fondo-letras.jpg') center/cover;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+  }
   .nav-inner{display:flex;align-items:center;}
   .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
   .brand-logo-box{position:relative;height:36px;display:flex;align-items:center;padding-left:50px;}
@@ -265,7 +279,7 @@
   <div class="wrap nav-inner">
     <a href="#inicio" class="brand-logo-box">
       <img src="img/logo.png" alt="Los Dioses del Olimpo" class="brand-logo">
-      <span class="brand-name disp">LOS DIOSES DEL OLIMPO</span>
+      <span class="brand-name disp">LOS <span class="brand-accent">DIOSES</span> DEL <span class="brand-accent">OLIMPO</span></span>
     </a>
     <div class="nav-links">
       <a href="#inicio" class="hide-mobile">INICIO</a>
@@ -342,7 +356,7 @@
           <label class="radio-opt"><input type="radio" name="modo" value="Delivery" checked> Delivery</label>
           <label class="radio-opt"><input type="radio" name="modo" value="Retiro"> Retiro</label>
         </div>
-        <button type="submit" class="btn-submit disp" id="submitBtn" disabled>⚡ Enviar pedido por WhatsApp</button>
+        <button type="submit" class="btn-submit disp" id="submitBtn" disabled>Enviar pedido por WhatsApp</button>
         <p class="cart-note">El pedido le llega al dueño por WhatsApp para confirmar.</p>
         <button type="button" class="btn-ticket" id="btnTicket" disabled>🧾 Descargar ticket</button>
         <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
@@ -356,7 +370,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col about">
-        <div class="footer-brand"><img src="img/logo.png" alt="Los Dioses del Olimpo" class="footer-logo"><span>Los Dioses del Olimpo</span></div>
+        <div class="footer-brand"><img src="img/logo.png" alt="Los Dioses del Olimpo" class="footer-logo"><span>Los <span class="brand-accent">Dioses</span> del <span class="brand-accent">Olimpo</span></span></div>
         <p>"Vení a batallar con nuestras hamburguesas, sin antes morir en el intento."</p>
       </div>
       <div class="footer-col">
