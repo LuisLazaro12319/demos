@@ -241,13 +241,13 @@
     .brand-name{display:none;}
   }
   @media(max-width:900px){
-    .hero{grid-template-columns:1fr;}
+    .hero{grid-template-columns:1fr;padding-top:.75rem;}
     .hero h1{font-size:3.4rem;}
-    .hero-visual-wrap{
-      width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);
-      order:-1;justify-content:center;background:#5c1414;padding:1.6rem 0;border-radius:0;box-shadow:none;
-    }
-    .hero-visual{flex:none;width:min(62%,230px);}
+    .hero-visual-wrap{width:min(78%,270px);order:-1;}
+    /* Se agranda el video hacia arriba (ocupa el hueco que quedaba libre
+       debajo del nav) sin mover el borde de abajo: por eso es un alto fijo
+       en vez de dejar que el aspect-ratio 9:16 lo calcule solo. */
+    .hero-visual{height:465px;}
     /* El corte diagonal solo tiene sentido con las dos columnas de al lado;
        apilado en una sola columna, se lo saca para no tapar el texto. */
     .hero::before{background:var(--bg);}
