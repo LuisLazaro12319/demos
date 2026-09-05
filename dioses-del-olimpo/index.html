@@ -84,61 +84,22 @@
   .mobile-menu a:hover{color:var(--primary);}
   .mobile-menu.open{display:flex;}
 
-  /* HERO */
-  .hero{position:relative;display:grid;grid-template-columns:7fr 5fr;gap:2rem;align-items:center;padding:3.5rem 0 3rem;}
-  /* Fondo partido en diagonal: crema del lado del texto, bordó del lado
-     de la foto/video — pura decoración, no afecta el layout de encima. */
-  .hero::before{
-    content:"";position:absolute;inset:0;z-index:-1;border-radius:1.5rem;
-    background:linear-gradient(100deg, var(--bg) 0%, var(--bg) 56%, #5c1414 56%, #5c1414 100%);
-  }
+  /* HERO — foto de fondo a todo el ancho, con un desvanecido hacia el color
+     de fondo de la página (se adapta solo al modo día/noche). En pc la foto
+     queda del lado derecho con el desvanecido horizontal separándola del
+     texto; en celu la foto ocupa todo arriba y el desvanecido es vertical,
+     con el texto flotando abajo. Mismo recurso que usamos en las tiendas de
+     ropa (Tapias, Chulita, Sin Destino). */
+  .hero{position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;}
+  .hero-bg{position:absolute;top:0;right:0;bottom:0;width:58%;z-index:0;}
+  .hero-bg-img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
+  .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, var(--bg) 0%, var(--bg) 22%, rgba(0,0,0,0) 62%);}
+  .hero-content{position:relative;z-index:2;max-width:600px;}
   .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
   .hero h1 span{color:var(--primary);}
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
   .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
   .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
-  .hero-visual-wrap{position:relative;width:min(100%,380px);justify-self:center;display:flex;border-radius:1.2rem;box-shadow:0 10px 28px rgba(0,0,0,.28);}
-  .hero-visual{
-    /* El video real es vertical (576x1024, 9:16) — el recuadro tiene que
-       tener esa misma forma para que entre completo, sin recortar. Solo
-       redondeado del lado derecho: del lado izquierdo se pega a la cintita
-       para que las dos piezas se vean como una sola. */
-    position:relative;flex:1;min-width:0;aspect-ratio:9/16;border-radius:0 1.2rem 1.2rem 0;overflow:hidden;
-  }
-  /* Cintita negra pegada al costado del video: mismo radio que el video pero
-     solo del lado izquierdo, así ambas piezas se leen como una sola forma. */
-  .tiktok-tab{
-    flex-shrink:0;display:flex;align-items:center;justify-content:center;
-    background:#000;text-decoration:none;border-radius:1.2rem 0 0 1.2rem;
-    padding:0 .5rem;transition:.2s;
-  }
-  .tiktok-tab:hover{background:#1a1a1a;}
-  .tiktok-tab span{
-    writing-mode:vertical-rl;transform:rotate(180deg);
-    color:#fff;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;
-  }
-  .hero-slide{
-    position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;
-    background:linear-gradient(150deg,var(--primary) 0%,var(--secondary) 100%);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .hero-slide.active{opacity:1;pointer-events:auto;}
-  .hero-slide svg{width:38%;height:38%;color:rgba(255,255,255,.9);}
-  .hero-slide video,.hero-slide img{width:100%;height:100%;object-fit:cover;display:block;}
-  .hero-arrow{
-    position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
-    background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:1rem;z-index:2;transition:.2s;
-  }
-  .hero-arrow:hover{background:rgba(0,0,0,.7);}
-  .hero-arrow.prev{left:.7rem;}
-  .hero-arrow.next{right:.7rem;}
-  .hero-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:2;}
-  .hero-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);transition:.2s;cursor:pointer;}
-  .hero-dots span.active{background:#fff;width:20px;border-radius:4px;}
-  .video-controls{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.4rem;z-index:3;}
-  .video-btn{width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:.2s;}
-  .video-btn:hover{background:rgba(0,0,0,.75);}
 
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
@@ -241,16 +202,11 @@
     .brand-name{display:none;}
   }
   @media(max-width:900px){
-    .hero{grid-template-columns:1fr;padding-top:.75rem;}
+    .hero{min-height:0;display:block;padding:0;}
     .hero h1{font-size:3.4rem;}
-    .hero-visual-wrap{width:min(78%,270px);order:-1;}
-    /* Se agranda el video hacia arriba (ocupa el hueco que quedaba libre
-       debajo del nav) sin mover el borde de abajo: por eso es un alto fijo
-       en vez de dejar que el aspect-ratio 9:16 lo calcule solo. */
-    .hero-visual{height:465px;}
-    /* El corte diagonal solo tiene sentido con las dos columnas de al lado;
-       apilado en una sola columna, se lo saca para no tapar el texto. */
-    .hero::before{background:var(--bg);}
+    .hero-bg{position:absolute;inset:0;width:100%;}
+    .hero-fade{background:linear-gradient(to top, var(--bg) 0%, var(--bg) 56%, rgba(0,0,0,0) 88%);}
+    .hero-content{position:relative;max-width:none;min-height:78vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:2rem;padding-bottom:2.5rem;}
     .menu-layout{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
@@ -298,36 +254,22 @@
   </div>
 </nav>
 
-<main class="wrap">
+<main>
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <div>
+    <div class="hero-bg">
+      <img src="img/hero-fondo.jpg" alt="Hamburguesa Zeus sobre un pedestal, ambientación del Olimpo" class="hero-bg-img">
+    </div>
+    <div class="hero-fade"></div>
+    <div class="hero-content wrap">
       <p class="eyebrow">🏛️ Batallá con nuestras hamburguesas</p>
       <h1 class="disp">Comida de <span>dioses.</span></h1>
       <p>Hamburguesas artesanales dignas del Olimpo. Vení a batallar con nuestras hamburguesas... sin antes morir en el intento.</p>
       <a href="#menu" class="btn-hero disp">Ver el menú</a>
     </div>
-    <!-- Carrusel del hero: puede mezclar videos y fotos, se agregan slides nuevos acá -->
-    <div class="hero-visual-wrap">
-      <a href="https://www.tiktok.com/@do.burgas" target="_blank" rel="noopener" class="tiktok-tab" aria-label="Seguinos en TikTok">
-        <span>Seguinos en TikTok</span>
-      </a>
-      <div class="hero-visual">
-        <div id="heroSlides">
-          <div class="hero-slide active">
-            <video src="video/local.mp4" autoplay muted loop playsinline></video>
-          </div>
-          <div class="hero-slide">
-            <video src="video/local-2.mp4" muted loop playsinline></video>
-          </div>
-        </div>
-        <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
-        <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
-        <div class="hero-dots" id="heroDots"></div>
-      </div>
-    </div>
   </section>
 
+  <div class="wrap">
   <!-- CATEGORÍAS -->
   <div class="cats-bar" id="menu">
     <div class="cats" id="catsWrap"></div>
@@ -367,6 +309,7 @@
         <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
       </form>
     </aside>
+  </div>
   </div>
 </main>
 
@@ -754,79 +697,6 @@
 
   renderMenu();
   renderCart();
-
-  /* ================== CARRUSEL DEL HERO (fotos y/o videos) ================== */
-  (function () {
-    const slidesWrap = document.getElementById("heroSlides");
-    const slides = Array.from(slidesWrap.querySelectorAll(".hero-slide"));
-    const dotsWrap = document.getElementById("heroDots");
-    const prevBtn = document.getElementById("heroPrev");
-    const nextBtn = document.getElementById("heroNext");
-    let current = 0;
-
-    // Controles de pausa/sonido en cada slide que tenga video (mudo por
-    // defecto porque el navegador exige eso para el autoplay; el botón de
-    // sonido recién lo activa con un click real, que sí cuenta como gesto).
-    slides.forEach((slide) => {
-      const video = slide.querySelector("video");
-      if (!video) return;
-      const controls = document.createElement("div");
-      controls.className = "video-controls";
-      controls.innerHTML =
-        '<button type="button" class="video-btn" data-role="play" aria-label="Pausar video">⏸</button>' +
-        '<button type="button" class="video-btn" data-role="mute" aria-label="Activar sonido">🔇</button>';
-      slide.appendChild(controls);
-      const playBtn = controls.querySelector('[data-role="play"]');
-      const muteBtn = controls.querySelector('[data-role="mute"]');
-      playBtn.addEventListener("click", () => {
-        if (video.paused) {
-          video.play();
-          playBtn.textContent = "⏸";
-          playBtn.setAttribute("aria-label", "Pausar video");
-        } else {
-          video.pause();
-          playBtn.textContent = "▶";
-          playBtn.setAttribute("aria-label", "Reproducir video");
-        }
-      });
-      muteBtn.addEventListener("click", () => {
-        video.muted = !video.muted;
-        muteBtn.textContent = video.muted ? "🔇" : "🔊";
-        muteBtn.setAttribute("aria-label", video.muted ? "Activar sonido" : "Silenciar");
-      });
-    });
-
-    if (slides.length <= 1) {
-      if (prevBtn) prevBtn.style.display = "none";
-      if (nextBtn) nextBtn.style.display = "none";
-      return;
-    }
-
-    dotsWrap.innerHTML = slides.map((_, i) => `<span data-i="${i}"></span>`).join("");
-    const dots = Array.from(dotsWrap.children);
-
-    function goTo(i) {
-      current = (i + slides.length) % slides.length;
-      slides.forEach((s, idx) => {
-        s.classList.toggle("active", idx === current);
-        const video = s.querySelector("video");
-        if (video) {
-          if (idx === current) video.play().catch(() => {});
-          else video.pause();
-        }
-      });
-      dots.forEach((d, idx) => d.classList.toggle("active", idx === current));
-    }
-
-    prevBtn.addEventListener("click", () => goTo(current - 1));
-    nextBtn.addEventListener("click", () => goTo(current + 1));
-    dotsWrap.addEventListener("click", (e) => {
-      const dot = e.target.closest("[data-i]");
-      if (dot) goTo(Number(dot.dataset.i));
-    });
-
-    goTo(0);
-  })();
 </script>
 </body>
 </html>
