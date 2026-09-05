@@ -18,8 +18,8 @@
     --fg-soft:rgba(26,26,26,.6);
     --fg-faint:rgba(26,26,26,.4);
     --line:rgba(26,26,26,.08);
-    --primary:#ff4d00;
-    --primary-dark:#d94100;
+    --primary:#1e6fff;
+    --primary-dark:#0a3fff;
     --secondary:#ffb800;
     --nav-bg:rgba(253,252,240,.9);
     color-scheme:light;
@@ -32,8 +32,8 @@
     --fg-soft:rgba(253,252,240,.65);
     --fg-faint:rgba(253,252,240,.4);
     --line:rgba(253,252,240,.1);
-    --primary:#ff4d00;
-    --primary-dark:#ff7a3d;
+    --primary:#3d8bff;
+    --primary-dark:#7ab0ff;
     --secondary:#ffb800;
     --nav-bg:rgba(21,14,10,.85);
     color-scheme:dark;
@@ -55,12 +55,13 @@
   input{font-family:inherit;}
 
   /* NAV */
+  /* Header azul eléctrico estilo rayo de Zeus, con las mismas variables que
+     el resto del sitio (así el modo oscuro también le pega bien). */
   nav{
     position:sticky;top:0;z-index:50;
     padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.15);
-    background:linear-gradient(135deg, #0a3fff 0%, #1e6fff 55%, #3d8bff 100%);
+    background:linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, #3d8bff 100%);
   }
-  /* PRUEBA: header azul eléctrico estilo rayo de Zeus */
   nav, nav .brand-name{color:#fff;}
   .nav-inner{display:flex;align-items:center;}
   .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
@@ -119,8 +120,8 @@
   .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
   .hero h1 span{color:var(--primary);}
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
-  .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
-  .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
+  .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;box-shadow:0 0 0 rgba(30,111,255,0);}
+  .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);box-shadow:0 0 22px 4px rgba(61,139,255,.55);}
 
   section{padding:0;}
   .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
@@ -149,7 +150,7 @@
   .mi-price{color:var(--primary);font-weight:700;flex-shrink:0;}
   .mi-desc{font-size:.88rem;color:var(--fg-soft);margin-bottom:1rem;}
   .btn-add{width:100%;border:2px solid var(--fg);padding:.7rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;transition:.2s;margin-top:auto;}
-  .btn-add:hover{background:var(--fg);color:var(--bg);}
+  .btn-add:hover{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 0 18px 3px rgba(61,139,255,.5);}
 
   .cart-box{background:var(--card);border-radius:1rem;padding:1.8rem;box-shadow:0 1px 0 var(--line) inset,0 0 0 1px var(--line);position:sticky;top:150px;}
   .cart-box h2{font-size:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--line);margin-bottom:1.3rem;}
@@ -177,7 +178,7 @@
   .radio-opt{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.78rem;font-weight:700;}
   .radio-opt input{accent-color:var(--primary);}
   .btn-submit{width:100%;background:var(--fg);color:var(--bg);padding:.95rem;font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;margin-top:.4rem;transition:.2s;}
-  .btn-submit:hover:not(:disabled){background:var(--primary);}
+  .btn-submit:hover:not(:disabled){background:var(--primary);box-shadow:0 0 18px 3px rgba(61,139,255,.5);}
   .btn-submit:disabled{opacity:.35;cursor:not-allowed;}
   .cart-note{margin-top:.6rem;text-align:center;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-faint);}
   .btn-ticket{
@@ -293,7 +294,7 @@
         <p class="eyebrow">🏛️ Batallá con nuestras hamburguesas</p>
         <h1 class="disp">Comida de <span>dioses.</span></h1>
         <p>Hamburguesas artesanales dignas del Olimpo. Vení a batallar con nuestras hamburguesas... sin antes morir en el intento.</p>
-        <a href="#menu" class="btn-hero disp">Ver el menú</a>
+        <a href="#menu" class="btn-hero disp">⚡ Ver el menú</a>
       </div>
     </div>
   </section>
@@ -332,7 +333,7 @@
           <label class="radio-opt"><input type="radio" name="modo" value="Delivery" checked> Delivery</label>
           <label class="radio-opt"><input type="radio" name="modo" value="Retiro"> Retiro</label>
         </div>
-        <button type="submit" class="btn-submit disp" id="submitBtn" disabled>Enviar pedido por WhatsApp</button>
+        <button type="submit" class="btn-submit disp" id="submitBtn" disabled>⚡ Enviar pedido por WhatsApp</button>
         <p class="cart-note">El pedido le llega al dueño por WhatsApp para confirmar.</p>
         <button type="button" class="btn-ticket" id="btnTicket" disabled>🧾 Descargar ticket</button>
         <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
@@ -465,7 +466,7 @@
           <span class="mi-price mono">${formatPrice(item.price)}</span>
         </div>
         <p class="mi-desc">${item.description}</p>
-        <button class="btn-add" data-add="${item.id}">Añadir al Pedido</button>
+        <button class="btn-add" data-add="${item.id}">⚡ Añadir al Pedido</button>
       </div>`
       )
       .join("");
