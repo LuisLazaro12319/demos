@@ -189,6 +189,7 @@
   .btn-ubicacion:hover{background:rgba(0,210,255,.14);}
   .btn-ubicacion.ok{background:rgba(34,150,60,.1);border-color:#22963c;color:#22963c;border-style:solid;}
   .ubicacion-nota{margin-top:.4rem;font-size:.68rem;color:var(--fg-faint);}
+  .ubicacion-tip{margin-top:.5rem;font-size:.72rem;color:var(--primary-light);}
   .radios{display:flex;gap:1.2rem;margin-bottom:1rem;}
   .radio-opt{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.78rem;font-weight:700;}
   .radio-opt input{accent-color:var(--primary);}
@@ -345,8 +346,8 @@
         <div class="field" id="direccionField">
           <label for="direccion">Dirección de entrega</label>
           <button type="button" class="btn-ubicacion" id="btnUbicacion">📍 Usar mi ubicación actual</button>
-          <input id="direccion" placeholder="O escribí tu dirección" style="margin-top:.6rem">
           <p class="ubicacion-nota" id="ubicacionNota"></p>
+          <p class="ubicacion-tip">💡 Para que la ubicación sea precisa, te recomendamos hacer tu pedido desde el celular.</p>
         </div>
         <div class="field">
           <label for="notas">Notas</label>
@@ -558,7 +559,6 @@
     r.addEventListener("change", () => {
       const isDelivery = document.querySelector('input[name="modo"]:checked').value === "Delivery";
       direccionField.style.display = isDelivery ? "" : "none";
-      document.getElementById("direccion").required = isDelivery;
     });
   });
 
@@ -568,7 +568,7 @@
   const ubicacionNota = document.getElementById("ubicacionNota");
   btnUbicacion.addEventListener("click", () => {
     if (!navigator.geolocation) {
-      ubicacionNota.textContent = "Tu navegador no permite compartir ubicación. Escribí la dirección abajo.";
+      ubicacionNota.textContent = "Tu navegador no permite compartir ubicación. Agregá tu dirección en el campo de Notas.";
       return;
     }
     btnUbicacion.textContent = "📍 Buscando tu ubicación...";
@@ -582,7 +582,7 @@
       },
       () => {
         btnUbicacion.textContent = "📍 Usar mi ubicación actual";
-        ubicacionNota.textContent = "No pudimos acceder a tu ubicación. Escribí la dirección abajo.";
+        ubicacionNota.textContent = "No pudimos acceder a tu ubicación. Agregá tu dirección en el campo de Notas.";
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
@@ -594,7 +594,6 @@
     if (cart.length === 0) return;
 
     const name = document.getElementById("nombre").value.trim();
-    const address = document.getElementById("direccion").value.trim();
     const notes = document.getElementById("notas").value.trim();
     const modo = document.querySelector('input[name="modo"]:checked').value;
 
@@ -608,9 +607,7 @@
 
     let entrega = "Retiro en el local";
     if (modo === "Delivery") {
-      if (ubicacionLink) entrega = `Ubicación: ${ubicacionLink}`;
-      else if (address) entrega = `Dirección: ${address}`;
-      else entrega = "Dirección: -";
+      entrega = ubicacionLink ? `Ubicación: ${ubicacionLink}` : "Dirección: no compartida (ver notas)";
     }
 
     const text = [
@@ -649,7 +646,6 @@
     const name = document.getElementById("nombre").value.trim() || "Cliente";
     const notes = document.getElementById("notas").value.trim();
     const modo = document.querySelector('input[name="modo"]:checked').value;
-    const address = document.getElementById("direccion").value.trim();
     const items = cart.map((l) => {
       const item = MENU.find((m) => m.id === l.id);
       return { qty: l.qty, name: item.name, price: item.price * l.qty };
@@ -720,7 +716,7 @@
     ctx.fillText(`Modalidad: ${modo}`, 24, y);
     y += 20;
     if (modo === "Delivery") {
-      ctx.fillText(`Dirección: ${address || "-"}`, 24, y);
+      ctx.fillText(`Ubicación: ${ubicacionLink ? "compartida por GPS" : "no compartida (ver notas)"}`, 24, y);
       y += 20;
     }
     if (notes) {
