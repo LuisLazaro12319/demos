@@ -583,7 +583,8 @@
       () => {
         btnUbicacion.textContent = "📍 Usar mi ubicación actual";
         ubicacionNota.textContent = "No pudimos acceder a tu ubicación. Escribí la dirección abajo.";
-      }
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
     );
   });
 
