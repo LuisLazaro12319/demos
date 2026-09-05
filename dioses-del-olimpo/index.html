@@ -640,9 +640,24 @@
     ctx.restore();
   }
 
-  btnTicket.addEventListener("click", () => {
+  function loadLogo() {
+    return new Promise((resolve) => {
+      const existing = document.querySelector(".brand-logo");
+      if (existing && existing.complete && existing.naturalWidth > 0) {
+        resolve(existing);
+        return;
+      }
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = "img/logo.png";
+    });
+  }
+
+  btnTicket.addEventListener("click", async () => {
     if (cart.length === 0) return;
 
+    const logo = await loadLogo();
     const name = document.getElementById("nombre").value.trim() || "Cliente";
     const notes = document.getElementById("notas").value.trim();
     const modo = document.querySelector('input[name="modo"]:checked').value;
@@ -654,8 +669,9 @@
 
     const width = 480;
     const lineH = 26;
+    const logoShift = 60;
     const extraLines = 1 + (modo === "Delivery" ? 1 : 0) + (notes ? 1 : 0);
-    const height = 130 + items.length * lineH + 64 + extraLines * 20 + 100;
+    const height = 130 + logoShift + items.length * lineH + 64 + extraLines * 20 + 100;
 
     const scale = 2;
     const canvas = document.createElement("canvas");
@@ -669,24 +685,29 @@
     ctx.fillStyle = "#0088ff";
     ctx.fillRect(0, 0, width, 8);
 
+    if (logo) {
+      const logoSize = 50;
+      ctx.drawImage(logo, (width - logoSize) / 2, 14, logoSize, logoSize);
+    }
+
     ctx.textAlign = "center";
     ctx.fillStyle = "#1a1a1a";
     ctx.font = "bold 23px sans-serif";
-    ctx.fillText("LOS DIOSES DEL OLIMPO", width / 2, 44);
+    ctx.fillText("LOS DIOSES DEL OLIMPO", width / 2, 44 + logoShift);
     ctx.font = "12px sans-serif";
     ctx.fillStyle = "rgba(26,26,26,.6)";
-    ctx.fillText("Hamburguesería", width / 2, 64);
+    ctx.fillText("Hamburguesería", width / 2, 64 + logoShift);
 
     const now = new Date();
     const fecha =
       now.toLocaleDateString("es-AR") +
       " · " +
       now.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
-    ctx.fillText(fecha, width / 2, 84);
+    ctx.fillText(fecha, width / 2, 84 + logoShift);
 
-    dashedLine(ctx, 24, 100, width - 24, 100);
+    dashedLine(ctx, 24, 100 + logoShift, width - 24, 100 + logoShift);
 
-    let y = 100 + 30;
+    let y = 100 + logoShift + 30;
     ctx.font = "13px monospace";
     items.forEach((it) => {
       ctx.fillStyle = "#1a1a1a";
