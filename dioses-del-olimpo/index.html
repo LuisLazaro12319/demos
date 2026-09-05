@@ -57,8 +57,11 @@
   /* NAV */
   nav{
     position:sticky;top:0;z-index:50;
-    padding:.7rem 0;border-bottom:1px solid var(--line);background:var(--nav-bg);backdrop-filter:blur(10px);
+    padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.15);
+    background:linear-gradient(135deg, #0a3fff 0%, #1e6fff 55%, #3d8bff 100%);
   }
+  /* PRUEBA: header azul eléctrico estilo rayo de Zeus */
+  nav, nav .brand-name{color:#fff;}
   .nav-inner{display:flex;align-items:center;}
   .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
   /* Caja "fantasma" chica: mantiene el header bajito, pero el logo de adentro
@@ -70,7 +73,7 @@
   .brand{font-size:1.8rem;letter-spacing:-1px;color:var(--primary);}
   .nav-links{display:flex;align-items:center;gap:1.5rem;margin-left:1.6rem;}
   .nav-links a{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;transition:.2s;}
-  .nav-links a:hover{color:var(--primary);}
+  .nav-links a:hover{color:#ffde59;}
   .cart-btn{position:relative;width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--line);color:var(--fg);display:flex;align-items:center;justify-content:center;transition:.2s;}
   .cart-btn:hover{background:rgba(255,77,0,.14);color:var(--primary);}
   .cart-badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--primary);color:#fff;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1;}
