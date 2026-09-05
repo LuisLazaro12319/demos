@@ -151,7 +151,7 @@
     color:#fff;padding:.7rem;font-size:.72rem;font-weight:800;text-transform:uppercase;
     letter-spacing:.5px;transition:.2s;margin-top:auto;border-radius:6px;
   }
-  .btn-add:hover{background:linear-gradient(rgba(0,40,110,.5),rgba(0,40,110,.5)), url('img/fondo-electrico.jpg') center/cover;border-color:var(--primary);box-shadow:0 0 15px rgba(0,210,255,.5);}
+  .btn-add:hover{background:linear-gradient(rgba(0,40,110,.5),rgba(0,40,110,.5)), url('img/fondo-electrico.jpg') center/cover;border-color:#ffffff;box-shadow:0 0 20px rgba(0,200,255,.7), inset 0 0 12px rgba(255,255,255,.5);}
 
   .cart-box{background:var(--card);border-radius:1rem;padding:1.8rem;box-shadow:0 1px 0 var(--line) inset,0 0 0 1px var(--line);position:sticky;top:30px;}
   .cart-box h2{font-size:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--line);margin-bottom:1.3rem;}
@@ -178,8 +178,19 @@
   .radios{display:flex;gap:1.2rem;margin-bottom:1rem;}
   .radio-opt{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.78rem;font-weight:700;}
   .radio-opt input{accent-color:var(--primary);}
-  .btn-submit{width:100%;background:var(--primary-dark);color:#fff;padding:.95rem;font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;margin-top:.4rem;transition:.2s;border-radius:6px;}
-  .btn-submit:hover:not(:disabled){background:linear-gradient(rgba(0,40,110,.5),rgba(0,40,110,.5)), url('img/fondo-electrico.jpg') center/cover;box-shadow:0 0 15px rgba(0,210,255,.5);}
+  .btn-submit{
+    width:100%;
+    background: linear-gradient(rgba(0,40,110,.45),rgba(0,40,110,.45)), url('img/fondo-botones.jpg') center/112% 112%;
+    border: 1px solid rgba(150,230,255,0.6);
+    color:#fff;padding:.95rem;font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;margin-top:.4rem;transition:.3s;border-radius:6px;
+    box-shadow: 0 0 20px rgba(0,150,255,0.5), inset 0 0 10px rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+  }
+  .btn-submit:hover:not(:disabled){
+    transform:translateY(-2px);
+    box-shadow: 0 0 30px rgba(0,200,255,0.8), inset 0 0 15px rgba(255,255,255,0.5);
+    border-color: #ffffff;
+  }
   .btn-submit:disabled{opacity:.35;cursor:not-allowed;}
   .cart-note{margin-top:.6rem;text-align:center;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-faint);}
   .btn-ticket{
