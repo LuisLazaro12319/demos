@@ -148,9 +148,9 @@
       </div>
     </div>
 
-    <p class="desc" style="margin-bottom:.7rem;">Fotos y videos del carrusel:</p>
-    <div class="slides-grid" id="slidesGrid"></div>
-    <input type="file" id="slideFile" accept="image/*,video/*" style="display:none">
+    <p class="desc" style="margin-bottom:.7rem;">Foto de fondo del hero:</p>
+    <div class="slides-grid" id="heroPhotoGrid"></div>
+    <input type="file" id="heroPhotoFile" accept="image/*" style="display:none">
 
     <div class="locked"><span class="lbtn">🔒 Guardar cambios del hero</span><small>Disponible cuando actives el panel real</small></div>
   </div>
@@ -211,51 +211,29 @@
   heroTitle.addEventListener('input', () => { heroPreviewTitle.textContent = heroTitle.value; });
   heroText.addEventListener('input', () => { heroPreviewText.textContent = heroText.value; });
 
-  /* ================== SLIDES DEL CARRUSEL ================== */
-  let slides = [
-    { type: 'video', label: 'Video: local', src: '../video/local.mp4' },
-    { type: 'photo', label: 'Foto (de ejemplo)', src: null },
-  ];
-  const slidesGrid = document.getElementById('slidesGrid');
-  const slideFile = document.getElementById('slideFile');
+  /* ================== FOTO DE FONDO DEL HERO ================== */
+  let heroPhoto = '../img/hero-fondo.jpg';
+  const heroPhotoGrid = document.getElementById('heroPhotoGrid');
+  const heroPhotoFile = document.getElementById('heroPhotoFile');
 
-  function renderSlides() {
-    slidesGrid.innerHTML = '';
-    slides.forEach((s, i) => {
-      const item = document.createElement('div');
-      item.className = 'slide-item';
-      if (s.type === 'video') {
-        item.innerHTML = s.src
-          ? `<video src="${s.src}" muted></video>`
-          : `<span class="ph">🎬</span>`;
-      } else {
-        item.innerHTML = s.src ? `<img src="${s.src}" alt="">` : `<span class="ph">🖼️</span>`;
-      }
-      item.innerHTML += `<span class="tag">${s.type === 'video' ? 'Video' : 'Foto'}</span><button class="del" type="button" aria-label="Quitar">×</button>`;
-      item.querySelector('.del').addEventListener('click', () => {
-        slides.splice(i, 1);
-        renderSlides();
-      });
-      slidesGrid.appendChild(item);
-    });
-    const addBtn = document.createElement('div');
-    addBtn.className = 'add-slide';
-    addBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg>Agregar foto o video`;
-    addBtn.addEventListener('click', () => slideFile.click());
-    slidesGrid.appendChild(addBtn);
+  function renderHeroPhoto() {
+    heroPhotoGrid.innerHTML = `<div class="slide-item"><img src="${heroPhoto}" alt=""></div>`;
+    const changeBtn = document.createElement('div');
+    changeBtn.className = 'add-slide';
+    changeBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg>Cambiar foto`;
+    changeBtn.addEventListener('click', () => heroPhotoFile.click());
+    heroPhotoGrid.appendChild(changeBtn);
   }
 
-  slideFile.addEventListener('change', () => {
-    const file = slideFile.files[0];
+  heroPhotoFile.addEventListener('change', () => {
+    const file = heroPhotoFile.files[0];
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    const isVideo = file.type.startsWith('video/');
-    slides.push({ type: isVideo ? 'video' : 'photo', label: file.name, src: url });
-    renderSlides();
-    slideFile.value = '';
+    heroPhoto = URL.createObjectURL(file);
+    renderHeroPhoto();
+    heroPhotoFile.value = '';
   });
 
-  renderSlides();
+  renderHeroPhoto();
 
   /* ================== CATEGORÍAS ================== */
   let categories = ['BURGERS', 'PAPAS', 'BEBIDAS'];
