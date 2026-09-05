@@ -12,6 +12,7 @@
 <style>
   :root{
     --bg:#fdfcf0;
+    --bg-rgb:253,252,240;
     --card:#ffffff;
     --fg:#1a1a1a;
     --fg-soft:rgba(26,26,26,.6);
@@ -25,6 +26,7 @@
   }
   :root[data-theme="dark"]{
     --bg:#150e0a;
+    --bg-rgb:21,14,10;
     --card:#1f1611;
     --fg:#fdfcf0;
     --fg-soft:rgba(253,252,240,.65);
@@ -93,7 +95,7 @@
   .hero{position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;}
   .hero-bg{position:absolute;top:0;right:0;bottom:0;width:50%;z-index:0;}
   .hero-bg-img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
-  .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, var(--bg) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 45%, transparent 85%);}
+  .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, var(--bg) 0%, rgba(var(--bg-rgb), .6) 45%, rgba(var(--bg-rgb), 0) 85%);}
   /* .hero-content ES el .wrap: tiene que centrarse en el mismo máximo de
      1280px que usa el nav (por eso width:100% + el margin:auto que ya trae
      .wrap), si no, en pantallas muy anchas el nav queda centrado pero el
