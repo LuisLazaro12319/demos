@@ -94,8 +94,18 @@
      ropa (Tapias, Chulita, Sin Destino). */
   .hero{position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;}
   .hero-bg{position:absolute;top:0;right:0;bottom:0;width:50%;z-index:0;}
-  .hero-bg-img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
-  .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, var(--bg) 0%, rgba(var(--bg-rgb), .6) 45%, rgba(var(--bg-rgb), 0) 85%);}
+  /* Debajo va una copia bien borrosa de la misma foto (sin máscara, se ve
+     entera); arriba va la foto nítida pero con una máscara que la vuelve
+     transparente del lado del texto — ahí es donde asoma la copia borrosa
+     de abajo, así la línea de separación se ve literalmente desenfocada,
+     no solo un cambio de color. */
+  .hero-bg-blur,.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
+  .hero-bg-blur{filter:blur(35px);transform:scale(1.15);}
+  .hero-bg-img{
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, black 60%);
+    mask-image:linear-gradient(to right, transparent 0%, black 60%);
+  }
+  .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, var(--bg) 0%, rgba(var(--bg-rgb), .75) 35%, rgba(var(--bg-rgb), .2) 65%, rgba(var(--bg-rgb), 0) 92%);}
   /* .hero-content ES el .wrap: tiene que centrarse en el mismo máximo de
      1280px que usa el nav (por eso width:100% + el margin:auto que ya trae
      .wrap), si no, en pantallas muy anchas el nav queda centrado pero el
@@ -215,6 +225,8 @@
     .hero{min-height:0;display:block;padding:0;}
     .hero h1{font-size:3.4rem;}
     .hero-bg{position:relative;width:100%;height:52vh;}
+    .hero-bg-blur{display:none;}
+    .hero-bg-img{-webkit-mask-image:none;mask-image:none;}
     .hero-fade{display:none;}
     .hero-content{position:static;padding:2rem 1.2rem 2.5rem;}
     .hero-text{max-width:none;}
@@ -269,6 +281,7 @@
   <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="hero-bg">
+      <img src="img/hero-fondo.jpg" alt="" class="hero-bg-blur" aria-hidden="true">
       <img src="img/hero-fondo.jpg" alt="Hamburguesa Zeus sobre un pedestal, ambientación del Olimpo" class="hero-bg-img">
     </div>
     <div class="hero-fade"></div>
