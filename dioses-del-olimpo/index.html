@@ -85,7 +85,13 @@
   .mobile-menu.open{display:flex;}
 
   /* HERO */
-  .hero{display:grid;grid-template-columns:7fr 5fr;gap:2rem;align-items:center;padding:3.5rem 0 3rem;}
+  .hero{position:relative;display:grid;grid-template-columns:7fr 5fr;gap:2rem;align-items:center;padding:3.5rem 0 3rem;}
+  /* Fondo partido en diagonal: crema del lado del texto, bordó del lado
+     de la foto/video — pura decoración, no afecta el layout de encima. */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;border-radius:1.5rem;
+    background:linear-gradient(100deg, var(--bg) 0%, var(--bg) 56%, #5c1414 56%, #5c1414 100%);
+  }
   .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
   .hero h1 span{color:var(--primary);}
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
@@ -238,6 +244,9 @@
     .hero{grid-template-columns:1fr;}
     .hero h1{font-size:3.4rem;}
     .hero-visual-wrap{width:min(100%,320px);order:-1;}
+    /* El corte diagonal solo tiene sentido con las dos columnas de al lado;
+       apilado en una sola columna, se lo saca para no tapar el texto. */
+    .hero::before{background:var(--bg);}
     .menu-layout{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
