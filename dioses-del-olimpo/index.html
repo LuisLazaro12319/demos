@@ -94,7 +94,11 @@
   .hero-bg{position:absolute;top:0;right:0;bottom:0;width:58%;z-index:0;}
   .hero-bg-img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
   .hero-fade{position:absolute;inset:0;z-index:1;background:linear-gradient(to right, var(--bg) 0%, var(--bg) 12%, rgba(0,0,0,0) 80%);}
-  .hero-content{position:relative;z-index:2;max-width:600px;}
+  /* .hero-content ES el .wrap (mismo margen izquierdo que el nav/footer);
+     el ancho de lectura del texto se limita en .hero-text, adentro, para
+     no volver a centrar la caja entera y romper esa alineación. */
+  .hero-content{position:relative;z-index:2;margin:0;}
+  .hero-text{max-width:600px;}
   .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
   .hero h1 span{color:var(--primary);}
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
@@ -202,11 +206,14 @@
     .brand-name{display:none;}
   }
   @media(max-width:900px){
+    /* En celu no hay overlay ni desvanecido: la foto va arriba tal cual,
+       plana, y el texto sigue abajo en el flujo normal de la página. */
     .hero{min-height:0;display:block;padding:0;}
     .hero h1{font-size:3.4rem;}
-    .hero-bg{position:absolute;inset:0;width:100%;}
-    .hero-fade{background:linear-gradient(to top, var(--bg) 0%, var(--bg) 56%, rgba(0,0,0,0) 88%);}
-    .hero-content{position:relative;max-width:none;min-height:78vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:2rem;padding-bottom:2.5rem;}
+    .hero-bg{position:relative;width:100%;height:52vh;}
+    .hero-fade{display:none;}
+    .hero-content{position:static;padding:2rem 1.2rem 2.5rem;}
+    .hero-text{max-width:none;}
     .menu-layout{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr 1fr;}
     .cart-box{position:static;}
@@ -262,10 +269,12 @@
     </div>
     <div class="hero-fade"></div>
     <div class="hero-content wrap">
-      <p class="eyebrow">🏛️ Batallá con nuestras hamburguesas</p>
-      <h1 class="disp">Comida de <span>dioses.</span></h1>
-      <p>Hamburguesas artesanales dignas del Olimpo. Vení a batallar con nuestras hamburguesas... sin antes morir en el intento.</p>
-      <a href="#menu" class="btn-hero disp">Ver el menú</a>
+      <div class="hero-text">
+        <p class="eyebrow">🏛️ Batallá con nuestras hamburguesas</p>
+        <h1 class="disp">Comida de <span>dioses.</span></h1>
+        <p>Hamburguesas artesanales dignas del Olimpo. Vení a batallar con nuestras hamburguesas... sin antes morir en el intento.</p>
+        <a href="#menu" class="btn-hero disp">Ver el menú</a>
+      </div>
     </div>
   </section>
 
