@@ -122,9 +122,19 @@
   .hero-content{position:relative;z-index:2;width:100%;}
   .hero-text{max-width:600px;}
   .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
-  .hero h1 span{color:var(--primary);}
+  .hero h1 span{
+    color:var(--primary);
+    background:url('img/electric-texture.jpg') center/cover;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 10px rgba(30,111,255,.65));
+  }
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
-  .btn-hero{display:inline-block;background:linear-gradient(135deg, var(--primary-deep), var(--primary) 55%, var(--primary-light) 100%);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;box-shadow:0 0 0 rgba(30,111,255,0);}
+  .btn-hero{
+    display:inline-block;
+    background:linear-gradient(rgba(5,12,40,.4),rgba(5,12,40,.4)), url('img/electric-texture.jpg') center/cover;
+    color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;
+    box-shadow:0 0 15px rgba(0,210,255,.5);
+  }
   .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);box-shadow:0 0 22px 4px rgba(61,139,255,.55);}
 
   section{padding:0;}
@@ -154,7 +164,7 @@
   .mi-price{color:var(--primary);font-weight:700;flex-shrink:0;}
   .mi-desc{font-size:.88rem;color:var(--fg-soft);margin-bottom:1rem;}
   .btn-add{width:100%;border:2px solid var(--fg);padding:.7rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;transition:.2s;margin-top:auto;}
-  .btn-add:hover{background:linear-gradient(135deg, var(--primary-deep), var(--primary) 55%, var(--primary-light) 100%);border-color:var(--primary);color:#fff;box-shadow:0 0 18px 3px rgba(61,139,255,.5);}
+  .btn-add:hover{background:linear-gradient(rgba(5,12,40,.4),rgba(5,12,40,.4)), url('img/electric-texture.jpg') center/cover;border-color:var(--primary);color:#fff;box-shadow:0 0 15px rgba(0,210,255,.5);}
 
   .cart-box{background:var(--card);border-radius:1rem;padding:1.8rem;box-shadow:0 1px 0 var(--line) inset,0 0 0 1px var(--line);position:sticky;top:150px;}
   .cart-box h2{font-size:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--line);margin-bottom:1.3rem;}
@@ -182,7 +192,7 @@
   .radio-opt{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.78rem;font-weight:700;}
   .radio-opt input{accent-color:var(--primary);}
   .btn-submit{width:100%;background:var(--fg);color:var(--bg);padding:.95rem;font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;margin-top:.4rem;transition:.2s;}
-  .btn-submit:hover:not(:disabled){background:linear-gradient(135deg, var(--primary-deep), var(--primary) 55%, var(--primary-light) 100%);box-shadow:0 0 18px 3px rgba(61,139,255,.5);}
+  .btn-submit:hover:not(:disabled){background:linear-gradient(rgba(5,12,40,.4),rgba(5,12,40,.4)), url('img/electric-texture.jpg') center/cover;box-shadow:0 0 15px rgba(0,210,255,.5);}
   .btn-submit:disabled{opacity:.35;cursor:not-allowed;}
   .cart-note{margin-top:.6rem;text-align:center;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-faint);}
   .btn-ticket{
