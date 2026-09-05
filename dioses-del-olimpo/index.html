@@ -64,7 +64,9 @@
   nav{
     position:sticky;top:0;z-index:50;
     padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.15);
-    background:linear-gradient(135deg, var(--primary-deep) 0%, var(--primary) 55%, var(--primary-light) 100%);
+    background:
+      linear-gradient(135deg, rgba(5,48,184,.55) 0%, rgba(30,111,255,.45) 55%, rgba(91,157,255,.35) 100%),
+      url('img/electric-texture.jpg') center/cover;
   }
   nav, nav .brand-name{color:#fff;}
   .nav-inner{display:flex;align-items:center;}
@@ -122,11 +124,16 @@
   .hero-content{position:relative;z-index:2;width:100%;}
   .hero-text{max-width:600px;}
   .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
-  .hero h1 span{
-    color:var(--primary);
-    background:url('img/electric-texture.jpg') center/cover;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    filter:drop-shadow(0 0 10px rgba(30,111,255,.65));
+  /* Azul sólido de base SIEMPRE (así nunca se ve negra si el navegador no
+     soporta recortar la imagen dentro de la letra); la textura de rayo
+     entra como mejora extra solo si el navegador confirma que la soporta. */
+  .hero h1 span{color:var(--primary);}
+  @supports (background-clip:text) or (-webkit-background-clip:text){
+    .hero h1 span{
+      background:url('img/electric-texture.jpg') center/cover;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 0 10px rgba(30,111,255,.65));
+    }
   }
   .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
   .btn-hero{
