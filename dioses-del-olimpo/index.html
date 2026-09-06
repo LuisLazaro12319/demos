@@ -48,20 +48,8 @@
     border-bottom-color:var(--line);
   }
   nav, nav .brand-name{color:#fff;}
-  .brand-accent{color:#53c0f0;}
-  @supports (background-clip:text) or (-webkit-background-clip:text){
-    .brand-accent{
-      background: url('img/fondo-letras.jpg') center/cover;
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-  }
-  .footer-brand span.brand-accent{color:#53c0f0;}
-  @supports (background-clip:text) or (-webkit-background-clip:text){
-    .footer-brand span.brand-accent{
-      background: url('img/fondo-letras.jpg') center/cover;
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-  }
+  .brand-accent{color:var(--primary-deep);}
+  .footer-brand span.brand-accent{color:var(--primary-deep);}
   .nav-inner{display:flex;align-items:center;}
   .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
   .brand-logo-box{position:relative;height:36px;display:flex;align-items:center;padding-left:50px;}
