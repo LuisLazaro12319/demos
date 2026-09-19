@@ -162,7 +162,6 @@
       <a href="#entregas">Entregas</a>
       <a href="#nosotros">Nosotros</a>
     </nav>
-    <a class="btn" id="navWa" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </header>
 
@@ -270,11 +269,11 @@
 const shop = {
   name: "Dulce Arte",
   tagline: "Pastelería y repostería artesanal",
-  whatsapp: "5491122334455",
+  whatsapp: "5491161258879",
   currency: "$",
   instagram: "@dulcearte",
   email: "hola@dulcearte.com",
-  address: "Av. Siempreviva 742, Barrio Centro",
+  address: "Ramón Falcón 7168, Liniers, CABA",
   hours: [
     { days: "Martes a Viernes", time: "10:00 – 19:00" },
     { days: "Sábados", time: "10:00 – 14:00" },
@@ -329,7 +328,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 
 const waLink = (text) => "https://wa.me/" + shop.whatsapp + "?text=" + encodeURIComponent(text);
 const helloText = "¡Hola " + shop.name + "! Quiero hacer una consulta sobre la carta.";
-["navWa","aboutWa","fabWa"].forEach(id => document.getElementById(id).href = waLink(helloText));
+["aboutWa","fabWa"].forEach(id => document.getElementById(id).href = waLink(helloText));
 
 document.getElementById("footIg").textContent = shop.instagram;
 document.getElementById("footIg").href = "https://instagram.com/" + shop.instagram.replace("@","");
