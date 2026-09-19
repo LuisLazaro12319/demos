@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dulce Arte — Pastelería y repostería artesanal</title>
+<meta name="description" content="Tortas, tartas, porciones y postres artesanales. Elegí tu pastel y encargalo por WhatsApp para coordinar pago y envío.">
+<meta property="og:title" content="Dulce Arte — Pastelería y repostería artesanal">
+<meta property="og:description" content="Elegí tu torta o postre artesanal y encargalo por WhatsApp en un toque.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Plantilla de demo: reemplazar shop.whatsapp por el numero real antes de mandarla a un cliente -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --radius:.75rem;
+    --bg:oklch(0.985 0.012 85);
+    --fg:oklch(0.26 0.035 45);
+    --card:oklch(0.995 0.008 85);
+    --primary:oklch(0.45 0.09 35);
+    --primary-fg:oklch(0.98 0.012 85);
+    --secondary:oklch(0.945 0.022 75);
+    --secondary-fg:oklch(0.32 0.04 40);
+    --muted-fg:oklch(0.52 0.035 50);
+    --accent:oklch(0.92 0.035 40);
+    --accent-fg:oklch(0.32 0.04 40);
+    --border:oklch(0.9 0.02 70);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:Karla,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;}
+  .serif{font-family:'Cormorant Garamond',Georgia,serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;border:none;background:none;cursor:pointer;}
+  .wrap{max-width:72rem;margin:0 auto;padding:0 1.25rem;}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--border);background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);}
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:4.5rem;}
+  .brand{display:flex;flex-direction:column;line-height:1.1;}
+  .brand .name{font-size:1.25rem;}
+  .brand .sub{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-fg);}
+  nav{display:none;gap:1.8rem;font-size:.92rem;color:var(--muted-fg);}
+  nav a:hover{color:var(--fg);}
+  @media(min-width:768px){nav{display:flex;}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.5rem;padding:0 1.1rem;border-radius:var(--radius);
+       background:var(--primary);color:var(--primary-fg);font-weight:600;font-size:.9rem;transition:filter .2s,transform .2s;}
+  .btn:hover{filter:brightness(1.12);transform:translateY(-1px);}
+  .btn-lg{height:3rem;padding:0 1.6rem;font-size:1rem;}
+  .btn-outline{background:transparent;border:1px solid var(--border);color:var(--fg);}
+  .btn-outline:hover{background:var(--secondary);}
+
+  /* HERO */
+  .hero{position:relative;}
+  .hero img{width:100%;height:62vh;min-height:380px;object-fit:cover;}
+  .hero .ov{position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 0%,color-mix(in oklab,var(--bg) 55%,transparent) 62%,transparent 100%);}
+  .hero-content{position:absolute;inset:0;display:flex;align-items:flex-end;}
+  .hero-content .wrap{padding-bottom:3rem;}
+  .kicker{font-size:.75rem;text-transform:uppercase;letter-spacing:.28em;color:var(--primary);font-weight:700;margin-bottom:.4rem;}
+  .hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);max-width:36rem;line-height:1.1;}
+  .hero p{margin-top:1rem;max-width:34rem;color:var(--muted-fg);}
+  .hero .btn{margin-top:1.6rem;}
+
+  section.pad{padding:4.5rem 0;}
+  @media(min-width:640px){section.pad{padding:5.5rem 0;}}
+  h2.big{font-size:clamp(1.8rem,3.6vw,2.5rem);}
+
+  /* CATEGORIAS */
+  .cats{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem;}
+  .cat-btn{border-radius:999px;padding:.5rem 1.1rem;font-size:.85rem;font-weight:600;border:1px solid var(--border);color:var(--muted-fg);transition:.2s;}
+  .cat-btn.active,.cat-btn:hover{background:var(--primary);border-color:var(--primary);color:var(--primary-fg);}
+
+  /* GRID */
+  .grid{display:grid;gap:2rem;margin-top:2.5rem;grid-template-columns:1fr;}
+  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1024px){.grid{grid-template-columns:1fr 1fr 1fr;}}
+  .pcard{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:1rem;background:var(--card);
+         box-shadow:0 1px 2px oklch(0.26 0.035 45/.04);transition:transform .3s,box-shadow .3s;cursor:pointer;}
+  .pcard:hover{transform:translateY(-4px);box-shadow:0 18px 34px -20px oklch(0.26 0.035 45/.25);}
+  .pcard .thumb{position:relative;aspect-ratio:1/1;overflow:hidden;}
+  .pcard .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .pcard:hover .thumb img{transform:scale(1.05);}
+  .pcard .tag{position:absolute;left:.8rem;top:.8rem;background:color-mix(in oklab,var(--bg) 92%,transparent);
+              padding:.25rem .7rem;border-radius:999px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);}
+  .pcard .body{display:flex;flex-direction:column;flex:1;padding:1.25rem;}
+  .pcard h3{font-size:1.25rem;}
+  .pcard .desc{margin-top:.5rem;font-size:.88rem;color:var(--muted-fg);flex:1;}
+  .pcard .sizes{margin-top:.7rem;font-size:.75rem;color:var(--muted-fg);}
+  .pcard .row{display:flex;align-items:center;justify-content:space-between;margin-top:1.1rem;}
+  .pcard .from{font-size:1.1rem;}
+  .pcard .btn-sm{height:2.25rem;padding:0 .9rem;font-size:.82rem;}
+
+  /* ENTREGAS */
+  #entregas{background:var(--secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .two{display:grid;gap:2.5rem;}
+  @media(min-width:768px){.two{grid-template-columns:1fr 1fr;}}
+  .policies{margin-top:1.3rem;display:flex;flex-direction:column;gap:.7rem;font-size:.9rem;color:var(--secondary-fg);}
+  .policies li{display:flex;gap:.6rem;list-style:none;}
+  .policies li::before{content:"•";color:var(--primary);font-weight:700;}
+  .hours{margin-top:1.3rem;font-size:.9rem;}
+  .hours div{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:.55rem 0;}
+  .hours div:last-child{border-bottom:none;}
+  .hours .d{color:var(--muted-fg);}
+
+  /* NOSOTROS */
+  #nosotros{text-align:center;max-width:42rem;margin:0 auto;padding:5rem 1.25rem;}
+  #nosotros p{margin-top:1.1rem;color:var(--muted-fg);}
+  #nosotros .btn{margin-top:1.6rem;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:3rem 0;}
+  .fgrid{display:grid;gap:2rem;}
+  @media(min-width:768px){.fgrid{grid-template-columns:1.3fr 1fr 1fr;}}
+  .fgrid h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--primary);margin-bottom:.8rem;}
+  .fgrid p,.fgrid a{font-size:.88rem;color:var(--muted-fg);display:block;margin-bottom:.4rem;}
+  .fgrid a:hover{color:var(--primary);}
+  .copy{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted-fg);text-align:center;}
+
+  /* MODAL */
+  .overlay{position:fixed;inset:0;background:oklch(0.2 0.02 45/.5);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem;}
+  .overlay.open{display:flex;}
+  .modal{background:var(--card);border-radius:1rem;max-width:34rem;width:100%;max-height:90vh;overflow-y:auto;padding:1.75rem;position:relative;}
+  .modal .close{position:absolute;right:1rem;top:1rem;width:2rem;height:2rem;border-radius:999px;background:var(--secondary);font-size:1.1rem;line-height:1;}
+  .modal h3{font-size:1.5rem;padding-right:2rem;}
+  .modal .desc{margin-top:.4rem;color:var(--muted-fg);font-size:.9rem;}
+  .field-lbl{margin:1.2rem 0 .5rem;font-size:.88rem;font-weight:600;}
+  .opt-grid{display:grid;gap:.5rem;}
+  .opt-row{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:.6rem;padding:.7rem 1rem;font-size:.9rem;text-align:left;transition:.15s;}
+  .opt-row.active{border-color:var(--primary);background:color-mix(in oklab,var(--primary) 10%,transparent);}
+  .pills{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem .9rem;font-size:.85rem;transition:.15s;}
+  .pill.active{border-color:var(--primary);background:color-mix(in oklab,var(--primary) 10%,transparent);}
+  .mode-row{display:flex;gap:.5rem;}
+  .mode-row button{flex:1;border:1px solid var(--border);border-radius:.6rem;padding:.6rem;font-size:.85rem;transition:.15s;}
+  .mode-row button.active{border-color:var(--primary);background:color-mix(in oklab,var(--primary) 10%,transparent);}
+  textarea{width:100%;border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font:inherit;font-size:.88rem;resize:vertical;background:var(--bg);color:var(--fg);}
+  textarea:focus{outline:none;border-color:var(--primary);}
+  .total-row{display:flex;align-items:center;justify-content:space-between;background:var(--secondary);border-radius:.6rem;padding:.8rem 1rem;margin-top:1.3rem;}
+  .total-row strong{font-size:1.25rem;}
+  .modal .btn{width:100%;margin-top:1rem;}
+  .fine{margin-top:.6rem;text-align:center;font-size:.72rem;color:var(--muted-fg);}
+
+  .fab{position:fixed;right:1.3rem;bottom:1.3rem;z-index:60;width:3.5rem;height:3.5rem;border-radius:999px;background:#25D366;
+       display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px oklch(0.6 0.15 150/.4);transition:transform .2s;}
+  .fab:hover{transform:scale(1.07);}
+  .fab svg{width:1.7rem;height:1.7rem;fill:#fff;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hbar">
+    <a href="#inicio" class="brand">
+      <span class="name serif">Dulce Arte</span>
+      <span class="sub">Artesanal</span>
+    </a>
+    <nav>
+      <a href="#carta">Carta</a>
+      <a href="#entregas">Entregas</a>
+      <a href="#nosotros">Nosotros</a>
+    </nav>
+    <a class="btn" id="navWa" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<section id="inicio" class="hero">
+  <img src="img/hero.jpg" alt="Pastelera decorando una torta artesanal">
+  <div class="ov"></div>
+  <div class="hero-content">
+    <div class="wrap">
+      <p class="kicker">Pastelería y repostería artesanal</p>
+      <h1 class="serif">Dulces hechos a mano, uno por uno</h1>
+      <p>Elegí el pastel que te guste y en un toque coordinamos por WhatsApp el sabor, la fecha, el pago y la entrega.</p>
+      <a class="btn btn-lg" href="#carta">Ver la carta</a>
+    </div>
+  </div>
+</section>
+
+<section id="carta" class="pad">
+  <div class="wrap">
+    <h2 class="big serif">Nuestra carta</h2>
+    <p style="margin-top:.5rem;color:var(--muted-fg)">Tocá cualquier producto para elegir tamaño y sabor.</p>
+    <div class="cats" id="cats"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="entregas" class="pad">
+  <div class="wrap two">
+    <div>
+      <h2 class="big serif">Entregas y pagos</h2>
+      <ul class="policies" id="policies"></ul>
+    </div>
+    <div>
+      <h2 class="big serif">Horarios</h2>
+      <div class="hours" id="hours"></div>
+      <p style="margin-top:1.2rem;font-size:.9rem;color:var(--muted-fg)" id="address"></p>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <h2 class="big serif">El oficio artesanal</h2>
+  <p>Trabajamos en pequeñas tandas, con manteca de verdad, frutas de estación y dulce de leche repostero. Nada se congela ni se produce en serie: cada torta se arma el día anterior a la entrega para que llegue fresca a tu mesa.</p>
+  <a class="btn btn-lg" id="aboutWa" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+</section>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <h4>Dulce Arte</h4>
+      <p>Pastelería y repostería artesanal, con pedidos coordinados por WhatsApp.</p>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <a id="footIg" target="_blank" rel="noopener"></a>
+      <p id="footEmail"></p>
+    </div>
+    <div>
+      <h4>Dirección</h4>
+      <p id="footAddress"></p>
+    </div>
+  </div>
+  <div class="wrap copy">© 2026 Dulce Arte · Sitio de demostración</div>
+</footer>
+
+<a class="fab" id="fabWa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.94 14.5L2 22l5.66-1.48A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .78.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close" id="closeModal" aria-label="Cerrar">&times;</button>
+    <h3 class="serif" id="mName"></h3>
+    <p class="desc" id="mDesc"></p>
+
+    <div id="sizeBlock" style="display:none">
+      <p class="field-lbl">Tamaño</p>
+      <div class="opt-grid" id="sizeOpts"></div>
+    </div>
+
+    <div id="flavorBlock" style="display:none">
+      <p class="field-lbl">Sabor o relleno</p>
+      <div class="pills" id="flavorOpts"></div>
+    </div>
+
+    <p class="field-lbl">Entrega</p>
+    <div class="mode-row" id="modeOpts">
+      <button data-mode="Retiro en el local" class="active">Retiro en el local</button>
+      <button data-mode="Envío a domicilio">Envío a domicilio</button>
+    </div>
+
+    <p class="field-lbl">Notas (fecha, dedicatoria, alergias…)</p>
+    <textarea id="notes" rows="3" placeholder='Ej: la necesito para el sábado 12, dedicatoria "Feliz cumple Sol"'></textarea>
+
+    <div class="total-row">
+      <span style="font-size:.88rem;color:var(--muted-fg)">Total estimado</span>
+      <strong class="serif" id="mPrice"></strong>
+    </div>
+
+    <a class="btn btn-lg" id="mWa" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+    <p class="fine">Se abre WhatsApp con tu pedido escrito para coordinar pago y envío.</p>
+  </div>
+</div>
+
+<script>
+const shop = {
+  name: "Dulce Arte",
+  tagline: "Pastelería y repostería artesanal",
+  whatsapp: "5491122334455",
+  currency: "$",
+  instagram: "@dulcearte",
+  email: "hola@dulcearte.com",
+  address: "Av. Siempreviva 742, Barrio Centro",
+  hours: [
+    { days: "Martes a Viernes", time: "10:00 – 19:00" },
+    { days: "Sábados", time: "10:00 – 14:00" },
+    { days: "Domingos y lunes", time: "Cerrado" },
+  ],
+  policies: [
+    "Pedidos de tortas enteras con 48 h de anticipación.",
+    "Retiro en el local o envío a domicilio (costo según zona).",
+    "Seña del 50 % para confirmar el pedido; el resto al retirar o recibir.",
+    "Aceptamos transferencia y efectivo.",
+  ],
+};
+
+const categories = ["Todo","Tortas enteras","Porciones","Tartas dulces","Postres individuales","Personalizadas"];
+
+const products = [
+  { id:"torta-chocolate", name:"Torta de chocolate intenso", category:"Tortas enteras",
+    description:"Bizcochuelo húmedo de cacao puro, relleno de ganache y terminada con virutas de chocolate semiamargo.",
+    price:18000, image:"img/torta-chocolate.jpg",
+    sizes:[{label:"8 porciones (16 cm)",price:18000},{label:"12 porciones (20 cm)",price:25000},{label:"20 porciones (24 cm)",price:36000}],
+    flavors:["Ganache clásico","Con dulce de leche","Con frambuesa"] },
+  { id:"lemon-pie", name:"Lemon pie con merengue", category:"Tartas dulces",
+    description:"Masa sablée crocante, curd de limón natural y merengue italiano tostado a mano.",
+    price:14500, image:"img/lemon-pie.jpg",
+    sizes:[{label:"Tarta chica (6 porciones)",price:14500},{label:"Tarta grande (10 porciones)",price:21000}] },
+  { id:"tarta-frutilla", name:"Tarta de frutillas y crema pastelera", category:"Tartas dulces",
+    description:"Frutillas frescas glaseadas sobre crema pastelera de vainilla y base de masa quebrada.",
+    price:16000, image:"img/tarta-frutilla.jpg",
+    sizes:[{label:"Tarta chica (6 porciones)",price:16000},{label:"Tarta grande (10 porciones)",price:23000}] },
+  { id:"porcion-red-velvet", name:"Porción de red velvet", category:"Porciones",
+    description:"Capas de bizcocho red velvet con frosting de queso crema. Lista para llevar.",
+    price:3800, image:"img/porcion-red-velvet.jpg",
+    sizes:[{label:"1 porción",price:3800},{label:"Pack de 4 porciones",price:14000}] },
+  { id:"postre-individual", name:"Postre en frasco de dulce de leche", category:"Postres individuales",
+    description:"Capas de crumble, crema batida y dulce de leche repostero en frasco de vidrio.",
+    price:4200, image:"img/postre-individual.jpg",
+    sizes:[{label:"1 frasco",price:4200},{label:"Pack de 6",price:23000}],
+    flavors:["Dulce de leche","Chocolate","Maracuyá"] },
+  { id:"alfajores", name:"Caja de alfajores y mini pastelería", category:"Postres individuales",
+    description:"Selección de alfajores de maicena, tartaletas y bocaditos artesanales para compartir.",
+    price:12000, image:"img/alfajores.jpg",
+    sizes:[{label:"Caja de 6",price:12000},{label:"Caja de 12",price:21000}] },
+  { id:"torta-personalizada", name:"Torta personalizada", category:"Personalizadas",
+    description:"Diseñamos tu torta para cumpleaños, casamientos o eventos: colores, flores naturales y sabores a elección.",
+    price:30000, image:"img/torta-personalizada.jpg",
+    sizes:[{label:"12 porciones",price:30000},{label:"20 porciones",price:42000},{label:"2 pisos (35 porciones)",price:68000}],
+    flavors:["Vainilla y frutos rojos","Chocolate y dulce de leche","Limón y merengue","A definir juntos"] },
+];
+
+const money = n => shop.currency + n.toLocaleString("es-AR");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const waLink = (text) => "https://wa.me/" + shop.whatsapp + "?text=" + encodeURIComponent(text);
+const helloText = "¡Hola " + shop.name + "! Quiero hacer una consulta sobre la carta.";
+["navWa","aboutWa","fabWa"].forEach(id => document.getElementById(id).href = waLink(helloText));
+
+document.getElementById("footIg").textContent = shop.instagram;
+document.getElementById("footIg").href = "https://instagram.com/" + shop.instagram.replace("@","");
+document.getElementById("footEmail").textContent = shop.email;
+document.getElementById("footAddress").textContent = shop.address;
+document.getElementById("address").textContent = shop.address;
+
+document.getElementById("policies").innerHTML = shop.policies.map(p => "<li>" + esc(p) + "</li>").join("");
+document.getElementById("hours").innerHTML = shop.hours.map(h =>
+  '<div><span class="d">' + esc(h.days) + "</span><span>" + esc(h.time) + "</span></div>").join("");
+
+let activeCategory = "Todo";
+const catsEl = document.getElementById("cats");
+function renderCats(){
+  catsEl.innerHTML = categories.map(c =>
+    '<button class="cat-btn' + (c===activeCategory?" active":"") + '" data-cat="' + esc(c) + '">' + esc(c) + "</button>").join("");
+}
+catsEl.addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]");
+  if(!b) return;
+  activeCategory = b.dataset.cat;
+  renderCats();
+  renderGrid();
+});
+
+const gridEl = document.getElementById("grid");
+function renderGrid(){
+  const items = activeCategory==="Todo" ? products : products.filter(p => p.category===activeCategory);
+  gridEl.innerHTML = items.map(p => {
+    const from = p.sizes ? p.sizes[0].price : p.price;
+    return '<article class="pcard" data-open="' + p.id + '">' +
+      '<div class="thumb"><img src="' + p.image + '" alt="' + esc(p.name) + '" loading="lazy">' +
+      '<span class="tag">' + esc(p.category) + '</span></div>' +
+      '<div class="body"><h3 class="serif">' + esc(p.name) + '</h3>' +
+      '<p class="desc">' + esc(p.description) + '</p>' +
+      (p.sizes ? '<p class="sizes">' + p.sizes.map(s=>s.label).join(" · ") + '</p>' : '') +
+      '<div class="row"><span class="from serif">desde ' + money(from) + '</span>' +
+      '<span class="btn btn-sm">Pedir</span></div></div></article>';
+  }).join("");
+}
+gridEl.addEventListener("click", e => {
+  const card = e.target.closest("[data-open]");
+  if(!card) return;
+  openModal(products.find(p => p.id === card.dataset.open));
+});
+
+/* MODAL */
+const overlay = document.getElementById("overlay");
+let current = null, sizeIndex = 0, flavor = "", mode = "Retiro en el local";
+
+function openModal(product){
+  current = product;
+  sizeIndex = 0;
+  flavor = product.flavors ? product.flavors[0] : "";
+  mode = "Retiro en el local";
+  document.getElementById("notes").value = "";
+  document.getElementById("mName").textContent = product.name;
+  document.getElementById("mDesc").textContent = product.description;
+
+  const sizeBlock = document.getElementById("sizeBlock");
+  if(product.sizes){
+    sizeBlock.style.display = "";
+    renderSizes();
+  } else sizeBlock.style.display = "none";
+
+  const flavorBlock = document.getElementById("flavorBlock");
+  if(product.flavors){
+    flavorBlock.style.display = "";
+    renderFlavors();
+  } else flavorBlock.style.display = "none";
+
+  renderMode();
+  updateTotal();
+  overlay.classList.add("open");
+}
+function renderSizes(){
+  document.getElementById("sizeOpts").innerHTML = current.sizes.map((s,i) =>
+    '<button type="button" class="opt-row' + (i===sizeIndex?" active":"") + '" data-size="' + i + '">' +
+    '<span>' + esc(s.label) + '</span><span>' + money(s.price) + '</span></button>').join("");
+}
+document.getElementById("sizeOpts").addEventListener("click", e => {
+  const b = e.target.closest("[data-size]");
+  if(!b) return;
+  sizeIndex = parseInt(b.dataset.size, 10);
+  renderSizes();
+  updateTotal();
+});
+function renderFlavors(){
+  document.getElementById("flavorOpts").innerHTML = current.flavors.map(f =>
+    '<button type="button" class="pill' + (f===flavor?" active":"") + '" data-flavor="' + esc(f) + '">' + esc(f) + '</button>').join("");
+}
+document.getElementById("flavorOpts").addEventListener("click", e => {
+  const b = e.target.closest("[data-flavor]");
+  if(!b) return;
+  flavor = b.dataset.flavor;
+  renderFlavors();
+  updateTotal();
+});
+function renderMode(){
+  document.querySelectorAll("#modeOpts button").forEach(b => b.classList.toggle("active", b.dataset.mode===mode));
+}
+document.getElementById("modeOpts").addEventListener("click", e => {
+  const b = e.target.closest("[data-mode]");
+  if(!b) return;
+  mode = b.dataset.mode;
+  renderMode();
+  updateTotal();
+});
+function currentPrice(){
+  return current.sizes ? current.sizes[sizeIndex].price : current.price;
+}
+function updateTotal(){
+  document.getElementById("mPrice").textContent = money(currentPrice());
+  document.getElementById("mWa").href = buildOrderLink();
+}
+function buildOrderLink(){
+  const size = current.sizes ? current.sizes[sizeIndex] : null;
+  const notes = document.getElementById("notes").value.trim();
+  const lines = [
+    "¡Hola " + shop.name + "! Quiero encargar:",
+    "",
+    "🍰 " + current.name,
+    size ? "Tamaño: " + size.label : null,
+    flavor ? "Sabor / relleno: " + flavor : null,
+    "Precio de referencia: " + money(currentPrice()),
+    "Entrega: " + mode,
+    notes ? "Notas: " + notes : null,
+    "",
+    "¿Me confirmás disponibilidad, forma de pago y envío?",
+  ].filter(Boolean);
+  return waLink(lines.join("\n"));
+}
+document.getElementById("notes").addEventListener("input", () => { document.getElementById("mWa").href = buildOrderLink(); });
+document.getElementById("closeModal").addEventListener("click", () => overlay.classList.remove("open"));
+overlay.addEventListener("click", e => { if(e.target === overlay) overlay.classList.remove("open"); });
+
+renderCats();
+renderGrid();
+</script>
+</body>
+</html>
