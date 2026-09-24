@@ -254,9 +254,14 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media(max-width: 600px) {
-      .menu-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: 2.7rem; }
       .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media(max-width: 420px) {
+      .menu-grid { gap: .6rem; }
+      .card-body { padding: .7rem; }
+      .card-title { font-size: 1rem; }
+      .card-desc { font-size: .7rem; }
     }
   </style>
 </head>
