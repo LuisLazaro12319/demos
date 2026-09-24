@@ -1,839 +1,799 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Los Últimos 10 Choriz | Parrilla y choripanes</title>
-<meta name="description" content="Los Últimos 10 Choriz — choripanes y parrilla al mejor estilo. Armá tu pedido y envialo por WhatsApp: delivery o retiro en el local.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>(function(){try{if(localStorage.getItem('l10c-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-<style>
-  :root{
-    --bg:#fdfcf0;
-    --card:#ffffff;
-    --fg:#1a1a1a;
-    --fg-soft:rgba(26,26,26,.6);
-    --fg-faint:rgba(26,26,26,.4);
-    --line:rgba(26,26,26,.08);
-    --primary:#ff4d00;
-    --primary-dark:#d94100;
-    --secondary:#ffb800;
-    --nav-bg:rgba(253,252,240,.9);
-    color-scheme:light;
-  }
-  :root[data-theme="dark"]{
-    --bg:#150e0a;
-    --card:#1f1611;
-    --fg:#fdfcf0;
-    --fg-soft:rgba(253,252,240,.65);
-    --fg-faint:rgba(253,252,240,.4);
-    --line:rgba(253,252,240,.1);
-    --primary:#ff4d00;
-    --primary-dark:#ff7a3d;
-    --secondary:#ffb800;
-    --nav-bg:rgba(21,14,10,.85);
-    color-scheme:dark;
-  }
-  .theme-toggle{width:34px;height:34px;flex:0 0 34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;}
-  .theme-toggle:hover{border-color:var(--primary);color:var(--primary);}
-  .theme-toggle .moon{display:none;}
-  :root[data-theme="dark"] .theme-toggle .sun{display:none;}
-  :root[data-theme="dark"] .theme-toggle .moon{display:block;}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;}
-  .disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;}
-  .mono{font-family:'JetBrains Mono',monospace;}
-  a{text-decoration:none;color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1280px;margin:0 auto;padding:0 1.2rem;}
-  button{font-family:inherit;border:none;background:none;cursor:pointer;}
-  input{font-family:inherit;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Los Últimos 10 Choriz | Parrilla & Choripanes</title>
+  <meta name="description" content="Los Últimos 10 Choriz — Parrilla al paso y choripanes artesanales. Pedí el tuyo por WhatsApp con delivery o retiro.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){try{if(localStorage.getItem('l10c-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();
+  </script>
+  <style>
+    :root {
+      --bg: #fdfcf0;
+      --card: #ffffff;
+      --fg: #1a1a1a;
+      --fg-soft: rgba(26,26,26,.65);
+      --fg-faint: rgba(26,26,26,.4);
+      --line: rgba(26,26,26,.08);
+      --primary: #ff4d00;
+      --primary-dark: #d94100;
+      --secondary: #ffb800;
+      --nav-bg: rgba(253,252,240,.92);
+      color-scheme: light;
+    }
+    :root[data-theme="dark"] {
+      --bg: #120b08;
+      --card: #1c130d;
+      --fg: #fdfcf0;
+      --fg-soft: rgba(253,252,240,.7);
+      --fg-faint: rgba(253,252,240,.4);
+      --line: rgba(253,252,240,.12);
+      --primary: #ff5e1a;
+      --primary-dark: #ff7a3d;
+      --secondary: #ffb800;
+      --nav-bg: rgba(18,11,8,.92);
+      color-scheme: dark;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; transition: background .25s, color .25s; }
+    .disp { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .5px; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.2rem; }
+    button { font-family: inherit; border: none; background: none; cursor: pointer; }
+    input { font-family: inherit; }
 
-  /* NAV */
-  nav{
-    position:sticky;top:0;z-index:50;
-    padding:.7rem 0;border-bottom:1px solid var(--line);background:var(--nav-bg);backdrop-filter:blur(10px);
-  }
-  .nav-inner{display:flex;align-items:center;}
-  .nav-actions{display:flex;align-items:center;gap:.8rem;margin-left:auto;}
-  /* Caja "fantasma" chica: mantiene el header bajito, pero el logo de adentro
-     es grande y sobresale hacia abajo con position:absolute (no empuja la
-     altura del nav porque un elemento absoluto no cuenta para el alto del flex). */
-  .brand-logo-box{position:relative;height:36px;display:flex;align-items:center;padding-left:100px;}
-  .brand-logo{position:absolute;top:-12px;left:0;height:60px;width:auto;}
-  .brand-name{font-size:1.05rem;letter-spacing:.3px;color:var(--fg);white-space:nowrap;}
-  .brand{font-size:1.8rem;letter-spacing:-1px;color:var(--primary);}
-  .nav-links{display:flex;align-items:center;gap:1.5rem;margin-left:1.6rem;}
-  .nav-links a{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;transition:.2s;}
-  .nav-links a:hover{color:var(--primary);}
-  .cart-btn{position:relative;width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--line);color:var(--fg);display:flex;align-items:center;justify-content:center;transition:.2s;}
-  .cart-btn:hover{background:rgba(255,77,0,.14);color:var(--primary);}
-  .cart-badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--primary);color:#fff;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1;}
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      padding: .75rem 0; border-bottom: 1px solid var(--line); background: var(--nav-bg); backdrop-filter: blur(12px);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .brand-logo-box { display: flex; align-items: center; gap: .7rem; }
+    .brand-logo { height: 44px; width: auto; }
+    .brand-name { font-size: 1.25rem; color: var(--fg); white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links a { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: .2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .live-pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .25rem .7rem; border-radius: 999px;
+      background: rgba(239, 68, 68, 0.12); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25);
+      font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+    .nav-actions { display: flex; align-items: center; gap: .8rem; }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+      background: var(--card); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: .2s;
+    }
+    .theme-toggle:hover { border-color: var(--primary); color: var(--primary); }
+    .theme-toggle .moon { display: none; }
+    :root[data-theme="dark"] .theme-toggle .sun { display: none; }
+    :root[data-theme="dark"] .theme-toggle .moon { display: block; }
 
-  .nav-toggle{display:none;width:38px;height:38px;flex:0 0 38px;border:none;background:transparent;color:var(--fg);cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;}
-  .nav-toggle span{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;transition:.25s;}
-  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-  .nav-toggle.open span:nth-child(2){opacity:0;}
-  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  .mobile-menu{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:.4rem 1.2rem 1rem;flex-direction:column;box-shadow:0 20px 40px rgba(0,0,0,.25);}
-  .mobile-menu a{padding:.85rem .2rem;color:var(--fg);font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);}
-  .mobile-menu a:last-child{border-bottom:none;}
-  .mobile-menu a:hover{color:var(--primary);}
-  .mobile-menu.open{display:flex;}
+    .cart-btn {
+      position: relative; width: 40px; height: 40px; border-radius: 50%;
+      background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; transition: .2s;
+    }
+    .cart-btn:hover { background: var(--primary-dark); transform: scale(1.05); }
+    .cart-badge {
+      position: absolute; top: -3px; right: -3px; min-width: 19px; height: 19px; padding: 0 4px;
+      border-radius: 10px; background: #1a1a1a; color: #fff; font-size: .68rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; border: 2px solid #fff;
+    }
+    :root[data-theme="dark"] .cart-badge { background: #fff; color: #1a1a1a; border-color: #1a1a1a; }
 
-  /* HERO */
-  .hero{display:grid;grid-template-columns:7fr 5fr;gap:2rem;align-items:center;padding:3.5rem 0 3rem;}
-  .hero h1{font-size:5.5rem;line-height:.92;letter-spacing:-2px;margin-bottom:1.3rem;}
-  .hero h1 span{color:var(--primary);}
-  .hero p{max-width:42ch;font-size:1.1rem;color:var(--fg-soft);margin-bottom:1.8rem;}
-  .btn-hero{display:inline-block;background:var(--primary);color:#fff;padding:1rem 2.4rem;font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;transition:.25s;}
-  .btn-hero:hover{background:var(--fg);transform:rotate(-1deg);}
-  /* La cintita y el video van en fila con flexbox: como .tiktok-tab no tiene
-     alto propio, con align-items:stretch (default) toma automáticamente la
-     misma altura que .hero-visual, sin necesidad de position:absolute — y
-     por eso funciona igual en pc y en celu. */
-  .hero-visual-wrap{position:relative;width:min(100%,380px);justify-self:center;display:flex;border-radius:1.2rem;box-shadow:0 10px 28px rgba(0,0,0,.28);}
-  .hero-visual{
-    /* El video real es vertical (576x1024, 9:16) — el recuadro tiene que
-       tener esa misma forma para que entre completo, sin recortar. Solo
-       redondeado del lado derecho: del lado izquierdo se pega a la cintita
-       para que las dos piezas se vean como una sola. */
-    position:relative;flex:1;min-width:0;aspect-ratio:9/16;border-radius:0 1.2rem 1.2rem 0;overflow:hidden;
-  }
-  /* Cintita negra pegada al costado del video: mismo radio que el video pero
-     solo del lado izquierdo, así ambas piezas se leen como una sola forma. */
-  .tiktok-tab{
-    flex-shrink:0;display:flex;align-items:center;justify-content:center;
-    background:#000;text-decoration:none;border-radius:1.2rem 0 0 1.2rem;
-    padding:0 .5rem;transition:.2s;
-  }
-  .tiktok-tab:hover{background:#1a1a1a;}
-  .tiktok-tab span{
-    writing-mode:vertical-rl;transform:rotate(180deg);
-    color:#fff;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;
-  }
-  .hero-slide{
-    position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;
-    background:linear-gradient(150deg,var(--primary) 0%,var(--secondary) 100%);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .hero-slide.active{opacity:1;pointer-events:auto;}
-  .hero-slide svg{width:38%;height:38%;color:rgba(255,255,255,.9);}
-  .hero-slide video,.hero-slide img{width:100%;height:100%;object-fit:cover;display:block;}
-  .hero-arrow{
-    position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
-    background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:1rem;z-index:2;transition:.2s;
-  }
-  .hero-arrow:hover{background:rgba(0,0,0,.7);}
-  .hero-arrow.prev{left:.7rem;}
-  .hero-arrow.next{right:.7rem;}
-  .hero-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:2;}
-  .hero-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);transition:.2s;cursor:pointer;}
-  .hero-dots span.active{background:#fff;width:20px;border-radius:4px;}
-  .video-controls{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.4rem;z-index:3;}
-  .video-btn{width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:.2s;}
-  .video-btn:hover{background:rgba(0,0,0,.75);}
+    /* APPLE-STYLE CINEMATIC HERO */
+    .apple-hero {
+      background: radial-gradient(circle at 50% 20%, #2b140b 0%, #110906 70%, #0d0705 100%);
+      color: #fff; padding: 3rem 0 4rem; position: relative; overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .hero-topbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem;
+      padding-bottom: 1.2rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,.1); font-size: .78rem;
+    }
+    .hero-top-left { display: flex; align-items: center; gap: .7rem; }
+    .hero-top-left a { color: #f87171; font-weight: 700; display: inline-flex; align-items: center; gap: .3rem; }
+    .hero-top-left a:hover { text-decoration: underline; color: #fff; }
 
-  section{padding:0;}
-  .eyebrow{display:block;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
+    .hero-tabs {
+      display: flex; justify-content: center; gap: .5rem; margin-bottom: 2.5rem; overflow-x: auto; padding-bottom: .4rem;
+    }
+    .hero-tab-btn {
+      padding: .5rem 1.1rem; border-radius: 999px; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.75); font-size: .8rem; font-weight: 700;
+      white-space: nowrap; transition: .2s;
+    }
+    .hero-tab-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
+    .hero-tab-btn.active {
+      background: var(--primary); color: #fff; border-color: var(--primary);
+      box-shadow: 0 4px 20px rgba(255,77,0,.4); transform: scale(1.03);
+    }
 
-  /* PROMO — a todo el ancho de la pantalla: va afuera del .wrap (main ya no tiene
-     padding propio, son dos .wrap internos: uno antes y otro después de esto) */
-  .promo-banner{display:block;width:100%;margin-top:1rem;}
-  .promo-banner img{width:100%;aspect-ratio:1856/576;object-fit:cover;display:block;}
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 1.3fr; gap: 3rem; align-items: center; }
+    .hero-eyebrow { font-size: .8rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); margin-bottom: .6rem; }
+    .hero-title { font-size: 4.8rem; line-height: .93; letter-spacing: -1.5px; margin-bottom: 1.2rem; }
+    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,.75); margin-bottom: 1.8rem; max-width: 44ch; }
+    
+    .hero-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      padding: 1.2rem 0; margin-bottom: 2rem; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .spec-item { display: flex; flex-direction: column; }
+    .spec-lbl { font-size: .7rem; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 700; }
+    .spec-val { font-size: 1.25rem; color: #fff; font-family: 'Anton', sans-serif; }
+    .spec-det { font-size: .72rem; color: rgba(255,255,255,.6); }
 
-  /* CATEGORÍAS — quedan fijas en su lugar normal de la página, no flotan
-     al scrollear (nada de sticky ni fixed: cero riesgo de que se rompa). */
-  .cats-bar{background:var(--bg);border-bottom:1px solid var(--line);padding:1.4rem 0;}
-  .cats{display:flex;flex-wrap:wrap;gap:.8rem;}
-  .cat-btn{white-space:nowrap;border-radius:20px;padding:.5rem 1.3rem;font-size:.82rem;font-weight:800;border:1px solid var(--line);transition:.2s;}
-  .cat-btn:hover{border-color:var(--primary);}
-  .cat-btn.active{background:var(--fg);color:var(--bg);border-color:var(--fg);}
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .btn-hero-primary {
+      padding: .85rem 1.8rem; border-radius: 999px; background: var(--primary); color: #fff;
+      font-family: 'Anton', sans-serif; font-size: 1.15rem; text-transform: uppercase; letter-spacing: .5px;
+      box-shadow: 0 8px 24px rgba(255,77,0,.35); transition: .2s; display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-hero-primary:hover { background: #e03e00; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,77,0,.5); }
+    .btn-hero-secondary {
+      padding: .85rem 1.5rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.25);
+      color: #fff; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: .2s;
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,.1); border-color: #fff; }
 
-  /* MENÚ + CARRITO */
-  .menu-layout{display:grid;grid-template-columns:8fr 4fr;gap:3rem;padding:3rem 0;align-items:start;}
-  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
-  .menu-item-img{
-    position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;margin-bottom:1rem;
-    display:flex;align-items:center;justify-content:center;transition:.3s;
-  }
-  .menu-item{display:flex;flex-direction:column;height:100%;}
-  .menu-item:hover .menu-item-img{box-shadow:0 0 0 2px var(--primary);}
-  .menu-item-img svg{width:34%;height:34%;color:rgba(255,255,255,.85);}
-  .menu-item-img img{width:100%;height:100%;object-fit:cover;display:block;}
-  .mi-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.4rem;}
-  .mi-head h3{font-size:1.35rem;}
-  .mi-price{color:var(--primary);font-weight:700;flex-shrink:0;}
-  .mi-desc{font-size:.88rem;color:var(--fg-soft);margin-bottom:1rem;}
-  .btn-add{width:100%;border:2px solid var(--fg);padding:.7rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;transition:.2s;margin-top:auto;}
-  .btn-add:hover{background:var(--fg);color:var(--bg);}
+    /* Showcase frame */
+    .hero-stage {
+      position: relative; border-radius: 1.8rem; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.15); background: #000; box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 50px rgba(255,77,0,.2);
+    }
+    .stage-img-wrap { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+    .stage-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+    .hero-stage:hover .stage-img-wrap img { transform: scale(1.04); }
+    
+    .stage-badge-live {
+      position: absolute; top: 1rem; left: 1rem; z-index: 10;
+      background: rgba(0,0,0,.75); backdrop-filter: blur(10px);
+      padding: .35rem .8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.2);
+      font-size: .7rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: .5rem;
+    }
+    .stage-badge-price {
+      position: absolute; top: 1rem; right: 1rem; z-index: 10;
+      background: var(--primary); padding: .35rem .85rem; border-radius: 999px;
+      font-size: .85rem; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace;
+    }
+    .stage-hotspots {
+      position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 10;
+      display: flex; flex-wrap: wrap; gap: .5rem;
+    }
+    .hotspot-pill {
+      background: rgba(0,0,0,.8); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2);
+      padding: .35rem .75rem; border-radius: .8rem; font-size: .72rem; color: #fff;
+    }
+    .hotspot-pill span { color: var(--primary); font-weight: 800; margin-right: .3rem; }
 
-  .cart-box{background:var(--card);border-radius:1rem;padding:1.8rem;box-shadow:0 1px 0 var(--line) inset,0 0 0 1px var(--line);position:sticky;top:150px;}
-  .cart-box h2{font-size:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--line);margin-bottom:1.3rem;}
-  .cart-empty{font-size:.88rem;color:var(--fg-faint);}
-  .cart-lines{display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.6rem;}
-  .cart-line{display:flex;align-items:center;justify-content:space-between;font-size:.85rem;}
-  .cart-line-left{display:flex;align-items:center;gap:.5rem;}
-  .qty-btn{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center;transition:.2s;}
-  .qty-btn:hover{border-color:var(--primary);color:var(--primary);}
-  .cart-total{display:flex;justify-content:space-between;font-family:'Anton',sans-serif;font-size:1.5rem;text-transform:uppercase;border-top:1px dashed var(--line);padding-top:1rem;margin-bottom:1.6rem;}
-  .cart-total span:last-child{color:var(--primary);}
-  .field{margin-bottom:.9rem;}
-  .field label{display:block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem;}
-  .field input{width:100%;border:none;border-bottom:1px solid var(--line);background:transparent;padding:.5rem 0;font-size:.88rem;outline:none;transition:.2s;}
-  .field input:focus{border-color:var(--primary);}
-  .btn-ubicacion{
-    width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;
-    background:rgba(255,77,0,.08);border:1.5px dashed var(--primary);color:var(--primary-dark);
-    padding:.65rem;border-radius:8px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;transition:.2s;
-  }
-  .btn-ubicacion:hover{background:rgba(255,77,0,.14);}
-  .btn-ubicacion.ok{background:rgba(34,150,60,.1);border-color:#22963c;color:#1a7a30;border-style:solid;}
-  .ubicacion-nota{margin-top:.4rem;font-size:.68rem;color:var(--fg-faint);}
-  .radios{display:flex;gap:1.2rem;margin-bottom:1rem;}
-  .radio-opt{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.78rem;font-weight:700;}
-  .radio-opt input{accent-color:var(--primary);}
-  .btn-submit{width:100%;background:var(--fg);color:var(--bg);padding:.95rem;font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;margin-top:.4rem;transition:.2s;}
-  .btn-submit:hover:not(:disabled){background:var(--primary);}
-  .btn-submit:disabled{opacity:.35;cursor:not-allowed;}
-  .cart-note{margin-top:.6rem;text-align:center;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;color:var(--fg-faint);}
-  .btn-ticket{
-    width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;
-    background:transparent;border:1.5px dashed var(--fg-faint);color:var(--fg-soft);
-    padding:.7rem;border-radius:8px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;
-    margin-top:.9rem;transition:.2s;
-  }
-  .btn-ticket:hover:not(:disabled){border-color:var(--fg);color:var(--fg);}
-  .btn-ticket:disabled{opacity:.35;cursor:not-allowed;}
+    /* STOCK BAR */
+    .stock-ticker {
+      background: rgba(255,77,0,.08); border-bottom: 1px solid rgba(255,77,0,.2);
+      padding: .8rem 0; font-size: .82rem;
+    }
+    .stock-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem; }
+    .stock-lbl { font-weight: 800; color: var(--primary); text-transform: uppercase; }
 
-  /* FOOTER */
-  footer{margin-top:4rem;background:#1a1a1a;color:#b8b3aa;padding:4rem 0 2rem;}
-  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.5rem;}
-  .footer-brand{display:flex;align-items:center;gap:.6rem;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;text-transform:uppercase;}
-  .footer-brand span{color:var(--secondary);}
-  .footer-logo{height:44px;width:auto;}
-  .footer-col.about p{font-size:.85rem;line-height:1.7;max-width:280px;}
-  .footer-col h4{color:#fff;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:1.1rem;}
-  .footer-col p{font-size:.85rem;}
-  .footer-col p+p{margin-top:.4rem;}
-  .footer-nav{display:flex;flex-direction:column;gap:.7rem;}
-  .footer-nav a{font-size:.85rem;}
-  .footer-nav a:hover{color:var(--primary);}
-  .footer-socials{display:flex;gap:.7rem;margin-bottom:1.2rem;}
-  .social-btn{
-    width:40px;height:40px;flex:0 0 40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
-    display:flex;align-items:center;justify-content:center;line-height:0;padding:0;
-    color:#fff;background:rgba(255,255,255,.05);transition:.25s;
-  }
-  .social-btn svg{display:block;flex-shrink:0;}
-  .social-btn:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent;}
-  .social-btn.wa:hover{background:#25d366;border-color:transparent;}
-  .footer-link{display:block;color:#c3beb5;font-size:.83rem;text-decoration:underline;}
-  .footer-link:hover{color:var(--secondary);}
-  footer .fine{font-size:.78rem;color:#8a857c;border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;text-align:center;}
+    /* PROMO BANNER */
+    .promo-box {
+      margin: 2rem 0; border-radius: 1.2rem; overflow: hidden;
+      background: linear-gradient(135deg, #ff4d00, #ff8400); color: #fff; padding: 1.5rem 2rem;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+      cursor: pointer; transition: .25s; box-shadow: 0 10px 25px rgba(255,77,0,.3);
+    }
+    .promo-box:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(255,77,0,.45); }
 
-  @media(max-width:700px){
-    .nav-links{display:none;}
-    .nav-toggle{display:flex;}
-    .brand-name{font-size:.72rem;letter-spacing:0;}
-  }
-  @media(max-width:360px){
-    .brand-name{display:none;}
-  }
-  @media(max-width:900px){
-    .hero{grid-template-columns:1fr;}
-    .hero h1{font-size:3.4rem;}
-    .hero-visual-wrap{width:min(100%,320px);order:-1;}
-    .menu-layout{grid-template-columns:1fr;}
-    .menu-grid{grid-template-columns:1fr 1fr;}
-    .cart-box{position:static;}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-    .brand-logo{height:46px;top:-4px;}
-    .brand-logo-box{padding-left:80px;}
-  }
-  @media(max-width:520px){
-    .menu-grid{grid-template-columns:1fr;}
-    .hero h1{font-size:2.6rem;}
-    .footer-grid{grid-template-columns:1fr;gap:2rem;}
-    .footer-col.about p{max-width:none;}
-  }
-</style>
+    /* MENU + CART */
+    .menu-layout { display: grid; grid-template-columns: 1fr 380px; gap: 2.2rem; align-items: start; margin: 3rem 0; }
+    .cats-bar { display: flex; gap: .5rem; margin-bottom: 1.5rem; overflow-x: auto; padding-bottom: .4rem; }
+    .cat-btn {
+      padding: .45rem 1.1rem; border-radius: 999px; background: rgba(0,0,0,.05);
+      border: 1px solid var(--line); font-size: .78rem; font-weight: 800; text-transform: uppercase; transition: .2s;
+    }
+    :root[data-theme="dark"] .cat-btn { background: rgba(255,255,255,.05); }
+    .cat-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .food-card {
+      border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; background: var(--card);
+      display: flex; flex-direction: column; justify-content: space-between; transition: .25s;
+    }
+    .food-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.08); }
+    .card-img-wrap { aspect-ratio: 16/10; overflow: hidden; background: #eee; position: relative; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-title { font-size: 1.2rem; margin-bottom: .3rem; }
+    .card-desc { font-size: .78rem; color: var(--fg-soft); margin-bottom: .8rem; }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: .7rem; }
+    .card-price { font-size: 1.1rem; font-weight: 700; color: var(--primary); font-family: 'JetBrains Mono', monospace; }
+    .btn-add {
+      background: var(--primary); color: #fff; padding: .4rem .9rem; border-radius: 999px;
+      font-size: .75rem; font-weight: 800; text-transform: uppercase; transition: .2s;
+    }
+    .btn-add:hover { background: var(--primary-dark); }
+
+    /* CART */
+    .cart-box {
+      border: 1px solid var(--line); border-radius: 1.2rem; background: var(--card); padding: 1.5rem;
+      position: sticky; top: 5.5rem; box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    .cart-line { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--line); font-size: .85rem; }
+    .cart-total { display: flex; justify-content: space-between; align-items: center; font-size: 1.4rem; font-family: 'Anton', sans-serif; margin: 1.2rem 0; }
+    .btn-submit {
+      width: 100%; background: var(--primary); color: #fff; padding: .9rem; border-radius: .8rem;
+      font-size: 1.1rem; font-family: 'Anton', sans-serif; text-transform: uppercase; transition: .2s;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--primary-dark); }
+    .btn-submit:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-ticket {
+      width: 100%; border: 1.5px dashed var(--fg-faint); color: var(--fg-soft); padding: .65rem; border-radius: .8rem;
+      font-size: .75rem; font-weight: 800; text-transform: uppercase; margin-top: .8rem; transition: .2s;
+    }
+    .btn-ticket:hover:not(:disabled) { border-color: var(--fg); color: var(--fg); }
+
+    /* FOOTER */
+    footer { background: #110906; color: rgba(255,255,255,.6); padding: 3.5rem 0 2rem; border-top: 1px solid rgba(255,255,255,.1); font-size: .82rem; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    .footer-brand { color: #fff; font-family: 'Anton', sans-serif; font-size: 1.3rem; margin-bottom: .6rem; }
+    .footer-col h4 { color: #fff; text-transform: uppercase; font-size: .8rem; font-weight: 800; margin-bottom: 1rem; }
+
+    @media(max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-title { font-size: 3.4rem; }
+      .menu-layout { grid-template-columns: 1fr; }
+      .cart-box { position: static; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.7rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap nav-inner">
-    <a href="#" class="brand-logo-box">
-      <img src="img/logo.png" alt="Los Últimos 10 Choriz" class="brand-logo">
-      <span class="brand-name disp">Los Últimos 10 Choriz</span>
-    </a>
-    <div class="nav-links">
-      <a href="#inicio" class="hide-mobile">Inicio</a>
-      <a href="#menu" class="hide-mobile">Menú</a>
-      <a href="panel/" class="hide-mobile">Panel</a>
-    </div>
-    <div class="nav-actions">
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
-        <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
-      <a href="#pedido" class="cart-btn" aria-label="Carrito">
-        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
-        <span class="cart-badge" id="cartCount">0</span>
+  <!-- NAV -->
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="#inicio" class="brand-logo-box">
+        <img src="img/logo.png" alt="Los Últimos 10 Choriz" class="brand-logo">
+        <span class="brand-name disp">Los Últimos 10 Choriz</span>
       </a>
-    </div>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#inicio">Inicio</a>
-    <a href="#menu">Menú</a>
-    <a href="panel/">Panel</a>
-  </div>
-</nav>
 
-<main>
-  <div class="wrap">
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div>
-      <p class="eyebrow">🔥 Parrilla al paso</p>
-      <h1 class="disp">Choripán de <span>verdad.</span></h1>
-      <p>Chorizo a la parrilla y las salsas de la casa. Los últimos 10 se agotan rápido — pedí el tuyo antes de que se terminen.</p>
-      <a href="#menu" class="btn-hero disp">Ver el menú</a>
+      <div class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#menu">Menú</a>
+        <a href="https://www.tiktok.com/@jorge.luis.claros0" target="_blank" rel="noopener" class="live-pill">
+          <span class="live-dot"></span>
+          <span>TikTok En Vivo</span>
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo día/noche">
+          <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a href="#pedido" class="cart-btn" aria-label="Ver Carrito">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.2 11.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </a>
+      </div>
     </div>
-    <!-- Carrusel del hero: puede mezclar videos y fotos, se agregan slides nuevos acá -->
-    <div class="hero-visual-wrap">
-      <a href="https://www.tiktok.com/@jorge.luis.claros0" target="_blank" rel="noopener" class="tiktok-tab" aria-label="Transmisiones todos los días en TikTok">
-        <span>Transmisiones todos los días en TikTok</span>
-      </a>
-      <div class="hero-visual">
-        <div id="heroSlides">
-          <div class="hero-slide active">
-            <video src="video/local.mp4" autoplay muted loop playsinline></video>
+  </nav>
+
+  <!-- APPLE-STYLE CINEMATIC HERO -->
+  <section class="apple-hero" id="inicio">
+    <div class="wrap">
+      
+      <div class="hero-topbar">
+        <div class="hero-top-left">
+          <span class="live-pill"><span class="live-dot"></span> TRANSMISIÓN EN VIVO TIKTOK</span>
+          <a href="https://www.tiktok.com/@jorge.luis.claros0" target="_blank" rel="noopener">@jorge.luis.claros0 ↗</a>
+        </div>
+        <div>🔥 "Los últimos 10 de cada tanda se agotan volando"</div>
+      </div>
+
+      <!-- Selector de Variedades Estilo Apple -->
+      <div class="hero-tabs" id="heroTabs">
+        <button class="hero-tab-btn active" data-slide="0">🔥 Clásico Pro</button>
+        <button class="hero-tab-btn" data-slide="1">🧀 Provoleta Dorada</button>
+        <button class="hero-tab-btn" data-slide="2">🔴 Brasas en Directo</button>
+        <button class="hero-tab-btn" data-slide="3">🥩 Bondiola de Autor</button>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <p class="hero-eyebrow" id="heroEyebrow">🔥 EDICIÓN DEFINITIVA</p>
+          <h1 class="hero-title disp" id="heroTitle">Choripán de <span style="color:var(--primary)">verdad.</span></h1>
+          <p class="hero-desc" id="heroDesc">Chorizo 100% puro cerdo seleccionado, dorado a fuego lento sobre brasas de quebracho blanco y servido en pan crocante con chimichurri casero emulsionado 48hs.</p>
+
+          <div class="hero-specs" id="heroSpecs">
+            <div class="spec-item">
+              <span class="spec-lbl">Carne</span>
+              <span class="spec-val">100% Cerdo</span>
+              <span class="spec-det">Parrillero de pura tripa</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-lbl">Fuego</span>
+              <span class="spec-val">Quebracho</span>
+              <span class="spec-det">Brasas vivas a 320°C</span>
+            </div>
           </div>
-          <div class="hero-slide">
-            <!-- Cuando llegue una foto real: reemplazar el svg por <img src="img/hero-2.jpg" alt="..."> -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h16M3 14h18a1 1 0 0 1 1 1c0 2.8-2.2 5-5 5H7c-2.8 0-5-2.2-5-5a1 1 0 0 1 1-1Z"/><path d="M5 10a7 7 0 0 1 14 0"/><path d="M4 17.5h16"/></svg>
+
+          <div class="hero-actions">
+            <button type="button" class="btn-hero-primary" id="btnHeroAdd">Pedir este chori · <span id="heroPrice">$4.500</span></button>
+            <a href="#menu" class="btn-hero-secondary">Ver todo el menú</a>
           </div>
         </div>
-        <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Anterior">&#10094;</button>
-        <button type="button" class="hero-arrow next" id="heroNext" aria-label="Siguiente">&#10095;</button>
-        <div class="hero-dots" id="heroDots"></div>
+
+        <div class="hero-stage">
+          <div class="stage-img-wrap">
+            <img src="img/hero_choripan_apple_pro_1790258477411.jpg" id="heroImg" alt="Choripán Pro">
+            <div class="stage-badge-live">
+              <span class="live-dot"></span>
+              <span>TIKTOK LIVE · @jorge.luis.claros0</span>
+            </div>
+            <div class="stage-badge-price" id="stagePrice">$4.500</div>
+            <div class="stage-hotspots">
+              <div class="hotspot-pill"><span>●</span> Brasa de Quebracho 320°C</div>
+              <div class="hotspot-pill"><span>●</span> Pan de Masa Madre Crocante</div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
-  </div>
 
-  <!-- PROMO -->
-  <a href="#menu" class="promo-banner">
-    <img src="img/promo.jpg" alt="Promo: 2 choripanes al precio de 1, solo hoy">
-  </a>
-
-  <div class="wrap">
-  <!-- CATEGORÍAS -->
-  <div class="cats-bar" id="menu">
-    <div class="cats" id="catsWrap"></div>
-  </div>
-
-  <!-- MENÚ + CARRITO -->
-  <div class="menu-layout">
-    <div class="menu-grid" id="menuGrid"></div>
-
-    <aside class="cart-box" id="pedido">
-      <h2 class="disp">Tu Pedido</h2>
-      <div id="cartLines"><p class="cart-empty">Todavía no agregaste nada. Elegí del menú.</p></div>
-      <div class="cart-total"><span>TOTAL</span><span class="mono" id="cartTotal">$0</span></div>
-
-      <form id="orderForm">
-        <div class="field">
-          <label for="nombre">Nombre</label>
-          <input id="nombre" required placeholder="Juan Pérez">
-        </div>
-        <div class="field" id="direccionField">
-          <label for="direccion">Dirección de entrega</label>
-          <button type="button" class="btn-ubicacion" id="btnUbicacion">📍 Usar mi ubicación actual</button>
-          <input id="direccion" placeholder="O escribí tu dirección" style="margin-top:.6rem">
-          <p class="ubicacion-nota" id="ubicacionNota"></p>
-        </div>
-        <div class="field">
-          <label for="notas">Notas</label>
-          <input id="notas" placeholder="Sin cebolla, timbre roto...">
-        </div>
-        <div class="radios">
-          <label class="radio-opt"><input type="radio" name="modo" value="Delivery" checked> Delivery</label>
-          <label class="radio-opt"><input type="radio" name="modo" value="Retiro"> Retiro</label>
-        </div>
-        <button type="submit" class="btn-submit disp" id="submitBtn" disabled>Enviar pedido por WhatsApp</button>
-        <p class="cart-note">El pedido le llega al dueño por WhatsApp para confirmar.</p>
-        <button type="button" class="btn-ticket" id="btnTicket" disabled>🧾 Descargar ticket</button>
-        <p class="cart-note">Opcional: para mostrar al retirar tu pedido.</p>
-      </form>
-    </aside>
-  </div>
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-col about" id="nosotros">
-        <div class="footer-brand"><img src="img/logo.png" alt="Los Últimos 10 Choriz" class="footer-logo"><span>Los Últimos 10 Choriz</span></div>
-        <p>"El chori que se agota primero." Parrilla y choripanes al paso, pedí el tuyo por WhatsApp.</p>
+  <!-- STOCK BAR -->
+  <div class="stock-ticker">
+    <div class="wrap stock-inner">
+      <div>
+        <span class="stock-lbl">Tanda en la Parrilla:</span>
+        <span>¡Quedan 7 de los últimos 10 chorizos! Pedí ahora antes de que se apaguen las brasas.</span>
       </div>
-      <div class="footer-col">
-        <h4>Horarios</h4>
-        <p>SÁB Y DOM: 12:00 - 21:30</p>
-        <p>MAR A VIE: 17:00 - 22:00</p>
-        <p>LUN: Cerrado</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navegación</h4>
-        <div class="footer-nav">
-          <a href="#inicio">Inicio</a>
-          <a href="#menu">Menú</a>
-          <a href="#pedido">Pedido</a>
-          <a href="panel/">Panel</a>
-        </div>
-      </div>
-      <div class="footer-col" id="locales">
-        <h4>Seguinos en Nuestras Redes</h4>
-        <div class="footer-socials">
-          <span class="social-btn" style="cursor:default" title="Instagram · próximamente" aria-label="Instagram (próximamente)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </span>
-          <a class="social-btn" href="https://www.tiktok.com/@jorge.luis.claros0" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.02-2.82H12.5v12.35a2.53 2.53 0 1 1-2.53-2.53c.2 0 .4.03.59.08V9.66a5.66 5.66 0 0 0-.59-.03A5.63 5.63 0 1 0 15.6 15.3V9.4a7.32 7.32 0 0 0 4.3 1.38V7.66a4.28 4.28 0 0 1-3.3-1.84z"/></svg>
-          </a>
-          <a class="social-btn wa" href="https://wa.me/5491133861673" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.96L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.25-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
-          </a>
-        </div>
-        <a class="footer-link" href="https://maps.app.goo.gl/KLaH8fR4kiHoxN2t6" target="_blank" rel="noopener">Ver ubicación en Maps</a>
-      </div>
+      <a href="#menu" style="font-weight:700; color:var(--primary); text-decoration:underline;">Asegurar mi pedido →</a>
     </div>
-    <p class="fine">© 2026 Los Últimos 10 Choriz · Barrio 6 de Agosto · CABA</p>
   </div>
-</footer>
 
-<script>
-  /* ================== TEMA DÍA/NOCHE ================== */
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) { document.documentElement.removeAttribute('data-theme'); try { localStorage.setItem('l10c-theme', 'light'); } catch (e) {} }
-    else { document.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('l10c-theme', 'dark'); } catch (e) {} }
-  });
+  <div class="wrap">
+    <!-- PROMO BANNER -->
+    <div class="promo-box" onclick="quickAdd('promo-dia')">
+      <div>
+        <span style="font-size:.7rem; font-weight:800; text-transform:uppercase; background:rgba(0,0,0,.2); padding:.2rem .6rem; border-radius:999px;">PROMO DEL DÍA</span>
+        <h3 class="disp" style="font-size:1.8rem; margin:.3rem 0;">2 CHORIPANES AL PRECIO DE 1</h3>
+        <p style="font-size:.85rem; opacity:.9;">Solo por hoy: 2 choripanes clásicos por $4.500. Tocá acá para agregarlo al carrito.</p>
+      </div>
+      <button type="button" style="background:#000; color:#fff; padding:.7rem 1.4rem; border-radius:999px; font-weight:800; text-transform:uppercase; font-size:.75rem;">Aprovechar Promo</button>
+    </div>
 
-  /* ================== NAV MÓVIL (hamburguesa) ================== */
-  const navToggle = document.getElementById('navToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  navToggle.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    navToggle.classList.toggle('open', open);
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  }));
+    <!-- MENÚ Y PEDIDO -->
+    <div class="cats-bar" id="menu">
+      <button class="cat-btn active" data-cat="TODO">TODO</button>
+      <button class="cat-btn" data-cat="PROMO">PROMO</button>
+      <button class="cat-btn" data-cat="CHORIPANES">CHORIPANES</button>
+      <button class="cat-btn" data-cat="PARRILLA">PARRILLA</button>
+      <button class="cat-btn" data-cat="BEBIDAS">BEBIDAS</button>
+    </div>
 
-  /* ================== DATOS (editar acá por cliente) ================== */
-  const OWNER_WHATSAPP = "5491133861673"; // reemplazar por el numero real del cliente
-  const BRAND = "LOS ÚLTIMOS 10 CHORIZ";
+    <div class="menu-layout">
+      <div class="menu-grid" id="menuGrid"></div>
 
-  const CATEGORIES = ["TODO", "PROMO", "CHORIPANES", "PARRILLA", "BEBIDAS"];
-
-  // icon: "chori" | "parrilla" | "drink" — usado para el placeholder visual
-  const MENU = [
-    { id: "promo-dia", name: "Promo del Día", price: 4500, description: "2 Choripanes Clásicos al precio de 1. Consultá si sigue vigente.", category: "PROMO", icon: "chori", image: "img/chori-clasico.jpg" },
-    { id: "chori-clasico", name: "Choripán Clásico", price: 4500, description: "Chorizo a la parrilla, pan casero y chimichurri de la casa.", category: "CHORIPANES", icon: "chori", image: "img/chori-clasico.jpg" },
-    { id: "chori-completo", name: "Choripán Completo", price: 5800, description: "Chorizo, provoleta grillada, morrón asado y chimichurri.", category: "CHORIPANES", icon: "chori", image: "img/chori-completo.jpg" },
-    { id: "chori-picante", name: "Choripán Picante", price: 5000, description: "Chorizo parrillero con salsa criolla picante de la casa.", category: "CHORIPANES", icon: "chori", image: "img/chori-picante.jpg" },
-    { id: "bondiola", name: "Bondiola al Pan", price: 6500, description: "Bondiola de cerdo a la parrilla, pan casero y salsa criolla.", category: "PARRILLA", icon: "parrilla", image: "img/bondiola.jpg" },
-    { id: "vacio", name: "Vacío al Pan", price: 7000, description: "Corte de vacío a la parrilla, jugoso, con chimichurri.", category: "PARRILLA", icon: "parrilla", image: "img/vacio.jpg" },
-    { id: "papas-parrilla", name: "Papas Fritas", price: 3500, description: "Porción grande de papas fritas bien crocantes.", category: "PARRILLA", icon: "parrilla" },
-    { id: "bebidas", name: "Gaseosa / Agua", price: 2500, description: "Línea Coca-Cola o agua mineral, bien fría.", category: "BEBIDAS", icon: "drink" },
-  ];
-
-  const ICONS = {
-    chori: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12c0-3.5 2-6 5-6h4c3 0 5 2.5 5 6s-2 6-5 6H10c-3 0-5-2.5-5-6Z"/><path d="M8 8.5c1 1 1 6 0 7M16 8.5c-1 1-1 6 0 7"/></svg>',
-    parrilla: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="10" width="18" height="3"/><path d="M5 13v6M9 13v6M15 13v6M19 13v6M4 10l2-5M20 10l-2-5M9 10l1.5-5M15 10 13.5 5"/></svg>',
-    drink: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3h10l-1 16a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2L7 3Z"/><path d="M6.5 8h11M11 3v-1M13 3v-1"/></svg>',
-  };
-
-  const formatPrice = (value) => "$" + value.toLocaleString("es-AR");
-
-  /* ================== ESTADO ================== */
-  let active = "TODO";
-  let cart = []; // [{ id, qty }]
-
-  /* ================== RENDER CATEGORÍAS ================== */
-  const catsWrap = document.getElementById("catsWrap");
-  catsWrap.innerHTML = CATEGORIES.map(
-    (c) => `<button class="cat-btn${c === active ? " active" : ""}" data-cat="${c}">${c}</button>`
-  ).join("");
-  catsWrap.addEventListener("click", (e) => {
-    const btn = e.target.closest(".cat-btn");
-    if (!btn) return;
-    active = btn.dataset.cat;
-    catsWrap.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === active));
-    renderMenu();
-  });
-
-  /* ================== RENDER MENÚ ================== */
-  const menuGrid = document.getElementById("menuGrid");
-  function renderMenu() {
-    const items = active === "TODO" ? MENU : MENU.filter((i) => i.category === active);
-    menuGrid.innerHTML = items
-      .map(
-        (item) => `
-      <div class="menu-item">
-        <div class="menu-item-img" style="${item.image ? "" : "background:linear-gradient(150deg,var(--primary),var(--secondary))"}">
-          ${item.image ? `<img src="${item.image}" alt="${item.name}" loading="lazy">` : ICONS[item.icon]}
+      <!-- ASIDE CARRITO -->
+      <aside class="cart-box" id="pedido">
+        <h2 class="disp" style="font-size:1.6rem; margin-bottom:1rem;">Tu Pedido</h2>
+        <div id="cartLines"><p style="color:var(--fg-soft); font-size:.85rem;">Todavía no agregaste nada. Elegí del menú.</p></div>
+        
+        <div class="cart-total">
+          <span>TOTAL</span>
+          <span class="mono" id="cartTotal" style="color:var(--primary);">$0</span>
         </div>
-        <div class="mi-head">
-          <h3 class="disp">${item.name}</h3>
-          <span class="mi-price mono">${formatPrice(item.price)}</span>
-        </div>
-        <p class="mi-desc">${item.description}</p>
-        <button class="btn-add" data-add="${item.id}">Añadir al Pedido</button>
-      </div>`
-      )
-      .join("");
-  }
-  menuGrid.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-add]");
-    if (!btn) return;
-    addToCart(btn.dataset.add);
-  });
 
-  /* ================== CARRITO ================== */
-  function addToCart(id) {
-    const line = cart.find((l) => l.id === id);
-    if (line) line.qty += 1;
-    else cart.push({ id, qty: 1 });
-    renderCart();
-  }
-  function removeFromCart(id) {
-    const line = cart.find((l) => l.id === id);
-    if (!line) return;
-    if (line.qty > 1) line.qty -= 1;
-    else cart = cart.filter((l) => l.id !== id);
-    renderCart();
-  }
+        <form id="orderForm">
+          <div style="margin-bottom:.8rem;">
+            <label style="display:block; font-size:.72rem; font-weight:800; text-transform:uppercase; margin-bottom:.3rem;">Tu Nombre *</label>
+            <input id="nombre" required placeholder="Juan Pérez" style="width:100%; padding:.6rem; border:1px solid var(--line); border-radius:.6rem; background:var(--bg); color:var(--fg);">
+          </div>
 
-  const cartLinesEl = document.getElementById("cartLines");
-  const cartTotalEl = document.getElementById("cartTotal");
-  const cartCountEl = document.getElementById("cartCount");
-  const submitBtn = document.getElementById("submitBtn");
-  const btnTicket = document.getElementById("btnTicket");
-
-  function renderCart() {
-    if (cart.length === 0) {
-      cartLinesEl.innerHTML = '<p class="cart-empty">Todavía no agregaste nada. Elegí del menú.</p>';
-    } else {
-      cartLinesEl.innerHTML = cart
-        .map((l) => {
-          const item = MENU.find((m) => m.id === l.id);
-          return `
-          <div class="cart-line">
-            <div class="cart-line-left">
-              <button class="qty-btn" data-remove="${l.id}" aria-label="Quitar uno de ${item.name}">−</button>
-              <span><b>${l.qty}x</b> ${item.name}</span>
+          <div style="margin-bottom:.8rem;">
+            <label style="display:block; font-size:.72rem; font-weight:800; text-transform:uppercase; margin-bottom:.3rem;">Modalidad</label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:.5rem;">
+              <label style="font-size:.8rem; font-weight:700;"><input type="radio" name="modo" value="Delivery" checked> 🛵 Delivery</label>
+              <label style="font-size:.8rem; font-weight:700;"><input type="radio" name="modo" value="Retiro"> 🏪 Retiro</label>
             </div>
-            <span class="mono">${formatPrice(item.price * l.qty)}</span>
-          </div>`;
-        })
-        .join("");
-    }
-    const total = cart.reduce((sum, l) => sum + MENU.find((m) => m.id === l.id).price * l.qty, 0);
-    const count = cart.reduce((sum, l) => sum + l.qty, 0);
-    cartTotalEl.textContent = formatPrice(total);
-    cartCountEl.textContent = count;
-    submitBtn.disabled = cart.length === 0;
-    btnTicket.disabled = cart.length === 0;
-  }
-  cartLinesEl.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-remove]");
-    if (!btn) return;
-    removeFromCart(btn.dataset.remove);
-  });
+          </div>
 
-  /* ================== MODO DELIVERY / RETIRO ================== */
-  const direccionField = document.getElementById("direccionField");
-  document.querySelectorAll('input[name="modo"]').forEach((r) => {
-    r.addEventListener("change", () => {
-      const isDelivery = document.querySelector('input[name="modo"]:checked').value === "Delivery";
-      direccionField.style.display = isDelivery ? "" : "none";
-      document.getElementById("direccion").required = isDelivery;
-    });
-  });
+          <div style="margin-bottom:.8rem;" id="dirWrap">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.3rem;">
+              <label style="font-size:.72rem; font-weight:800; text-transform:uppercase;">Dirección</label>
+              <button type="button" id="btnUbicacion" style="font-size:.72rem; color:var(--primary); font-weight:700;">📍 Usar mi GPS</button>
+            </div>
+            <input id="direccion" placeholder="Calle, número, piso" style="width:100%; padding:.6rem; border:1px solid var(--line); border-radius:.6rem; background:var(--bg); color:var(--fg);">
+            <p id="ubicacionNota" style="font-size:.7rem; color:green; margin-top:.2rem;"></p>
+          </div>
 
-  /* ================== UBICACIÓN (más precisa que escribir la dirección) ================== */
-  let ubicacionLink = "";
-  const btnUbicacion = document.getElementById("btnUbicacion");
-  const ubicacionNota = document.getElementById("ubicacionNota");
-  btnUbicacion.addEventListener("click", () => {
-    if (!navigator.geolocation) {
-      ubicacionNota.textContent = "Tu navegador no permite compartir ubicación. Escribí la dirección abajo.";
-      return;
-    }
-    btnUbicacion.textContent = "📍 Buscando tu ubicación...";
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        ubicacionLink = `https://maps.google.com/?q=${latitude},${longitude}`;
-        btnUbicacion.textContent = "✅ Ubicación lista para enviar";
-        btnUbicacion.classList.add("ok");
-        ubicacionNota.textContent = "Se va a mandar tu ubicación exacta junto con el pedido.";
+          <div style="margin-bottom:1rem;">
+            <label style="display:block; font-size:.72rem; font-weight:800; text-transform:uppercase; margin-bottom:.3rem;">Notas</label>
+            <input id="notas" placeholder="Sin cebolla, timbre roto..." style="width:100%; padding:.6rem; border:1px solid var(--line); border-radius:.6rem; background:var(--bg); color:var(--fg);">
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn" disabled>Enviar por WhatsApp</button>
+          <button type="button" class="btn-ticket" id="btnTicket" disabled>🧾 Descargar ticket PNG</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="nosotros">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">LOS ÚLTIMOS 10 CHORIZ</div>
+          <p>"El chori que se agota primero." Parrilla al paso con quebracho blanco, pan de masa madre y chimichurri casero.</p>
+        </div>
+        <div>
+          <h4>Horarios</h4>
+          <p>SÁB Y DOM: 12:00 - 21:30</p>
+          <p>MAR A VIE: 17:00 - 22:00</p>
+          <p>LUN: Cerrado</p>
+        </div>
+        <div>
+          <h4>Navegación</h4>
+          <p><a href="#inicio">Inicio</a></p>
+          <p><a href="#menu">Menú</a></p>
+          <p><a href="https://www.tiktok.com/@jorge.luis.claros0" target="_blank" rel="noopener">TikTok Live</a></p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p><a href="https://wa.me/5491133861673" target="_blank" rel="noopener">WhatsApp: 5491133861673</a></p>
+          <p><a href="https://maps.app.goo.gl/KLaH8fR4kiHoxN2t6" target="_blank" rel="noopener">Ver en Google Maps</a></p>
+          <p>Barrio 6 de Agosto · CABA</p>
+        </div>
+      </div>
+      <p style="text-align:center; font-size:.75rem; border-top:1px solid rgba(255,255,255,.08); padding-top:1.5rem;">
+        © 2026 Los Últimos 10 Choriz · Parrilla tradicional al paso
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const OWNER_WHATSAPP = "5491133861673";
+    const BRAND = "LOS ÚLTIMOS 10 CHORIZ";
+
+    const MENU = [
+      { id: "promo-dia", name: "Promo del Día", price: 4500, description: "2 Choripanes Clásicos al precio de 1. Consultá si sigue vigente.", category: "PROMO", image: "img/promo.jpg" },
+      { id: "chori-clasico", name: "Choripán Clásico", price: 4500, description: "Chorizo a la parrilla, pan casero y chimichurri de la casa.", category: "CHORIPANES", image: "img/hero_choripan_apple_pro_1790258477411.jpg" },
+      { id: "chori-completo", name: "Choripán Completo", price: 5800, description: "Chorizo, provoleta grillada, morrón asado y chimichurri.", category: "CHORIPANES", image: "img/choripan_completo_provoleta_1790258486039.jpg" },
+      { id: "chori-picante", name: "Choripán Picante", price: 5000, description: "Chorizo parrillero con salsa criolla picante de la casa.", category: "CHORIPANES", image: "img/chori-picante.jpg" },
+      { id: "bondiola", name: "Bondiola al Pan", price: 6500, description: "Bondiola de cerdo a la parrilla, pan casero y salsa criolla.", category: "PARRILLA", image: "img/bondiola_gourmet_sandwich_1790258505659.jpg" },
+      { id: "vacio", name: "Vacío al Pan", price: 7000, description: "Corte de vacío a la parrilla, jugoso, con chimichurri.", category: "PARRILLA", image: "img/vacio.jpg" },
+      { id: "papas-parrilla", name: "Papas Fritas", price: 3500, description: "Porción grande de papas fritas bien crocantes.", category: "PARRILLA", image: "img/promo.jpg" },
+      { id: "bebidas", name: "Gaseosa / Agua", price: 2500, description: "Línea Coca-Cola o agua mineral, bien fría.", category: "BEBIDAS", image: "img/promo.jpg" }
+    ];
+
+    const SLIDES = [
+      {
+        id: "chori-clasico",
+        eyebrow: "🔥 EDICIÓN DEFINITIVA",
+        title: 'Choripán de <span style="color:var(--primary)">verdad.</span>',
+        desc: "Chorizo 100% puro cerdo seleccionado, dorado a fuego lento sobre brasas de quebracho blanco y servido en pan crocante con chimichurri casero emulsionado 48hs.",
+        price: 4500,
+        img: "img/hero_choripan_apple_pro_1790258477411.jpg",
+        specs: [{lbl:"Carne", val:"100% Cerdo", det:"Sin conservantes"}, {lbl:"Fuego", val:"Quebracho", det:"Brasas vivas a 320°C"}]
       },
-      () => {
-        btnUbicacion.textContent = "📍 Usar mi ubicación actual";
-        ubicacionNota.textContent = "No pudimos acceder a tu ubicación. Escribí la dirección abajo.";
+      {
+        id: "chori-completo",
+        eyebrow: "🧀 PROVOLETA DORADA",
+        title: 'Provoleta & <span style="color:var(--primary)">Morrón Asado.</span>',
+        desc: "Queso provoleta hilado sobre el chorizo caliente con morrones pelados a mano al rescoldo de la brasa viva.",
+        price: 5800,
+        img: "img/choripan_completo_provoleta_1790258486039.jpg",
+        specs: [{lbl:"Queso", val:"Provoleta Hilada", det:"Fundida a la chapa"}, {lbl:"Vegetales", val:"Morrón Asado", det:"Pelado a mano"}]
+      },
+      {
+        id: "promo-dia",
+        eyebrow: "🔴 EN VIVO TIKTOK",
+        title: 'Fuego real <span style="color:var(--primary)">en directo.</span>',
+        desc: "Mirá cómo prendemos el fuego y asamos cada chorizo en vivo con Jorge Luis Claros. Asegurate el tuyo antes de que se termine la tanda.",
+        price: 4500,
+        img: "img/parrilla_embers_action_1790258495914.jpg",
+        specs: [{lbl:"Live", val:"@jorge.luis.claros0", det:"Transmisión diaria"}, {lbl:"Tanda", val:"Últimos 10", det:"Salen volando"}]
+      },
+      {
+        id: "bondiola",
+        eyebrow: "🥩 CORTE DE AUTOR",
+        title: 'Bondiola de cerdo <span style="color:var(--primary)">al pan.</span>',
+        desc: "Corte seleccionado marinado con especias criollas, sellado a temperatura alta y servido con salsa criolla fresca.",
+        price: 6500,
+        img: "img/bondiola_gourmet_sandwich_1790258505659.jpg",
+        specs: [{lbl:"Corte", val:"Bondiola Premium", det:"Cocción jugosa"}, {lbl:"Salsa", val:"Criolla Fresca", det:"Tomate y cebolla morada"}]
       }
-    );
-  });
+    ];
 
-  /* ================== ENVIAR PEDIDO ================== */
-  document.getElementById("orderForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (cart.length === 0) return;
-
-    const name = document.getElementById("nombre").value.trim();
-    const address = document.getElementById("direccion").value.trim();
-    const notes = document.getElementById("notas").value.trim();
-    const modo = document.querySelector('input[name="modo"]:checked').value;
-
-    const total = cart.reduce((sum, l) => sum + MENU.find((m) => m.id === l.id).price * l.qty, 0);
-    const lines = cart
-      .map((l) => {
-        const item = MENU.find((m) => m.id === l.id);
-        return `• ${l.qty}x ${item.name} — ${formatPrice(item.price * l.qty)}`;
-      })
-      .join("\n");
-
-    let entrega = "Retiro en el local";
-    if (modo === "Delivery") {
-      if (ubicacionLink) entrega = `Ubicación: ${ubicacionLink}`;
-      else if (address) entrega = `Dirección: ${address}`;
-      else entrega = "Dirección: -";
+    let currentSlide = 0;
+    function renderSlide(idx) {
+      currentSlide = idx;
+      const s = SLIDES[idx];
+      document.getElementById('heroEyebrow').innerHTML = s.eyebrow;
+      document.getElementById('heroTitle').innerHTML = s.title;
+      document.getElementById('heroDesc').textContent = s.desc;
+      document.getElementById('heroPrice').textContent = "$" + s.price.toLocaleString("es-AR");
+      document.getElementById('stagePrice').textContent = "$" + s.price.toLocaleString("es-AR");
+      document.getElementById('heroImg').src = s.img;
+      document.getElementById('heroSpecs').innerHTML = s.specs.map(sp => `
+        <div class="spec-item">
+          <span class="spec-lbl">${sp.lbl}</span>
+          <span class="spec-val">${sp.val}</span>
+          <span class="spec-det">${sp.det}</span>
+        </div>
+      `).join('');
+      document.querySelectorAll('#heroTabs button').forEach((b, i) => b.classList.toggle('active', i === idx));
     }
 
-    const text = [
-      `*NUEVO PEDIDO — ${BRAND}*`,
-      "",
-      lines,
-      "",
-      `*TOTAL: ${formatPrice(total)}*`,
-      "",
-      `Nombre: ${name || "-"}`,
-      `Modalidad: ${modo}`,
-      entrega,
-      notes ? `Notas: ${notes}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
-  });
-
-  /* ================== TICKET DESCARGABLE (opcional, para el cliente) ==================
-     Es solo una imagen PNG dibujada en canvas: no reemplaza el mensaje de WhatsApp
-     (un link de wa.me no puede adjuntar archivos, solo texto), es una foto del
-     pedido en ese momento para mostrar al retirarlo. Si el cliente cambia el
-     pedido, simplemente descarga uno nuevo. */
-  function dashedLine(ctx, x1, y1, x2, y2) {
-    ctx.save();
-    ctx.strokeStyle = "rgba(26,26,26,.25)";
-    ctx.setLineDash([4, 4]);
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  btnTicket.addEventListener("click", () => {
-    if (cart.length === 0) return;
-
-    const name = document.getElementById("nombre").value.trim() || "Cliente";
-    const notes = document.getElementById("notas").value.trim();
-    const modo = document.querySelector('input[name="modo"]:checked').value;
-    const address = document.getElementById("direccion").value.trim();
-    const items = cart.map((l) => {
-      const item = MENU.find((m) => m.id === l.id);
-      return { qty: l.qty, name: item.name, price: item.price * l.qty };
+    document.getElementById('heroTabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (btn) renderSlide(Number(btn.dataset.slide));
     });
-    const total = items.reduce((sum, it) => sum + it.price, 0);
 
-    const width = 480;
-    const lineH = 26;
-    const extraLines = 1 + (modo === "Delivery" ? 1 : 0) + (notes ? 1 : 0);
-    const height = 130 + items.length * lineH + 64 + extraLines * 20 + 100;
+    document.getElementById('btnHeroAdd').addEventListener('click', () => {
+      quickAdd(SLIDES[currentSlide].id);
+      document.getElementById('btnHeroAdd').textContent = "¡Agregado al pedido!";
+      setTimeout(() => {
+        document.getElementById('btnHeroAdd').innerHTML = `Pedir este chori · <span>$${SLIDES[currentSlide].price.toLocaleString("es-AR")}</span>`;
+      }, 1200);
+    });
 
-    const scale = 2;
-    const canvas = document.createElement("canvas");
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-    const ctx = canvas.getContext("2d");
-    ctx.scale(scale, scale);
+    // Theme toggle
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem('l10c-theme', 'light'); } catch (e) {}
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        try { localStorage.setItem('l10c-theme', 'dark'); } catch (e) {}
+      }
+    });
 
-    ctx.fillStyle = "#fdfcf0";
-    ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = "#ff4d00";
-    ctx.fillRect(0, 0, width, 8);
+    // Cart state
+    let cart = []; // [{ id, qty }]
 
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#1a1a1a";
-    ctx.font = "bold 23px sans-serif";
-    ctx.fillText("LOS ÚLTIMOS 10 CHORIZ", width / 2, 44);
-    ctx.font = "12px sans-serif";
-    ctx.fillStyle = "rgba(26,26,26,.6)";
-    ctx.fillText("Parrilla al paso", width / 2, 64);
+    function formatPrice(val) {
+      return "$" + val.toLocaleString("es-AR");
+    }
 
-    const now = new Date();
-    const fecha =
-      now.toLocaleDateString("es-AR") +
-      " · " +
-      now.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
-    ctx.fillText(fecha, width / 2, 84);
+    function renderCart() {
+      const lines = document.getElementById('cartLines');
+      const totalEl = document.getElementById('cartTotal');
+      const badge = document.getElementById('cartCount');
+      const submitBtn = document.getElementById('submitBtn');
+      const ticketBtn = document.getElementById('btnTicket');
 
-    dashedLine(ctx, 24, 100, width - 24, 100);
+      const count = cart.reduce((acc, c) => acc + c.qty, 0);
+      badge.textContent = count;
 
-    let y = 100 + 30;
-    ctx.font = "13px monospace";
-    items.forEach((it) => {
+      if (cart.length === 0) {
+        lines.innerHTML = '<p style="color:var(--fg-soft); font-size:.85rem;">Todavía no agregaste nada. Elegí del menú.</p>';
+        totalEl.textContent = '$0';
+        submitBtn.disabled = true;
+        ticketBtn.disabled = true;
+        return;
+      }
+
+      submitBtn.disabled = false;
+      ticketBtn.disabled = false;
+
+      let total = 0;
+      lines.innerHTML = cart.map(c => {
+        const item = MENU.find(m => m.id === c.id);
+        const sub = item.price * c.qty;
+        total += sub;
+        return `
+          <div class="cart-line">
+            <div>
+              <strong>${item.name}</strong><br>
+              <small class="mono">${formatPrice(item.price)} x ${c.qty}</small>
+            </div>
+            <div style="display:flex; align-items:center; gap:.5rem;">
+              <button type="button" onclick="modifyQty('${c.id}', -1)" style="padding:.2rem .5rem; border:1px solid var(--line); border-radius:4px;">-</button>
+              <span class="mono"><strong>${c.qty}</strong></span>
+              <button type="button" onclick="modifyQty('${c.id}', 1)" style="padding:.2rem .5rem; border:1px solid var(--line); border-radius:4px;">+</button>
+              <span class="mono" style="color:var(--primary); font-weight:700; margin-left:.4rem;">${formatPrice(sub)}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      totalEl.textContent = formatPrice(total);
+    }
+
+    function quickAdd(id) {
+      const ex = cart.find(c => c.id === id);
+      if (ex) ex.qty += 1;
+      else cart.push({ id, qty: 1 });
+      renderCart();
+    }
+
+    function modifyQty(id, delta) {
+      const idx = cart.findIndex(c => c.id === id);
+      if (idx !== -1) {
+        cart[idx].qty += delta;
+        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+        renderCart();
+      }
+    }
+
+    // Menu render
+    let currentCat = "TODO";
+    function renderMenu() {
+      const grid = document.getElementById('menuGrid');
+      const filtered = currentCat === "TODO" ? MENU : MENU.filter(m => m.category === currentCat);
+      grid.innerHTML = filtered.map(item => `
+        <div class="food-card">
+          <div class="card-img-wrap">
+            <img src="${item.image}" alt="${item.name}">
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="disp card-title">${item.name}</h3>
+              <p class="card-desc">${item.description}</p>
+            </div>
+            <div class="card-foot">
+              <span class="card-price">${formatPrice(item.price)}</span>
+              <button type="button" class="btn-add" onclick="quickAdd('${item.id}')">+ Agregar</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat;
+        renderMenu();
+      });
+    });
+
+    // GPS
+    let gpsLink = "";
+    document.getElementById('btnUbicacion').addEventListener('click', () => {
+      if (!navigator.geolocation) return;
+      document.getElementById('ubicacionNota').textContent = "Buscando coordenadas GPS...";
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          gpsLink = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+          document.getElementById('ubicacionNota').textContent = "✓ Ubicación GPS fijada correctamente.";
+          if (!document.getElementById('direccion').value) {
+            document.getElementById('direccion').value = `GPS: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
+          }
+        },
+        () => {
+          document.getElementById('ubicacionNota').textContent = "No se pudo obtener la ubicación automáticamente.";
+        }
+      );
+    });
+
+    // Form submit WhatsApp
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (cart.length === 0) return;
+      const nombre = document.getElementById('nombre').value.trim();
+      const modo = document.querySelector('input[name="modo"]:checked').value;
+      const direccion = document.getElementById('direccion').value.trim();
+      const notas = document.getElementById('notas').value.trim();
+
+      const lines = cart.map(c => {
+        const item = MENU.find(m => m.id === c.id);
+        return `• ${c.qty}x ${item.name} — ${formatPrice(item.price * c.qty)}`;
+      }).join('\n');
+
+      const total = cart.reduce((sum, c) => sum + (MENU.find(m => m.id === c.id).price * c.qty), 0);
+
+      let entrega = `Modalidad: Retiro en el local`;
+      if (modo === "Delivery") {
+        if (gpsLink) entrega = `Modalidad: Delivery\nGPS: ${gpsLink}\nDirección: ${direccion || '-'}`;
+        else entrega = `Modalidad: Delivery\nDirección: ${direccion || '-'}`;
+      }
+
+      const text = [
+        `*NUEVO PEDIDO — ${BRAND}*`,
+        "",
+        lines,
+        "",
+        `*TOTAL: ${formatPrice(total)}*`,
+        "",
+        `Nombre: ${nombre || 'Cliente'}`,
+        entrega,
+        notas ? `Notas: ${notas}` : ""
+      ].filter(Boolean).join('\n');
+
+      window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+
+    // Ticket PNG generator
+    document.getElementById('btnTicket').addEventListener('click', () => {
+      if (cart.length === 0) return;
+      const name = document.getElementById('nombre').value.trim() || 'Cliente';
+      const modo = document.querySelector('input[name="modo"]:checked').value;
+      const total = cart.reduce((sum, c) => sum + (MENU.find(m => m.id === c.id).price * c.qty), 0);
+
+      const canvas = document.createElement('canvas');
+      const width = 450;
+      const height = 180 + cart.length * 28 + 120;
+      canvas.width = width * 2;
+      canvas.height = height * 2;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(2, 2);
+
+      ctx.fillStyle = "#fdfcf0";
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = "#ff4d00";
+      ctx.fillRect(0, 0, width, 6);
+
       ctx.fillStyle = "#1a1a1a";
+      ctx.font = "bold 20px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("LOS ÚLTIMOS 10 CHORIZ", width / 2, 40);
+
+      ctx.font = "12px sans-serif";
+      ctx.fillStyle = "rgba(26,26,26,0.6)";
+      ctx.fillText("Parrilla al paso · CABA", width / 2, 60);
+
+      let y = 100;
+      ctx.font = "13px monospace";
+      cart.forEach(c => {
+        const item = MENU.find(m => m.id === c.id);
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#1a1a1a";
+        ctx.fillText(`${c.qty}x ${item.name}`, 25, y);
+        ctx.textAlign = "right";
+        ctx.fillText(formatPrice(item.price * c.qty), width - 25, y);
+        y += 28;
+      });
+
+      y += 10;
+      ctx.fillStyle = "#ff4d00";
+      ctx.font = "bold 18px sans-serif";
       ctx.textAlign = "left";
-      ctx.fillText(`${it.qty}x ${it.name}`, 24, y);
+      ctx.fillText("TOTAL", 25, y);
       ctx.textAlign = "right";
-      ctx.fillText(formatPrice(it.price), width - 24, y);
-      y += lineH;
+      ctx.fillText(formatPrice(total), width - 25, y);
+
+      y += 30;
+      ctx.fillStyle = "#1a1a1a";
+      ctx.font = "12px sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText(`Cliente: ${name} · ${modo}`, 25, y);
+
+      y += 30;
+      ctx.textAlign = "center";
+      ctx.font = "italic 11px sans-serif";
+      ctx.fillStyle = "rgba(26,26,26,0.5)";
+      ctx.fillText('"El chori que se agota primero."', width / 2, y);
+
+      const a = document.createElement('a');
+      a.download = `ticket-${Date.now()}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
     });
 
-    dashedLine(ctx, 24, y, width - 24, y);
-    y += 32;
-    ctx.font = "bold 20px sans-serif";
-    ctx.fillStyle = "#1a1a1a";
-    ctx.textAlign = "left";
-    ctx.fillText("TOTAL", 24, y);
-    ctx.fillStyle = "#ff4d00";
-    ctx.textAlign = "right";
-    ctx.fillText(formatPrice(total), width - 24, y);
-
-    y += 32;
-    ctx.font = "12px sans-serif";
-    ctx.fillStyle = "#1a1a1a";
-    ctx.textAlign = "left";
-    ctx.fillText(`Cliente: ${name}`, 24, y);
-    y += 20;
-    ctx.fillText(`Modalidad: ${modo}`, 24, y);
-    y += 20;
-    if (modo === "Delivery") {
-      ctx.fillText(`Dirección: ${address || "-"}`, 24, y);
-      y += 20;
-    }
-    if (notes) {
-      ctx.fillText(`Notas: ${notes}`, 24, y);
-      y += 20;
-    }
-
-    y += 8;
-    dashedLine(ctx, 24, y, width - 24, y);
-    y += 26;
-    ctx.textAlign = "center";
-    ctx.font = "italic 12px sans-serif";
-    ctx.fillStyle = "rgba(26,26,26,.6)";
-    ctx.fillText('"El chori que se agota primero."', width / 2, y);
-    y += 20;
-    ctx.font = "11px sans-serif";
-    ctx.fillText("Mostrá este ticket al retirar tu pedido", width / 2, y);
-
-    const link = document.createElement("a");
-    link.download = `ticket-los-ultimos-10-choriz-${Date.now()}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  });
-
-  renderMenu();
-  renderCart();
-
-  /* ================== CARRUSEL DEL HERO (fotos y/o videos) ================== */
-  (function () {
-    const slidesWrap = document.getElementById("heroSlides");
-    const slides = Array.from(slidesWrap.querySelectorAll(".hero-slide"));
-    const dotsWrap = document.getElementById("heroDots");
-    const prevBtn = document.getElementById("heroPrev");
-    const nextBtn = document.getElementById("heroNext");
-    let current = 0;
-
-    // Controles de pausa/sonido en cada slide que tenga video (mudo por
-    // defecto porque el navegador exige eso para el autoplay; el botón de
-    // sonido recién lo activa con un click real, que sí cuenta como gesto).
-    slides.forEach((slide) => {
-      const video = slide.querySelector("video");
-      if (!video) return;
-      const controls = document.createElement("div");
-      controls.className = "video-controls";
-      controls.innerHTML =
-        '<button type="button" class="video-btn" data-role="play" aria-label="Pausar video">⏸</button>' +
-        '<button type="button" class="video-btn" data-role="mute" aria-label="Activar sonido">🔇</button>';
-      slide.appendChild(controls);
-      const playBtn = controls.querySelector('[data-role="play"]');
-      const muteBtn = controls.querySelector('[data-role="mute"]');
-      playBtn.addEventListener("click", () => {
-        if (video.paused) {
-          video.play();
-          playBtn.textContent = "⏸";
-          playBtn.setAttribute("aria-label", "Pausar video");
-        } else {
-          video.pause();
-          playBtn.textContent = "▶";
-          playBtn.setAttribute("aria-label", "Reproducir video");
-        }
-      });
-      muteBtn.addEventListener("click", () => {
-        video.muted = !video.muted;
-        muteBtn.textContent = video.muted ? "🔇" : "🔊";
-        muteBtn.setAttribute("aria-label", video.muted ? "Activar sonido" : "Silenciar");
-      });
-    });
-
-    if (slides.length <= 1) {
-      if (prevBtn) prevBtn.style.display = "none";
-      if (nextBtn) nextBtn.style.display = "none";
-      return;
-    }
-
-    dotsWrap.innerHTML = slides.map((_, i) => `<span data-i="${i}"></span>`).join("");
-    const dots = Array.from(dotsWrap.children);
-
-    function goTo(i) {
-      current = (i + slides.length) % slides.length;
-      slides.forEach((s, idx) => {
-        s.classList.toggle("active", idx === current);
-        const video = s.querySelector("video");
-        if (video) {
-          if (idx === current) video.play().catch(() => {});
-          else video.pause();
-        }
-      });
-      dots.forEach((d, idx) => d.classList.toggle("active", idx === current));
-    }
-
-    prevBtn.addEventListener("click", () => goTo(current - 1));
-    nextBtn.addEventListener("click", () => goTo(current + 1));
-    dotsWrap.addEventListener("click", (e) => {
-      const dot = e.target.closest("[data-i]");
-      if (dot) goTo(Number(dot.dataset.i));
-    });
-
-    goTo(0);
-  })();
-</script>
+    renderMenu();
+    renderCart();
+  </script>
 </body>
 </html>
